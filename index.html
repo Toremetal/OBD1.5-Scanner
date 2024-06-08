@@ -1,0 +1,2550 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+    ~   ************************************************************************
+    ~     toremetal properties : Copyright (c) 2024 ™T©ReMeTaL.
+    ~   ************************************************************************
+    ~
+    ~    ™T©ReMeTaL toremetal.com
+    ~    Copyright (C) 2024 ™T©ReMeTaL.
+    ~    Unless required by applicable law or agreed to in writing, software
+    ~    is on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND
+    ~    either express or implied. Created with best intent, Use at your own risk.
+    ~    ™T©ReMeTaL assumes no-liability of any kind.
+    ~
+    ~   ************************************************************************
+    -->
+    <meta http-equiv="language" content="en_US">
+    <meta lang="en_US" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=1, shrink-to-fit=yes" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <meta name="copyright" content="&#8482;T&#169;ReMeTaL" />
+    <meta name="author" content="&#8482;T&#169;ReMeTaL" />
+    <meta name="Description" content="95 OBD 1.5 Scanner - Index">
+    <title>OBD 1.5 Scanner - &#8482;T&#169;ReMeTaL</title>
+    <link rel="icon" href="img/favicon.png" type="image/png" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link crossorigin rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+    --width: 100%;
+    --height: 100%;
+    --myGold: #c34e2d;
+    --themeMetal1: /*CopperRed*/ #CD6E53;
+    --themeMetal2: /*CrayolaCopper*/ #D88968;
+    --themeMetal3: /*CrayolaGold*/ #E4BA99;
+    --themeMetal4: /*Brass*/ #E4BA99;
+    --themeMetal5: /*CaliforniaGold*/ #AD9B2E;
+    --themeBlue1: #062DA2;
+    --themeBlue2: #2BDDF9;
+    --themeBlue3: #57F2FF;
+    --themeBlue4: #015CE0;
+    --themeBlue5: #0B1A51;
+    --themeChrome1: #4B505A;
+    --themeChrome2: #B0C4DE;
+    --themeChrome3: #D1E1F6;
+    --themeChrome4: #CCCCCC;
+    --themeChrome5: #D8D8D8;
+    --themeGold1: #FFDD6B;
+    --themeGold2: #F8D060;
+    --themeGold3: #F8C04D;
+    --themeGold4: #EBA831;
+    --themeGold5: #E69400;
+}
+* {
+    text-shadow: 0.5px 0.5px 1px ThreeDFace, 0 0 0.1em ThreeDLightShadow, 0 0 0 ThreeDDarkShadow;
+
+    font-family: 'IM Fell English SC', serif;
+    width:auto;
+    padding:0 1px 0;
+    margin: 1px;
+}
+
+#dtcdata {
+    color:red;
+    font-size:larger;
+    height: 200px;
+    padding: 4px;
+    border-radius: 8px;
+    border: solid 0.4px #cbc9c9;
+    text-shadow: 1px 2px 5px rgba(0,0,0,0.31);
+    background: transparent;
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.31);
+    overflow:auto;
+}
+
+#sdata {
+/*
+    border:1px red solid; 
+    color:red;
+    font-size:20px;
+    cursor: pointer;
+*/
+    color:red;
+    font-size:larger;
+    height: 200px;
+    padding: 4px;
+    border-radius: 8px;
+    border: solid 0.4px #cbc9c9;
+    text-shadow: 1px 2px 5px rgba(0,0,0,0.31);
+    background: transparent;
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.31);
+    overflow:auto;
+}
+#sdata.i {
+    color:green;
+}
+.chromeBorder {
+    box-sizing: border-box;
+    box-shadow: 1px 2px 5px rgba(0,0,0,.31);
+    border: 1px solid rgb(177, 176, 176);
+    border: inset 10px var(--themeBlue3, #D8DBDE);/*BBA53D   D8DBDE*/
+    border-style:groove ridge ridge groove;
+    border-style: outset inset inset outset;
+    border-radius:50%;
+    padding-top:0;
+    padding-bottom:0;
+    height:fit-content;
+    opacity:0.7;
+background:transparent;
+border:none;
+box-shadow:none;
+padding:0 0 0 0;
+}
+#shact {
+   color:darkgreen;
+   font-size:20px;
+    padding: 4px;
+    border-radius: 50%;
+    border: solid 0.4px #cbc9c9;
+    text-shadow: 1px 2px 5px rgba(0,0,0,0.31);
+    background: transparent;
+    cursor: pointer;
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.31);
+}
+   #shact:hover {
+   color:red;
+        /*transform: rotate(-1deg);*/
+        padding: 3.5px;
+        border: solid 0.5px #cbc9c9;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.09);
+        opacity: 0.8;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.09);
+        -webkit-transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        -webkit-transform: scale(0.95);
+        -ms-transform: scale(0.95);
+        -moz-transform: scale(0.95);
+        -o-transform: scale(0.95);
+        transform: scale(0.95);
+   }
+.resBtn {
+    border-radius:16px;
+}
+.btn {
+    cursor: pointer;
+}
+   .btn:hover {
+   color:orangered;
+        /*transform: rotate(-1deg);*/
+        padding: 3.5px;
+        border: solid 0.5px #cbc9c9;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.09);
+        opacity: 0.8;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.09);
+        -webkit-transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        -webkit-transform: scale(0.95);
+        -ms-transform: scale(0.95);
+        -moz-transform: scale(0.95);
+        -o-transform: scale(0.95);
+        transform: scale(0.95);
+   }
+input[type=number] {
+  font-size:xx-large;
+  font-family: 'IM Fell English SC', serif;
+  width: 78px;
+  padding: 0 0 0 9px;
+  margin: -10px 0 12px;
+  text-align: center;
+  color:orangered;/*darkred  #ccffee*/
+  background:#B0B0B0;/*#36454F*/
+    box-sizing: border-box;
+    border-radius:50%;
+    border: ridge 0.4px #cbc9c9;
+   box-shadow: 1px 2px 5px rgba(0,0,0,0.31);
+}
+td {
+   border-radius:40%;
+    border: ridge 0.4px #cbc9c9;
+   box-shadow: 1px 2px 5px rgba(0,0,0,0.31);
+background: transparent;
+background-color:#36454F;/*#B0B0B0*/
+}
+td .td1 {
+   border-radius:5%;
+    border: ridge 0.4px #cbc9c9;
+   box-shadow: 1px 2px 5px rgba(0,0,0,0.31);
+background: transparent;
+}
+.td2 {
+    border-radius:5px;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+fieldset {
+   min-width:160px;
+   border-radius:40%;
+    border: ridge 0.4px #cbc9c9;
+   box-shadow: 1px 2px 5px rgba(0,0,0,0.31);
+background: transparent;
+}
+legend {
+   color:darkgreen;
+   font-size:20px;
+    padding: 4px;
+    border-radius: 50%;
+    border: solid 0.4px #cbc9c9;
+    text-shadow: 1px 2px 5px rgba(0,0,0,0.31);
+    background: var(--themeChrome3);
+    cursor: pointer;
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.31);
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.switch input:checked + .slider {
+  background-color: #2196F3;
+}
+
+.switch input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.switch input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+form {
+   background:transparent;
+}
+table {
+   border:none;
+   background:transparent;
+}
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+.slidecontainer {
+  width: 180px;
+}
+
+.slider2 {
+  -webkit-appearance: none;
+  height: 12px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider2:hover {
+  opacity: 1;
+}
+
+.slider2::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.slider2::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #04AA6D;
+  cursor: pointer;
+}
+.hide {
+background:transparent;
+border:none;
+box-shadow:none;
+padding:0 0 0 0;
+}
+.scanControl {
+  opacity:0.9;
+  background-color:#0f0f0f;
+}
+</style>
+
+
+
+ </head>
+<body bgcolor="#000000" text="#303020" link="#006677" vlink="#334460" alink="#cc0055" ><!--onload="checkCookie()"-->
+   <div align="center">
+    <!--<font size ="5"><b>POV-Ray demo files preview - Index</b></font><br>
+    <font size ="2">|
+    <font color="#4F4F4F">index</font> |
+    <a href="templates/_index.htm">templates</a> |
+    <a href="advanced.htm">advanced</a> |
+    <a href="rad_sub.htm">radiosity</a> |
+    <a href="animations.htm">animations</a> |
+    <a href="interior.htm">light + interior</a> |
+    <a href="cameras.htm">cameras</a> |
+    <a href="language.htm">language</a> |
+    <a href="objects.htm">objects</a> |
+    <a href="textures.htm">textures</a> |
+    <a href="incdemo.htm">include</a> |
+    </font><br>-->
+<header>
+<i style="position:absolute;top:4px;right:4px;z-index:1;">
+<img title="&#8482;T&#169;ReMeTaL" alt="&#8482;T&#169;ReMeTaL" src="img/toremetal.png" style="width:108px;height:74px;border-radius:25%;"/>
+<br />
+&#8482;T&#169;ReMeTaL</i>
+<fieldset class="scanControl">
+
+ <legend onclick='sH("usbHelp")' title="Click for Connection Diagram">[?]Scan Controls</legend>
+<img onclick='sH("usbHelp")' title="1995 Camaro" alt="1995 Camaro" src="img/camaro2.png" style="cursor:pointer;margin-right:-108px;float:left;border:none;height:48px;width:100px;"/>
+<input type="button" id="fs" value="F Screen" onclick="getFScreen()" />
+|    
+    <input title="Disconnect" style="cursor:pointer;" id="disconnect" value="DisConnect" type="button" onclick="stopScan();" disabled/>
+    <input id="connected" type="checkbox" disabled/>
+    <input title="Connect to Ecm" style="cursor:pointer;" id="connect" value="Connect to ECM" type="button" onclick='getSerialPortInfo();/*document.getElementById("Scan").disabled=false*/'/>
+|
+    <input title="RealTime Scan" id="scan" value="Scan" type="button" onclick='startStopRealTime()' disabled/>
+|
+    [<input id="sendingEcmCmd" type="checkbox" disabled/>
+    <label for="sendingEcmCmd">Sending Request</label> ] 
+|
+    [<input id="resettingMil" type="checkbox" disabled/>
+    <label for="resettingMil">Resetting MIL Codes</label>] 
+|
+    <label hidden for="ecmdatafile">Transmission:</label>
+    <select hidden name="ecmdatafile" id="ecmdatafile" onchange='if(this.value=="0"){document.getElementById("manF").hidden=false;document.getElementById("autoF").hidden=true;}else if(this.value=="1"){document.getElementById("manF").hidden=true;document.getElementById("autoF").hidden=false;}'>
+        <optgroup label="Manual">
+            <option value="0">Manual</option>
+        </optgroup>
+        <optgroup label="Automatic">
+            <option value="1">Automatic</option>
+        </optgroup>
+    </select>
+
+<legend style="font-size:xx-small;"><i>Brake Pressed</i><input type="checkbox" id="brakepressed"/></legend>
+                      <div hidden><code id="autoF" class="slidecontainer" hidden>
+                      <label for="gear">Automatic- </label>
+                        <input type="range" min="0" max="6" value="6" class="slider2" name="prndl" id="gear">
+                        [ <span id="prndlDis" style="color:red;font-size:large;">P</span> ]
+                    </code>
+                    <code id="manF" class="slidecontainer" hidden>
+                      <label for="manualGear">Manual- </label>
+                          <input type="range" min="0" max="6" value="6" class="slider2" name="manualGear" id="manualGear">
+                        [ <span id="manualDis" style="color:red;font-size:large;">N</span> ]
+                    </code> &nbsp;&nbsp; 
+                    <code></div>
+                      <label for="checkEngine"><img id="checkEngineLight" title="checkEngineLight" alt="checkEngineLight" hidden src="img/checkEngineLight.png" style="width:32px;height:32px;border-radius:6px;"/></label>
+                          <input id="checkEngine" title="checkEngine" type="checkBox" hidden disabled>
+                    </code>
+</fieldset>
+<div hidden id="usbHelp" style="position:fixed;top:0;bottom:0;right:0;left:0;width:100%;margin-top:80px;z-index:1;background:transparent;" align="center">
+<legend style="color:orangered;background-color:#000000;width:fit-content;border-radius:10px;" title="Connection Diagram.">
+<label>
+PC-USB to OBD1.5 ECM
+<br/>
+(with OBD2 plug)
+</label>
+<br/>
+<img onclick='sH("usbHelp")' id="usbImage" title="USB" alt="USB" src="img/usb.png" />
+<br/>
+<i>Rx/Tx to Pin 9.</i>
+<br/>
+<i>Gnd to Pins 4 (Gnd) & 5 (Signal Gnd).</i>
+</legend>
+<br/>
+<!--<fieldset style="color:orangered;background:transparent;width:fit-content;border:none;">-->
+<legend style="color:orangered;background-color:#000000;width:fit-content;border-radius:10px;" for="delaytime" title="Stream Read delay.">
+<i>Read Delay [1 sec = 1000 ms]</i>
+    <input id="delaytime" style="border-radius:10px;width:100px;" title="Stream Read delay." value="1" type="number" min="1" max="100" step="1" />00 ms
+<br/>
+
+<legend style="color:orangered;background-color:#000000;width:fit-content;border-radius:10px;" for="intdelay" title="Scan Speed. IMPORTANT!! Set BEFORE Connecting!">
+<i>Scan Speed [1 sec = 1000 ms]</i>
+    <input id="intdelay" style="border-radius:10px;width:100px;" title="Scan Speed. IMPORTANT!! Set BEFORE Connecting!" value="10" type="number"min="1" max="100" step="1" onchange='setDelay(this.value)'/>00 ms
+<br/>
+<code style="color:orange;font-size:small;">IMPORTANT!!<br/>Make adjustments to Scan Speed BEFORE Connecting!<br/>
+Read delay can be adjusted anytime.
+</code>
+</legend>
+<!--</fieldset>-->
+</div>
+</header>
+<input id="NotUsed" type="text" value="" hidden/>
+<input id="toDo" type="text" value="" hidden/>
+<!--<label for="category">Category:</label>
+<input list="categories" name="category" id="category">
+<datalist id="categories">
+ <option value="Products (New)">
+ <option value="Products (Used)">
+ <option value="Media">
+ <option value="Software">
+ <option value="Services">
+ <option value="Deals">
+</datalist>-->
+
+<div align="center">
+<!-- Dash -->
+
+<table width="auto" id="Dash">
+ <legend id="dashTitle" onclick='sH("Dash")'>Dash</legend>
+
+<tr class="td1">
+    
+<!-- outer table -->
+<td class="td2" width="49%" align="top">
+  <table class="td1" width="98%">
+<!--(1) set of 3-->
+  <tr>
+
+    <td class="chromeBorder" width="25%" onclick='sH("f1")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("f1")'>
+<fieldset align="center" id="f1">
+ <legend onclick='sH("f1")'>Air/Fuel</legend>
+<form align="center">
+ <input type="number" step="0.1" id="airfuel" name="airfuel" value="14.7" style="font-size:xxx-large;width:100px;padding-left:10px;" readonly>
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+<!--item (2)-->
+<!--    <td width="25%" onclick='sH("rpmField")' class="hide">
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("rpmField")'>
+<fieldset id="rpmField" align="center" class="chromeBorder">
+ <legend onclick='sH("rpmField")'>RPM</legend>
+<form align="center">
+ <input type="number" id="rpm" name="rpm" value="0" style="padding:0;margin:0;font-size:xxx-large;width:136px;" readonly>
+
+<fieldset hidden style="padding:0;margin:0;font-size:12px;border-radius: 6px;border: solid 0.4px #cbc9c9;text-shadow: 1px 2px 5px rgba(0,0,0,0.31);background: transparent;cursor: default;box-shadow: none;">
+ <legend style="padding:0;margin:0;text-align:left;color:darkblue;font-size:12px;text-shadow: 1px 2px 5px rgba(0,0,0,0.31);border-radius: 0;border: none;background: transparent;cursor: default;box-shadow: none;">24x</legend>
+ <input type="number" id="rpm24x" name="rpm24x" value="0" readonly>
+</fieldset>
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>-->
+
+
+    <td onclick='sH("rpmField")' class="hide">
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="transparent" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("rpmField")'>
+<fieldset id="rpmField" align="center" class="chromeBorder">
+ <legend onclick='sH("rpmField")'>RPM</legend>
+<form align="center">
+ <input type="number" id="rpm" name="rpm" value="0" style="font-size:xxx-large;width:136px;" readonly>
+
+<fieldset hidden style="padding:0;margin:0;font-size:12px;border-radius: 6px;border: solid 0.4px #cbc9c9;text-shadow: 1px 2px 5px rgba(0,0,0,0.31);background: transparent;cursor: default;box-shadow: none;">
+ <legend style="padding:0;margin:0;text-align:left;color:darkblue;font-size:12px;text-shadow: 1px 2px 5px rgba(0,0,0,0.31);border-radius: 0;border: none;background: transparent;cursor: default;box-shadow: none;">24x</legend>
+ <input type="number" id="rpm24x" name="rpm24x" value="0" readonly>
+</fieldset>
+
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+<!--end item (2)-->
+<!--item (3)-->
+    <td onclick='sH("mphField")' class="hide">
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="transparent" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("mphField")'>
+<fieldset id="mphField" align="center" class="chromeBorder">
+ <legend onclick='sH("mphField")'>MPH</legend>
+<form align="center">
+ <input type="number" id="mph" name="mph" value="0" style="font-size:xxx-large;width:136px;" readonly>
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+<!--end item (3)-->
+  </tr>
+<!--(1) end set of 3-->
+<!--(1.1) set of 3-->
+  <tr>
+    <td class="chromeBorder" width="25%" onclick='sH("tiField")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("tiField")'>
+<fieldset id="tiField" align="center">
+ <legend onclick='sH("tiField")'>Target Idle</legend>
+<form align="center">
+ <input type="number" step="1" id="targetidle" name="targetidle" value="0" readonly>
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td class="chromeBorder" width="25%" onclick='sH("iacField")'><div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
+<td onclick='sH("iacField")'>
+<fieldset id="iacField" align="center">
+ <legend onclick='sH("iacField")'>IAC</legend>
+<form align="center">
+ <input type="number" step="1" id="iac" name="iac" value="0" readonly>
+</form>
+</fieldset>
+</td></tr></table>
+        </div></td>
+<td class="chromeBorder" width="25%" onclick='sH("miniacField")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("miniacField")'>
+<fieldset id="miniacField" align="center">
+ <legend onclick='sH("miniacField")'>Min IAC</legend>
+<form align="center">
+ <input type="number" step="1" id="miniac" name="miniac" value="0" readonly>
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+  </tr>
+
+<!--(1.1) end set of 3-->
+<!--(2) set of 3-->
+  <tr style="padding:0 60px;">
+
+<!--item (1)-->
+    <td class="chromeBorder" width="25%" onclick='sH("throttleDis")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef"bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("throttleDis")'>
+<fieldset align="center" id="throttleDis">
+ <legend onclick='sH("throttleDis")'>Throttle (tps)</legend>
+<form align="center">
+ <input type="number" step="0.01" id="throttlev" name="throttlev" value="0.00" readonly> v 
+ <input type="number" step="1" id="throttlep" name="throttlep" value="0" readonly> %
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+<!--end item (1)-->
+<td class="chromeBorder" width="25%" onclick='sH("coolField")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("coolField")'>
+<fieldset id="coolField" align="center">
+ <legend onclick='sH("coolField")'>Coolant Temp</legend>
+<form align="center">
+ <input type="number" step="1" id="coolanttempf" name="coolanttempf" value="0" readonly> °f
+ <!--<input type="number" step="1" id="coolanttempc" name="coolanttempc" value="0" readonly> °c-->
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td class="chromeBorder" width="25%" onclick='sH("airField")'><div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
+<td onclick='sH("airField")'>
+<fieldset id="airField" align="center">
+ <legend onclick='sH("airField")'>Intake Air Temp</legend>
+<form align="center">
+ <input type="number" step="1" id="airtempf" name="airtempf" value="0" readonly> °f
+ <!--<input type="number" step="1" id="airtempc" name="airtempc" value="0" readonly> °c-->
+</form>
+</fieldset>
+</td></tr></table>
+        </div></td>
+
+<td hidden class="chromeBorder" width="25%"> 
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td>
+<fieldset align="center">
+ <legend>Trans Temp</legend><!--TODO:set Up formula for conversion-->
+<form align="center">
+ <input type="number" step="1" id="tempf" name="tempf" value="0" readonly> °f
+ <input type="number" step="1" id="tempc" name="tempc" value="0" readonly> °c
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+
+
+  </tr>
+<!--(2) end set of 3-->
+<!--(3) set of 3-->
+  <tr>
+    <td class="chromeBorder" width="25%" onclick='sH("sparkadvField")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("sparkadvField")'>
+<fieldset id="sparkadvField" align="center">
+ <legend onclick='sH("sparkadvField")'>Spark Advance</legend>
+<form align="center">
+ <input type="number" step="1" id="sparkadvance" name="sparkadvance" value="0" readonly> °deg
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td class="chromeBorder" width="25%" onclick='sH("knockField")'><div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
+<td onclick='sH("knockField")'>
+<fieldset id="knockField" align="center">
+ <legend onclick='sH("knockField")'>Knock Count</legend>
+<form align="center">
+ <input type="number" step="1" id="knock" name="knock" value="0" readonly>
+</form>
+</fieldset>
+</td></tr></table>
+        </div></td>
+<td class="chromeBorder" width="25%" onclick='sH("retardField")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("retardField")'>
+<fieldset id="retardField" align="center">
+ <legend onclick='sH("retardField")'>Knock Retard</legend>
+<form align="center">
+ <input type="number" step="1" id="knockretard" name="knockretard" value="0" readonly> °deg
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+  </tr>
+
+<!--(3) end set of 3-->
+
+<!--(1.1) set of 3-->
+  <tr>
+<td class="chromeBorder" width="25%" onclick='sH("fc")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("fc")'>
+<fieldset align="center" id="fc">
+ <legend onclick='sH("fc")'>Battery +</legend>
+<form align="center">
+ <input type="number" step="0.1" id="battery" name="battery" value="12.9" readonly> v
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+
+    <td class="chromeBorder" width="25%" onclick='sH("runtimeField")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("runtimeField")'>
+<fieldset id="runtimeField" align="center">
+ <legend onclick='sH("runtimeField")'>Engine Run Time</legend>
+<form align="center">
+ <input type="number" step="1" id="runtime" name="runtime" value="0" readonly> sec
+ <input type="number" step="1" id="runtimelsb" name="runtime" value="0" readonly> sec
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td class="chromeBorder" width="25%" onclick='sH("actMilCodeField")'>
+      <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr><td onclick='sH("actMilCodeField")'>
+<fieldset id="actMilCodeField" align="center">
+ <legend onclick='sH("actMilCodeField")'><img title="checkEngineLight" alt="checkEngineLight" src="img/checkEngine.png" style="width:64px;height:48px;border-radius:6px;"/></legend>
+<form align="center">
+<label for="actcodes">Current</label>
+ <input type="number" step="1" id="actcodes" name="activemilcodes" value="0" readonly>
+<label for="milcodes">History</label>
+ <input type="number" step="1" id="milcodes" name="milcodes" value="0" readonly>
+</form>
+</fieldset>
+</td></tr></table>
+        </div></td>
+
+
+  </tr>
+
+<!--(1.1) end set of 3-->
+  </table>
+
+</td><!-- outer table --><!-- outer table -->
+<td class="td2" width="50%" align="top">
+  <table class="td1" width="98%">
+<!--(4) set of 3-->
+  <tr>
+
+
+
+
+
+
+
+    <td class="chromeBorder" width="25%" onclick='sH("f2")'><div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
+<td onclick='sH("f2")'>
+<fieldset align="center" id="f2">
+ <legend onclick='sH("f2")'>base inj p/w</legend>
+<form align="center">
+ <input type="number" step="1" id="injp" name="injp" value="0" readonly> ms
+</form>
+</fieldset>
+</td></tr></table>
+        </div></td>
+<td class="chromeBorder" width="25%" onclick='sH("f3")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("f3")'>
+<fieldset align="center" id="f3">
+ <legend onclick='sH("f3")'>BLM cell#</legend>
+<form align="center">
+ <input type="number" step="1" id="blm" name="blm" value="0" style="font-size:x-large;width:80px;" readonly>
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+
+
+    <td class="chromeBorder" width="25%" onclick='sH("fd")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("fd")'>
+<fieldset align="center" id="fd">
+ <legend onclick='sH("fd")'>Fuel Pump(volts)</legend>
+<form align="center">
+ <input type="number" step="0.01" id="fuelpumpv" name="fuelpumpv" value="0.00" readonly> v
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+
+  </tr>
+
+<!--(4) end set of 3-->
+<!--(5) set of 3-->
+  <tr>
+    <td class="chromeBorder" width="25%" onclick='sH("f4")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("f4")'>
+<fieldset align="center" id="f4">
+ <legend onclick='sH("f4")'>O2 bank L</legend>
+<form align="center">
+ <input type="number" step="0.01" id="o2bankL" name="o2bankL" value="0.00" readonly> v
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td class="chromeBorder" width="25%" onclick='sH("f5")' align="center"><div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
+<td onclick='sH("f5")'>
+<fieldset align="center" id="f5">
+ <legend onclick='sH("f5")'>st-ft(int)bank L</legend>
+<form align="center">
+ <input type="number" step="0.01" id="stftbankL" name="stftbankL" value="0" readonly>
+</form>
+</fieldset>
+</td></tr></table>
+        </div></td>
+<td class="chromeBorder" width="25%" onclick='sH("f6")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("f6")'>
+<fieldset align="center" id="f6">
+ <legend onclick='sH("f6")'>lt-ft(blm)bank L</legend>
+<form align="center">
+ <input type="number" step="1" id="ltftbankL" name="ltftbankL" value="0" readonly>
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+  </tr>
+
+<!--(5) end set of 3-->
+<!--(6) set of 3-->
+  <tr>
+    <td class="chromeBorder" width="25%" onclick='sH("f7")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("f7")'>
+<fieldset align="center" id="f7">
+ <legend onclick='sH("f7")'>o2 bank R</legend>
+<form align="center">
+ <input type="number" step="0.01" id="o2bankR" name="o2bankR" value="0.00" readonly> v
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td class="chromeBorder" width="25%" onclick='sH("f8")'><div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
+<td onclick='sH("f8")'>
+<fieldset align="center" id="f8">
+ <legend onclick='sH("f8")'>st-ft(int)bank R</legend>
+<form align="center">
+ <input type="number" step="0.01" id="stftbankR" name="stftbankR" value="0" readonly>
+</form>
+</fieldset>
+</td></tr></table>
+        </div></td>
+<td class="chromeBorder" width="25%" onclick='sH("f9")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("f9")'>
+<fieldset align="center" id="f9">
+ <legend onclick='sH("f9")'>lt-ft(blm)bank R</legend>
+<form align="center">
+ <input type="number" step="1" id="ltftbankR" name="ltftbankR" value="0" readonly>
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+  </tr>
+
+<!--(6) end set of 3-->
+<!--(6.1) set of 3-->
+  <tr>
+    <td class="chromeBorder" width="25%" onclick='sH("fa")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("fa")'>
+<fieldset align="center" id="fa">
+ <legend onclick='sH("fa")'>Map Sensor</legend>
+<form align="center">
+ <input type="number" step="0.01" id="mapvolts" name="mapvolts" value="0.00" readonly> v
+ <input type="number" step="0.1" id="mapkpa" name="mapkpa" value="0.0" readonly> kpa
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td class="chromeBorder" width="25%" onclick='sH("fb")'><div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr><td onclick='sH("fb")'>
+<fieldset align="center" id="fb">
+ <legend onclick='sH("fb")'>A/C</legend>
+<form align="center">
+ <input type="number" step="1" id="actempf" name="actempf" value="0" readonly> °f
+ <input type="number" step="0.1" id="acpsi" name="acpsi" value="0.0" readonly> psi
+</form>
+</fieldset>
+</td></tr></table>
+        </div></td>
+
+  </tr>
+
+<!--(6.1) end set of 3-->
+<!--(6.2) set of 3-->
+  <tr>
+<!-- Item -->
+<td class="chromeBorder" width="25%" onclick='sH("fmdc")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("fmdc")'>
+<fieldset id="fmdc" align="center">
+ <legend onclick='sH("fmdc")'>ForcedMotor<br/>DutyCycle</legend>
+<form align="center">
+ <input type="number" step="1" id="ForcedMotorDutyCycle" name="ForcedMotorDutyCycle" value="0" readonly> %
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+
+
+<!-- End Item -->
+    <td class="chromeBorder" width="25%" onclick='sH("fe")'><div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
+<td onclick='sH("fe")'>
+<fieldset align="center" id="fe">
+ <legend onclick='sH("fe")'>EVAP Duty Cycle</legend>
+<form align="center">
+ <input type="number" step="1" id="evap" name="evap" value="0" readonly> %
+</form>
+</fieldset>
+</td></tr></table>
+        </div></td>
+<td class="chromeBorder" width="25%" onclick='sH("bar")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("bar")'>
+<fieldset align="center" id="bar">
+ <legend onclick='sH("bar")'>Baro Pressure</legend>
+<form align="center">
+ <input type="number" step="1" id="baro" name="baro" value="0" readonly> kpa
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+  </tr>
+
+<!--(6.2) end set of 3-->
+
+  </table>
+
+</td><!-- outer table -->
+
+</tr>
+</table>
+<br>
+
+<!-- End Dash -->
+
+<table width="100%">
+  <tr>
+    <td width="99%" align="top" class="hide"><!-- width="50%"-->
+      <table width="98%">
+  <tr>
+    <td width="25%" class="hide"></td>
+
+     <td width="25%"><div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+        <tr><td>
+          <button id="resetMilBtn" onclick="resetMil()" class="btn resBtn" disabled>Reset MIL Codes
+            <!--<img src="previews/advanced/balcony.jpg" alt="Reset MIL Codes" title="Reset MIL Codes" border="0" width="160" height="120">-->
+          </button>
+        </td></tr>
+        </table>
+     </div></td>
+    <td width="25%" class="hide"></td>
+  </tr>
+
+      </table>
+    </td>
+
+    <td width="50%" align="top" class="hide">
+      <table width="98%">
+  <tr>
+    <td width="25%" class="hide"></td>
+
+     <td width="25%" hidden><div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+        <tr><td>
+          <button id="resetBlmBtn" class="btn resBtn" disabled>Reset BLM Value
+            <!--<img src="previews/advanced/balcony.jpg" alt="Reset BLM Value" title="Reset BLM Value" border="0" width="160" height="120">-->
+          </button>
+        </td></tr>
+        </table>
+     </div></td>
+    <td width="25%" class="hide"></td>
+  </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+
+
+<form id="actControls" hidden>
+<!-- outer table -->
+<table width="100%" style="border:1px green dashed;" id="actuators" hidden>
+ <legend id="shact" name="shact" onclick='document.getElementById("actuators").hidden=!document.getElementById("actuators").hidden'>Actuators</legend>
+<tr align="center">
+
+<td width="50%" align="top" class="hide">
+  <table width="98%">
+  <tr align="center">
+    <td width="25%">
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr align="center">
+<td>
+<fieldset>
+ <legend>Reset All</legend>
+<!--<form>-->
+ <label for="resetall">Reset All</label>
+ <input type="radio" id="resetall" onclick="sendEcmCmd(EcmCmd.reset)" name="idle" value="resetall"><br>
+<!--</form>-->
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td width="25%">
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr align="center">
+<td>
+<fieldset>
+ <legend>Coolant Fan</legend>
+<!--<form>-->
+                     <!--OFF <label class="switch" for="fanOnOff">
+                        <input id="fanOnOff" onclick="if(this.checked){sendEcmCmd(EcmCmd.fanon);}else{sendEcmCmd(EcmCmd.fanoff);}" type="checkbox">
+                        <span class="slider round"></span>
+                      </label> ON-->
+ <label for="fanon">fan on</label>
+ <input type="radio" id="fanon" onclick="sendEcmCmd(EcmCmd.fanon)" name="idle" value="fanon"><br>
+ <label for="fanoff">fan off</label>
+ <input type="radio" id="fanoff" onclick="sendEcmCmd(EcmCmd.fanoff)" name="idle" value="fanoff">
+<!--</form>--><br>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td width="25%">
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr align="center">
+<td>
+<fieldset>
+ <legend>MIL/SES</legend>
+<!--<form>-->
+ <label for="lighton">Light On</label>
+ <input type="radio" id="lighton" onclick="sendEcmCmd(EcmCmd.milon)" name="idle" value="lighton"><br>
+ <label for="lightoff">Light Off</label>
+ <input type="radio" id="lightoff" onclick="sendEcmCmd(EcmCmd.miloff)" name="idle" value="lightoff"><br>
+<!--</form>-->
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+  </tr>
+
+
+  <tr align="center">
+<td width="25%">
+    <div>
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+            <tr align="center">
+                <td>
+                    <fieldset>
+                        <legend>Idle Speed</legend>
+                        <label for="idle6">600</label>
+                        <input type="radio" id="idle6" onclick="sendEcmCmd(EcmCmd.idle6)" name="idle" value="6"><br>
+                        <label for="idle8">800</label>
+                        <input type="radio" id="idle8" onclick="sendEcmCmd(EcmCmd.idle8)" name="idle" value="8"><br>
+                        <label for="idle10">1000</label>
+                        <input type="radio" id="idle10" onclick="sendEcmCmd(EcmCmd.idle10)" name="idle" value="10"><br>
+                        <label for="idle12">1200</label>
+                        <input type="radio" id="idle12" onclick="sendEcmCmd(EcmCmd.idle12)" name="idle" value="12"><br>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td width="25%">
+    <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+            <tr align="center">
+                <td>
+                    <fieldset>
+                        <legend>EVAP Purge</legend>
+                        <label for="evapon">EVAP Purge On</label>
+                        <input type="radio" id="evapon" onclick="sendEcmCmd(EcmCmd.evapon)" name="idle" value="evapon"><br>
+                        <label for="evapoff">EVAP Purge Off</label>
+                        <input type="radio" id="evapoff" onclick="sendEcmCmd(EcmCmd.evapoff)" name="idle" value="evapoff"><br>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </div>
+</td>
+<td width="25%">
+    <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+            <tr align="center">
+                <td>
+                    <fieldset>
+                        <legend>A/C Relay</legend>
+                        <label for="acon">A/C On</label>
+                        <input type="radio" id="acon" onclick="sendEcmCmd(EcmCmd.acon)" name="idle" value="acon"><br>
+                        <label for="acoff">A/C Off</label>
+                        <input type="radio" id="acoff" onclick="sendEcmCmd(EcmCmd.acoff)" name="idle" value="acoff"><br>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </div>
+</td>
+  </tr>
+
+  <tr align="center">
+    <td width="25%">
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr align="center">
+<td>
+<fieldset>
+ <legend>EGR Solenoid 1</legend>
+<!--<form>-->
+ <label for="egr1on">EGR solenoid On</label>
+ <input type="radio" id="egr1on" onclick="sendEcmCmd(EcmCmd.egr1on)" name="idle" value="egr1on"><br>
+ <label for="egr1off">EGR solenoid Off</label>
+ <input type="radio" id="egr1off" onclick="sendEcmCmd(EcmCmd.egr1off)" name="idle" value="egr1off"><br>
+<!--</form>-->
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td width="25%">
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr align="center">
+<td>
+<fieldset>
+ <legend>EGR Solenoid 2</legend>
+<!--<form>-->
+ <label for="egr2on">EGR solenoid On</label>
+ <input type="radio" id="egr2on" onclick="sendEcmCmd(EcmCmd.egr2on)" name="idle" value="egr2on"><br>
+ <label for="egr2off">EGR solenoid Off</label>
+ <input type="radio" id="egr2off" onclick="sendEcmCmd(EcmCmd.egr2off)" name="idle" value="egr2off"><br>
+<!--</form>-->
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+<td width="25%">
+    <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+            <tr align="center">
+                <td>
+                    <fieldset>
+                        <legend>EGR Solenoid 3</legend>
+                        <label for="egr3on">EGR solenoid On</label>
+                        <input type="radio" id="egr3on" onclick="sendEcmCmd(EcmCmd.egr3on)" name="idle" value="egr3on"><br>
+                        <label for="egr3off">EGR solenoid Off</label>
+                        <input type="radio" id="egr3off" onclick="sendEcmCmd(EcmCmd.egr3off)" name="idle" value="egr3off"><br>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </div>
+</td>
+  </tr>
+  </table>
+
+</td><!-- 1/2 td -->
+
+<td width="98%" align="top" class="hide" ><!-- width="50%" 2/2 td -->
+  <table width="98%">
+    <legend>Status</legend>
+    <tr align="center">
+<!--item-->
+     <td width="25%">
+      <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+            <tr align="center">
+                <td>
+                    <fieldset>
+                        <legend>Disconnect Ecm Test</legend>
+                        <label for="disconnectEcmTestResponse">Disconnect Ecm Test</label>
+                        <input type="radio" id="disconnectEcmTestResponse" onclick="sendEcmCmd(EcmCmd.disconnectEcmCmdNum)" name="idle" value="disconnectEcmTestResponse"><br>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+      </div>
+     </td>
+     <td width="25%">
+      <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+            <tr align="center">
+                <td>
+                    <fieldset>
+                        <legend>Stop Com Test</legend>
+                        <label for="stopComTestResponse">Stop Com Test</label>
+                        <input type="radio" id="stopComTestResponse" onclick="sendEcmCmd(EcmCmd.stopComCmdNum)" name="idle" value="stopComTestResponse"><br>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+      </div>
+     </td>
+<!--end item-->
+<!--item-->
+     <td width="25%">
+      <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+            <tr align="center">
+                <td>
+                    <fieldset>
+                        <legend>Mil Test</legend>
+                        <label for="milTestResponse">milTestResponse</label>
+                        <input type="radio" id="milTestResponse" onclick="sendEcmCmd(EcmCmd.milTestResponse)" name="idle" value="milTestResponse"><br>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+      </div>
+     </td>
+<!--end item-->
+</tr>
+<tr align="center">
+<!--item-->
+     <td width="25%">
+      <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+            <tr align="center">
+                <td>
+                    <fieldset>
+                        <legend>Data Test</legend>
+                        <label for="mainTestResponse">Engine Test Response</label>
+                        <input type="radio" id="mainTestResponse" onclick="sendEcmCmd(EcmCmd.mainTestResponse)" name="idle" value="mainTestResponse"><br>
+                        <label for="vinTestResponse">Vin Test Response</label>
+                        <input type="radio" id="vinTestResponse" onclick="sendEcmCmd(EcmCmd.vinTestResponse)" name="idle" value="vinTestResponse"><br>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+      </div>
+     </td>
+<!--end item-->
+</tr>
+<tr align="center">
+<!--item-->
+     <td width="25%">
+      <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+            <tr align="center">
+                <td>
+                    <fieldset>
+                      <legend>Fan Status</legend>
+                      OFF <label class="switch" for="fanOnOff">
+                        <input id="fanOnOff" type="checkbox" value=0>
+                        <span class="slider round"></span>
+                      </label> ON<br>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+      </div>
+     </td>
+<!--end item-->
+<!--item
+     <td width="25%">
+      <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+            <tr align="center">
+                <td>
+                    <fieldset>
+                      <legend>Manual</legend>
+<div class="slidecontainer"><span id="manualDis"></span>
+  <input type="range" min="0" max="6" value="6" class="slider2" name="manualGear" id="manualGear">
+</div>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+      </div>
+     </td>
+end item-->
+<!--item
+     <td width="25%">
+      <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+            <tr align="center">
+                <td>
+                    <fieldset>
+                      <legend>Automatic</legend>
+                      <div class="slidecontainer">
+                        <span id="prndlDis"></span>
+                        <input type="range" min="0" max="6" value="6" class="slider2" name="prndl" id="gear">
+                      </div>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+      </div>
+     </td>
+end item-->
+    </tr>
+  </table>
+</td><!-- 2/2 td -->
+</tr>
+</table>
+<!-- 100% outer table -->
+</form>
+
+<!--End Actuators-->
+<br/>
+<fieldset id="dtc" class="hide">
+ <legend class="btn" onclick='sH("dtcdata")'>Diagnostic Trouble Codes</legend>
+<div hidden name="dtcdata" id="dtcdata" title="Diagnostic Trouble Codes" align="center"></div>
+</fieldset>
+<br/>
+<fieldset id="scanData" class="hide">
+ <legend class="btn" onclick='sH("sdata")'>{Raw} Scan Data</legend>
+<div hidden name="sdata" id="sdata" title="serial data" align="center"></div>
+</fieldset>
+<br>
+    <!--<font size ="2">|
+    <font color="#4F4F4F">index</font> |
+    <a href="templates/_index.htm">templates</a> |
+    <a href="advanced.htm">advanced</a> |
+    <a href="rad_sub.htm">radiosity</a> |
+    <a href="animations.htm">animations</a> |
+    <a href="interior.htm">light + interior</a> |
+    <a href="cameras.htm">cameras</a> |
+    <a href="language.htm">language</a> |
+    <a href="objects.htm">objects</a> |
+    <a href="textures.htm">textures</a> |
+    <a href="incdemo.htm">include</a> |
+    </font>--><br>
+
+
+<div align="right" style="width:98%;border:none;padding:0;margin:-50px 0 0 0;height:0">
+<img title="1995 Camaro" alt="1995 Camaro" src="img/camaro1.png" style="margin-left:-108px;float:right;border:none;height:48px;width:100px;"/>
+</div>
+</div>
+<!-- footer -->
+<hr size="3">
+<table width="95%" align="center">
+<tr>
+ <td class="hide">
+
+        <!-- Copyright -->
+        <script>
+            function yr() {
+                const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL';
+            }
+            /*document.write('<b style="color:#752975;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yr() + '" >' + yr() + "</b>");*/
+            document.write('<small onclick=window.open("https://toremetal.com") style="color:#752929;text-align: left;position: fixed;z-index:8; bottom: 6px; left: 5px;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yr() + '" >' + yr() + "</small>");
+        </script>
+        <!-- End Copyright -->
+ </td>
+</tr>
+</table><!-- end footer -->
+</body>
+<script>
+
+/* if (DEBUG==1) {console.log()}*/
+const DEBUG = 2;
+
+/* ---------------------------------------------|
+ * Byte Converters (for translating serial data)
+ *   numericToAlpha(0-255)=00-FF
+ *   alphaToNumeric(00-FF)=0-255
+ *      numToBin(0-255) 00000000-11111111
+ * ------------------------------------------ */
+
+function numToBin(i) {
+  let nBinary="";
+  let tmpBinary="";
+  let tmpBinary2="";
+/*1*/   nBinary=(i%2).toFixed().toString();
+      tmpBinary=i/2;
+/*2*/      nBinary=parseInt(tmpBinary%2) + nBinary;
+      tmpBinary2=tmpBinary/2;
+/*3*/      nBinary=parseInt(tmpBinary2%2) + nBinary;
+      tmpBinary=tmpBinary2/2;
+/*4*/      nBinary=parseInt(tmpBinary%2) + nBinary;
+      tmpBinary2=tmpBinary/2;
+/*5*/      nBinary=parseInt(tmpBinary2%2) + nBinary;
+      tmpBinary=tmpBinary2/2;
+/*6*/      nBinary=parseInt(tmpBinary%2) + nBinary;
+      tmpBinary2=tmpBinary/2;
+/*7*/      nBinary=parseInt(tmpBinary2%2) + nBinary;
+      tmpBinary=tmpBinary2/2;
+/*8*/      nBinary=parseInt(tmpBinary%2) + nBinary;
+      return nBinary;
+}
+
+function setDelay(val) {
+    EcmCmds.loopTime=val*100;
+    if (EcmCmds.allowCookies) {setCookie("speed",val*100,30);}
+}
+
+function numericToAlpha(i) {
+    let j=(parseInt(i)%16);
+    let d=(parseInt(i)-parseInt(j))/16;
+    var L=getVal(d);
+    var R=getVal(j);
+    return L + R;
+}
+
+function alphaToNumeric(l) {
+  for (let i = 0; i < 256; i++) {
+    let c=numericToAlpha(i);
+    if (c==l) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function getVal(d) {
+    if (parseInt(d) >=0 && parseInt(d) <=9) {
+        return d.toString();
+    } else {
+        if (d==10) {
+            return "A";
+        } else if (d==11) {
+            return "B";
+        } else if (d==12) {
+            return "C";
+        } else if (d==13) {
+            return "D";
+        } else if (d==14) {
+            return "E";
+        } else if (d==15) {
+            return "F";
+        } else {
+            return "-1"
+        }
+    }
+}
+
+/* End:Byte Converters */
+
+/* Decoder File Constants
+ *  note: values assigned by the order listed. 
+ */
+const DTCCODES = {
+code20:"NOT USED",
+code21:"NOT USED",
+code22:"NOT USED",
+code23:"NOT USED",
+code24:"MALF CODE 98  INVALID PCM PROGRAM",
+code25:"MALF CODE 75  EGR1 SOLENOID ERROR",
+code26:"MALF CODE 76  EGR2 SOLENOID ERROR",
+code27:"MALF CODE 77  EGR3 SOLENOID ERROR",
+code30:"MALF CODE 36  IC 24X SIGNAL ERROR",
+code31:"MALF CODE 41  IC EST ERROR",
+code32:"MALF CODE 42  IC EST BYPASS ERROR",
+code33:"MALF CODE 14  ENGINE COOLANT TEMP. HIGH",
+code34:"MALF CODE 15  ENGINE COOLANT TEMP. LOW",
+code35:"MALF CODE 33  MAP SENSOR HIGH",
+code36:"MALF CODE 34  MAP SENSOR LOW",
+code37:"MALF CODE 51  PROM ERROR",
+code40:"MALF CODE 63  RIGHT O2 SENSOR ERROR",
+code41:"MALF CODE 46  PASSKEY II ERROR",
+code42:"MALF CODE 13  LEFT O2 SENSOR ERROR",
+code43:"NOT USED",
+code44:"MALF CODE 64  RIGHT O2 SENSOR LEAN",
+code45:"MALF CODE 44  LEFT O2 SENSOR LEAN",
+code46:"MALF CODE 65  RIGHT O2 SENSOR RICH",
+code47:"MALF CODE 45  LEFT O2 SENSOR RICH",
+code50:"MALF CODE 35  IDLE SPEED ERROR",
+code51:"MALF CODE 43  KS CIRCUIT ERROR",
+code52:"MALF CODE 53  SYS. VOLTS HIGH",
+code53:"MALF CODE 16  SYS. VOLTS LOW",
+code54:"MALF CODE 25  IAT HIGH",
+code55:"MALF CODE 23  IAT LOW",
+code56:"MALF CODE 21  TPS VOLTAGE HIGH",
+code57:"MALF CODE 22  TPS VOLTAGE LOW",
+code60:"MALF CODE 66  A/C PRESSURE SENSOR LOW",
+code61:"MALF CODE 70  A/C PRESSURE SENSOR HIGH",
+code62:"MALF CODE 68  A/C RELAY SHORTED",
+code63:"MALF CODE 69  A/C RELAY OPEN",
+code64:"MALF CODE 67  A/C PRESS SENS ERR",
+code65:"MALF CODE 71  A/C EVAP TEMP LOW",
+code66:"MALF CODE 73  A/C EVAP TEMP HIGH",
+code67:"",
+code70:"",
+code71:"",
+code72:"MALF CODE 24  VSS CKT. NO SIGNAL",
+code73:"",
+code74:"MALF CODE 58  TFT SENSOR CKT. HIGH (LOW TEMP.)",
+code75:"MALF CODE 59  TFT SENSOR CKT. LOW (HIGH TEMP.)",
+code76:"MALF CODE 28  TR PRESSURE SWITCH CKT.",
+code77:"MALF CODE 72  VSS CKT. SIGNAL ERROR",
+code80:"MALF CODE 17  CAM SENSOR ERROR",
+code81:"MALF CODE 37  TCC BRAKE SWITCH ERROR",
+code82:"",
+code83:"",
+code84:"",
+code85:"",
+code86:"",
+code87:"",
+code90:"",
+code91:"MALF CODE 96 TRANS. SYSTEM VOLTAGE LOW",
+code92:"MALF CODE 82 IC 3X SIGNAL ERROR",
+code93:"MALF CODE 61 A/C LOW REFRIGERANT",
+code94:"MALF CODE 93 PCS CIRCUIT (CURRENT ERROR)",
+code95:"MALF CODE 79  TRANS. FLUID OVERTEMP.",
+code96:"MALF CODE 80  TRANS. COMPONENT ERROR",
+code97:"MALF CODE 90  TCC ERROR",
+code100:"",
+code101:"",
+code102:"",
+code103:"",
+code104:"",
+code105:"MALF CODE 99  INVALID PCM PROGRAM",
+code106:"MALF CODE 54  FUEL PUMP VOLTAGE LOW",
+code107:"MALF CODE 85  PROM ERROR",
+code110:"",
+code111:"MALF CODE 87  EEPROM ERROR",
+code112:"MALF CODE 86  A/D ERROR",
+code113:"",
+code114:"",
+code115:"",
+code116:"",
+code117:"",
+code120:"",
+code121:"",
+code122:"",
+code123:"",
+code124:"MALF CODE 98  INVALID PCM PROGRAM",
+code125:"MALF CODE 75  EGR1 SOLENOID ERROR",
+code126:"MALF CODE 76  EGR2 SOLENOID ERROR",
+code127:"MALF CODE 77  EGR3 SOLENOID ERROR",
+code130:"MALF CODE 13  HO2S ERROR",
+code131:"MALF CODE 41  IC EST ERROR",
+code132:"MALF CODE 42  IC EST BYPASS ERROR",
+code133:"MALF CODE 14  ENGINE COOLANT TEMP. HIGH",
+code134:"MALF CODE 15  ENGINE COOLANT TEMP. LOW",
+code135:"MALF CODE 33  MAP SENSOR HIGH",
+code136:"MALF CODE 34  MAP SENSOR LOW",
+code137:"MALF CODE 51  PROM ERROR",
+code140:"MALF CODE 63  RIGHT O2 SENSOR ERROR",
+code141:"MALF CODE 46  PASSKEY II ERROR",
+code142:"MALF CODE 13  LEFT O2 SENSOR ERROR",
+code143:"",
+code144:"MALF CODE 64  RIGHT O2 SENSOR LEAN",
+code145:"MALF CODE 44  LEFT O2 SENSOR LEAN",
+code146:"MALF CODE 65  RIGHT O2 SENSOR RICH",
+code147:"MALF CODE 45  LEFT O2 SENSOR RICH",
+code150:"MALF CODE 35  IDLE SPEED ERROR",
+code151:"MALF CODE 43  KS CIRCUIT",
+code152:"MALF CODE 53  SYS. VOLTS HIGH",
+code153:"MALF CODE 16  SYS. VOLTS LOW",
+code154:"MALF CODE 25  IAT HIGH",
+code155:"MALF CODE 23  IAT LOW",
+code156:"MALF CODE 21  TPS VOLTAGE HIGH",
+code157:"MALF CODE 22  TPS VOLTAGE LOW",
+code160:"MALF CODE 66  A/C PRESSURE SENSOR LOW",
+code161:"MALF CODE 70  A/C PRESSURE SENSOR HIGH",
+code162:"MALF CODE 68  A/C RELAY SHORTED",
+code163:"MALF CODE 69  A/C RELAY OPEN",
+code164:"MALF CODE 67  A/C PRESS SENS ERR",
+code165:"MALF CODE 71  A/C EVAP TEMP LOW",
+code166:"MALF CODE 73  A/C EVAP TEMP HIGH",
+code167:"",
+code170:"",
+code171:"",
+code172:"MALF CODE 24  VSS CKT. NO SIGNAL",
+code173:"",
+code174:"MALF CODE 58  TFT SENSOR CKT. LOW (HIGH TEMP.)",
+code175:"MALF CODE 59  TFT SENSOR CKT. HIGH (LOW TEMP.)",
+code176:"MALF CODE 28  TR PRESSURE SWITCH CKT.",
+code177:"MALF CODE 72  VSS CKT. SIGNAL ERROR",
+code180:"MALF CODE 17  CAM SENSOR ERROR",
+code181:"MALF CODE 37  TCC BRAKE SWITCH ERROR",
+code182:"",
+code183:"",
+code184:"",
+code185:"",
+code186:"",
+code187:"",
+code190:"",
+code191:"MALF CODE 96 TRANS. SYSTEM VOLTAGE LOW",
+code192:"MALF CODE 82 IC 3X SIGNAL ERROR",
+code193:"MALF CODE 61 A/C LOW REFRIGERANT",
+code194:"MALF CODE 93 PCS CIRCUIT (CURRENT ERROR)",
+code195:"MALF CODE 79  TRANS. FLUID OVERTEMP.",
+code196:"MALF CODE 80  TRANS. COMPONENT ERROR",
+code197:"MALF CODE 90  TCC ERROR",
+code200:"",
+code201:"",
+code202:"",
+code203:"",
+code204:"",
+code205:"MALF CODE 99  INVALID PCM PROGRAM",
+code206:"MALF CODE 54  FUEL PUMP VOLS. LOW",
+code207:"MALF CODE 85  PROM ERROR",
+code210:"",
+code211:"MALF CODE 87  EEPROM ERROR",
+code212:"MALF CODE 86  A/D ERROR",
+code213:"",
+code214:"",
+code215:"",
+code216:"",
+code217:""
+
+}
+const EcmCmdDisConnectDataStream = {
+/* ----Mode [0] Response */
+  id:0xE4,
+  messageLength:0x56,
+  mode:0x00
+}
+
+const EcmCmdStopComDataStream = {
+/* ----Mode [8] Response */
+  id:0xE4,
+  messageLength:0x56,
+  mode:0x08
+}
+
+const EcmCmdMilDataStream = {
+/* ----Mode [1] Message(2) Response */
+  id:0xE4,
+  messageLength:0x6B,
+  mode:0x01
+}
+
+const EcmCmdVinDataStream = {
+/* ----Mode [1] Message(4) Response */
+  id:0xE4,
+  messageLength:0x83,
+  mode:0x01
+}
+
+const EcmCmdMainDataStream = {
+/* ----Mode [1] Message(0) Response */
+/* ----    byte id : ElementName (DO NOT CHANGE VALUES) */
+ id:0xE4,            /* DO NOT CHANGE ID or VALUE */
+ messageLength:0x99, /* DO NOT CHANGE ID or VALUE */
+ mode:0x01,          /* DO NOT CHANGE ID or VALUE */
+/*data-byte1*/EngineRuntimeMSB:"runtime",
+/*byte2*/     EngineRuntimeLSB:"runtimelsb",
+/*byte3*/     Coolant:"coolanttempf",
+/*byte4*/     Battery:"battery",
+/*byte5*/     AirTemp:"airtempf",
+/*byte6*/     Map:"mapvolts",
+/*byte7*/     Baro:"baro",
+/*byte8*/     TpsVolts:"throttlev",
+/*byte9*/     TpsPercent:"throttlep",
+/*byte10*/    TransTmp:"tempf",/*TODO:set Up formula for conversion*/
+/*byte11*/    MPH:"mph",
+/*byte12*/    TargetRPM:"targetidle",
+/*byte13*/    RPM24:"NotUsed",
+/*byte14*/    RPM24x:"rpm24x",
+/*byte15*/    GEAR:"gear",
+/*byte16*/    Knock:"knock",
+/*byte17*/    KnockRetard:"knockretard",
+/*byte18*/    EgrStatus:"NotUsed",
+/*byte19*/    Blm:"blm",
+/*byte20*/    AirFuel:"airfuel",
+/*byte21*/    InjectorMSB:"injp",
+/*byte22*/    InjectorLSB:"injp",
+/*byte23*/    StFtBankR:"stftbankR",
+/*byte24*/    LtFtBankR:"ltftbankR",
+/*byte25*/    O2BankR:"o2bankR",
+/*byte26*/    StFtBankL:"stftbankL",
+/*byte27*/    LtFtBankL:"ltftbankL",
+/*byte28*/    O2BankL:"o2bankL",
+/*byte29*/    IAC:"iac",
+/*byte30*/    MinIAC:"miniac",
+/*byte31*/    FuelPump:"fuelpumpv",
+/*byte32*/    ACpsi:"acpsi",
+/*byte33*/    SparkAdvanceMSB:"NotUsed",
+/*byte34*/    SparkAdvance:"sparkadvance",
+/*byte35*/    Evap:"evap",
+/*byte36*/    O2Status:"NotUsed",
+/*byte37*/    KickDown:"NotUsed",
+/*byte38*/    FanOn:"fanOnOff",
+/*byte39*/    byte39:"NotUsed",
+/*byte40*/    RPMnX125:"rpm",
+/*byte41*/    ACtemp:"actempf",
+/*byte42*/    ACstatus:"NotUsed",
+/*byte43*/    brakePressed:"brakepressed",
+/*44*/    byte44:"NotUsed",
+/*45*/    byte45:"milcodes",
+    byte46:"NotUsed",
+    byte47:"ForcedMotorDutyCycle",
+    byte48:"NotUsed",
+    byte49:"NotUsed",
+    byte50:"NotUsed",
+    byte51:"NotUsed",
+    byte52:"NotUsed",
+    byte53:"NotUsed",
+    byte54:"NotUsed",
+    byte55dyno:"NotUsed",
+    byte56:"NotUsed",
+    byte57:"NotUsed",
+    byte59:"NotUsed",
+    byte60:"NotUsed",
+    byte61:"NotUsed",
+    byte62:"NotUsed",
+    byte63:"NotUsed",
+    byte64:"NotUsed",
+    byte65:"NotUsed",
+    byte66:"NotUsed",
+    byte67:"NotUsed",
+    length:70
+}
+/* End Decoder File Constants */
+
+/* Ecm Cmds order number */
+const EcmCmd = {
+    mainDataCmdNum:0,
+    milDataCmdNum:1,
+    vinDataCmdNum:2,
+    resetMilCmdNum:3,
+    stopComCmdNum:4,
+    disconnectEcmCmdNum:5,
+    reset:6,
+    fanon:7,
+    fanoff:8,
+    milon:9,
+    miloff:10,
+    evapon:11,
+    evapoff:12,
+    acon:13,
+    acoff:14,
+    egr1on:15,
+    egr1off:16,
+    egr2on:17,
+    egr2off:18,
+    egr3on:19,
+    egr3off:20,
+    idle6:21,
+    idle8:22,
+    idle10:23,
+    idle12:24,
+    milTestResponse:25,
+    mainTestResponse:26,
+    vinTestResponse:27
+}
+
+const EcmCmds = {
+/*0*/ mainDataCmd: new Uint8Array([0xE4,0x57,0x01,0x00,0xC4]),
+/*1*/  milDataCmd: new Uint8Array([0xE4,0x57,0x01,0x02,0xC2]),
+/*2*/  vinDataCmd: new Uint8Array([0xE4,0x57,0x01,0x04,0xC0]),
+/*3*/ resetMilCmd: new Uint8Array([0xE4,0x56,0x0A,0xBC]),
+/*4*/  stopComCmd: new Uint8Array([0xE4,0x56,0x08,0xAE]),
+/*5*/ disconnectEcmCmd: new Uint8Array([0xE4,0x56,0x00,0xC6]),
+/*6 */   reset: new Uint8Array([0xE4,0x62,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xB6]),
+/*7*/    fanon: new Uint8Array([0xE4,0x62,0x04,0x00,0x00,0x00,0x00,0x80,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0xB6]),
+/*8*/   fanoff: new Uint8Array([0xE4,0x62,0x04,0x00,0x00,0x00,0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x36]),
+/*9*/    milon: new Uint8Array([0xE4,0x62,0x04,0x02,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xB2]),
+/*10*/  miloff: new Uint8Array([0xE4,0x62,0x04,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xB4]),
+/*11*/  evapon: new Uint8Array([0xE4,0x62,0x04,0x10,0x10,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x96]),
+/*12*/ evapoff: new Uint8Array([0xE4,0x62,0x04,0x10,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xA6]),
+/*13*/    acon: new Uint8Array([0xE4,0x62,0x04,0x01,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xB4]),
+/*14*/   acoff: new Uint8Array([0xE4,0x62,0x04,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xB5]),
+/*15*/  egr1on: new Uint8Array([0xE4,0x62,0x04,0x80,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xB6]),
+/*16*/ egr1off: new Uint8Array([0xE4,0x62,0x04,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x36]),
+/*17*/  egr2on: new Uint8Array([0xE4,0x62,0x04,0x40,0x40,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x36]),
+/*18*/ egr2off: new Uint8Array([0xE4,0x62,0x04,0x40,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x76]),
+/*19*/  egr3on: new Uint8Array([0xE4,0x62,0x04,0x20,0x20,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x76]),
+/*20*/ egr3off: new Uint8Array([0xE4,0x62,0x04,0x20,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x96]),
+/*21*/   idle6: new Uint8Array([0xE4,0x62,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x30,0x00,0x00,0x30,0x00,0x00,0x56]),
+/*22*/   idle8: new Uint8Array([0xE4,0x62,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x30,0x00,0x00,0x40,0x00,0x00,0x46]),
+/*23*/  idle10: new Uint8Array([0xE4,0x62,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x30,0x00,0x00,0x50,0x00,0x00,0x36]),
+/*24*/  idle12: new Uint8Array([0xE4,0x62,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x30,0x00,0x00,0x60,0x00,0x00,0x26]),
+/*25*/  milTestResponse: new Uint8Array([0xE4,0x6B,0x01,0x03,0x00,0x00,0x21,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x8C]),
+/*26*/  mainTestResponse: new Uint8Array([0xE4,0x99,0x01,0x00,0x00,0x49,0x74,0x32,0xFF,0xFF,0x1C,0x00,0x01,0x00,0x00,0xFF,0xFF,0x04,0x00,0x00,0x00,0x00,0x4E,0x16,0xB4,0x80,0x80,0x66,0x80,0x80,0x64,0x64,0x06,0x00,0xFF,0x00,0x24,0x00,0xC2,0xC0,0x48,0x00,0x00,0x00,0x61,0x28,0xF7,0x02,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0x00,0x08,0x00,0x30]),
+/*27*/  vinTestResponse: new Uint8Array([0xE4,0x83,0x01,0x32,0x47,0x31,0x46,0x50,0x32,0x32,0x53,0x37,0x53,0x32,0x31,0x38,0x39,0x36,0x32,0x37,0x00,0xF7,0x74,0x0D,0x31,0x36,0x30,0x30,0x33,0x31,0x31,0x30,0x39,0x36,0x37,0x35,0x30,0x37,0x34,0x02,0x00,0xF7,0x74,0x3F,0x00,0xF7,0x74,0x40,0xD3]),
+/*--*/  mainTestResponseLabels: new Uint8Array([0xE4,0x99,0x01,/*1runtime*/ 0,/*2runtime*/ 0,/*3coolant*/ alphaToNumeric("48"),/*4battery*/ alphaToNumeric("75"),/*5airTemp*/ alphaToNumeric("30"),/*6mapVolts*/ 255,/*7Baro*/ 255,/*8TP Volts*/ alphaToNumeric("1C"),/*9TP angle*/ 0,/*TRANS TEMP SEN. F = 1.35*N - 40*/ 0,/*MPH*/ 0,/*desiredIdle*/ 0,/*13NEWRFPER*/ 255,/*14NEWRFPER+1 RPM=1310720/N */ 255,/*15 PRNDL 0=D1,1=D2,2=D3,3=D4,4=N,5=R,6=P,7=notDefined*/ 4,/*16Knock Sensor*/ 0,/*sparkRetard*/ 0,/*18 egr solenoids*/ 0,/*19 BLM*/ 0,/*20 AirFuel*/ alphaToNumeric("4E"),/*21 inj*/ alphaToNumeric("17"),/*22 inj*/ alphaToNumeric("10"),/*23bank1Learn*/ alphaToNumeric("80"),/*24bank1*/ alphaToNumeric("80"),/*25bank1o2*/ alphaToNumeric("66"),/*26bank2*/ alphaToNumeric("80"),/*27 2*/ alphaToNumeric("80"),/*28 o2 2*/ alphaToNumeric("63"),/*29 iac*/ alphaToNumeric("65"),/*30 iac min*/ 6,/*31fuelPump Volts*/ 0,/*32AC EVAP Temp Sensor*/ 255,/*33SparkAdvance*/ 0,/*34SparkAdvance*/ alphaToNumeric("24"),/*35CCP DUTY CYCLE*/ 255,/*36 o2Ready*/ alphaToNumeric("C2"),/*21=LEFT OXYGEN SENSOR READY 31=Right OXYGEN SENSOR READY 01=BLOCK LEARN ENABLED 11=A.I.R. DIVERT FLAG 41=CLOSED LOOP A/F MODE ENABLED*//*37*/ alphaToNumeric("C0"),/*01=CAM PULSE,11=kickDown,20=InjFault,41=A/C request, 51=A/C clutch*/ alphaToNumeric("48"),/*[38] 01=FAN # 1 ON, 21=NORMAL/SNOW (X1R),41=TRANS SHIFT SOLENOID A, 51=TRANSMISSION SHIFT SOLENOID B,71=TCC ENABLE SOL. OUTPUT*//*notused*/ 0,/*rpm*/ 0,/*ac volts*/ 0,/*ac stuff*/ alphaToNumeric("61"),/*43 TCC brake 51 = Pressed*/ alphaToNumeric("28"), alphaToNumeric("F7"),/*Mil Codes*/ 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, alphaToNumeric("80"), 0, 8, 0, alphaToNumeric("D7")]),
+      lastCmdStr: "",
+      lastCmdlength: 0,
+      lastCmd: 99,
+      nextCmd: 2,
+      sendCmd: 0,
+      sendCnt: 0,
+      sendCntCap:10,
+      byteStart:0,
+      noCmdNum:99,
+      autoTran:0,
+      received:0,
+      loopTime:500,
+      allowCookies:false
+};
+
+
+    const cnt = {value:0};
+    document.getElementById("ecmdatafile").value=EcmCmds.autoTran;
+    document.getElementById("manF").hidden=EcmCmds.autoTran;
+    document.getElementById("autoF").hidden=!EcmCmds.autoTran;
+
+    function msgTest(v0,v1,v2,msg) {
+        return v0.toString() + "," + v1.toString() + "," + v2.toString()==msg.id.toString() + "," + msg.messageLength.toString() + "," + msg.mode.toString();
+    }
+
+/* ==========================================================|
+ * [Serial Data Reader:] readAllChunks(reader)
+ *  var reader: com port connection-for serial read.
+ * -------------------------------------------------------- */
+async function readAllChunks(reader) {
+let d=document.getElementById("delaytime").value*100;
+setTimeout(console.log("delay:" + d),d);
+    try {
+        return await reader.read().then(
+            ({value, done}) => {
+                if (done) {
+                    console.log("Stream Closed.");
+                } else {
+                    if (value!="") {
+
+/* !! IMPORTANT! Internal function, uses value array
+ * Must Not be removed from CODE BLOCK
+ * [without exporting values to an array.]
+ * otherwise it may be processed as a string array not a byte array.
+ * ---------------------------------------------------------------- */
+function setValues(ecmFileConst) {
+    let injector=0;
+    let t=0;
+    let y=EcmCmds.byteStart;
+        
+    for (z in ecmFileConst) {
+        try {
+            if (DEBUG==1) {console.log("value[" + y + "](" + t + "):" + value[y]);}
+            if (t==ecmFileConst.length || y>=value.length) {
+                break;
+            } else if (ecmFileConst[z]==ecmFileConst.id) {
+                /* Skip */
+            } else if (ecmFileConst[z]==ecmFileConst.messageLength) {
+                /* Skip */
+            } else if (ecmFileConst[z]==ecmFileConst.mode) {
+                /* Skip */
+            } else if (ecmFileConst[z]==ecmFileConst.length) {
+                /* Skip */
+            } else if (ecmFileConst[z]=="NotUsed") {
+                /* Skip */
+            } else if (ecmFileConst[z]=="TODO") {
+                /* Skip */
+            } else if (ecmFileConst[z]=="gear") {
+                let currentGear=numToBin(value[y]);
+                let bitSpot=0;
+                for (c in currentGear) {
+                    if (currentGear[c]==1) {
+                        console.log("GEAR-Spot" + bitSpot + "=" + c);
+                        document.getElementById("gear").value=bitSpot;
+                    }
+                    bitSpot++;
+                }
+            } else if (ecmFileConst[z]=="brakepressed") {
+                let brakes=numToBin(value[y]);
+                let tc=0;
+                for (t in brakes) {
+                     if (tc==5) {
+                         if (brakes[t]=="1") {
+                             document.getElementById("brakepressed").checked=true;
+                         } else {
+                             document.getElementById("brakepressed").checked=false;
+                         }
+                         break;
+                     }
+                     tc++;
+                }
+            } else if (ecmFileConst[z]=="milcodes") {
+                if (value[y]>0) {
+                    document.getElementById("checkEngineLight").hidden=false;
+                } else {document.getElementById("checkEngineLight").hidden=true;}
+                setValue(ecmFileConst[z], value[y]);
+                if (DEBUG==1) {console.log("setValues-["+ z.toString() +"]:" + ecmFileConst[z] + value[y].toString());}
+            } else if (ecmFileConst[z]=="fanOnOff") {
+                if (value[y]==0) {
+                    document.getElementById("fanOnOff").checked=false;
+                } else if (value[y]==1) {
+                    document.getElementById("fanOnOff").checked=true;
+                }
+            } else if (ecmFileConst[z]=="coolanttempf" || ecmFileConst[z]=="airtempf" || ecmFileConst[z]=="actempf") {
+                setValue(ecmFileConst[z], setDegF(value[y]));
+                if (DEBUG==1) {console.log("setDegF(value[y]):" + setDegF(value[y]));}
+            } else if (ecmFileConst[z]=="mapvolts" || ecmFileConst[z]=="baro" || ecmFileConst[z]=="throttlev") {
+                setValue(ecmFileConst[z], setVolts(value[y]));
+                if (DEBUG==1) {console.log("setVolts(value[y]):" + setVolts(value[y]));}
+            } else if (ecmFileConst[z]=="battery" || ecmFileConst[z]=="airfuel" || ecmFileConst[z]=="fuelpumpv") {
+                try {
+                    setValue(ecmFileConst[z], (parseInt(value[y])/10).toFixed(1));
+                    if (DEBUG==1) {console.log("value[(t:"+ t +")"+ y +"]" + value[y] +" / 10:" + (value[y]/10).toFixed(1));}
+                } catch(error) {
+                    console.log("ERROR(" + ecmFileConst[z] + "): " + error);
+                }
+            } else if (ecmFileConst[z]=="targetidle" || ecmFileConst[z]=="rpm") {
+                setValue(ecmFileConst[z], (12.5*value[y]).toFixed());
+                if (DEBUG==1) {console.log("12.5*value[y]:" + (12.5*value[y]).toFixed());}
+            } else if (ecmFileConst[z]=="throttlep" || ecmFileConst[z]=="evap" || ecmFileConst[z]=="ForcedMotorDutyCycle") {
+                setValue(ecmFileConst[z], (value[y]/2.55).toFixed());
+                if (DEBUG==1) {console.log("value[y]/2.55:" + (value[y]/2.55).toFixed());}
+            /* TODO auto tran values *********************************
+            } else if (t>45 && t<49 && EcmCmds.autoTran==1) {
+              setValue(ecmFileConst[z], (value[y]/2.55).toFixed());
+              if (DEBUG==1) {console.log("value[y]/2.55:" + (value[y]/2.55).toFixed());}
+             * END TODO  *********************************************  */
+            } else if (ecmFileConst[z]=="rpm24x") {
+                if (value[y]!=255) {
+                    setValue(ecmFileConst[z], (1310720/parseInt(value[y])).toFixed());
+                } else {setValue(ecmFileConst[z], 0);}
+                if (DEBUG==1) {console.log("rpm: 1310720/value[y]:" + (1310720/value[y]).toFixed());}
+            } else if (ecmFileConst[z]=="knockretard") {
+                setValue(ecmFileConst[z], (45*parseInt(value[y])/256).toFixed());
+                if (DEBUG==1) {console.log("45*value[y]/256:" + (45*value[y]/256).toFixed());}
+            } else if (ecmFileConst[z]=="o2bankR" || ecmFileConst[z]=="o2bankL") {
+                setValue(ecmFileConst[z], (value[y]*4.42).toFixed()*0.001);
+                if (DEBUG==1) {console.log("value[y]*4.42:" + (value[y]*4.42).toFixed(1));}
+            } else if (ecmFileConst[z]=="sparkadvance") {
+                setValue(ecmFileConst[z], (value[y]*90/256).toFixed());
+                if (DEBUG==1) {console.log("value[y]*90/256:" + (value[y]*90/256).toFixed());}
+            } else if (ecmFileConst[z]=="injp" && injector==0) {
+                injector=value[y];
+            } else if (ecmFileConst[z]=="injp") {
+                let newVal=((parseInt(injector)*256+value[y])/65.536).toFixed();
+                setValue(ecmFileConst[z], newVal);
+                if (DEBUG==1) {console.log("setValues(injector*256 + value[y])/65.536)-[z:"+ z.toString() +"]-ecmFileConst[z]:" + ecmFileConst[z] +" -value[y]:" + value[y].toString()+" -newVal:"+newVal+" injector:"+injector.toString());}
+            } else if (ecmFileConst[z]=="acpsi") {
+                let newVal=(value[y]*1.875-18.75).toFixed();
+                setValue(ecmFileConst[z], (value[y]*1.875-18.75).toFixed());
+                if (DEBUG==1) {console.log("setValues(N*1.875-18.75)-[z:"+ z.toString() +"]-ecmFileConst[z]:" + ecmFileConst[z] +" -value[y]:" + value[y].toString()+" -newVal:"+newVal);}
+            } else {
+                if (t<ecmFileConst.length && y<value.length) {
+                    setValue(ecmFileConst[z], value[y]);
+                }
+                if (DEBUG==1) {console.log("setValues-["+ z.toString() +"]:" + ecmFileConst[z] + value[y].toString());}
+            }
+        } catch(error) {
+            console.log("ERROR setValues" + ecmFileConst[z] + ": " + error);
+        }                    
+        t++;                         
+        y++;                           
+    }                                  
+}                                  
+/* End Function ----------------------------------------------------------------------- */
+
+                      if (DEBUG==1 || DEBUG==2) {console.log("EcmCmds.lastCmd: " + EcmCmds.lastCmd.toString());}
+                      let conBit="";
+                      let conBin="";
+                      let y = 0;
+                      let bit=0;
+                      for (x in value) {
+                              /* ========================================|
+                               *  Convert and Display Serial Data.
+                               * ====================================== */
+                        try {
+                            conBit+=numericToAlpha(value[x]);
+                            conBit+=",";
+                            conBin+=numToBin(value[x]);
+                            conBin+=",";
+                        } catch(error) {
+                            console.log("ERROR bitConvert:" + error.toString());
+                        }
+                              /* END: Convert and Display Serial Data. */
+                                                                        
+                                   /* ========================================|
+                                    * Scan Serial Data for VIN Information.
+                                    * ====================================== */
+                        if (EcmCmds.lastCmd==EcmCmd.vinDataCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
+                            if (DEBUG==2) {console.log("Reading VIN Response!" + EcmCmds.sendCnt);}
+                            if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdVinDataStream)) {
+                                let vinStr="";
+                                for (let v=(y+3);v<(y+20);v++) {
+                                    vinStr+=String.fromCharCode(value[v]);
+                                }
+                                document.getElementById("dashTitle").innerHTML="Dash (vin:" + vinStr + ")";
+                                sendEcmCmd(EcmCmd.stopComCmdNum);
+                                if (DEBUG==2) {console.log("ECM [(vin)engine]:Request" + EcmCmds.nextCmd);}
+                            } else if (EcmCmds.sendCnt<EcmCmds.sendCntCap) {
+                                EcmCmds.sendCnt++;
+                            } else {
+                                EcmCmds.sendCnt=0;
+                                EcmCmds.nextCmd=EcmCmd.vinDataCmdNum;
+                                sendEcmCmd(EcmCmd.stopComCmdNum);
+                                if (DEBUG==2) {console.log("ECM [Vin]:Request");}
+                            }
+                        } else if (EcmCmds.lastCmd==EcmCmd.mainDataCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
+                            if (DEBUG==2) {console.log("Reading Engine Response!");}
+                                        /* ========================================|
+                                         * Scan Serial Data for Engine Information.
+                                         * ====================================== */
+                            if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdMainDataStream)) {
+                                EcmCmds.byteStart = y;
+                                EcmCmds.received=1;
+                                setValues(EcmCmdMainDataStream);
+                                if (document.getElementById("dtcdata").innerHTML=="") {
+                                    EcmCmds.nextCmd=EcmCmd.milDataCmdNum;
+                                    sendEcmCmd(EcmCmd.milDataCmdNum);
+                                    if (DEBUG==2) {console.log("ECM [(engine)MIL]:Request");}
+                                } else if (document.getElementById("scan").value!="Scan") {
+                                    if (EcmCmds.sendCnt<1) {
+                                        EcmCmds.sendCnt++;
+                                    } else {
+                                        EcmCmds.sendCnt=0;
+                                        sendEcmCmd(EcmCmd.mainDataCmdNum);
+                                        if (DEBUG==2) {console.log("ECM [engine]:Request");}
+                                    }
+                                } else {
+                                    /* No COMMAND return ECM to normal. */
+                                    sendEcmCmd(EcmCmd.disconnectEcmCmdNum);
+                                    if (DEBUG==2) {console.log("ECM [r2Normal]:Request");}
+                                }
+                            } else if (EcmCmds.sendCnt<EcmCmds.sendCntCap) {
+                                EcmCmds.sendCnt++;
+                            } else {
+                                EcmCmds.sendCnt=0;
+                                sendEcmCmd(EcmCmd.stopComCmdNum);
+                                if (DEBUG==2) {console.log("ECM [Engine]:Request");}
+                            }
+                        } else if (EcmCmds.lastCmd==EcmCmd.milDataCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
+                            if (DEBUG==2) {console.log("Reading MIL Response!");}
+                                        /* ========================================|
+                                         * Scan Serial Data for MIL Information.
+                                         * ====================================== */
+                            if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdMilDataStream)) {
+                                EcmCmds.received=1;
+                                let dtcStr="";
+                                let props = Object.getOwnPropertyNames(DTCCODES);
+                                for (let k=(y+4);k<(y+24);k++) {
+                                    if (k==(y+4)) {
+                                        setValue("actcodes",value[k]);
+                                    } else if (value[k]!=0) {
+                                        let dtcCode=numToBin(value[k]);
+                                        let tc=0;
+                                        for (t in dtcCode) {
+                                            if (dtcCode[t]=="1") {
+                                                for (z in props) {
+                                                    if (props[z]=="code" + (k-y-2).toString() + tc.toString()) {
+                                                        dtcStr+=DTCCODES[props[z]] + "<br/>";
+                                                        break;
+                                                     }
+                                                }
+                                            }
+                                            tc++;
+                                        }
+                                    }
+                                }
+                                document.getElementById("dtcdata").innerHTML=dtcStr;
+                                sendEcmCmd(EcmCmd.stopComCmdNum);
+                                if (DEBUG==2) {console.log("ECM [(MIL)engine]:Request" + EcmCmds.nextCmd);}
+                            } else if (EcmCmds.sendCnt<EcmCmds.sendCntCap) {
+                                EcmCmds.sendCnt++;
+                            } else {
+                                EcmCmds.sendCnt=0;
+                                sendEcmCmd(EcmCmd.stopComCmdNum);
+                                if (DEBUG==2) {console.log("ECM [Engine]:Request");}
+                            }
+                        } else if (EcmCmds.lastCmd==EcmCmd.stopComCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
+                                        /* ========================================|
+                                         * Scan Serial Data for Clear COM Response.
+                                         * ====================================== */
+                            if (DEBUG==2) {console.log("Reading Clear COM Response!");}
+                            if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdStopComDataStream)) {
+                                if (DEBUG==2) {console.log("ECM [Stop COM]");}
+                                EcmCmds.sendCnt=0;
+                                sendEcmCmd(EcmCmds.nextCmd);
+                                if (EcmCmds.nextCmd==EcmCmd.vinDataCmdNum) {
+                                    document.getElementById("connected").checked=true;
+                                    document.getElementById("disconnect").disabled=false;
+                                    document.getElementById("scan").disabled=false;
+                                    document.getElementById("actControls").hidden=false;
+                                    document.getElementById("resetMilBtn").disabled=false;
+                                    document.getElementById("resetBlmBtn").disabled=false;
+                                    console.log("ECM [Connected!]");
+                                    EcmCmds.nextCmd=EcmCmd.mainDataCmdNum;
+                                } else if (EcmCmds.nextCmd>EcmCmd.mainDataCmdNum) {
+                                    EcmCmds.nextCmd=EcmCmd.mainDataCmdNum;
+                                }
+                            }
+                            if (EcmCmds.sendCnt<EcmCmds.sendCntCap) {
+                                EcmCmds.sendCnt++;
+                            } else {
+                                EcmCmds.sendCnt=0;
+                                sendEcmCmd(EcmCmd.stopComCmdNum);
+                                if (DEBUG==2) {console.log("ECM [Stop-COM]:Request");}
+                            }
+                        } else if (EcmCmds.lastCmd==EcmCmd.disconnectEcmCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
+                                        /* ========================================|
+                                         * Scan Serial Data for DisConnect ECM Response.
+                                         * ====================================== */
+                            if (DEBUG==2) {console.log("Reading DisConnect Response!");}
+                            if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdDisConnectDataStream)) {
+                                console.log("ECM [DisConnected]");
+                                EcmCmds.lastCmd=EcmCmds.noCmdNum;
+                            }
+                                        
+                        } else if (EcmCmds.lastCmd>5 && EcmCmds.lastCmd<99 && document.getElementById("sendingEcmCmd").checked==false) {
+                            if (DEBUG==2) {console.log("Reading CMD ["+ EcmCmds.lastCmd +"]");}
+                            sendEcmCmd(EcmCmd.stopComCmdNum);
+                            if (DEBUG==2) {console.log("ECM [engine(act)]:Request" + EcmCmds.nextCmd);}
+                        } else if (EcmCmds.lastCmd==EcmCmd.resetMilCmdNum && document.getElementById("resettingMil").checked==false) {
+                            EcmCmds.nextCmd=EcmCmd.milDataCmdNum;
+                            sendEcmCmd(EcmCmd.stopComCmdNum);
+                            if (DEBUG==2) {console.log("ECM [resetMIL MIL]:Request" + EcmCmds.nextCmd);}
+                                        
+                        } else if (EcmCmds.lastCmd>=EcmCmds.noCmdNum) {
+                            if (DEBUG==2) {console.log("ECM LastCmd[No CMD]");}
+                                        /* ========================================|
+                                         * DoNothing for EcmCmds.lastCmd>=EcmCmds.noCmdNum.
+                                         * ====================================== */
+                            if (document.getElementById("scan").value!="Scan") {
+                                if (EcmCmds.sendCnt<1) {
+                                    EcmCmds.sendCnt++;
+                                } else {
+                                    EcmCmds.sendCnt=0;
+                                    sendEcmCmd(EcmCmd.stopComCmdNum);
+                                    if (DEBUG==2) {console.log("ECM [engine]:Request");}
+                                }
+                            }
+                        } else {
+                            if (DEBUG==2) {
+                                console.log("NoAction lastCMD["+ EcmCmds.lastCmd +"] Response! sndCmd.Checked="+document.getElementById("sendingEcmCmd").checked);
+                            }
+                                        /* ========================================|
+                                         * DoNothing for No Cmd.
+                                         * ====================================== */
+                        }
+                        y++;
+                      }
+                      let curData=document.getElementById("sdata").innerHTML;
+                      document.getElementById("sdata").innerHTML= cnt.value.toString() + ": " + value + "<br />" + cnt.value.toString() + ": " + conBit + "<br />" + cnt.value.toString() + ": " + conBin + "<br />" + curData;
+                      cnt.value+=1;
+                    }
+                }/* end if done*/
+            }, e => {
+                console.error("Stream UnReadable:",e);
+            }
+        );
+    } catch(error) {
+        console.log("ERROR: getReader()" + error.toString());
+        return;
+    }
+}
+
+/* =========================================================|
+ * [Send Data:] sendSerialPortInfo(comPort,ecmCmd,ecmCmdNum)
+ *  var comPort: com port connection -for serial read/write.
+ *  var ecmCmd: value to pipe to the port.
+ *  var ecmCmdNum: Request Tracking for Response Decoding.
+ * ------------------------------------------------------ */
+    async function sendSerialPortInfo(comPort,ecmCmd,ecmCmdNum) {
+            /* const textEncoder = new TextEncoder(); const myData = textEncoder.encode("E45608"); */
+            const writer = comPort.writable.getWriter();
+            EcmCmds.lastCmd=ecmCmdNum;
+            await writer.write(ecmCmd);
+            await writer.releaseLock();
+            console.log("Sent Cmd: " + ecmCmd.toString());
+            document.getElementById("sendingEcmCmd").checked=false;
+    }
+
+var myIntervalWriter;
+
+/* =========================================================|
+ * [Get Data:] getSerialPortInfo() -Starts Port Session
+ *  Reads continuously for Response Decoding and writes.
+ * ------------------------------------------------------ */
+    async function getSerialPortInfo() {
+        try {
+            document.getElementById("intdelay").disabled=true;
+            document.getElementById("connect").disabled=true;
+            const myport = await navigator.serial.requestPort();
+            await myport.open({baudRate: 8192, dataBits: 8, stopBits: 1, parity: "none"});
+            const {usbProductId, usbVendorId}=myport.getInfo();
+            let portInfo="[usbProductId:]" + usbProductId + " [usbVendorId:]" + usbVendorId + "<br />";
+            document.getElementById("sdata").innerHTML=portInfo;
+
+                   /* myIntervalWriter=setInterval(function () {
+
+                        if (EcmCmds.lastCmd==EcmCmd.disconnectEcmCmdNum && document.getElementById("connected").checked==false) {
+                            console.log("ECM: Dis-Connecting!");
+                            clearInterval(myIntervalWriter);
+                        } else if (document.getElementById("resettingMil").checked) {
+                            try {
+                                sendSerialPortInfo(myport, EcmCmds.resetMilCmd, EcmCmd.resetMilCmdNum);
+                                document.getElementById("resettingMil").checked=false;
+                                
+                                if (DEBUG==2) {console.log("Reset MIL Codes");}
+                            } catch(error) { console.log("ERROR (reset MIL): " + error.toString()); }
+                            
+                        } else if (document.getElementById("sendingEcmCmd").checked) {
+                            let i=0;
+                            try {
+                                for (let x in EcmCmds) {
+                                    if (EcmCmds.sendCmd==i) {
+                                        sendSerialPortInfo(myport, EcmCmds[x], EcmCmds.sendCmd);
+                                        break;
+                                    }
+                                    i++;
+                                }
+                                if (DEBUG==2) { let ans = ""; if (i==0) {ans="mainDataCmd"} else if (i==1) {ans="MIL Codes"} else if (i==2) {ans="VIN"} else if (i==3) {ans="RESET MIL"} else if (i==4) {ans="Clear Com"} else if (i==5) {ans="Return ECM to Normal Mode"} else {ans=i.toString()} console.log("Requesting cmd("+ ans +")"); }
+                            } catch(error) { console.log("ERROR SndCMD(" + i + "): " + error.toString()); }
+                        }
+                    }, EcmCmds.loopTime);*/
+
+
+
+            /* SEND CMD TO SERIAL PORT */
+            await sendSerialPortInfo(myport, EcmCmds.stopComCmd, EcmCmd.stopComCmdNum);
+            //await sendSerialPortInfo(myport, EcmCmds.vinDataCmd, EcmCmd.vinDataCmdNum);
+            if (myport.readable) {
+                const reader = myport.readable.getReader();
+                console.log("Scan Speed:" + EcmCmds.loopTime);
+                try {
+                    myIntervalWriter=setInterval(function () {
+                    /*while (myport.readable) {*/
+
+                        if (EcmCmds.lastCmd==EcmCmd.disconnectEcmCmdNum && document.getElementById("connected").checked==false) {
+                            console.log("ECM: Dis-Connecting!");
+                            clearInterval(myIntervalWriter);
+                        } else if (document.getElementById("resettingMil").checked) {
+                            try {
+                                sendSerialPortInfo(myport, EcmCmds.resetMilCmd, EcmCmd.resetMilCmdNum);
+                                document.getElementById("resettingMil").checked=false;
+                                
+                                if (DEBUG==2) {console.log("Reset MIL Codes");}
+                            } catch(error) { console.log("ERROR (reset MIL): " + error.toString()); }
+                            
+                        } else if (document.getElementById("sendingEcmCmd").checked) {
+                            let i=0;
+                            try {
+                                for (let x in EcmCmds) {
+                                    if (EcmCmds.sendCmd==i) {
+                                        sendSerialPortInfo(myport, EcmCmds[x], EcmCmds.sendCmd);
+                                        break;
+                                    }
+                                    i++;
+                                }
+                                if (DEBUG==2) { let ans = ""; if (i==0) {ans="mainDataCmd"} else if (i==1) {ans="MIL Codes"} else if (i==2) {ans="VIN"} else if (i==3) {ans="RESET MIL"} else if (i==4) {ans="Clear Com"} else if (i==5) {ans="Return ECM to Normal Mode"} else {ans=i.toString()} console.log("Requesting cmd("+ ans +")"); }
+                            } catch(error) { console.log("ERROR SndCMD(" + i + "): " + error.toString()); }
+                        }
+                        readAllChunks(reader);
+                    /*}*/
+                    }, EcmCmds.loopTime);
+                } catch(error) { console.log("ERROR readAllChunks:" + error.toString()); }
+            }
+        } catch(error) {
+            console.log("ERROR getSerialPortInfo():" + error.toString());
+        }
+    }
+
+/* ==========================================================|
+ * [Send Requests to the ECM:] sendEcmCmd(cmdNum)
+ *  Add new commands: <button onclick=sendEcmCmd(cmdNum)>
+ *  const EcmCmd = {
+ *      idle12:18,
+ *      newCMD:NextNumber
+ *  ....
+ *  const EcmCmds = {
+ *    ...,
+ *    newCMD: new Uint8Array([value,value,value,value])
+ * -------------------------------------------------------- */
+    function sendEcmCmd(cmdNum) {
+        try {
+            EcmCmds.sendCmd=cmdNum;
+            document.getElementById("sendingEcmCmd").checked=true;
+        } catch(error) {
+            console.log("ERROR [sendEcmCmd(" + cmdNum.toString() + ")]: " + error.toString());
+        }
+    }
+
+/* =========================================================|
+ *  async stopScan()-Sends normal Mode
+ * ------------------------------------------------------ */
+    function stopScan() {
+        document.getElementById("disconnect").disabled=true;
+        document.getElementById("scan").disabled=true;
+        document.getElementById("connected").checked=false;
+        document.getElementById("resetMilBtn").disabled=true;
+        document.getElementById("resetBlmBtn").disabled=true;
+        document.getElementById("actControls").hidden=true;
+        EcmCmds.sendCmd=EcmCmd.disconnectEcmCmdNum;
+        document.getElementById("sendingEcmCmd").checked=true;
+    }
+    
+/* =========================================================|
+ *  async startStopRealTime()-Sends Engine Data Requests
+ *  continuously for realtime display data.
+ * ------------------------------------------------------ */
+    function startStopRealTime() {
+        if (document.getElementById("scan").value=="Scan") {
+            document.getElementById("scan").value="Stop";
+        } else {
+            document.getElementById("scan").value="Scan";
+        }
+    }
+
+    /* Reset MIL light and dtc codes */
+    function resetMil() {
+      try {
+        document.getElementById("resettingMil").checked=true;
+      } catch(error) {
+        console.log("ERROR resetMilCmd: " + error.toString());
+      }
+    }
+
+    /* Voltage Formula */
+    function setVolts(value) {
+      if (value!="" && value>0) {
+        return (parseInt(value)*5/255).toFixed(1);
+      } else {return 0;}
+    }
+
+    /* Tempature (F) Formula */
+    function setDegF(value) {
+      if (value!="" && value>0) {
+        return (1.35*parseInt(value)-40).toFixed();
+      } else {return 0;}
+    }
+
+    /* set element value */
+    function setValue(id, value) {
+      document.getElementById(id).value=value;
+    }
+
+    /* show hide elements */
+    function sH(id) {
+      document.getElementById(id).hidden=!document.getElementById(id).hidden;
+    }
+
+/* full screen*/
+var elem = document.documentElement;
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) { /* Safari */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { /* IE11 */
+    document.msExitFullscreen();
+  }
+}
+
+  function getFScreen() {
+    if (document.fullscreenElement) {
+      closeFullscreen();
+    } else {
+      openFullscreen();
+    }
+  }
+/*end full screen*/
+
+/* Transmission Gear Position Controller */
+var automatic = document.getElementById("gear");
+var manual = document.getElementById("manualGear");
+var automaticGear = document.getElementById("prndlDis");
+var manualGear = document.getElementById("manualDis");
+
+automatic.oninput = function() {
+  manual.value=this.value;
+  if (this.value==0) {
+    automaticGear.innerHTML = "D1";
+    manualGear.innerHTML = "1";
+  } else if (this.value==1) {
+    automaticGear.innerHTML = "D2";
+    manualGear.innerHTML = "2";
+  } else if (this.value==2) {
+    automaticGear.innerHTML = "D3";
+    manualGear.innerHTML = "3";
+  } else if (this.value==3) {
+    automaticGear.innerHTML = "D4";
+    manualGear.innerHTML = "4";
+  } else if (this.value==4) {
+    automaticGear.innerHTML = "N";
+    manualGear.innerHTML = "5";
+  } else if (this.value==5) {
+    automaticGear.innerHTML = "R";
+    manualGear.innerHTML = "R";
+  } else {
+    automaticGear.innerHTML = "P";
+    manualGear.innerHTML = "N";
+  }
+}
+
+manual.oninput = function() {
+  automatic.value=this.value;
+  if (this.value==0) {
+    automaticGear.innerHTML = "D1";
+    manualGear.innerHTML = "1";
+  } else if (this.value==1) {
+    automaticGear.innerHTML = "D2";
+    manualGear.innerHTML = "2";
+  } else if (this.value==2) {
+    automaticGear.innerHTML = "D3";
+    manualGear.innerHTML = "3";
+  } else if (this.value==3) {
+    automaticGear.innerHTML = "D4";
+    manualGear.innerHTML = "4";
+  } else if (this.value==4) {
+    automaticGear.innerHTML = "N";
+    manualGear.innerHTML = "5";
+  } else if (this.value==5) {
+    automaticGear.innerHTML = "R";
+    manualGear.innerHTML = "R";
+  } else {
+    automaticGear.innerHTML = "P";
+    manualGear.innerHTML = "N";
+  }
+}
+/* Transmission Gear Position Controller */
+
+function setCookie(cname,cvalue,exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkCookie() {
+  let allowCookies = getCookie("allowCookies");
+  if (allowCookies == "") {
+     allowCookies = confirm("Do You Give Permission to uses Cookies to Save Changes to Settings? [Permission & Cookies Saved for 30 days.]");
+     if (allowCookies != "" && allowCookies != null) {
+         setCookie("allowCookies", allowCookies, 30);
+         EcmCmds.allowCookies=true;
+     }
+  } else if (allowCookies) {
+      EcmCmds.allowCookies=true;
+      let speed = getCookie("speed");
+      if (speed != "" && speed != null) {
+          document.getElementById("intdelay").value=speed;
+          EcmCmds.loopTime=speed;
+      }
+  }
+}
+</script>
+
+</html>
