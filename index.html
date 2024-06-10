@@ -83,7 +83,7 @@
     margin: 1px;
 }
 
-#dtcdata {
+.data {
     color:red;
     font-size:larger;
     height: 200px;
@@ -378,7 +378,7 @@ padding:0 0 0 0;
 &#8482;T&#169;ReMeTaL</i>
 <fieldset class="scanControl">
 
- <legend onclick='sH("usbHelp")' title="Click for Connection Diagram">[?]Scan Controls</legend>
+ <legend onclick='sH("usbHelp")' title="Click for Connection Diagram">[?]Scan Controls</legend>
 <img onclick='sH("usbHelp")' title="1995 Camaro" alt="1995 Camaro" src="img/camaro2.png" style="cursor:pointer;margin-right:-108px;float:left;border:none;height:48px;width:100px;"/>
 <input type="button" id="fs" value="F Screen" onclick="getFScreen()" />
 |    
@@ -404,19 +404,32 @@ padding:0 0 0 0;
         </optgroup>
     </select>
 
-<legend style="font-size:xx-small;"><i>Brake Pressed</i><input type="checkbox" id="brakepressed"/></legend>
-                      <div hidden><code id="autoF" class="slidecontainer" hidden>
+<legend style="font-size:xx-small;">
+<i>Brake Pressed</i>
+<label class="switch" for="brakepressed">
+<input type="checkbox" id="brakepressed" disabled/>
+<span class="slider round"></span>
+</label>
+<i>Coolant Fan</i>
+<label class="switch" for="fanOnOff">
+<input id="fanOnOff" type="checkbox" disabled><!--onclick="if(this.checked){sendEcmCmd(EcmCmdNums.fanon);}else{sendEcmCmd(EcmCmdNums.fanoff);}"-->
+<span class="slider round"></span>
+</label>
+
+</legend>
+
+                      <div><code id="autoF" class="slidecontainer" hidden>
                       <label for="gear">Automatic- </label>
                         <input type="range" min="0" max="6" value="6" class="slider2" name="prndl" id="gear">
                         [ <span id="prndlDis" style="color:red;font-size:large;">P</span> ]
                     </code>
-                    <code id="manF" class="slidecontainer" hidden>
-                      <label for="manualGear">Manual- </label>
+                    <code id="manF" class="slidecontainer">
+                      <label for="manualGear">Manual- </label>
                           <input type="range" min="0" max="6" value="6" class="slider2" name="manualGear" id="manualGear">
                         [ <span id="manualDis" style="color:red;font-size:large;">N</span> ]
                     </code> &nbsp;&nbsp; 
                     <code></div>
-                      <label for="checkEngine"><img id="checkEngineLight" title="checkEngineLight" alt="checkEngineLight" hidden src="img/checkEngineLight.png" style="width:32px;height:32px;border-radius:6px;"/></label>
+                      <label for="checkEngine"><img id="checkEngineLight" title="checkEngineLight" alt="checkEngineLight" hidden src="img/checkEngineLight.png" style="width:32px;height:32px;border-radius:6px;"/></label>
                           <input id="checkEngine" title="checkEngine" type="checkBox" hidden disabled>
                     </code>
 </fieldset>
@@ -436,17 +449,16 @@ PC-USB to OBD1.5 ECM
 </legend>
 <br/>
 <!--<fieldset style="color:orangered;background:transparent;width:fit-content;border:none;">-->
-<legend style="color:orangered;background-color:#000000;width:fit-content;border-radius:10px;" for="delaytime" title="Stream Read delay.">
+<!--<legend style="color:orangered;background-color:#000000;width:fit-content;border-radius:10px;" for="delaytime" title="Stream Read delay.">
 <i>Read Delay [1 sec = 1000 ms]</i>
-    <input id="delaytime" style="border-radius:10px;width:100px;" title="Stream Read delay." value="1" type="number" min="1" max="100" step="1" />00 ms
-<br/>
+    <input id="delaytime" style="border-radius:10px;width:100px;" title="Stream Read delay." value="10" type="number" min="10" max="10000" step="10" onchange='EcmCmds.delayTime=this.value;' /> ms
+<br/>-->
 
 <legend style="color:orangered;background-color:#000000;width:fit-content;border-radius:10px;" for="intdelay" title="Scan Speed. IMPORTANT!! Set BEFORE Connecting!">
 <i>Scan Speed [1 sec = 1000 ms]</i>
-    <input id="intdelay" style="border-radius:10px;width:100px;" title="Scan Speed. IMPORTANT!! Set BEFORE Connecting!" value="10" type="number"min="1" max="100" step="1" onchange='setDelay(this.value)'/>00 ms
+    <input id="intdelay" style="border-radius:10px;width:100px;" title="Scan Speed. IMPORTANT!! Set BEFORE Connecting!" value="500" type="number"min="100" max="10000" step="100" onchange='setSpeed(this.value)'/> ms
 <br/>
-<code style="color:orange;font-size:small;">IMPORTANT!!<br/>Make adjustments to Scan Speed BEFORE Connecting!<br/>
-Read delay can be adjusted anytime.
+<code style="color:orange;font-size:small;">IMPORTANT!!<br/>Make adjustments to Scan Speed BEFORE Connecting!
 </code>
 </legend>
 <!--</fieldset>-->
@@ -457,37 +469,40 @@ Read delay can be adjusted anytime.
 <!--<label for="category">Category:</label>
 <input list="categories" name="category" id="category">
 <datalist id="categories">
- <option value="Products (New)">
- <option value="Products (Used)">
- <option value="Media">
- <option value="Software">
- <option value="Services">
- <option value="Deals">
+ <option value="Products (New)">
+ <option value="Products (Used)">
+ <option value="Media">
+ <option value="Software">
+ <option value="Services">
+ <option value="Deals">
 </datalist>-->
 
 <div align="center">
 <!-- Dash -->
 
-<table width="auto" id="Dash">
- <legend id="dashTitle" onclick='sH("Dash")'>Dash</legend>
+<table id="Dash">
+ <legend id="dashTitle" onclick='sH("Dash")'>Dash</legend>
 
 <tr class="td1">
     
-<!-- outer table -->
-<td class="td2" width="49%" align="top">
+<!-- outer table with middle divide.
+<td class="td2" width="50%" align="top">
   <table class="td1" width="98%">
+ -->
+<td class="td2" align="top">
+  <table class="td1">
 <!--(1) set of 3-->
   <tr>
 
-    <td class="chromeBorder" width="25%" onclick='sH("f1")'>
+    <td class="chromeBorder" width="22%" onclick='sH("f1")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
 <td onclick='sH("f1")'>
 <fieldset align="center" id="f1">
- <legend onclick='sH("f1")'>Air/Fuel</legend>
+ <legend onclick='sH("f1")'>Air/Fuel</legend>
 <form align="center">
- <input type="number" step="0.1" id="airfuel" name="airfuel" value="14.7" style="font-size:xxx-large;width:100px;padding-left:10px;" readonly>
+ <input type="number" step="0.1" id="airfuel" name="airfuel" value="14.7" style="font-size:xxx-large;width:100px;padding-left:10px;" readonly>
 </form>
 </fieldset>
 </td>
@@ -496,42 +511,19 @@ Read delay can be adjusted anytime.
         </div>
 </td>
 <!--item (2)-->
-<!--    <td width="25%" onclick='sH("rpmField")' class="hide">
-<div align="center">
-        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
-<tr>
-<td onclick='sH("rpmField")'>
-<fieldset id="rpmField" align="center" class="chromeBorder">
- <legend onclick='sH("rpmField")'>RPM</legend>
-<form align="center">
- <input type="number" id="rpm" name="rpm" value="0" style="padding:0;margin:0;font-size:xxx-large;width:136px;" readonly>
-
-<fieldset hidden style="padding:0;margin:0;font-size:12px;border-radius: 6px;border: solid 0.4px #cbc9c9;text-shadow: 1px 2px 5px rgba(0,0,0,0.31);background: transparent;cursor: default;box-shadow: none;">
- <legend style="padding:0;margin:0;text-align:left;color:darkblue;font-size:12px;text-shadow: 1px 2px 5px rgba(0,0,0,0.31);border-radius: 0;border: none;background: transparent;cursor: default;box-shadow: none;">24x</legend>
- <input type="number" id="rpm24x" name="rpm24x" value="0" readonly>
-</fieldset>
-</form>
-</fieldset>
-</td>
-</tr>
-</table>
-        </div>
-</td>-->
-
-
     <td onclick='sH("rpmField")' class="hide">
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="transparent" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
 <td onclick='sH("rpmField")'>
 <fieldset id="rpmField" align="center" class="chromeBorder">
- <legend onclick='sH("rpmField")'>RPM</legend>
+ <legend onclick='sH("rpmField")'>RPM</legend>
 <form align="center">
- <input type="number" id="rpm" name="rpm" value="0" style="font-size:xxx-large;width:136px;" readonly>
+ <input type="number" id="rpm" name="rpm" value="0" style="font-size:xxx-large;width:136px;" readonly>
 
 <fieldset hidden style="padding:0;margin:0;font-size:12px;border-radius: 6px;border: solid 0.4px #cbc9c9;text-shadow: 1px 2px 5px rgba(0,0,0,0.31);background: transparent;cursor: default;box-shadow: none;">
- <legend style="padding:0;margin:0;text-align:left;color:darkblue;font-size:12px;text-shadow: 1px 2px 5px rgba(0,0,0,0.31);border-radius: 0;border: none;background: transparent;cursor: default;box-shadow: none;">24x</legend>
- <input type="number" id="rpm24x" name="rpm24x" value="0" readonly>
+ <legend style="padding:0;margin:0;text-align:left;color:darkblue;font-size:12px;text-shadow: 1px 2px 5px rgba(0,0,0,0.31);border-radius: 0;border: none;background: transparent;cursor: default;box-shadow: none;">24x</legend>
+ <input type="number" id="rpm24x" name="rpm24x" value="0" readonly>
 </fieldset>
 
 </form>
@@ -549,9 +541,9 @@ Read delay can be adjusted anytime.
 <tr>
 <td onclick='sH("mphField")'>
 <fieldset id="mphField" align="center" class="chromeBorder">
- <legend onclick='sH("mphField")'>MPH</legend>
+ <legend onclick='sH("mphField")'>MPH</legend>
 <form align="center">
- <input type="number" id="mph" name="mph" value="0" style="font-size:xxx-large;width:136px;" readonly>
+ <input type="number" id="mph" name="mph" value="0" style="font-size:xxx-large;width:136px;" readonly>
 </form>
 </fieldset>
 </td>
@@ -560,19 +552,16 @@ Read delay can be adjusted anytime.
         </div>
 </td>
 <!--end item (3)-->
-  </tr>
-<!--(1) end set of 3-->
-<!--(1.1) set of 3-->
-  <tr>
-    <td class="chromeBorder" width="25%" onclick='sH("tiField")'>
+
+<td class="chromeBorder" width="22%" onclick='sH("fc")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
-<td onclick='sH("tiField")'>
-<fieldset id="tiField" align="center">
- <legend onclick='sH("tiField")'>Target Idle</legend>
+<td onclick='sH("fc")'>
+<fieldset align="center" id="fc">
+ <legend onclick='sH("fc")'>Battery +</legend>
 <form align="center">
- <input type="number" step="1" id="targetidle" name="targetidle" value="0" readonly>
+ <input type="number" step="0.1" id="battery" name="battery" value="12.9" readonly> v
 </form>
 </fieldset>
 </td>
@@ -580,50 +569,42 @@ Read delay can be adjusted anytime.
 </table>
         </div>
 </td>
-    <td class="chromeBorder" width="25%" onclick='sH("iacField")'><div align="center">
-        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
-<td onclick='sH("iacField")'>
-<fieldset id="iacField" align="center">
- <legend onclick='sH("iacField")'>IAC</legend>
+
+
+
+    <!--<td class="chromeBorder" onclick='sH("actMilCodeField")'>
+      <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr><td onclick='sH("actMilCodeField")'>
+<fieldset id="actMilCodeField" align="center">
+ <legend onclick='sH("actMilCodeField")'><img title="checkEngineLight" alt="checkEngineLight" src="img/checkEngine.png" style="width:64px;height:48px;border-radius:6px;"/></legend>
 <form align="center">
- <input type="number" step="1" id="iac" name="iac" value="0" readonly>
+<label for="actcodes">Active</label><br/>
+ <input type="number" step="1" id="actcodes" name="activemilcodes" value="0" readonly>
+<label for="milcodes">History</label><br/>
+ <input type="number" step="1" id="milcodes" name="milcodes" value="0" readonly>
 </form>
 </fieldset>
 </td></tr></table>
-        </div></td>
-<td class="chromeBorder" width="25%" onclick='sH("miniacField")'>
-<div align="center">
-        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
-<tr>
-<td onclick='sH("miniacField")'>
-<fieldset id="miniacField" align="center">
- <legend onclick='sH("miniacField")'>Min IAC</legend>
-<form align="center">
- <input type="number" step="1" id="miniac" name="miniac" value="0" readonly>
-</form>
-</fieldset>
-</td>
-</tr>
-</table>
-        </div>
-</td>
-  </tr>
+        </div></td>-->
 
-<!--(1.1) end set of 3-->
-<!--(2) set of 3-->
-  <tr style="padding:0 60px;">
+
+  </tr>
+<!--(1) end set of 4-->
+<!--(1.1) set of 4-->
+  <tr>
 
 <!--item (1)-->
-    <td class="chromeBorder" width="25%" onclick='sH("throttleDis")'>
+    <td class="chromeBorder" width="22%" onclick='sH("throttleDis")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef"bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
 <td onclick='sH("throttleDis")'>
 <fieldset align="center" id="throttleDis">
- <legend onclick='sH("throttleDis")'>Throttle (tps)</legend>
+ <legend onclick='sH("throttleDis")'>Throttle (tps)</legend>
 <form align="center">
- <input type="number" step="0.01" id="throttlev" name="throttlev" value="0.00" readonly> v 
- <input type="number" step="1" id="throttlep" name="throttlep" value="0" readonly> %
+ <input type="number" step="0.01" id="throttlev" name="throttlev" value="0.00" readonly> v 
+ <input type="number" step="1" id="throttlep" name="throttlep" value="0" readonly> %
 </form>
 </fieldset>
 </td>
@@ -632,16 +613,32 @@ Read delay can be adjusted anytime.
         </div>
 </td>
 <!--end item (1)-->
-<td class="chromeBorder" width="25%" onclick='sH("coolField")'>
+
+<!--item (1)-->
+    <td class="chromeBorder" width="22%" onclick='sH("iacField")'><div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
+<td onclick='sH("iacField")'>
+<fieldset id="iacField" align="center">
+ <legend onclick='sH("iacField")'>IAC</legend>
+<form align="center">
+ <input type="number" step="1" id="iac" name="iac" value="0" readonly>
+</form>
+</fieldset>
+</td></tr></table>
+        </div>
+</td>
+<!--end item (1)-->
+
+<!--item-->
+<td class="chromeBorder" width="22%" onclick='sH("miniacField")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
-<td onclick='sH("coolField")'>
-<fieldset id="coolField" align="center">
- <legend onclick='sH("coolField")'>Coolant Temp</legend>
+<td onclick='sH("miniacField")'>
+<fieldset id="miniacField" align="center">
+ <legend onclick='sH("miniacField")'>Min IAC</legend>
 <form align="center">
- <input type="number" step="1" id="coolanttempf" name="coolanttempf" value="0" readonly> °f
- <!--<input type="number" step="1" id="coolanttempc" name="coolanttempc" value="0" readonly> °c-->
+ <input type="number" step="1" id="miniac" name="miniac" value="0" readonly>
 </form>
 </fieldset>
 </td>
@@ -649,29 +646,110 @@ Read delay can be adjusted anytime.
 </table>
         </div>
 </td>
-    <td class="chromeBorder" width="25%" onclick='sH("airField")'><div align="center">
+<!--item-->
+<!--item-->
+    <td class="chromeBorder" width="22%" onclick='sH("tiField")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("tiField")'>
+<fieldset id="tiField" align="center">
+ <legend onclick='sH("tiField")'>Target Idle</legend>
+<form align="center">
+ <input type="number" step="1" id="targetidle" name="targetidle" value="0" readonly>
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+<!--item-->
+
+
+  </tr>
+
+<!--(1.1) end set of 3-->
+<!--(2) set of 3-->
+  <tr style="padding:0 60px;">
+
+
+<!--item (1)-->
+    <td class="chromeBorder" width="22%" onclick='sH("throttleDisx")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef"bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("throttleDisx")'>
+<fieldset align="center" id="throttleDisx">
+ <legend onclick='sH("throttleDisx")'>(TPS)-Adaptive Modifier</legend>
+<form align="center">
+ <input type="number" step="1" id="CURADPT" name="CURADPT" value="0" readonly>Cnt 
+ <input type="number" step="1" id="CURCELL" name="CURCELL" value="0" readonly>%
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+<!--end item (1)-->
+<td class="chromeBorder" width="22%" onclick='sH("coolField")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("coolField")'>
+<fieldset id="coolField" align="center">
+ <legend onclick='sH("coolField")'>Coolant Temp</legend>
+<form align="center">
+ <input type="number" step="1" id="coolanttempf" name="coolanttempf" value="0" readonly> °f
+ <!--<input type="number" step="1" id="coolanttempc" name="coolanttempc" value="0" readonly> °c-->
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td class="chromeBorder" width="22%" onclick='sH("airField")'><div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
 <td onclick='sH("airField")'>
 <fieldset id="airField" align="center">
- <legend onclick='sH("airField")'>Intake Air Temp</legend>
+ <legend onclick='sH("airField")'>Intake Air Temp</legend>
 <form align="center">
- <input type="number" step="1" id="airtempf" name="airtempf" value="0" readonly> °f
- <!--<input type="number" step="1" id="airtempc" name="airtempc" value="0" readonly> °c-->
+ <input type="number" step="1" id="airtempf" name="airtempf" value="0" readonly> °f
+ <!--<input type="number" step="1" id="airtempc" name="airtempc" value="0" readonly> °c-->
 </form>
 </fieldset>
 </td></tr></table>
         </div></td>
 
-<td hidden class="chromeBorder" width="25%"> 
+    <td class="chromeBorder" width="22%" onclick='sH("actMilCodeField")'>
+      <div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr><td onclick='sH("actMilCodeField")'>
+<fieldset id="actMilCodeField" align="center">
+ <legend onclick='sH("actMilCodeField")'><img title="checkEngineLight" alt="checkEngineLight" src="img/checkEngine.png" style="width:64px;height:48px;border-radius:6px;"/></legend>
+<form align="center">
+<label for="actcodes">Active</label> <b>|</b> <label for="milcodes">History</label>
+<br/>
+<br/>
+ <input type="number" step="1" id="actcodes" name="activemilcodes" value="0" style="width:50px;" readonly>
+ <input type="number" step="1" id="milcodes" name="milcodes" value="0" style="width:50px;" readonly>
+</form>
+</fieldset>
+</td></tr></table>
+        </div></td>
+
+<td hidden class="chromeBorder" width="22%"> 
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
 <td>
 <fieldset align="center">
- <legend>Trans Temp</legend><!--TODO:set Up formula for conversion-->
+ <legend>Trans Temp</legend><!--TODO:set Up formula for conversion-->
 <form align="center">
- <input type="number" step="1" id="tempf" name="tempf" value="0" readonly> °f
- <input type="number" step="1" id="tempc" name="tempc" value="0" readonly> °c
+ <input type="number" step="1" id="tempf" name="tempf" value="0" readonly> °f
+ <input type="number" step="1" id="tempc" name="tempc" value="0" readonly> °c
 </form>
 </fieldset>
 </td>
@@ -685,15 +763,15 @@ Read delay can be adjusted anytime.
 <!--(2) end set of 3-->
 <!--(3) set of 3-->
   <tr>
-    <td class="chromeBorder" width="25%" onclick='sH("sparkadvField")'>
+    <td class="chromeBorder" width="22%" onclick='sH("sparkadvField")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
 <td onclick='sH("sparkadvField")'>
 <fieldset id="sparkadvField" align="center">
- <legend onclick='sH("sparkadvField")'>Spark Advance</legend>
+ <legend onclick='sH("sparkadvField")'>Spark Advance</legend>
 <form align="center">
- <input type="number" step="1" id="sparkadvance" name="sparkadvance" value="0" readonly> °deg
+ <input type="number" step="1" id="sparkadvance" name="sparkadvance" value="0" readonly> °deg
 </form>
 </fieldset>
 </td>
@@ -701,26 +779,26 @@ Read delay can be adjusted anytime.
 </table>
         </div>
 </td>
-    <td class="chromeBorder" width="25%" onclick='sH("knockField")'><div align="center">
+    <td class="chromeBorder" width="22%" onclick='sH("knockField")'><div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
 <td onclick='sH("knockField")'>
 <fieldset id="knockField" align="center">
- <legend onclick='sH("knockField")'>Knock Count</legend>
+ <legend onclick='sH("knockField")'>Knock Count</legend>
 <form align="center">
- <input type="number" step="1" id="knock" name="knock" value="0" readonly>
+ <input type="number" step="1" id="knock" name="knock" value="0" readonly>
 </form>
 </fieldset>
 </td></tr></table>
         </div></td>
-<td class="chromeBorder" width="25%" onclick='sH("retardField")'>
+<td class="chromeBorder" width="22%" onclick='sH("retardField")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
 <td onclick='sH("retardField")'>
 <fieldset id="retardField" align="center">
- <legend onclick='sH("retardField")'>Knock Retard</legend>
+ <legend onclick='sH("retardField")'>Knock Retard</legend>
 <form align="center">
- <input type="number" step="1" id="knockretard" name="knockretard" value="0" readonly> °deg
+ <input type="number" step="1" id="knockretard" name="knockretard" value="0" readonly> °deg
 </form>
 </fieldset>
 </td>
@@ -728,100 +806,80 @@ Read delay can be adjusted anytime.
 </table>
         </div>
 </td>
+
+<!--item-->
+    <td class="chromeBorder" width="22%" onclick='sH("f2")'><div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
+<td onclick='sH("f2")'>
+<fieldset align="center" id="f2">
+ <legend onclick='sH("f2")'>base inj p/w</legend>
+<form align="center">
+ <input type="number" step="1" id="injp" name="injp" value="0" readonly> ms
+</form>
+</fieldset>
+</td></tr></table>
+        </div></td>
+<!--end item-->
+
   </tr>
 
 <!--(3) end set of 3-->
 
 <!--(1.1) set of 3-->
-  <tr>
-<td class="chromeBorder" width="25%" onclick='sH("fc")'>
-<div align="center">
-        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
-<tr>
-<td onclick='sH("fc")'>
-<fieldset align="center" id="fc">
- <legend onclick='sH("fc")'>Battery +</legend>
-<form align="center">
- <input type="number" step="0.1" id="battery" name="battery" value="12.9" readonly> v
-</form>
-</fieldset>
-</td>
-</tr>
-</table>
-        </div>
-</td>
 
-    <td class="chromeBorder" width="25%" onclick='sH("runtimeField")'>
-<div align="center">
-        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
-<tr>
-<td onclick='sH("runtimeField")'>
-<fieldset id="runtimeField" align="center">
- <legend onclick='sH("runtimeField")'>Engine Run Time</legend>
-<form align="center">
- <input type="number" step="1" id="runtime" name="runtime" value="0" readonly> sec
- <input type="number" step="1" id="runtimelsb" name="runtime" value="0" readonly> sec
-</form>
-</fieldset>
-</td>
-</tr>
-</table>
-        </div>
-</td>
-    <td class="chromeBorder" width="25%" onclick='sH("actMilCodeField")'>
-      <div align="center">
-        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
-<tr><td onclick='sH("actMilCodeField")'>
-<fieldset id="actMilCodeField" align="center">
- <legend onclick='sH("actMilCodeField")'><img title="checkEngineLight" alt="checkEngineLight" src="img/checkEngine.png" style="width:64px;height:48px;border-radius:6px;"/></legend>
-<form align="center">
-<label for="actcodes">Current</label>
- <input type="number" step="1" id="actcodes" name="activemilcodes" value="0" readonly>
-<label for="milcodes">History</label>
- <input type="number" step="1" id="milcodes" name="milcodes" value="0" readonly>
-</form>
-</fieldset>
-</td></tr></table>
-        </div></td>
-
-
-  </tr>
 
 <!--(1.1) end set of 3-->
-  </table>
 
-</td><!-- outer table --><!-- outer table -->
+<!-- 
+  </table>
+</td>
+ -->
+<!-- Middle Divide -->
+<!-- 
 <td class="td2" width="50%" align="top">
   <table class="td1" width="98%">
+ -->
+
 <!--(4) set of 3-->
   <tr>
 
-
-
-
-
-
-
-    <td class="chromeBorder" width="25%" onclick='sH("f2")'><div align="center">
+<!-- Item -->
+    <td class="chromeBorder" width="22%" onclick='sH("fe")'><div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
-<td onclick='sH("f2")'>
-<fieldset align="center" id="f2">
- <legend onclick='sH("f2")'>base inj p/w</legend>
+<td onclick='sH("fe")'>
+<fieldset align="center" id="fe">
+ <legend onclick='sH("fe")'>EVAP Duty Cycle</legend>
 <form align="center">
- <input type="number" step="1" id="injp" name="injp" value="0" readonly> ms
+ <input type="number" step="1" id="evap" name="evap" value="0" readonly> %
 </form>
 </fieldset>
 </td></tr></table>
         </div></td>
-<td class="chromeBorder" width="25%" onclick='sH("f3")'>
+<td class="chromeBorder" width="22%" onclick='sH("bar")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("bar")'>
+<fieldset align="center" id="bar">
+ <legend onclick='sH("bar")'>Baro Pressure</legend>
+<form align="center">
+ <input type="number" step="1" id="baro" name="baro" value="0" readonly> kpa
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+<td class="chromeBorder" width="22%" onclick='sH("f3")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
 <td onclick='sH("f3")'>
 <fieldset align="center" id="f3">
- <legend onclick='sH("f3")'>BLM cell#</legend>
+ <legend onclick='sH("f3")'>BLM cell#</legend>
 <form align="center">
- <input type="number" step="1" id="blm" name="blm" value="0" style="font-size:x-large;width:80px;" readonly>
+ <input type="number" step="1" id="blm" name="blm" value="0" style="font-size:x-large;width:80px;" readonly>
 </form>
 </fieldset>
 </td>
@@ -831,15 +889,15 @@ Read delay can be adjusted anytime.
 </td>
 
 
-    <td class="chromeBorder" width="25%" onclick='sH("fd")'>
+    <td class="chromeBorder" width="22%" onclick='sH("fd")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
 <td onclick='sH("fd")'>
 <fieldset align="center" id="fd">
- <legend onclick='sH("fd")'>Fuel Pump(volts)</legend>
+ <legend onclick='sH("fd")'>Fuel Pump(volts)</legend>
 <form align="center">
- <input type="number" step="0.01" id="fuelpumpv" name="fuelpumpv" value="0.00" readonly> v
+ <input type="number" step="0.01" id="fuelpumpv" name="fuelpumpv" value="0.00" readonly> v
 </form>
 </fieldset>
 </td>
@@ -853,15 +911,17 @@ Read delay can be adjusted anytime.
 <!--(4) end set of 3-->
 <!--(5) set of 3-->
   <tr>
-    <td class="chromeBorder" width="25%" onclick='sH("f4")'>
+
+    <td class="chromeBorder" width="22%" onclick='sH("fa")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
-<td onclick='sH("f4")'>
-<fieldset align="center" id="f4">
- <legend onclick='sH("f4")'>O2 bank L</legend>
+<td onclick='sH("fa")'>
+<fieldset align="center" id="fa">
+ <legend onclick='sH("fa")'>Map Sensor</legend>
 <form align="center">
- <input type="number" step="0.01" id="o2bankL" name="o2bankL" value="0.00" readonly> v
+ <input type="number" step="0.01" id="mapvolts" name="mapvolts" value="0.00" readonly> v
+ <input type="number" step="0.1" id="mapkpa" name="mapkpa" value="0.0" readonly> kpa
 </form>
 </fieldset>
 </td>
@@ -869,26 +929,42 @@ Read delay can be adjusted anytime.
 </table>
         </div>
 </td>
-    <td class="chromeBorder" width="25%" onclick='sH("f5")' align="center"><div align="center">
+    <td class="chromeBorder" width="22%" onclick='sH("f4")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("f4")'>
+<fieldset align="center" id="f4">
+ <legend onclick='sH("f4")'>O2 bank L</legend>
+<form align="center">
+ <input type="number" step="0.01" id="o2bankL" name="o2bankL" value="0.00" readonly> v
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td class="chromeBorder" width="22%" onclick='sH("f5")' align="center"><div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
 <td onclick='sH("f5")'>
 <fieldset align="center" id="f5">
- <legend onclick='sH("f5")'>st-ft(int)bank L</legend>
+ <legend onclick='sH("f5")'>st-ft(int)bank L</legend>
 <form align="center">
- <input type="number" step="0.01" id="stftbankL" name="stftbankL" value="0" readonly>
+ <input type="number" step="0.01" id="stftbankL" name="stftbankL" value="0" readonly>
 </form>
 </fieldset>
 </td></tr></table>
         </div></td>
-<td class="chromeBorder" width="25%" onclick='sH("f6")'>
+<td class="chromeBorder" width="22%" onclick='sH("f6")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
 <td onclick='sH("f6")'>
 <fieldset align="center" id="f6">
- <legend onclick='sH("f6")'>lt-ft(blm)bank L</legend>
+ <legend onclick='sH("f6")'>lt-ft(blm)bank L</legend>
 <form align="center">
- <input type="number" step="1" id="ltftbankL" name="ltftbankL" value="0" readonly>
+ <input type="number" step="1" id="ltftbankL" name="ltftbankL" value="0" readonly>
 </form>
 </fieldset>
 </td>
@@ -901,15 +977,16 @@ Read delay can be adjusted anytime.
 <!--(5) end set of 3-->
 <!--(6) set of 3-->
   <tr>
-    <td class="chromeBorder" width="25%" onclick='sH("f7")'>
+    <td class="chromeBorder" width="22%" onclick='sH("runtimeField")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
-<td onclick='sH("f7")'>
-<fieldset align="center" id="f7">
- <legend onclick='sH("f7")'>o2 bank R</legend>
+<td onclick='sH("runtimeField")'>
+<fieldset id="runtimeField" align="center">
+ <legend onclick='sH("runtimeField")'>Engine Run Time</legend>
 <form align="center">
- <input type="number" step="0.01" id="o2bankR" name="o2bankR" value="0.00" readonly> v
+ <input type="number" step="1" id="runtime" name="runtime" value="0" readonly> sec
+ <input type="number" step="1" id="runtimelsb" name="runtime" value="0" readonly> sec
 </form>
 </fieldset>
 </td>
@@ -917,26 +994,43 @@ Read delay can be adjusted anytime.
 </table>
         </div>
 </td>
-    <td class="chromeBorder" width="25%" onclick='sH("f8")'><div align="center">
+
+    <td class="chromeBorder" width="22%" onclick='sH("f7")'>
+<div align="center">
+        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
+<tr>
+<td onclick='sH("f7")'>
+<fieldset align="center" id="f7">
+ <legend onclick='sH("f7")'>o2 bank R</legend>
+<form align="center">
+ <input type="number" step="0.01" id="o2bankR" name="o2bankR" value="0.00" readonly> v
+</form>
+</fieldset>
+</td>
+</tr>
+</table>
+        </div>
+</td>
+    <td class="chromeBorder" width="22%" onclick='sH("f8")'><div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
 <td onclick='sH("f8")'>
 <fieldset align="center" id="f8">
- <legend onclick='sH("f8")'>st-ft(int)bank R</legend>
+ <legend onclick='sH("f8")'>st-ft(int)bank R</legend>
 <form align="center">
- <input type="number" step="0.01" id="stftbankR" name="stftbankR" value="0" readonly>
+ <input type="number" step="0.01" id="stftbankR" name="stftbankR" value="0" readonly>
 </form>
 </fieldset>
 </td></tr></table>
         </div></td>
-<td class="chromeBorder" width="25%" onclick='sH("f9")'>
+<td class="chromeBorder" width="22%" onclick='sH("f9")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
 <td onclick='sH("f9")'>
 <fieldset align="center" id="f9">
- <legend onclick='sH("f9")'>lt-ft(blm)bank R</legend>
+ <legend onclick='sH("f9")'>lt-ft(blm)bank R</legend>
 <form align="center">
- <input type="number" step="1" id="ltftbankR" name="ltftbankR" value="0" readonly>
+ <input type="number" step="1" id="ltftbankR" name="ltftbankR" value="0" readonly>
 </form>
 </fieldset>
 </td>
@@ -949,30 +1043,14 @@ Read delay can be adjusted anytime.
 <!--(6) end set of 3-->
 <!--(6.1) set of 3-->
   <tr>
-    <td class="chromeBorder" width="25%" onclick='sH("fa")'>
-<div align="center">
-        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
-<tr>
-<td onclick='sH("fa")'>
-<fieldset align="center" id="fa">
- <legend onclick='sH("fa")'>Map Sensor</legend>
-<form align="center">
- <input type="number" step="0.01" id="mapvolts" name="mapvolts" value="0.00" readonly> v
- <input type="number" step="0.1" id="mapkpa" name="mapkpa" value="0.0" readonly> kpa
-</form>
-</fieldset>
-</td>
-</tr>
-</table>
-        </div>
-</td>
-    <td class="chromeBorder" width="25%" onclick='sH("fb")'><div align="center">
+    <td class="chromeBorder" width="22%" onclick='sH("fb")'><div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr><td onclick='sH("fb")'>
 <fieldset align="center" id="fb">
- <legend onclick='sH("fb")'>A/C</legend>
+ <legend onclick='sH("fb")'>A/C</legend>
 <form align="center">
- <input type="number" step="1" id="actempf" name="actempf" value="0" readonly> °f
- <input type="number" step="0.1" id="acpsi" name="acpsi" value="0.0" readonly> psi
+ <input type="number" step="1" id="actempf" name="actempf" value="0" readonly> °f
+ <input type="number" step="1" id="acpsi" name="acpsi" value="0" readonly> psi<br/>
+ <input type="number" step="0.01" id="acv" name="acv" value="0.00" readonly> V
 </form>
 </fieldset>
 </td></tr></table>
@@ -983,53 +1061,27 @@ Read delay can be adjusted anytime.
 <!--(6.1) end set of 3-->
 <!--(6.2) set of 3-->
   <tr>
+
 <!-- Item -->
-<td class="chromeBorder" width="25%" onclick='sH("fmdc")'>
+<!-- <td class="chromeBorder" width="22%" onclick='sH("fmdc")'>
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr>
 <td onclick='sH("fmdc")'>
 <fieldset id="fmdc" align="center">
- <legend onclick='sH("fmdc")'>ForcedMotor<br/>DutyCycle</legend>
+ <legend onclick='sH("fmdc")'>ForcedMotor<br/>DutyCycle</legend>
 <form align="center">
- <input type="number" step="1" id="ForcedMotorDutyCycle" name="ForcedMotorDutyCycle" value="0" readonly> %
+ <input type="number" step="1" id="ForcedMotorDutyCycle" name="ForcedMotorDutyCycle" value="0" readonly> %
 </form>
 </fieldset>
 </td>
 </tr>
 </table>
         </div>
-</td>
-
-
+</td> -->
 <!-- End Item -->
-    <td class="chromeBorder" width="25%" onclick='sH("fe")'><div align="center">
-        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff"><tr>
-<td onclick='sH("fe")'>
-<fieldset align="center" id="fe">
- <legend onclick='sH("fe")'>EVAP Duty Cycle</legend>
-<form align="center">
- <input type="number" step="1" id="evap" name="evap" value="0" readonly> %
-</form>
-</fieldset>
-</td></tr></table>
-        </div></td>
-<td class="chromeBorder" width="25%" onclick='sH("bar")'>
-<div align="center">
-        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
-<tr>
-<td onclick='sH("bar")'>
-<fieldset align="center" id="bar">
- <legend onclick='sH("bar")'>Baro Pressure</legend>
-<form align="center">
- <input type="number" step="1" id="baro" name="baro" value="0" readonly> kpa
-</form>
-</fieldset>
-</td>
-</tr>
-</table>
-        </div>
-</td>
+
+
   </tr>
 
 <!--(6.2) end set of 3-->
@@ -1049,9 +1101,9 @@ Read delay can be adjusted anytime.
     <td width="99%" align="top" class="hide"><!-- width="50%"-->
       <table width="98%">
   <tr>
-    <td width="25%" class="hide"></td>
+    <td width="22%" class="hide"></td>
 
-     <td width="25%"><div align="center">
+     <td width="22%"><div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
         <tr><td>
           <button id="resetMilBtn" onclick="resetMil()" class="btn resBtn" disabled>Reset MIL Codes
@@ -1060,7 +1112,7 @@ Read delay can be adjusted anytime.
         </td></tr>
         </table>
      </div></td>
-    <td width="25%" class="hide"></td>
+    <td width="22%" class="hide"></td>
   </tr>
 
       </table>
@@ -1069,9 +1121,9 @@ Read delay can be adjusted anytime.
     <td width="50%" align="top" class="hide">
       <table width="98%">
   <tr>
-    <td width="25%" class="hide"></td>
+    <td width="22%" class="hide"></td>
 
-     <td width="25%" hidden><div align="center">
+     <td width="22%" hidden><div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
         <tr><td>
           <button id="resetBlmBtn" class="btn resBtn" disabled>Reset BLM Value
@@ -1080,7 +1132,7 @@ Read delay can be adjusted anytime.
         </td></tr>
         </table>
      </div></td>
-    <td width="25%" class="hide"></td>
+    <td width="22%" class="hide"></td>
   </tr>
 
       </table>
@@ -1088,26 +1140,39 @@ Read delay can be adjusted anytime.
   </tr>
 </table>
 
+<br/>
+<!--/* ************************************************ TransData ******** */-->
+<fieldset id="trms" class="hide">
+ <legend class="btn" onclick='sH("TransData")'>Engine Data</legend>
+<div id="TransData" title="Engine Stats" name="TransData" class="data" align="center"></div>
+</fieldset>
+<br/>
+<!--/* ************************************************ Diagnostic Trouble Codes ****** */-->
+<fieldset id="dtc" class="hide">
+ <legend class="btn" onclick='sH("dtcdata")'>Diagnostic Trouble Codes</legend>
+<div name="dtcdata" id="dtcdata" title="Diagnostic Trouble Codes" class="data" align="center"></div>
+</fieldset>
 
+<!--/* ************************************************ Actuators ****** */-->
 <form id="actControls" hidden>
 <!-- outer table -->
 <table width="100%" style="border:1px green dashed;" id="actuators" hidden>
- <legend id="shact" name="shact" onclick='document.getElementById("actuators").hidden=!document.getElementById("actuators").hidden'>Actuators</legend>
+ <legend id="shact" name="shact" onclick='document.getElementById("actuators").hidden=!document.getElementById("actuators").hidden'>Actuators</legend>
 <tr align="center">
 
 <td width="50%" align="top" class="hide">
   <table width="98%">
   <tr align="center">
-    <td width="25%">
+    <td width="22%">
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr align="center">
 <td>
 <fieldset>
- <legend>Reset All</legend>
+ <legend>Reset All</legend>
 <!--<form>-->
- <label for="resetall">Reset All</label>
- <input type="radio" id="resetall" onclick="sendEcmCmd(EcmCmd.reset)" name="idle" value="resetall"><br>
+ <label for="resetall">Reset All</label>
+ <input type="radio" id="resetall" onclick="sendEcmCmd(EcmCmdNums.reset)" name="idle" value="resetall"><br>
 <!--</form>-->
 </fieldset>
 </td>
@@ -1115,22 +1180,18 @@ Read delay can be adjusted anytime.
 </table>
         </div>
 </td>
-    <td width="25%">
+    <td width="22%">
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr align="center">
 <td>
 <fieldset>
- <legend>Coolant Fan</legend>
+ <legend>Coolant Fan</legend>
 <!--<form>-->
-                     <!--OFF <label class="switch" for="fanOnOff">
-                        <input id="fanOnOff" onclick="if(this.checked){sendEcmCmd(EcmCmd.fanon);}else{sendEcmCmd(EcmCmd.fanoff);}" type="checkbox">
-                        <span class="slider round"></span>
-                      </label> ON-->
- <label for="fanon">fan on</label>
- <input type="radio" id="fanon" onclick="sendEcmCmd(EcmCmd.fanon)" name="idle" value="fanon"><br>
- <label for="fanoff">fan off</label>
- <input type="radio" id="fanoff" onclick="sendEcmCmd(EcmCmd.fanoff)" name="idle" value="fanoff">
+ <label for="fanon">fan on</label>
+ <input type="radio" id="fanon" onclick="sendEcmCmd(EcmCmdNums.fanon)" name="idle" value="fanon"><br>
+ <label for="fanoff">fan off</label>
+ <input type="radio" id="fanoff" onclick="sendEcmCmd(EcmCmdNums.fanoff)" name="idle" value="fanoff">
 <!--</form>--><br>
 </fieldset>
 </td>
@@ -1138,18 +1199,18 @@ Read delay can be adjusted anytime.
 </table>
         </div>
 </td>
-    <td width="25%">
+    <td width="22%">
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr align="center">
 <td>
 <fieldset>
- <legend>MIL/SES</legend>
+ <legend>MIL/SES</legend>
 <!--<form>-->
- <label for="lighton">Light On</label>
- <input type="radio" id="lighton" onclick="sendEcmCmd(EcmCmd.milon)" name="idle" value="lighton"><br>
- <label for="lightoff">Light Off</label>
- <input type="radio" id="lightoff" onclick="sendEcmCmd(EcmCmd.miloff)" name="idle" value="lightoff"><br>
+ <label for="lighton">Light On</label>
+ <input type="radio" id="lighton" onclick="sendEcmCmd(EcmCmdNums.milon)" name="idle" value="lighton"><br>
+ <label for="lightoff">Light Off</label>
+ <input type="radio" id="lightoff" onclick="sendEcmCmd(EcmCmdNums.miloff)" name="idle" value="lightoff"><br>
 <!--</form>-->
 </fieldset>
 </td>
@@ -1161,55 +1222,55 @@ Read delay can be adjusted anytime.
 
 
   <tr align="center">
-<td width="25%">
+<td width="22%">
     <div>
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
             <tr align="center">
                 <td>
                     <fieldset>
-                        <legend>Idle Speed</legend>
-                        <label for="idle6">600</label>
-                        <input type="radio" id="idle6" onclick="sendEcmCmd(EcmCmd.idle6)" name="idle" value="6"><br>
-                        <label for="idle8">800</label>
-                        <input type="radio" id="idle8" onclick="sendEcmCmd(EcmCmd.idle8)" name="idle" value="8"><br>
-                        <label for="idle10">1000</label>
-                        <input type="radio" id="idle10" onclick="sendEcmCmd(EcmCmd.idle10)" name="idle" value="10"><br>
-                        <label for="idle12">1200</label>
-                        <input type="radio" id="idle12" onclick="sendEcmCmd(EcmCmd.idle12)" name="idle" value="12"><br>
+                        <legend>Idle Speed</legend>
+                        <label for="idle6">600</label>
+                        <input type="radio" id="idle6" onclick="sendEcmCmd(EcmCmdNums.idle6)" name="idle" value="6"><br>
+                        <label for="idle8">800</label>
+                        <input type="radio" id="idle8" onclick="sendEcmCmd(EcmCmdNums.idle8)" name="idle" value="8"><br>
+                        <label for="idle10">1000</label>
+                        <input type="radio" id="idle10" onclick="sendEcmCmd(EcmCmdNums.idle10)" name="idle" value="10"><br>
+                        <label for="idle12">1200</label>
+                        <input type="radio" id="idle12" onclick="sendEcmCmd(EcmCmdNums.idle12)" name="idle" value="12"><br>
                     </fieldset>
                 </td>
             </tr>
         </table>
     </div>
 </td>
-<td width="25%">
+<td width="22%">
     <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
             <tr align="center">
                 <td>
                     <fieldset>
-                        <legend>EVAP Purge</legend>
-                        <label for="evapon">EVAP Purge On</label>
-                        <input type="radio" id="evapon" onclick="sendEcmCmd(EcmCmd.evapon)" name="idle" value="evapon"><br>
-                        <label for="evapoff">EVAP Purge Off</label>
-                        <input type="radio" id="evapoff" onclick="sendEcmCmd(EcmCmd.evapoff)" name="idle" value="evapoff"><br>
+                        <legend>EVAP Purge</legend>
+                        <label for="evapon">EVAP Purge On</label>
+                        <input type="radio" id="evapon" onclick="sendEcmCmd(EcmCmdNums.evapon)" name="idle" value="evapon"><br>
+                        <label for="evapoff">EVAP Purge Off</label>
+                        <input type="radio" id="evapoff" onclick="sendEcmCmd(EcmCmdNums.evapoff)" name="idle" value="evapoff"><br>
                     </fieldset>
                 </td>
             </tr>
         </table>
     </div>
 </td>
-<td width="25%">
+<td width="22%">
     <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
             <tr align="center">
                 <td>
                     <fieldset>
-                        <legend>A/C Relay</legend>
-                        <label for="acon">A/C On</label>
-                        <input type="radio" id="acon" onclick="sendEcmCmd(EcmCmd.acon)" name="idle" value="acon"><br>
-                        <label for="acoff">A/C Off</label>
-                        <input type="radio" id="acoff" onclick="sendEcmCmd(EcmCmd.acoff)" name="idle" value="acoff"><br>
+                        <legend>A/C Relay</legend>
+                        <label for="acon">A/C On</label>
+                        <input type="radio" id="acon" onclick="sendEcmCmd(EcmCmdNums.acon)" name="idle" value="acon"><br>
+                        <label for="acoff">A/C Off</label>
+                        <input type="radio" id="acoff" onclick="sendEcmCmd(EcmCmdNums.acoff)" name="idle" value="acoff"><br>
                     </fieldset>
                 </td>
             </tr>
@@ -1219,18 +1280,18 @@ Read delay can be adjusted anytime.
   </tr>
 
   <tr align="center">
-    <td width="25%">
+    <td width="22%">
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr align="center">
 <td>
 <fieldset>
- <legend>EGR Solenoid 1</legend>
+ <legend>EGR Solenoid 1</legend>
 <!--<form>-->
- <label for="egr1on">EGR solenoid On</label>
- <input type="radio" id="egr1on" onclick="sendEcmCmd(EcmCmd.egr1on)" name="idle" value="egr1on"><br>
- <label for="egr1off">EGR solenoid Off</label>
- <input type="radio" id="egr1off" onclick="sendEcmCmd(EcmCmd.egr1off)" name="idle" value="egr1off"><br>
+ <label for="egr1on">EGR solenoid On</label>
+ <input type="radio" id="egr1on" onclick="sendEcmCmd(EcmCmdNums.egr1on)" name="idle" value="egr1on"><br>
+ <label for="egr1off">EGR solenoid Off</label>
+ <input type="radio" id="egr1off" onclick="sendEcmCmd(EcmCmdNums.egr1off)" name="idle" value="egr1off"><br>
 <!--</form>-->
 </fieldset>
 </td>
@@ -1238,18 +1299,18 @@ Read delay can be adjusted anytime.
 </table>
         </div>
 </td>
-    <td width="25%">
+    <td width="22%">
 <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
 <tr align="center">
 <td>
 <fieldset>
- <legend>EGR Solenoid 2</legend>
+ <legend>EGR Solenoid 2</legend>
 <!--<form>-->
- <label for="egr2on">EGR solenoid On</label>
- <input type="radio" id="egr2on" onclick="sendEcmCmd(EcmCmd.egr2on)" name="idle" value="egr2on"><br>
- <label for="egr2off">EGR solenoid Off</label>
- <input type="radio" id="egr2off" onclick="sendEcmCmd(EcmCmd.egr2off)" name="idle" value="egr2off"><br>
+ <label for="egr2on">EGR solenoid On</label>
+ <input type="radio" id="egr2on" onclick="sendEcmCmd(EcmCmdNums.egr2on)" name="idle" value="egr2on"><br>
+ <label for="egr2off">EGR solenoid Off</label>
+ <input type="radio" id="egr2off" onclick="sendEcmCmd(EcmCmdNums.egr2off)" name="idle" value="egr2off"><br>
 <!--</form>-->
 </fieldset>
 </td>
@@ -1257,17 +1318,17 @@ Read delay can be adjusted anytime.
 </table>
         </div>
 </td>
-<td width="25%">
+<td width="22%">
     <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
             <tr align="center">
                 <td>
                     <fieldset>
-                        <legend>EGR Solenoid 3</legend>
-                        <label for="egr3on">EGR solenoid On</label>
-                        <input type="radio" id="egr3on" onclick="sendEcmCmd(EcmCmd.egr3on)" name="idle" value="egr3on"><br>
-                        <label for="egr3off">EGR solenoid Off</label>
-                        <input type="radio" id="egr3off" onclick="sendEcmCmd(EcmCmd.egr3off)" name="idle" value="egr3off"><br>
+                        <legend>EGR Solenoid 3</legend>
+                        <label for="egr3on">EGR solenoid On</label>
+                        <input type="radio" id="egr3on" onclick="sendEcmCmd(EcmCmdNums.egr3on)" name="idle" value="egr3on"><br>
+                        <label for="egr3off">EGR solenoid Off</label>
+                        <input type="radio" id="egr3off" onclick="sendEcmCmd(EcmCmdNums.egr3off)" name="idle" value="egr3off"><br>
                     </fieldset>
                 </td>
             </tr>
@@ -1279,35 +1340,35 @@ Read delay can be adjusted anytime.
 
 </td><!-- 1/2 td -->
 
-<td hidden width="0" align="top" class="hide" ><!-- width="50%" 2/2 td -->
+<td width="0" hidden align="top" class="hide" ><!-- width="50%" 2/2 td -->
   <table width="98%">
     <legend>Status</legend>
     <tr align="center">
 <!--item-->
-     <td width="25%">
+     <td width="22%">
       <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
             <tr align="center">
                 <td>
                     <fieldset>
-                        <legend>Disconnect Ecm Test</legend>
-                        <label for="disconnectEcmTestResponse">Disconnect Ecm Test</label>
-                        <input type="radio" id="disconnectEcmTestResponse" onclick="sendEcmCmd(EcmCmd.disconnectEcmCmdNum)" name="idle" value="disconnectEcmTestResponse"><br>
+                        <legend>Disconnect Ecm Test</legend>
+                        <label for="disconnectEcmTestResponse">Disconnect Ecm Test</label>
+                        <input type="radio" id="disconnectEcmTestResponse" onclick="sendEcmCmd(EcmCmdNums.disconnectEcmCmdNum)" name="idle" value="disconnectEcmTestResponse"><br>
                     </fieldset>
                 </td>
             </tr>
         </table>
       </div>
      </td>
-     <td width="25%">
+     <td width="22%">
       <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
             <tr align="center">
                 <td>
                     <fieldset>
-                        <legend>Stop Com Test</legend>
-                        <label for="stopComTestResponse">Stop Com Test</label>
-                        <input type="radio" id="stopComTestResponse" onclick="sendEcmCmd(EcmCmd.stopComCmdNum)" name="idle" value="stopComTestResponse"><br>
+                        <legend>Stop Com Test</legend>
+                        <label for="stopComTestResponse">Stop Com Test</label>
+                        <input type="radio" id="stopComTestResponse" onclick="sendEcmCmd(EcmCmdNums.stopComCmdNum)" name="idle" value="stopComTestResponse"><br>
                     </fieldset>
                 </td>
             </tr>
@@ -1316,15 +1377,15 @@ Read delay can be adjusted anytime.
      </td>
 <!--end item-->
 <!--item-->
-     <td width="25%">
+     <td width="22%">
       <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
             <tr align="center">
                 <td>
                     <fieldset>
-                        <legend>Mil Test</legend>
-                        <label for="milTestResponse">milTestResponse</label>
-                        <input type="radio" id="milTestResponse" onclick="sendEcmCmd(EcmCmd.milTestResponse)" name="idle" value="milTestResponse"><br>
+                        <legend>Mil Test</legend>
+                        <label for="milTestResponse">milTestResponse</label>
+                        <input type="radio" id="milTestResponse" onclick="sendEcmCmd(EcmCmdNums.milTestResponse)" name="idle" value="milTestResponse"><br>
                     </fieldset>
                 </td>
             </tr>
@@ -1335,17 +1396,17 @@ Read delay can be adjusted anytime.
 </tr>
 <tr align="center">
 <!--item-->
-     <td width="25%">
+     <td width="22%">
       <div align="center">
         <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
             <tr align="center">
                 <td>
                     <fieldset>
-                        <legend>Data Test</legend>
-                        <label for="mainTestResponse">Engine Test Response</label>
-                        <input type="radio" id="mainTestResponse" onclick="sendEcmCmd(EcmCmd.mainTestResponse)" name="idle" value="mainTestResponse"><br>
-                        <label for="vinTestResponse">Vin Test Response</label>
-                        <input type="radio" id="vinTestResponse" onclick="sendEcmCmd(EcmCmd.vinTestResponse)" name="idle" value="vinTestResponse"><br>
+                        <legend>Data Test</legend>
+                        <label for="mainTestResponse">Engine Test Response</label>
+                        <input type="radio" id="mainTestResponse" onclick="sendEcmCmd(EcmCmdNums.mainTestResponse)" name="idle" value="mainTestResponse"><br>
+                        <label for="vinTestResponse">Vin Test Response</label>
+                        <input type="radio" id="vinTestResponse" onclick="sendEcmCmd(EcmCmdNums.vinTestResponse)" name="idle" value="vinTestResponse"><br>
                     </fieldset>
                 </td>
             </tr>
@@ -1354,64 +1415,6 @@ Read delay can be adjusted anytime.
      </td>
 <!--end item-->
 </tr>
-<tr align="center">
-<!--item-->
-     <td width="25%">
-      <div align="center">
-        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
-            <tr align="center">
-                <td>
-                    <fieldset>
-                      <legend>Fan Status</legend>
-                      OFF <label class="switch" for="fanOnOff">
-                        <input id="fanOnOff" type="checkbox" value=0>
-                        <span class="slider round"></span>
-                      </label> ON<br>
-                    </fieldset>
-                </td>
-            </tr>
-        </table>
-      </div>
-     </td>
-<!--end item-->
-<!--item
-     <td width="25%">
-      <div align="center">
-        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
-            <tr align="center">
-                <td>
-                    <fieldset>
-                      <legend>Manual</legend>
-<div class="slidecontainer"><span id="manualDis"></span>
-  <input type="range" min="0" max="6" value="6" class="slider2" name="manualGear" id="manualGear">
-</div>
-                    </fieldset>
-                </td>
-            </tr>
-        </table>
-      </div>
-     </td>
-end item-->
-<!--item
-     <td width="25%">
-      <div align="center">
-        <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0" bordercolordark="#808080" bordercolorlight="#ffffff">
-            <tr align="center">
-                <td>
-                    <fieldset>
-                      <legend>Automatic</legend>
-                      <div class="slidecontainer">
-                        <span id="prndlDis"></span>
-                        <input type="range" min="0" max="6" value="6" class="slider2" name="prndl" id="gear">
-                      </div>
-                    </fieldset>
-                </td>
-            </tr>
-        </table>
-      </div>
-     </td>
-end item-->
-    </tr>
   </table>
 </td><!-- 2/2 td -->
 </tr>
@@ -1421,13 +1424,8 @@ end item-->
 
 <!--End Actuators-->
 <br/>
-<fieldset id="dtc" class="hide">
- <legend class="btn" onclick='sH("dtcdata")'>Diagnostic Trouble Codes</legend>
-<div name="dtcdata" id="dtcdata" title="Diagnostic Trouble Codes" align="center"></div>
-</fieldset>
-<br/>
 <fieldset id="scanData" class="hide">
- <legend class="btn" onclick='sH("sdata")'>{Raw} Scan Data</legend>
+ <legend class="btn" onclick='sH("sdata")'>{Raw} Scan Data</legend>
 <div hidden name="sdata" id="sdata" title="serial data" align="center"></div>
 </fieldset>
 <br>
@@ -1458,11 +1456,13 @@ end item-->
 
         <!-- Copyright -->
         <script>
+/* <!-- */
             function yr() {
                 const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL';
             }
             /*document.write('<b style="color:#752975;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yr() + '" >' + yr() + "</b>");*/
             document.write('<small onclick=window.open("https://toremetal.com") style="color:#752929;text-align: left;position: fixed;z-index:8; bottom: 6px; left: 5px;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yr() + '" >' + yr() + "</small>");
+/* --> */
         </script>
         <!-- End Copyright -->
  </td>
@@ -1470,9 +1470,9 @@ end item-->
 </table><!-- end footer -->
 </body>
 <script>
-
+/* <!-- */
 /* if (DEBUG==1) {console.log()}*/
-const DEBUG = 0;
+const DEBUG = 2;
 
 /* ---------------------------------------------|
  * Byte Converters (for translating serial data)
@@ -1503,8 +1503,8 @@ function numToBin(i) {
       return nBinary;
 }
 
-function setDelay(val) {
-    EcmCmds.loopTime=val*100;
+function setSpeed(val) {
+    EcmCmds.loopTime=val;
     if (EcmCmds.allowCookies) {setCookie("speed",val*100,30);}
 }
 
@@ -1759,7 +1759,7 @@ const EcmCmdMainDataStream = {
 /*byte7*/     Baro:"baro",
 /*byte8*/     TpsVolts:"throttlev",
 /*byte9*/     TpsPercent:"throttlep",
-/*byte10*/    TransTmp:"tempf",/*TODO:set Up formula for conversion*/
+/*byte10*/    TransTmp:"tempf",
 /*byte11*/    MPH:"mph",
 /*byte12*/    TargetRPM:"targetidle",
 /*byte13*/    RPM24:"NotUsed",
@@ -1767,7 +1767,7 @@ const EcmCmdMainDataStream = {
 /*byte15*/    GEAR:"gear",
 /*byte16*/    Knock:"knock",
 /*byte17*/    KnockRetard:"knockretard",
-/*byte18*/    EgrStatus:"NotUsed",
+/*byte18*/    byte18:"byte18",
 /*byte19*/    Blm:"blm",
 /*byte20*/    AirFuel:"airfuel",
 /*byte21*/    InjectorMSB:"injp",
@@ -1781,47 +1781,48 @@ const EcmCmdMainDataStream = {
 /*byte29*/    IAC:"iac",
 /*byte30*/    MinIAC:"miniac",
 /*byte31*/    FuelPump:"fuelpumpv",
-/*byte32*/    ACpsi:"acpsi",
+/*byte32*/    ACtemp:"actempf",
 /*byte33*/    SparkAdvanceMSB:"NotUsed",
 /*byte34*/    SparkAdvance:"sparkadvance",
 /*byte35*/    Evap:"evap",
-/*byte36*/    O2Status:"NotUsed",
-/*byte37*/    KickDown:"NotUsed",
-/*byte38*/    FanOn:"fanOnOff",
+/*byte36*/    byte36:"SPI-INPUT-DISCRETES-STATUS-REGISTER-3",
+/*byte37*/    byte37:"ALDL-STATUS",
+/*byte38*/    byte38:"fanOnOff",
 /*byte39*/    byte39:"NotUsed",
 /*byte40*/    RPMnX125:"rpm",
-/*byte41*/    ACtemp:"actempf",
-/*byte42*/    ACstatus:"NotUsed",
-/*byte43*/    brakePressed:"brakepressed",
-/*44*/    byte44:"NotUsed",
+/*byte41*/    byte41:"acpsi",
+/*byte42*/    byte42:"A-C STATUS",
+/*byte43*/    byte43:"brakepressed",
+/*44*/    byte44:"byte44",
 /*45*/    byte45:"milcodes",
-    byte46:"NotUsed",
+    byte46:"TCC DUTY CYCLE",
     byte47:"ForcedMotorDutyCycle",
-    byte48:"NotUsed",
-    byte49:"NotUsed",
-    byte50:"NotUsed",
-    byte51:"NotUsed",
-    byte52:"NotUsed",
-    byte53:"NotUsed",
-    byte54:"NotUsed",
-    byte55dyno:"NotUsed",
-    byte56:"NotUsed",
-    byte57:"NotUsed",
-    byte59:"NotUsed",
-    byte60:"NotUsed",
-    byte61:"NotUsed",
-    byte62:"NotUsed",
-    byte63:"NotUsed",
-    byte64:"NotUsed",
-    byte65:"NotUsed",
-    byte66:"NotUsed",
-    byte67:"NotUsed",
+    byte48:"DownshiftSolenoid",
+    byte49:"TCC SLIPPAGE MSB",
+    byte50:"TCC SLIPPAGE LSB",
+    byte51:"OUTPUT SHAFT SPEED MSB",
+    byte52:"OUTPUT SHAFT SPEED LSB",
+    byte53:"INPUT SHAFT SPEED MSB",
+    byte54:"INPUT SHAFT SPEED LSB",
+    byte55:"COMMANDED PRESSURE",
+    byte56:"FORCE MOTOR COMMAND CURRENT",
+    byte57:"byte57",
+    byte58:"byte58",
+    byte59:"byte59",
+    byte60:"byte60",
+    byte61:"byte61",
+    byte62:"byte62",
+    byte63:"byte63",
+    byte64:"byte64",
+    byte65:"byte65",
+    byte66:"byte66",
+    byte67:"byte67",
     length:70
 }
 /* End Decoder File Constants */
 
 /* Ecm Cmds order number */
-const EcmCmd = {
+const EcmCmdNums = {
     mainDataCmdNum:0,
     milDataCmdNum:1,
     vinDataCmdNum:2,
@@ -1879,7 +1880,7 @@ const EcmCmds = {
 /*23*/  idle10: new Uint8Array([0xE4,0x62,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x30,0x00,0x00,0x50,0x00,0x00,0x36]),
 /*24*/  idle12: new Uint8Array([0xE4,0x62,0x04,0x00,0x00,0x00,0x00,0x00,0x00,0x30,0x00,0x00,0x60,0x00,0x00,0x26]),
 /*25*/  milTestResponse: new Uint8Array([0xE4,0x6B,0x01,0x03,0x00,0x00,0x21,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x8C]),
-/*26*/  mainTestResponse: new Uint8Array([0xE4,0x99,0x01,0x00,0x00,0x49,0x74,0x32,0xFF,0xFF,0x1C,0x00,0x01,0x00,0x00,0xFF,0xFF,0x04,0x00,0x00,0x00,0x00,0x4E,0x16,0xB4,0x80,0x80,0x66,0x80,0x80,0x64,0x64,0x06,0x00,0xFF,0x00,0x24,0x00,0xC2,0xC0,0x48,0x00,0x00,0x00,0x61,0x28,0xF7,0x02,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0x00,0x08,0x00,0x30]),
+/*26*/  mainTestResponse: new Uint8Array([0xE4,0x99,0x01,0x00,0x00,0x66,0x75,0x40,0xFF,0xFF,0x1C,0x00,0x01,0x00,0x00,0xFF,0xFF,0x04,0x00,0x00,0x00,0x00,0x4F,0x0E,0xE4,0x80,0x80,0x66,0x80,0x80,0x66,0x4C,0x00,0x00,0xFF,0x80,0xB6,0x80,0xE3,0xE0,0xEC,0x80,0x80,0x80,0x7C,0xFF,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0x00,0x08,0x00,0xF9,0x05]),
 /*27*/  vinTestResponse: new Uint8Array([0xE4,0x83,0x01,0x32,0x47,0x31,0x46,0x50,0x32,0x32,0x53,0x37,0x53,0x32,0x31,0x38,0x39,0x36,0x32,0x37,0x00,0xF7,0x74,0x0D,0x31,0x36,0x30,0x30,0x33,0x31,0x31,0x30,0x39,0x36,0x37,0x35,0x30,0x37,0x34,0x02,0x00,0xF7,0x74,0x3F,0x00,0xF7,0x74,0x40,0xD3]),
 /*--*/  mainTestResponseLabels: new Uint8Array([0xE4,0x99,0x01,/*1runtime*/ 0,/*2runtime*/ 0,/*3coolant*/ alphaToNumeric("48"),/*4battery*/ alphaToNumeric("75"),/*5airTemp*/ alphaToNumeric("30"),/*6mapVolts*/ 255,/*7Baro*/ 255,/*8TP Volts*/ alphaToNumeric("1C"),/*9TP angle*/ 0,/*TRANS TEMP SEN. F = 1.35*N - 40*/ 0,/*MPH*/ 0,/*desiredIdle*/ 0,/*13NEWRFPER*/ 255,/*14NEWRFPER+1 RPM=1310720/N */ 255,/*15 PRNDL 0=D1,1=D2,2=D3,3=D4,4=N,5=R,6=P,7=notDefined*/ 4,/*16Knock Sensor*/ 0,/*sparkRetard*/ 0,/*18 egr solenoids*/ 0,/*19 BLM*/ 0,/*20 AirFuel*/ alphaToNumeric("4E"),/*21 inj*/ alphaToNumeric("17"),/*22 inj*/ alphaToNumeric("10"),/*23bank1Learn*/ alphaToNumeric("80"),/*24bank1*/ alphaToNumeric("80"),/*25bank1o2*/ alphaToNumeric("66"),/*26bank2*/ alphaToNumeric("80"),/*27 2*/ alphaToNumeric("80"),/*28 o2 2*/ alphaToNumeric("63"),/*29 iac*/ alphaToNumeric("65"),/*30 iac min*/ 6,/*31fuelPump Volts*/ 0,/*32AC EVAP Temp Sensor*/ 255,/*33SparkAdvance*/ 0,/*34SparkAdvance*/ alphaToNumeric("24"),/*35CCP DUTY CYCLE*/ 255,/*36 o2Ready*/ alphaToNumeric("C2"),/*21=LEFT OXYGEN SENSOR READY 31=Right OXYGEN SENSOR READY 01=BLOCK LEARN ENABLED 11=A.I.R. DIVERT FLAG 41=CLOSED LOOP A/F MODE ENABLED*//*37*/ alphaToNumeric("C0"),/*01=CAM PULSE,11=kickDown,20=InjFault,41=A/C request, 51=A/C clutch*/ alphaToNumeric("48"),/*[38] 01=FAN # 1 ON, 21=NORMAL/SNOW (X1R),41=TRANS SHIFT SOLENOID A, 51=TRANSMISSION SHIFT SOLENOID B,71=TCC ENABLE SOL. OUTPUT*//*notused*/ 0,/*rpm*/ 0,/*ac volts*/ 0,/*ac stuff*/ alphaToNumeric("61"),/*43 TCC brake 51 = Pressed*/ alphaToNumeric("28"), alphaToNumeric("F7"),/*Mil Codes*/ 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, alphaToNumeric("80"), 0, 8, 0, alphaToNumeric("D7")]),
       lastCmdStr: "",
@@ -1888,15 +1889,19 @@ const EcmCmds = {
       nextCmd: 2,
       sendCmd: 0,
       sendCnt: 0,
-      sendCntCap:10,
+      sendCntCap:3000,
       byteStart:0,
       noCmdNum:99,
       autoTran:0,
       received:0,
       loopTime:500,
+      delayTime:10,
       allowCookies:false
 };
-
+/*
+mainTestResponse: new Uint8Array([0xE4,0x99,0x01,0x00,0x00,0x49,0x74,0x32,0xFF,0xFF,0x1C,0x00,0x01,0x00,0x00,0xFF,0xFF,0x04,0x00,0x00,0x00,0x00,0x4E,0x16,0xB4,0x80,0x80,0x66,0x80,0x80,0x64,0x64,0x06,0x00,0xFF,0x00,0x24,0x00,0xC2,0xC0,0x48,0x00,0x00,0x00,0x61,0x28,0xF7,0x02,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0x00,0x08,0x00,0x30]),
+mainTestResponse: new Uint8Array([0xE4,0x99,0x01,0x00,0x00,0x66,0x75,0x40,0xFF,0xFF,0x1C,0x00,0x01,0x00,0x00,0xFF,0xFF,0x04,0x00,0x00,0x00,0x00,0x4F,0x0E,0xE4,0x80,0x80,0x66,0x80,0x80,0x66,0x4C,0x00,0x00,0xFF,0x80,0xB6,0x80,0xE3,0xE0,0xEC,0x80,0x80,0x80,0x7C,0xFF,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0x00,0x08,0x00,0xF9,0x05]),
+,5F,00,60,00,67,75,00,00,00,00,66,FA,0A,58,00,00,00,9E,91,FD,80,00,00,16,F8,FF,F6,FF,0A,58,00,00,00,9E,91,D9,80,80,00,16,0A,58,00,00,00,9E,91,59,80,80,00,00,16,0A,58,00,00,00,9E,91,59,00,80,80,16,05,5F,00,60,00,67,75,00,00,00,00,66,FA,0A,58,00,00,00,9E,91,59,00,80,80,00,16,F0,56,E4,D6,0A,58,00,00,00,9E,91,59,00,00,80,80,16,0A,58,00,00,80,DF,91,59,00,00,80]),*/
 
     const cnt = {value:0};
     document.getElementById("ecmdatafile").value=EcmCmds.autoTran;
@@ -1912,8 +1917,8 @@ const EcmCmds = {
  *  var reader: com port connection-for serial read.
  * -------------------------------------------------------- */
 async function readAllChunks(reader) {
-let d=document.getElementById("delaytime").value*100;
-setTimeout(console.log("delay:" + d),d);
+
+    await setTimeout(console.log("Speed:" + EcmCmds.loopTime), EcmCmds.delayTime);
     try {
         return await reader.read().then(
             ({value, done}) => {
@@ -1931,7 +1936,7 @@ function setValues(ecmFileConst) {
     let injector=0;
     let t=0;
     let y=EcmCmds.byteStart;
-        
+    let tranStr="";
     for (z in ecmFileConst) {
         try {
             if (DEBUG==1) {console.log("value[" + y + "](" + t + "):" + value[y]);}
@@ -1945,20 +1950,47 @@ function setValues(ecmFileConst) {
                 /* Skip */
             } else if (ecmFileConst[z]==ecmFileConst.length) {
                 /* Skip */
-            } else if (ecmFileConst[z]=="NotUsed") {
-                /* Skip */
-            } else if (ecmFileConst[z]=="TODO") {
-                /* Skip */
             } else if (ecmFileConst[z]=="gear") {
-                let currentGear=numToBin(value[y]);
-                let bitSpot=0;
-                for (c in currentGear) {
-                    if (currentGear[c]==1) {
-                        console.log("GEAR-Spot" + bitSpot + "=" + c);
-                        document.getElementById("gear").value=bitSpot;
-                    }
-                    bitSpot++;
+                let gear=numToBin(value[y]);
+                let gStr="";
+                let tc=0;
+                for (t in gear) {
+                     if (tc>1 && tc<6) {
+                         if (tc==2) {
+                             gStr=gear[t];
+                         } else if (tc==3) {
+                             gStr+=gear[t];
+                         } else if (tc==4) {
+                             gStr+=gear[t];
+                         } else if (tc==5 && gear[t]=="0") {
+                             tranStr+="INJECTOR FAULT<br/>";
+                         }
+                     }
+                     tc++;
                 }
+                if (gStr=="000") {/*D1*/
+                    document.getElementById("gear").value=0;
+                    document.getElementById("manualGear").value=0;
+                } else if (gStr=="100") {/*D2*/
+                    document.getElementById("gear").value=1;
+                    document.getElementById("manualGear").value=1;
+                } else if (gStr=="001") {/*D3*/
+                    document.getElementById("gear").value=2;
+                    document.getElementById("manualGear").value=2;
+                } else if (gStr=="011") {/*D4*/
+                    document.getElementById("gear").value=3;
+                    document.getElementById("manualGear").value=3;
+                } else if (gStr=="110") {/*Reverse*/
+                    document.getElementById("gear").value=5;
+                    document.getElementById("manualGear").value=5;
+                } else if (gStr=="010") {/*Park Nuetral*/
+                    document.getElementById("gear").value=4;
+                    document.getElementById("manualGear").value=4;
+                } else if (gStr=="111") {/*P*/
+                    document.getElementById("gear").value=6;
+                    document.getElementById("manualGear").value=6;
+                }
+                setLabel();
             } else if (ecmFileConst[z]=="brakepressed") {
                 let brakes=numToBin(value[y]);
                 let tc=0;
@@ -1973,19 +2005,55 @@ function setValues(ecmFileConst) {
                      }
                      tc++;
                 }
-            } else if (ecmFileConst[z]=="milcodes") {
+            } else if (ecmFileConst[z]=="rpm24x")/*byte14*/ {
+                if (value[y]!=255) {
+                    setValue(ecmFileConst[z], (1310720/parseInt(value[y])).toFixed());
+                } else {setValue(ecmFileConst[z], 0);}
+                if (DEBUG==1) {console.log("rpm: 1310720/value[y]:" + (1310720/value[y]).toFixed());}
+            } else if (ecmFileConst[z]=="milcodes")/*byte45*/ {
                 if (value[y]>0) {
                     document.getElementById("checkEngineLight").hidden=false;
                 } else {document.getElementById("checkEngineLight").hidden=true;}
                 setValue(ecmFileConst[z], value[y]);
                 if (DEBUG==1) {console.log("setValues-["+ z.toString() +"]:" + ecmFileConst[z] + value[y].toString());}
-            } else if (ecmFileConst[z]=="fanOnOff") {
-                if (value[y]==0) {
-                    document.getElementById("fanOnOff").checked=false;
-                } else if (value[y]==1) {
-                    document.getElementById("fanOnOff").checked=true;
+            } else if (ecmFileConst[z]=="fanOnOff")/*byte38*/ {
+                let bits=numToBin(value[y]);
+                let tc=0;
+                let tccStr="";
+                for (t in bits) {
+                    if (tc==0 && bits[t]=="1") {
+                        document.getElementById("fanOnOff").checked=true;
+                    } else if (tc==0 && bits[t]=="0") {
+                        document.getElementById("fanOnOff").checked=false;
+                    } else if (tc==2) {
+                        tranStr+="NORMAL/SNOW (X1R):" + bits[t] + "<br/>";
+                    } else if (tc==4) {
+                        tccStr=bits[t];
+                    } else if (tc==5) {
+                        tccStr+=bits[t];
+                        if (tccStr=="11") {
+                            tranStr+="Trans in Gear: 1<br/>";
+                        } else if (tccStr=="01") {
+                            tranStr+="Trans in Gear: 2<br/>";
+                        } else if (tccStr=="00") {
+                            tranStr+="Trans in Gear: 3<br/>";
+                        } else if (tccStr=="10") {
+                            tranStr+="Trans in Gear: 4<br/>";
+                        }
+                    } else if (tc==7) {
+                        tranStr+="TCC ENABLE SOL:" + bits[t] + "<br/>";
+                    }
+                    tc++;
                 }
-            } else if (ecmFileConst[z]=="coolanttempf" || ecmFileConst[z]=="airtempf" || ecmFileConst[z]=="actempf") {
+            } else if (ecmFileConst[z]=="actempf") {
+                if (value[y]<12) {
+                    let an = ((12-(12-value[y]))*2.6);
+                    setValue(ecmFileConst[z], "-" + an);
+                } else {
+                    let an = (value[y]*1.1);
+                    setValue(ecmFileConst[z], an);
+                }
+            } else if (ecmFileConst[z]=="coolanttempf" || ecmFileConst[z]=="airtempf") {
                 setValue(ecmFileConst[z], setDegF(value[y]));
                 if (DEBUG==1) {console.log("setDegF(value[y]):" + setDegF(value[y]));}
             } else if (ecmFileConst[z]=="mapvolts" || ecmFileConst[z]=="baro" || ecmFileConst[z]=="throttlev") {
@@ -2001,19 +2069,305 @@ function setValues(ecmFileConst) {
             } else if (ecmFileConst[z]=="targetidle" || ecmFileConst[z]=="rpm") {
                 setValue(ecmFileConst[z], (12.5*value[y]).toFixed());
                 if (DEBUG==1) {console.log("12.5*value[y]:" + (12.5*value[y]).toFixed());}
-            } else if (ecmFileConst[z]=="throttlep" || ecmFileConst[z]=="evap" || ecmFileConst[z]=="ForcedMotorDutyCycle") {
+            } else if (ecmFileConst[z]=="throttlep" || ecmFileConst[z]=="evap") {
                 setValue(ecmFileConst[z], (value[y]/2.55).toFixed());
                 if (DEBUG==1) {console.log("value[y]/2.55:" + (value[y]/2.55).toFixed());}
-            /* TODO auto tran values *********************************
-            } else if (t>45 && t<49 && EcmCmds.autoTran==1) {
-              setValue(ecmFileConst[z], (value[y]/2.55).toFixed());
-              if (DEBUG==1) {console.log("value[y]/2.55:" + (value[y]/2.55).toFixed());}
-             * END TODO  *********************************************  */
-            } else if (ecmFileConst[z]=="rpm24x") {
-                if (value[y]!=255) {
-                    setValue(ecmFileConst[z], (1310720/parseInt(value[y])).toFixed());
-                } else {setValue(ecmFileConst[z], 0);}
-                if (DEBUG==1) {console.log("rpm: 1310720/value[y]:" + (1310720/value[y]).toFixed());}
+
+            } else if (ecmFileConst[z]=="SPI-INPUT-DISCRETES-STATUS-REGISTER-3") {
+
+                let bitsSPI=numToBin(value[y]);
+                let tc=0;
+                tranStr+="SPI INPUT DISCRETES STATUS REGISTER #3:<br/>(QDM FAULT CANNOT BE USED UNLESS ALL QDM OUTPUTS ARE CONTROLLED FOR TESTING)<br/>";
+                for (t in bitsSPI) {
+                     if (tc==0 && bitsSPI[t]=="1") {
+                         tranStr+="--BLOCK LEARN ENABLED<br/>";
+                     } else if (tc==1 && bitsSPI[t]=="1") {
+                         tranStr+="--A.I.R. DIVERT FLAG<br/>";
+                     } else if (tc==2) {
+                         if (bitsSPI[t]=="1") {
+                         tranStr+="LEFT, FRONT OXYGEN SENSOR [READY]<br/>";
+                         } else if (bitsSPI[t]=="0") {
+                         tranStr+="LEFT, FRONT OXYGEN SENSOR [NOT READY]<br/>";
+                         }
+                     } else if (tc==3) {
+                         if (bitsSPI[t]=="1") {
+                             tranStr+="RIGHT, REAR OXYGEN SENSOR [READY]<br/>";
+                         } else if (bitsSPI[t]=="0") {
+                             tranStr+="RIGHT, REAR OXYGEN SENSOR [NOT READY]<br/>";
+                         }
+                         tranStr+="RIGHT, REAR OXYGEN SENSOR READY [" + bitsSPI[t] + "]<br/>";
+                     } else if (tc==4 && bitsSPI[t]=="1") {
+                         tranStr+="--CLOSED LOOP A/F MODE ENABLED<br/>";
+                     } else if (tc==5 && bitsSPI[t]=="1") {
+                         tranStr+="--QDM FAULT 3 DETECTED<br/>";
+                     } else if (tc==6 && bitsSPI[t]=="1") {
+                         tranStr+="--QDM FAULT 4 DETECTED<br/>";
+                     } else if (tc==7 && bitsSPI[t]=="1") {
+                         tranStr+="--QDM FAULT 5 DETECTED<br/>";
+                     }
+                     tc++;
+                }
+
+            } else if (ecmFileConst[z]=="ALDL-STATUS") {
+
+                let bitsALDL=numToBin(value[y]);
+                let tc=0;
+                tranStr+="ALDL STATUS:<br/>(QDM FAULT CANNOT BE USED UNLESS ALL QDM OUTPUTS ARE CONTROLLED FOR TESTING)<br/>";
+                for (t in bitsALDL) {
+                     if (tc==0 && bitsALDL[t]=="1") {
+                         tranStr+="-CAM PULSE SEEN<br/>";
+                     } else if (tc==1 && bitsALDL[t]=="1") {
+                         tranStr+="-KICKDOWN PATTERN ACTIVE/NOT IDLE(Manual)<br/>";
+                     } else if (tc==2 && bitsALDL[t]=="0") {
+                         tranStr+="--QDM INJECTOR FAULT<br/>";
+                     } else if (tc==3 && bitsALDL[t]=="1") {
+                         tranStr+="P/N<br/>";
+                     } else if (tc==4 && bitsALDL[t]=="1") {
+                         tranStr+="A/C REQUESTED<br/>";
+                     } else if (tc==5 && bitsALDL[t]=="1") {
+                         tranStr+="A/C CLUTCH RELAY ON<br/>";
+                     } else if (tc==6 && bitsALDL[t]=="1") {
+                         tranStr+="--QDM FAULT 1 Detected<br/>";
+                     } else if (tc==7 && bitsALDL[t]=="1") {
+                         tranStr+="--QDM FAULT 2 Detected<br/>";
+                     }
+                     tc++;
+                }
+
+            } else if (ecmFileConst[z]=="A-C STATUS") {
+                let bitsAC=numToBin(value[y]);
+                let tc=0;
+                tranStr+="A/C STATUS:<br/>";
+                for (t in bitsAC) {
+                     if (bitsAC[t]=="0" && tc==0) {
+                         tranStr+="--A/C CLUTCH ENABLED<br/>";
+                     } else if (bitsAC[t]=="1" && tc==1) {
+                         tranStr+="--A/C WOT LOGIC USING N/V TIME THRESHOLD<br/>";
+                     } else if (bitsAC[t]=="1" && tc==2) {
+                         tranStr+="--A/C PRESSURE REQUESTS FAN<br/>";
+                     } else if (bitsAC[t]=="1" && tc==4) {
+                         tranStr+="--A/C LOAD SWAP (A/C FORCED OFF)<br/>";
+                     } else if (bitsAC[t]=="1" && tc==5) {
+                         tranStr+="--A/C OLD (6.25 MS.) 3RD GEAR FLAG<br/>";
+                     } else if (bitsAC[t]=="1" && tc==6) {
+                         tranStr+="--A/C EVAP TEMPERATURE CLUTCH DISABLE<br/>";
+                     } else if (bitsAC[t]=="1" && tc==7) {
+                         tranStr+="--A/C CFIV FREON LOW CLUTCH DISABLE<br/>";
+                     }
+                     tc++;
+                }
+            } else if (ecmFileConst[z]==ecmFileConst.byte44) {
+/*******************************************************************************
+* PRNDL DECODE TABLE FOR F CARS                                               *
+* ----------------------------------                                          *
+*    INP A   INP B   INP C    PRNDL POSITION                             *
+*    -----   -----   -----    --------------                             *
+*      0       1       1      DRIVE 4                                    *
+*      1       0       0      DRIVE 2                                    *
+*      1       1       0      REVERSE                                    *
+*      1       0       0      LOW                                        *
+*      0       1       0      NEUTRAL                                    *
+*      0       1       0      PARK                                       *
+*      0       0       1      DRIVE 3                                    *
+*******************************************************************************/
+                let gear=numToBin(value[y]);
+                let gStr="";
+                let tc=0;
+                for (t in gear) {
+                     if (tc>1 && tc<6) {
+                         if (tc==2) {
+                             gStr=gear[t];
+                         } else if (tc==3) {
+                             gStr+=gear[t];
+                         } else if (tc==4) {
+                             gStr+=gear[t];
+                         } else if (tc==5 && gear[t]=="0") {
+                             tranStr+="INJECTOR FAULT<br/>";
+                         }
+                     }
+                     tc++;
+                }
+                if (gStr=="000") {/*D1*/
+                    document.getElementById("gear").value=0;
+                    document.getElementById("manualGear").value=0;
+                } else if (gStr=="100") {/*D2*/
+                    document.getElementById("gear").value=1;
+                    document.getElementById("manualGear").value=1;
+                } else if (gStr=="001") {/*D3*/
+                    document.getElementById("gear").value=2;
+                    document.getElementById("manualGear").value=2;
+                } else if (gStr=="011") {/*D4*/
+                    document.getElementById("gear").value=3;
+                    document.getElementById("manualGear").value=3;
+                } else if (gStr=="110") {/*Reverse*/
+                    document.getElementById("gear").value=5;
+                    document.getElementById("manualGear").value=5;
+                } else if (gStr=="010") {/*Park Nuetral*/
+                    document.getElementById("gear").value=4;
+                    document.getElementById("manualGear").value=4;
+                } else if (gStr=="111") {/*P*/
+                    document.getElementById("gear").value=6;
+                    document.getElementById("manualGear").value=6;
+                }
+                setLabel();
+            } else if (ecmFileConst[z]=="TCC DUTY CYCLE") {
+                tranStr+="TCC DUTY CYCLE: " + ((value[y]/2.55).toFixed(2)).toString() + " %<br/>";
+            } else if (ecmFileConst[z]=="ForcedMotorDutyCycle") {
+                tranStr+="FORCE MOTOR DUTY CYCLE: " + (value[y]/2.55).toFixed(2) + " %<br/>";
+            } else if (ecmFileConst[z]=="DownshiftSolenoid") {
+                tranStr+="3->2 DOWNSHIFT SOLENOID DUTY CYCLE: " + (value[y]/2.55).toFixed(2) + " %<br/>";
+            } else if (ecmFileConst[z]=="TCC SLIPPAGE MSB") {
+                tranStr+="AMOUNT OF TCC SLIPPAGE MSB: " + value[y] + "<br/>";
+            } else if (ecmFileConst[z]=="TCC SLIPPAGE LSB") {
+                tranStr+="AMOUNT OF TCC SLIPPAGE LSB: " + (value[y]/8).toFixed(2) + " (RPM)<br/>";
+            } else if (ecmFileConst[z]=="OUTPUT SHAFT SPEED MSB") {
+                tranStr+="FILTERED OUTPUT SHAFT SPEED MSB: " + value[y] + "<br/>";
+            } else if (ecmFileConst[z]=="OUTPUT SHAFT SPEED LSB") {
+                tranStr+="FILTERED OUTPUT SHAFT SPEED LSB: " + (value[y]/8).toFixed(2) + " (RPM)<br/>";
+            } else if (ecmFileConst[z]=="INPUT SHAFT SPEED MSB") {
+                tranStr+="FILTERED INPUT SHAFT SPEED MSB: " + value[y] + "<br/>";
+            } else if (ecmFileConst[z]=="INPUT SHAFT SPEED LSB") {
+                tranStr+="FILTERED INPUT SHAFT SPEED LSB: " + (value[y]/8).toFixed(2) + " (RPM)<br/>";
+            } else if (ecmFileConst[z]=="COMMANDED PRESSURE") {
+                tranStr+="COMMANDED PRESSURE: " + value[y] + " Psi<br/>";
+            } else if (ecmFileConst[z]=="FORCE MOTOR COMMAND CURRENT") {
+                tranStr+="FORCE MOTOR COMMAND CURRENT: " + (value[y]/51).toFixed(1) + " (AMPS)<br/>";
+            } else if (ecmFileConst[z]==ecmFileConst.byte57) {
+                tranStr+="FORCE MOTOR ACTUAL CURRENT: " + (value[y]/51).toFixed(1) + " (AMPS)<br/>";
+            } else if (ecmFileConst[z]==ecmFileConst.byte58) {
+                document.getElementById("CURADPT").value=value[y];
+            } else if (ecmFileConst[z]==ecmFileConst.byte59) {
+                document.getElementById("CURCELL").value=(value[y]/0.16).toFixed();
+            } else if (ecmFileConst[z]==ecmFileConst.byte60) {
+                tranStr+="1->2 SHIFT ERROR: " + (value[y]/40).toFixed() + " (Sec)<br/>";
+            } else if (ecmFileConst[z]==ecmFileConst.byte61) {
+                tranStr+="2->3 SHIFT ERROR: " + (value[y]/40).toFixed() + " (Sec)<br/>";
+            } else if (ecmFileConst[z]==ecmFileConst.byte62) {
+                tranStr+="1->2 SHIFT TIME: " + (value[y]/40).toFixed() + " (Sec)<br/>";
+            } else if (ecmFileConst[z]==ecmFileConst.byte63) {
+                tranStr+="2->3 SHIFT TIME: " + (value[y]/40).toFixed() + " (Sec)<br/>";
+            } else if (ecmFileConst[z]==ecmFileConst.byte64) {
+
+                let transState=numToBin(value[y]);
+                let tc=0;
+                tranStr+="TRANS SHIFT ADAPT STATUS:<br/>";
+                for (t in transState) {
+                     if (transState[t]=="1") {
+                         if (tc=="0" || tc==0) {
+                             tranStr+="--ADAPTABLE SHIFT IN PROGRESS<br/>";
+                         } else if (tc=="1" || tc==1) {
+                             tranStr+="--LOW BARO FOR ADAPTABLE SHIFT<br/>";
+                         } else if (tc=="2" || tc==2) {
+                             tranStr+="--LONG DLY BEFORE SHIFT FOR ADAPT<br/>";
+                         } else if (tc=="3" || tc==3) {
+                             tranStr+="--LONG SHIFT BEFORE ADAPT<br/>";
+                         } else if (tc=="4" || tc==4) {
+                             tranStr+="--RUN THROUGH ADAPT<br/>";
+                         } else if (tc=="5" || tc==5) {
+                             tranStr+="--STANDARD ADAPT<br/>";
+                         } else if (tc=="6" || tc==6) {
+                             tranStr+="--LAST LOOP WAS STANDARD ADAPT<br/>";
+                         } else if (tc=="7" || tc==7) {
+                             tranStr+="--TEMPMW,HOTMODE SHADOW BIT<br/>";
+                         }
+                     }
+                     tc++;
+                }
+            } else if (ecmFileConst[z]==ecmFileConst.byte65) {
+                let transState=numToBin(value[y]);
+                let tc=0;
+                tranStr+="TRANS ADAPTIVE SHIFT CONDITION VIOLATIONS:<br/>";
+                for (t in transState) {
+                     if (transState[t]=="1") {
+                         if (tc=="0" || tc==0) {
+                             tranStr+="--PATTERN IS NOT NORMAL<br/>";
+                         } else if (tc=="1" || tc==1) {
+                             tranStr+="--TRANSMISSION TEMPERATURE OUT OF RANGE<br/>";
+                         } else if (tc=="2" || tc==2) {
+                             tranStr+="--THROTTLE OUT OF RANGE<br/>";
+                         } else if (tc=="3" || tc==3) {
+                             tranStr+="--BRAKE PRESSURE USED THIS SHIFT<br/>";
+                         } else if (tc=="4" || tc==4) {
+                             tranStr+="--PRNDL IS LO OR D2<br/>";
+                         } else if (tc=="5" || tc==5) {
+                             tranStr+="--LONG SHIFT DELAY TIME<br/>";
+                         } else if (tc=="6" || tc==6) {
+                             tranStr+="--FILL/TORQUE PHASES WERE TOO QUICK<br/>";
+                         } else if (tc=="7" || tc==7) {
+                             tranStr+="--THROTTLE CHANGED TOO MUCH<br/>";
+                         }
+                     }
+                     tc++;
+                }
+
+            } else if (ecmFileConst[z]==ecmFileConst.byte66) {
+                let transState=numToBin(value[y]);
+                let tc=0;
+                tranStr+="TCC STATUS MSB:<br/>";
+                for (t in transState) {
+                     if (transState[t]=="1") {
+                         if (tc=="0" || tc==0) {
+                             tranStr+="--RANGE CONTINGENCY FORCED TCC OFF<br/>";
+                         } else if (tc=="1" || tc==1) {
+                             tranStr+="--TR. TMP. LIMIT FORCED TCC OFF<br/>";
+                         } else if (tc=="2" || tc==2) {
+                             tranStr+="--COOLANT TMP. LIM. FORCED TCC OFF<br/>";
+                         } else if (tc=="3" || tc==3) {
+                             tranStr+="--BRAKE ON FORCED TCC OFF<br/>";
+                         } else if (tc=="4" || tc==4) {
+                             tranStr+="--NEGATIVE DELT. THROT. FORCED TCC OFF<br/>";
+                         } else if (tc=="5" || tc==5) {
+                             tranStr+="--DOWNSHIFT CONTINGENCY FORCED TCC OFF<br/>";
+                         } else if (tc=="6" || tc==6) {
+                             tranStr+="--AC CONTINGENCY FORCED TCC OFF<br/>";
+                         } else if (tc=="7" || tc==7) {
+                             tranStr+="--SLIP CONTINGENCY FORCED TCC OFF<br/>";
+                         }
+                     }
+                     tc++;
+                }
+
+            } else if (ecmFileConst[z]==ecmFileConst.byte18) {
+
+                let transState=numToBin(value[y]);
+                let tc=0;
+                for (t in transState) {
+                     if (transState[t]=="1") {
+                         if (tc=="0" || tc==0) {
+                             tranStr+="--EGR SOLENOID 1 ON<br/>";
+                         } else if (tc=="1" || tc==1) {
+                             tranStr+="--EGR SOLENOID 2 ON<br/>";
+                         } else if (tc=="2" || tc==2) {
+                             tranStr+="--EGR SOLENOID 3 ON<br/>";
+                         }
+                     }
+                     tc++;
+                }
+
+            } else if (ecmFileConst[z]==ecmFileConst.byte67) {
+
+                let transState=numToBin(value[y]);
+                let tc=0;
+                tranStr+="TCC STATUS LSB:<br/>";
+                for (t in transState) {
+                     if (transState[t]=="1") {
+                         if (tc=="0" || tc==0) {
+                             tranStr+="--UPSHIFT CONTINGENCY FORCED TCC OFF<br/>";
+                         } else if (tc=="1" || tc==1) {
+                             tranStr+="--MINIMUM THROTTLE CONT. FORCED TCC OFF<br/>";
+                         } else if (tc=="2" || tc==2) {
+                             tranStr+="--DIAGNOSTIC CONTINGENCY FORCED TCC OFF<br/>";
+                         } else if (tc=="3" || tc==3) {
+                             tranStr+="--OUTPUT SPEED LOSS FORCED TCC OFF<br/>";
+                         } else if (tc=="4" || tc==4) {
+                             tranStr+="--PRNDL D3 FORCED TCC OFF<br/>";
+                         } else if (tc=="5" || tc==5) {
+                             tranStr+="--PRNDL D4 FORCED TCC OFF<br/>";
+                         }
+                     }
+                     tc++;
+                }
+
             } else if (ecmFileConst[z]=="knockretard") {
                 setValue(ecmFileConst[z], (45*parseInt(value[y])/256).toFixed());
                 if (DEBUG==1) {console.log("45*value[y]/256:" + (45*value[y]/256).toFixed());}
@@ -2031,8 +2385,14 @@ function setValues(ecmFileConst) {
                 if (DEBUG==1) {console.log("setValues(injector*256 + value[y])/65.536)-[z:"+ z.toString() +"]-ecmFileConst[z]:" + ecmFileConst[z] +" -value[y]:" + value[y].toString()+" -newVal:"+newVal+" injector:"+injector.toString());}
             } else if (ecmFileConst[z]=="acpsi") {
                 let newVal=(value[y]*1.875-18.75).toFixed();
+                let newValV=(value[y]*5/255).toFixed();
+                document.getElementById("acv").value=newValV;
                 setValue(ecmFileConst[z], (value[y]*1.875-18.75).toFixed());
                 if (DEBUG==1) {console.log("setValues(N*1.875-18.75)-[z:"+ z.toString() +"]-ecmFileConst[z]:" + ecmFileConst[z] +" -value[y]:" + value[y].toString()+" -newVal:"+newVal);}
+            } else if (ecmFileConst[z]=="NotUsed") {
+                /* Skip */
+            } else if (ecmFileConst[z]=="TODO") {
+                /* Skip */
             } else {
                 if (t<ecmFileConst.length && y<value.length) {
                     setValue(ecmFileConst[z], value[y]);
@@ -2044,7 +2404,8 @@ function setValues(ecmFileConst) {
         }                    
         t++;                         
         y++;                           
-    }                                  
+    }
+    document.getElementById("TransData").innerHTML=tranStr;
 }                                  
 /* End Function ----------------------------------------------------------------------- */
 
@@ -2070,7 +2431,7 @@ function setValues(ecmFileConst) {
                                    /* ========================================|
                                     * Scan Serial Data for VIN Information.
                                     * ====================================== */
-                        if (EcmCmds.lastCmd==EcmCmd.vinDataCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
+                        if (EcmCmds.lastCmd==EcmCmdNums.vinDataCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
                             if (DEBUG==2) {console.log("Reading VIN Response!" + EcmCmds.sendCnt);}
                             if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdVinDataStream)) {
                                 let vinStr="";
@@ -2078,17 +2439,20 @@ function setValues(ecmFileConst) {
                                     vinStr+=String.fromCharCode(value[v]);
                                 }
                                 document.getElementById("dashTitle").innerHTML="Dash (vin:" + vinStr + ")";
-                                sendEcmCmd(EcmCmd.stopComCmdNum);
+                                EcmCmds.received=1;
+                                EcmCmds.sendCnt=0;
+                                EcmCmds.nextCmd=0;
+                                sendEcmCmd(EcmCmdNums.milDataCmdNum);
                                 if (DEBUG==2) {console.log("ECM [(vin)engine]:Request" + EcmCmds.nextCmd);}
                             } else if (EcmCmds.sendCnt<EcmCmds.sendCntCap) {
                                 EcmCmds.sendCnt++;
                             } else {
                                 EcmCmds.sendCnt=0;
-                                EcmCmds.nextCmd=EcmCmd.vinDataCmdNum;
-                                sendEcmCmd(EcmCmd.stopComCmdNum);
-                                if (DEBUG==2) {console.log("ECM [Vin]:Request");}
+                                EcmCmds.nextCmd=EcmCmdNums.vinDataCmdNum;
+                                sendEcmCmd(EcmCmdNums.stopComCmdNum);
+                                if (DEBUG==2) {console.log("ECM [Vin]:Re-Request");}
                             }
-                        } else if (EcmCmds.lastCmd==EcmCmd.mainDataCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
+                        } else if (EcmCmds.lastCmd==EcmCmdNums.mainDataCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
                             if (DEBUG==2) {console.log("Reading Engine Response!");}
                                         /* ========================================|
                                          * Scan Serial Data for Engine Information.
@@ -2096,38 +2460,43 @@ function setValues(ecmFileConst) {
                             if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdMainDataStream)) {
                                 EcmCmds.byteStart = y;
                                 EcmCmds.received=1;
+                                EcmCmds.sendCnt=0;
                                 setValues(EcmCmdMainDataStream);
                                 if (document.getElementById("dtcdata").innerHTML=="") {
-                                    EcmCmds.nextCmd=EcmCmd.milDataCmdNum;
-                                    sendEcmCmd(EcmCmd.milDataCmdNum);
+                                    EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
+                                    sendEcmCmd(EcmCmdNums.milDataCmdNum);
                                     if (DEBUG==2) {console.log("ECM [(engine)MIL]:Request");}
                                 } else if (document.getElementById("scan").value!="Scan") {
                                     if (EcmCmds.sendCnt<1) {
                                         EcmCmds.sendCnt++;
                                     } else {
                                         EcmCmds.sendCnt=0;
-                                        sendEcmCmd(EcmCmd.mainDataCmdNum);
+                                        EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
+                                        sendEcmCmd(EcmCmdNums.stopComCmdNum);
                                         if (DEBUG==2) {console.log("ECM [engine]:Request");}
                                     }
                                 } else {
                                     /* No COMMAND return ECM to normal. */
-                                    sendEcmCmd(EcmCmd.disconnectEcmCmdNum);
+                                    sendEcmCmd(EcmCmdNums.disconnectEcmCmdNum);
                                     if (DEBUG==2) {console.log("ECM [r2Normal]:Request");}
                                 }
                             } else if (EcmCmds.sendCnt<EcmCmds.sendCntCap) {
                                 EcmCmds.sendCnt++;
+                                console.log("Waiting to Retry[Engine]:"+ EcmCmds.sendCnt);
                             } else {
                                 EcmCmds.sendCnt=0;
-                                sendEcmCmd(EcmCmd.stopComCmdNum);
-                                if (DEBUG==2) {console.log("ECM [Engine]:Request");}
+                                EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
+                                sendEcmCmd(EcmCmdNums.stopComCmdNum);
+                                if (DEBUG==2) {console.log("Retry ECM [Engine]:Request");}
                             }
-                        } else if (EcmCmds.lastCmd==EcmCmd.milDataCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
+                        } else if (EcmCmds.lastCmd==EcmCmdNums.milDataCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
                             if (DEBUG==2) {console.log("Reading MIL Response!");}
                                         /* ========================================|
                                          * Scan Serial Data for MIL Information.
                                          * ====================================== */
                             if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdMilDataStream)) {
                                 EcmCmds.received=1;
+                                EcmCmds.sendCnt=0;
                                 let dtcStr="";
                                 let props = Object.getOwnPropertyNames(DTCCODES);
                                 for (let k=(y+4);k<(y+24);k++) {
@@ -2150,16 +2519,19 @@ function setValues(ecmFileConst) {
                                     }
                                 }
                                 document.getElementById("dtcdata").innerHTML=dtcStr;
-                                sendEcmCmd(EcmCmd.stopComCmdNum);
+                                /*sendEcmCmd(EcmCmdNums.stopComCmdNum);*/
+                                EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
+                                sendEcmCmd(EcmCmdNums.mainDataCmdNum);
                                 if (DEBUG==2) {console.log("ECM [(MIL)engine]:Request" + EcmCmds.nextCmd);}
                             } else if (EcmCmds.sendCnt<EcmCmds.sendCntCap) {
                                 EcmCmds.sendCnt++;
                             } else {
                                 EcmCmds.sendCnt=0;
-                                sendEcmCmd(EcmCmd.stopComCmdNum);
+                                EcmCmds.nextCmd=EcmCmdNums.milDataCmdNum;
+                                sendEcmCmd(EcmCmdNums.stopComCmdNum);
                                 if (DEBUG==2) {console.log("ECM [Engine]:Request");}
                             }
-                        } else if (EcmCmds.lastCmd==EcmCmd.stopComCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
+                        } else if (EcmCmds.lastCmd==EcmCmdNums.stopComCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
                                         /* ========================================|
                                          * Scan Serial Data for Clear COM Response.
                                          * ====================================== */
@@ -2168,7 +2540,7 @@ function setValues(ecmFileConst) {
                                 if (DEBUG==2) {console.log("ECM [Stop COM]");}
                                 EcmCmds.sendCnt=0;
                                 sendEcmCmd(EcmCmds.nextCmd);
-                                if (EcmCmds.nextCmd==EcmCmd.vinDataCmdNum) {
+                                if (EcmCmds.nextCmd==EcmCmdNums.vinDataCmdNum) {
                                     document.getElementById("connected").checked=true;
                                     document.getElementById("disconnect").disabled=false;
                                     document.getElementById("scan").disabled=false;
@@ -2176,35 +2548,40 @@ function setValues(ecmFileConst) {
                                     document.getElementById("resetMilBtn").disabled=false;
                                     document.getElementById("resetBlmBtn").disabled=false;
                                     console.log("ECM [Connected!]");
-                                    EcmCmds.nextCmd=EcmCmd.mainDataCmdNum;
-                                } else if (EcmCmds.nextCmd>EcmCmd.mainDataCmdNum) {
-                                    EcmCmds.nextCmd=EcmCmd.mainDataCmdNum;
-                                }
-                            }
-                            if (EcmCmds.sendCnt<EcmCmds.sendCntCap) {
+                                    /*EcmCmds.nextCmd=EcmCmdNums.milDataCmdNum;*/
+                                }/* else if (EcmCmds.nextCmd>EcmCmdNums.mainDataCmdNum) {
+                                    EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
+                                }*/
+                            } else if (EcmCmds.sendCnt<EcmCmds.sendCntCap) {
                                 EcmCmds.sendCnt++;
+                                console.log("Waiting to Retry[StopCom]:"+ EcmCmds.sendCnt);
                             } else {
-                                EcmCmds.sendCnt=0;
-                                sendEcmCmd(EcmCmd.stopComCmdNum);
                                 if (DEBUG==2) {console.log("ECM [Stop-COM]:Request");}
+                                EcmCmds.sendCnt=0;
+                                sendEcmCmd(EcmCmdNums.stopComCmdNum);
                             }
-                        } else if (EcmCmds.lastCmd==EcmCmd.disconnectEcmCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
+                        } else if (EcmCmds.lastCmd==EcmCmdNums.disconnectEcmCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
                                         /* ========================================|
                                          * Scan Serial Data for DisConnect ECM Response.
                                          * ====================================== */
                             if (DEBUG==2) {console.log("Reading DisConnect Response!");}
                             if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdDisConnectDataStream)) {
                                 console.log("ECM [DisConnected]");
-                                EcmCmds.lastCmd=EcmCmds.noCmdNum;
                             }
+                            EcmCmds.lastCmd=EcmCmds.noCmdNum;
                                         
                         } else if (EcmCmds.lastCmd>5 && EcmCmds.lastCmd<99 && document.getElementById("sendingEcmCmd").checked==false) {
                             if (DEBUG==2) {console.log("Reading CMD ["+ EcmCmds.lastCmd +"]");}
-                            sendEcmCmd(EcmCmd.stopComCmdNum);
+                            EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
+                            sendEcmCmd(EcmCmdNums.mainDataCmdNum);
+                            /*sendEcmCmd(EcmCmdNums.stopComCmdNum);*/
                             if (DEBUG==2) {console.log("ECM [engine(act)]:Request" + EcmCmds.nextCmd);}
-                        } else if (EcmCmds.lastCmd==EcmCmd.resetMilCmdNum && document.getElementById("resettingMil").checked==false) {
-                            EcmCmds.nextCmd=EcmCmd.milDataCmdNum;
-                            sendEcmCmd(EcmCmd.stopComCmdNum);
+
+                        } else if (EcmCmds.lastCmd==EcmCmdNums.resetMilCmdNum && document.getElementById("resettingMil").checked==false) {
+                            EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
+                            sendEcmCmd(EcmCmdNums.milDataCmdNum);
+                            /*EcmCmds.nextCmd=EcmCmdNums.milDataCmdNum;
+                            sendEcmCmd(EcmCmdNums.stopComCmdNum);*/
                             if (DEBUG==2) {console.log("ECM [resetMIL MIL]:Request" + EcmCmds.nextCmd);}
                                         
                         } else if (EcmCmds.lastCmd>=EcmCmds.noCmdNum) {
@@ -2213,11 +2590,13 @@ function setValues(ecmFileConst) {
                                          * DoNothing for EcmCmds.lastCmd>=EcmCmds.noCmdNum.
                                          * ====================================== */
                             if (document.getElementById("scan").value!="Scan") {
-                                if (EcmCmds.sendCnt<1) {
+                                if (EcmCmds.sendCnt<500) {
                                     EcmCmds.sendCnt++;
                                 } else {
                                     EcmCmds.sendCnt=0;
-                                    sendEcmCmd(EcmCmd.stopComCmdNum);
+                                    EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
+                                    sendEcmCmd(EcmCmdNums.mainDataCmdNum);
+                                    /*sendEcmCmd(EcmCmdNums.stopComCmdNum);*/
                                     if (DEBUG==2) {console.log("ECM [engine]:Request");}
                                 }
                             }
@@ -2280,12 +2659,12 @@ var myIntervalWriter;
 
                    /* myIntervalWriter=setInterval(function () {
 
-                        if (EcmCmds.lastCmd==EcmCmd.disconnectEcmCmdNum && document.getElementById("connected").checked==false) {
+                        if (EcmCmds.lastCmd==EcmCmdNums.disconnectEcmCmdNum && document.getElementById("connected").checked==false) {
                             console.log("ECM: Dis-Connecting!");
                             clearInterval(myIntervalWriter);
                         } else if (document.getElementById("resettingMil").checked) {
                             try {
-                                sendSerialPortInfo(myport, EcmCmds.resetMilCmd, EcmCmd.resetMilCmdNum);
+                                sendSerialPortInfo(myport, EcmCmds.resetMilCmd, EcmCmdNums.resetMilCmdNum);
                                 document.getElementById("resettingMil").checked=false;
                                 
                                 if (DEBUG==2) {console.log("Reset MIL Codes");}
@@ -2309,8 +2688,8 @@ var myIntervalWriter;
 
 
             /* SEND CMD TO SERIAL PORT */
-            await sendSerialPortInfo(myport, EcmCmds.stopComCmd, EcmCmd.stopComCmdNum);
-            //await sendSerialPortInfo(myport, EcmCmds.vinDataCmd, EcmCmd.vinDataCmdNum);
+            await sendSerialPortInfo(myport, EcmCmds.stopComCmd, EcmCmdNums.stopComCmdNum);
+            //await sendSerialPortInfo(myport, EcmCmds.vinDataCmd, EcmCmdNums.vinDataCmdNum);
             if (myport.readable) {
                 const reader = myport.readable.getReader();
                 console.log("Scan Speed:" + EcmCmds.loopTime);
@@ -2318,12 +2697,12 @@ var myIntervalWriter;
                     myIntervalWriter=setInterval(function () {
                     /*while (myport.readable) {*/
 
-                        if (EcmCmds.lastCmd==EcmCmd.disconnectEcmCmdNum && document.getElementById("connected").checked==false) {
+                        if (EcmCmds.lastCmd==EcmCmdNums.disconnectEcmCmdNum && document.getElementById("connected").checked==false) {
                             console.log("ECM: Dis-Connecting!");
                             clearInterval(myIntervalWriter);
                         } else if (document.getElementById("resettingMil").checked) {
                             try {
-                                sendSerialPortInfo(myport, EcmCmds.resetMilCmd, EcmCmd.resetMilCmdNum);
+                                sendSerialPortInfo(myport, EcmCmds.resetMilCmd, EcmCmdNums.resetMilCmdNum);
                                 document.getElementById("resettingMil").checked=false;
                                 
                                 if (DEBUG==2) {console.log("Reset MIL Codes");}
@@ -2382,7 +2761,7 @@ var myIntervalWriter;
         document.getElementById("resetMilBtn").disabled=true;
         document.getElementById("resetBlmBtn").disabled=true;
         document.getElementById("actControls").hidden=true;
-        EcmCmds.sendCmd=EcmCmd.disconnectEcmCmdNum;
+        EcmCmds.sendCmd=EcmCmdNums.disconnectEcmCmdNum;
         document.getElementById("sendingEcmCmd").checked=true;
     }
     
@@ -2469,49 +2848,32 @@ var automaticGear = document.getElementById("prndlDis");
 var manualGear = document.getElementById("manualDis");
 
 automatic.oninput = function() {
-  manual.value=this.value;
-  if (this.value==0) {
-    automaticGear.innerHTML = "D1";
-    manualGear.innerHTML = "1";
-  } else if (this.value==1) {
-    automaticGear.innerHTML = "D2";
-    manualGear.innerHTML = "2";
-  } else if (this.value==2) {
-    automaticGear.innerHTML = "D3";
-    manualGear.innerHTML = "3";
-  } else if (this.value==3) {
-    automaticGear.innerHTML = "D4";
-    manualGear.innerHTML = "4";
-  } else if (this.value==4) {
-    automaticGear.innerHTML = "N";
-    manualGear.innerHTML = "5";
-  } else if (this.value==5) {
-    automaticGear.innerHTML = "R";
-    manualGear.innerHTML = "R";
-  } else {
-    automaticGear.innerHTML = "P";
-    manualGear.innerHTML = "N";
-  }
+    manual.value=this.value;
+    setLabel();
 }
 
 manual.oninput = function() {
-  automatic.value=this.value;
-  if (this.value==0) {
+    automatic.value=this.value;
+    setLabel();
+}
+
+function setLabel() {
+  if (manual.value==0) {
     automaticGear.innerHTML = "D1";
     manualGear.innerHTML = "1";
-  } else if (this.value==1) {
+  } else if (manual.value==1) {
     automaticGear.innerHTML = "D2";
     manualGear.innerHTML = "2";
-  } else if (this.value==2) {
+  } else if (manual.value==2) {
     automaticGear.innerHTML = "D3";
     manualGear.innerHTML = "3";
-  } else if (this.value==3) {
+  } else if (manual.value==3) {
     automaticGear.innerHTML = "D4";
     manualGear.innerHTML = "4";
-  } else if (this.value==4) {
+  } else if (manual.value==4) {
     automaticGear.innerHTML = "N";
     manualGear.innerHTML = "5";
-  } else if (this.value==5) {
+  } else if (manual.value==5) {
     automaticGear.innerHTML = "R";
     manualGear.innerHTML = "R";
   } else {
@@ -2561,6 +2923,7 @@ function checkCookie() {
       }
   }
 }
-</script>
 
+/* --> */
+</script>
 </html>
