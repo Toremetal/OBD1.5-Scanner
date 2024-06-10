@@ -2095,7 +2095,6 @@ function setValues(ecmFileConst) {
                          } else if (bitsSPI[t]=="0") {
                              tranStr+="RIGHT, REAR OXYGEN SENSOR [NOT READY]<br/>";
                          }
-                         tranStr+="RIGHT, REAR OXYGEN SENSOR READY [" + bitsSPI[t] + "]<br/>";
                      } else if (tc==4 && bitsSPI[t]=="1") {
                          tranStr+="--CLOSED LOOP A/F MODE ENABLED<br/>";
                      } else if (tc==5 && bitsSPI[t]=="1") {
@@ -2431,14 +2430,25 @@ function setValues(ecmFileConst) {
                                    /* ========================================|
                                     * Scan Serial Data for VIN Information.
                                     * ====================================== */
-                        if (EcmCmds.lastCmd==EcmCmdNums.vinDataCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
-                            if (DEBUG==2) {console.log("Reading VIN Response!" + EcmCmds.sendCnt);}
                             if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdVinDataStream)) {
                                 let vinStr="";
                                 for (let v=(y+3);v<(y+20);v++) {
                                     vinStr+=String.fromCharCode(value[v]);
                                 }
                                 document.getElementById("dashTitle").innerHTML="Dash (vin:" + vinStr + ")";
+                            }
+                            if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdMainDataStream)) {
+                                EcmCmds.byteStart = y;
+                                setValues(EcmCmdMainDataStream);
+                            }
+                        if (EcmCmds.lastCmd==EcmCmdNums.vinDataCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
+                            if (DEBUG==2) {console.log("Reading VIN Response!" + EcmCmds.sendCnt);}
+                            if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdVinDataStream)) {
+                                /*let vinStr="";
+                                for (let v=(y+3);v<(y+20);v++) {
+                                    vinStr+=String.fromCharCode(value[v]);
+                                }
+                                document.getElementById("dashTitle").innerHTML="Dash (vin:" + vinStr + ")";*/
                                 EcmCmds.received=1;
                                 EcmCmds.sendCnt=0;
                                 EcmCmds.nextCmd=0;
@@ -2461,7 +2471,7 @@ function setValues(ecmFileConst) {
                                 EcmCmds.byteStart = y;
                                 EcmCmds.received=1;
                                 EcmCmds.sendCnt=0;
-                                setValues(EcmCmdMainDataStream);
+                                //setValues(EcmCmdMainDataStream);
                                 if (document.getElementById("dtcdata").innerHTML=="") {
                                     EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
                                     sendEcmCmd(EcmCmdNums.milDataCmdNum);
