@@ -165,6 +165,38 @@ padding:0 0 0 0;
 .resBtn {
     border-radius:16px;
 }
+
+    
+.wait {
+  width: 300px;
+  height: 60px;
+  background-color: red;
+  border-radius:10px;
+  padding-top:20px;
+  position: absolute;
+  z-index:2;
+  animation-name: example;
+  animation-duration: 9s;
+  animation-iteration-count: infinite;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.09);
+        opacity: 0.8;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.09);
+        -webkit-transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+}
+
+@keyframes example {
+  0%   {background-color:red; color:green; left:1%; top:70px;}
+  14%  {background-color:yellow; color:blue; left:38%; top:70px;}
+  28%  {background-color:blue; color:yellow; left:76%; top:70px;}
+  42%  {background-color:green; color:red; left:38%; top:70px;}
+  56% {background-color:orange; color:blue; left:1%; top:70px;}
+  70% {background-color:red; color:green; left:38%; top:70px;}
+  84% {background-color:yellow; color:blue; left:76%; top:70px;}
+  98%  {background-color:blue; color:yellow; left:38%; top:70px;}
+}
 .btn {
     cursor: pointer;
 }
@@ -378,6 +410,7 @@ padding:0 0 0 0;
 &#8482;T&#169;ReMeTaL</i>
 <fieldset class="scanControl">
 
+       <div hidden id="wait" class="wait" align="center">-Scanning-<br/>Please Wait</div>
  <legend onclick='sH("usbHelp")' title="Click for Connection Diagram">[?]Scan Controls</legend>
 <img onclick='sH("usbHelp")' title="1995 Camaro" alt="1995 Camaro" src="img/camaro2.png" style="cursor:pointer;margin-right:-108px;float:left;border:none;height:48px;width:100px;"/>
 <input type="button" id="fs" value="F Screen" onclick="getFScreen()" />
@@ -386,7 +419,7 @@ padding:0 0 0 0;
     <input id="connected" type="checkbox" disabled/>
     <input title="Connect to Ecm" style="cursor:pointer;" id="connect" value="Connect to ECM" type="button" onclick='getSerialPortInfo();/*document.getElementById("Scan").disabled=false*/'/>
 |
-    <input title="RealTime Scan" id="scan" value="Scan" type="button" onclick='startStopRealTime()' disabled/>
+    <input hidden title="RealTime Scan" id="scan" value="Scan" type="button" onclick='startStopRealTime()' disabled/>
 |
     [<input id="sendingEcmCmd" type="checkbox" disabled/>
     <label for="sendingEcmCmd">Sending Request</label> ] 
@@ -417,7 +450,9 @@ padding:0 0 0 0;
 </label>
 
 </legend>
-
+<div style="width:100%;height:100%;positions:absolute;top:0;bottom:0;left:0;right:0;z-index:5;" align="center">
+    
+</div>
                       <div><code id="autoF" class="slidecontainer" hidden>
                       <label for="gear">Automatic- </label>
                         <input type="range" min="0" max="6" value="6" class="slider2" name="prndl" id="gear">
@@ -1894,8 +1929,8 @@ const EcmCmds = {
       noCmdNum:99,
       autoTran:0,
       received:0,
-      loopTime:500,
-      delayTime:10,
+      loopTime:1000,
+      delayTime:5,
       allowCookies:false
 };
 /*
@@ -1932,10 +1967,10 @@ async function readAllChunks(reader) {
  * [without exporting values to an array.]
  * otherwise it may be processed as a string array not a byte array.
  * ---------------------------------------------------------------- */
-function setValues(ecmFileConst) {
+function setValues(ecmFileConst, g) {
     let injector=0;
     let t=0;
-    let y=EcmCmds.byteStart;
+    let y=parseInt(g);/*EcmCmds.byteStart;*/
     let tranStr="";
     for (z in ecmFileConst) {
         try {
@@ -2439,7 +2474,31 @@ function setValues(ecmFileConst) {
                             }
                             if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdMainDataStream)) {
                                 EcmCmds.byteStart = y;
-                                setValues(EcmCmdMainDataStream);
+                                setValues(EcmCmdMainDataStream, y);
+                            }
+                            if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdMilDataStream)) {
+                                let dtcStr="";
+                                let props = Object.getOwnPropertyNames(DTCCODES);
+                                for (let k=(y+4);k<(y+24);k++) {
+                                    if (k==(y+4)) {
+                                        setValue("actcodes",value[k]);
+                                    } else if (value[k]!=0) {
+                                        let dtcCode=numToBin(value[k]);
+                                        let tc=0;
+                                        for (t in dtcCode) {
+                                            if (dtcCode[t]=="1") {
+                                                for (z in props) {
+                                                    if (props[z]=="code" + (k-y-2).toString() + tc.toString()) {
+                                                        dtcStr+=DTCCODES[props[z]] + "<br/>";
+                                                        break;
+                                                     }
+                                                }
+                                            }
+                                            tc++;
+                                        }
+                                    }
+                                }
+                                document.getElementById("dtcdata").innerHTML=dtcStr;
                             }
                         if (EcmCmds.lastCmd==EcmCmdNums.vinDataCmdNum && document.getElementById("sendingEcmCmd").checked==false) {
                             if (DEBUG==2) {console.log("Reading VIN Response!" + EcmCmds.sendCnt);}
@@ -2451,7 +2510,7 @@ function setValues(ecmFileConst) {
                                 document.getElementById("dashTitle").innerHTML="Dash (vin:" + vinStr + ")";*/
                                 EcmCmds.received=1;
                                 EcmCmds.sendCnt=0;
-                                EcmCmds.nextCmd=0;
+                                EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
                                 sendEcmCmd(EcmCmdNums.milDataCmdNum);
                                 if (DEBUG==2) {console.log("ECM [(vin)engine]:Request" + EcmCmds.nextCmd);}
                             } else if (EcmCmds.sendCnt<EcmCmds.sendCntCap) {
@@ -2468,10 +2527,11 @@ function setValues(ecmFileConst) {
                                          * Scan Serial Data for Engine Information.
                                          * ====================================== */
                             if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdMainDataStream)) {
-                                EcmCmds.byteStart = y;
+                                //EcmCmds.byteStart = y;
                                 EcmCmds.received=1;
                                 EcmCmds.sendCnt=0;
-                                //setValues(EcmCmdMainDataStream);
+                                //setValues(EcmCmdMainDataStream, y);
+                                document.getElementById("wait").hidden=true;
                                 if (document.getElementById("dtcdata").innerHTML=="") {
                                     EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
                                     sendEcmCmd(EcmCmdNums.milDataCmdNum);
@@ -2507,7 +2567,7 @@ function setValues(ecmFileConst) {
                             if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdMilDataStream)) {
                                 EcmCmds.received=1;
                                 EcmCmds.sendCnt=0;
-                                let dtcStr="";
+                                /*let dtcStr="";
                                 let props = Object.getOwnPropertyNames(DTCCODES);
                                 for (let k=(y+4);k<(y+24);k++) {
                                     if (k==(y+4)) {
@@ -2528,7 +2588,7 @@ function setValues(ecmFileConst) {
                                         }
                                     }
                                 }
-                                document.getElementById("dtcdata").innerHTML=dtcStr;
+                                document.getElementById("dtcdata").innerHTML=dtcStr;*/
                                 /*sendEcmCmd(EcmCmdNums.stopComCmdNum);*/
                                 EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
                                 sendEcmCmd(EcmCmdNums.mainDataCmdNum);
@@ -2545,10 +2605,10 @@ function setValues(ecmFileConst) {
                                         /* ========================================|
                                          * Scan Serial Data for Clear COM Response.
                                          * ====================================== */
-                            if (DEBUG==2) {console.log("Reading Clear COM Response!");}
+                            //if (DEBUG==2) {console.log("Reading Clear COM Response!");}
                             if (y+2<value.length && msgTest(value[x],value[y+1],value[y+2],EcmCmdStopComDataStream)) {
                                 if (DEBUG==2) {console.log("ECM [Stop COM]");}
-                                EcmCmds.sendCnt=0;
+                                //EcmCmds.sendCnt=0;
                                 sendEcmCmd(EcmCmds.nextCmd);
                                 if (EcmCmds.nextCmd==EcmCmdNums.vinDataCmdNum) {
                                     document.getElementById("connected").checked=true;
@@ -2562,7 +2622,7 @@ function setValues(ecmFileConst) {
                                 }/* else if (EcmCmds.nextCmd>EcmCmdNums.mainDataCmdNum) {
                                     EcmCmds.nextCmd=EcmCmdNums.mainDataCmdNum;
                                 }*/
-                            } else if (EcmCmds.sendCnt<EcmCmds.sendCntCap) {
+                            } else if (EcmCmds.sendCnt<EcmCmds.sendCntCap) {/*EcmCmds.sendCntCap*/
                                 EcmCmds.sendCnt++;
                                 console.log("Waiting to Retry[StopCom]:"+ EcmCmds.sendCnt);
                             } else {
@@ -2661,6 +2721,7 @@ var myIntervalWriter;
         try {
             document.getElementById("intdelay").disabled=true;
             document.getElementById("connect").disabled=true;
+            document.getElementById("wait").hidden=false;
             const myport = await navigator.serial.requestPort();
             await myport.open({baudRate: 8192, dataBits: 8, stopBits: 1, parity: "none"});
             const {usbProductId, usbVendorId}=myport.getInfo();
