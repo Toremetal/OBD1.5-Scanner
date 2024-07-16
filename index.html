@@ -29,7 +29,7 @@
     ~    SOFTWARE.
     ~    Created with best intent, Use at your own risk.
     ~    ™T©ReMeTaL Assumes No Liability of any kind.
-    ~
+    ~UTF-8
     ~   ************************************************************************
     -->
     <meta http-equiv="language" content="en_US">
@@ -49,42 +49,7 @@
     <link href="font/im-fell-english-sc.css" rel="stylesheet" />
     <script src="ds/ECM278.js"></script>
     <style>
-        :root {
-            --width: 100%;
-            --height: 100%;
-            --myGold: #c34e2d;
-            --themeMetal1:
-                /*CopperRed*/
-                #CD6E53;
-            --themeMetal2:
-                /*CrayolaCopper*/
-                #D88968;
-            --themeMetal3:
-                /*CrayolaGold*/
-                #E4BA99;
-            --themeMetal4:
-                /*Brass*/
-                #E4BA99;
-            --themeMetal5:
-                /*CaliforniaGold*/
-                #AD9B2E;
-            --themeBlue1: #062DA2;
-            --themeBlue2: #2BDDF9;
-            --themeBlue3: #57F2FF;
-            --themeBlue4: #015CE0;
-            --themeBlue5: #0B1A51;
-            --themeChrome1: #4B505A;
-            --themeChrome2: #B0C4DE;
-            --themeChrome3: #D1E1F6;
-            --themeChrome4: #CCCCCC;
-            --themeChrome5: #D8D8D8;
-            --themeGold1: #FFDD6B;
-            --themeGold2: #F8D060;
-            --themeGold3: #F8C04D;
-            --themeGold4: #EBA831;
-            --themeGold5: #E69400;
-        }
-
+        
         * {
             text-shadow: 0.5px 0.5px 1px ThreeDFace, 0 0 0.1em ThreeDLightShadow, 0 0 0 ThreeDDarkShadow;
 
@@ -109,12 +74,6 @@
         }
 
         #sdata {
-            /*
-    border:1px red solid; 
-    color:red;
-    font-size:20px;
-    cursor: pointer;
-*/
             color: red;
             font-size: larger;
             height: 330px;
@@ -135,8 +94,7 @@
             box-sizing: border-box;
             box-shadow: 1px 2px 5px rgba(0, 0, 0, .31);
             border: 1px solid rgb(177, 176, 176);
-            border: inset 10px var(--themeBlue3, #D8DBDE);
-            /*BBA53D   D8DBDE*/
+            border: inset 10px #57F2FF;
             border-style: groove ridge ridge groove;
             border-style: outset inset inset outset;
             border-radius: 35%;
@@ -167,6 +125,18 @@
             border-start-end-radius: 20px;
         }
 
+        #shact:hover {
+            color: red;
+            border: solid 0.5px #cbc9c9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.09);
+            opacity: 0.8;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.09);
+            -webkit-transition: all .3s ease-in-out;
+            -moz-transition: all .3s ease-in-out;
+            -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
+
         .tab {
             color: darkgreen;
             font-size: 20px;
@@ -182,27 +152,6 @@
             border-radius: 2px;
             border-start-start-radius: 20px;
             border-start-end-radius: 20px;
-        }
-
-        #shact:hover {
-            color: red;
-            /*transform: rotate(-1deg);
-        -webkit-transform: scale(0.95);
-        -ms-transform: scale(0.95);
-        -moz-transform: scale(0.95);
-        -o-transform: scale(0.95);
-        transform: scale(0.95);
-        padding: 3.5px;
-
-*/
-            border: solid 0.5px #cbc9c9;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.09);
-            opacity: 0.8;
-            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.09);
-            -webkit-transition: all .3s ease-in-out;
-            -moz-transition: all .3s ease-in-out;
-            -o-transition: all .3s ease-in-out;
-            transition: all .3s ease-in-out;
         }
 
         .resBtn {
@@ -294,7 +243,6 @@
 
         .btn:hover {
             color: orangered;
-            /*transform: rotate(-1deg);*/
             padding: 3.5px;
             border: solid 0.5px #cbc9c9;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.09);
@@ -319,8 +267,6 @@
             margin: -10px 0 12px;
             text-align: center;
             color: orangered;
-            /*darkred  #ccffee*/
-            /*background:#B0B0B0; #36454F*/
             background: transparent;
             box-sizing: border-box;
             border-radius: 6px;
@@ -334,7 +280,6 @@
             box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
             background: transparent;
             background-color: #36454F;
-            /*#B0B0B0*/
         }
 
         td .td1 {
@@ -366,7 +311,7 @@
             border-radius: 50%;
             border: solid 0.4px #cbc9c9;
             text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            background: var(--themeChrome3);
+            background: #D1E1F6;
             cursor: pointer;
             box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
         }
@@ -498,10 +443,9 @@
             height: 200px;
             padding: 0;
         }
+        
     </style>
-
-
-
+    
 </head>
 
 <body bgcolor="#000000" text="#303020" link="#006677" vlink="#334460" alink="#cc0055"><!--onload="checkCookie()"-->
@@ -531,16 +475,16 @@
                         Scans</legend>
 
                     <input style="cursor:pointer;" disabled type="radio" id="Mode1"
-                        onclick="cmdRunning(1);CMD_CONTROL.eng=0;CMD_CONTROL.nextCmd=ECM.EcmCmdNums.engineDataCmdNum;sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);"
+                        onclick="cmdRunning(1);CMD_CONTROL.com=0;CMD_CONTROL.eng=0;CMD_CONTROL.nextCmd=ECM.EcmCmdNums.engineDataCmdNum;sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);"
                         name="idle" value="Mode1" title="Request Engine Data">
                     <label for="Mode1">ENG</label>
 
                     <input style="cursor:pointer;" disabled type="radio" id="Mode2"
-                        onclick="cmdRunning(1);CMD_CONTROL.mil=0;CMD_CONTROL.nextCmd=ECM.EcmCmdNums.milDataCmdNum;sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);"
+                        onclick="cmdRunning(1);CMD_CONTROL.com=0;CMD_CONTROL.mil=0;CMD_CONTROL.nextCmd=ECM.EcmCmdNums.milDataCmdNum;sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);"
                         name="idle" value="Mode2" title="Request MIL Codes.">
                     <label for="Mode2">MIL</label>
                     <input style="cursor:pointer;" disabled type="radio" id="Mode4"
-                        onclick="cmdRunning(1);CMD_CONTROL.vin=0;CMD_CONTROL.nextCmd=ECM.EcmCmdNums.vinDataCmdNum;sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);"
+                        onclick="cmdRunning(1);CMD_CONTROL.com=0;CMD_CONTROL.vin=0;CMD_CONTROL.nextCmd=ECM.EcmCmdNums.vinDataCmdNum;sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);"
                         name="idle" value="Mode4" title="Update VIN Data">
                     <label for="Mode4">VIN</label>
                 </fieldset>
@@ -572,11 +516,6 @@
                         <input type="range" min="0" max="6" value="6" class="slider2" name="prndl" id="gear">
                         [ <span id="prndlDis" style="color:red;font-size:large;">P</span><small style="color:orange;" id="prndlDis2"></small> ]
                     </code> &nbsp;&nbsp;
-                    <i hidden><code id="manF" class="slidecontainer">
-                      <label for="manualGear">Manual- </label>
-                          <input type="range" min="0" max="6" value="6" class="slider2" name="manualGear" id="manualGear">
-                        [ <span id="manualDis" style="color:red;font-size:large;">N</span><small style="color:orange;" id="manualDis2"></small> ]
-                    </code></i>
                     <code>
                       <label for="checkEngine"><img id="checkEngineLight" title="checkEngineLight" alt="checkEngineLight" hidden src="img/checkEngineLight.png" style="width:32px;height:32px;border-radius:6px;"/></label>
                           <input id="checkEngine" title="checkEngine" type="checkBox" hidden disabled>
@@ -586,52 +525,52 @@
             <div hidden id="usbHelp"
                 style="position:fixed;top:0;bottom:0;right:0;left:0;width:100%;margin-top:8px;z-index:1;background:transparent;"
                 align="center">
-                <legend style="color:orangered;background-color:#000000;width:fit-content;border-radius:10px;"
-                    title="Connection Diagram.">
-                    <label>
-                        PC-USB to OBD1.5 ECM
-                        <br />
-                        (with OBD2 plug)
+                <legend style="min-width:414px;color:orangered;background-color:#000000;width:fit-content;border-radius:10px 10px 1px 1px;cursor:default;"
+                    title="Connection Diagram."><b title="Close." onclick='sH("usbHelp")' style="cursor:pointer;color:black;float:left;background-color:white;border:1px ridge red;border-radius:4px;padding:4px 4px 0;">X</b>
+                    <label style="margin-left:-30px;">
+                        PC-USB to OBD1.5 ECM<br />(with OBD2 plug) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </label>
                     <br />
-                    <img onclick='sH("usbHelp")' id="usbImage" title="USB" alt="USB" src="img/usb.png" />
+                    <img id="usbImage" title="USB" alt="USB" src="img/usb.png"/>
                     <br />
-                    <i>Rx/Tx to Pin 9.</i>
+                    <i style="color:skyblue;">Rx/Tx to Pin <sup style="color:blue;font-size:xx-large;"><sub>9</sub></sup><small><sup><sub style="color:grey;">( M on 12 pin-dlc )</sub></sup></small>.</i>
                     <br />
-                    <i>Gnd to Pins 4 (Gnd) & 5 (Signal Gnd).</i>
+                    <i style="color:yellow;">Gnd to Pins <sup style="color:goldenrod;font-size:larger;">4</sup> <small>&</small> <sup style="font-size:larger;color:gold;">5<small><sub style="color:grey;font-size:small;">( A on 12 pin-dlc )</sub></small></sup>.</i>
                 </legend>
-                <!--<fieldset style="color:orangered;background:transparent;width:fit-content;border:none;">-->
-                <legend style="color:orangered;background-color:#000000;width:fit-content;border-radius:10px;"
-                    for="delayTimeValue">
-                    <i title="Send Request Interval.">Request Data every, [1 sec = 1000 ms]</i>
+                <legend style="min-width:414px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding:4px 4px;cursor:default;"
+                    title="Validate Check-Sum">
+                    <i title="Un-Check if Not Reading Engine Data.">Verify Engine Data Check-Sum</i>
+                    <input id="validate" style="border-radius:10px;cursor:pointer;" title="Not-Compatible with all OS's." type="checkbox" />
+                </legend>
+                <legend style="min-width:414px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding-top:10px;cursor:default;">
+                    <!--<i title="Send Request Interval.">Request Data every, [1 sec = 1000 ms]</i>
                     <input id="delayTimeValue" style="border-radius:10px;width:100px;" title="Stream Read delay."
                         value="3000" type="number" min="10" max="10000" step="10"
                         onchange='CMD_CONTROL.delayTime=parseInt(this.value);' /> ms
-                    <br />
-                    <i title="Serial Read Interval.">Read Data every [1 sec = 1000 ms]</i>
-                    <input id="loopTimeValue" style="border-radius:10px;width:100px;"
+                    <br />-->
+                    <i title="Serial Read Interval." style="margin-bottom:-30px;">Read Data every [1 sec = 1000 ms]</i>
+                    <input id="loopTimeValue" style="border-radius:10px;width:100px;margin-bottom:-30px;"
                         title="Read Interval. IMPORTANT!! Set BEFORE Connecting!" value="1000" type="number" min="100"
                         max="10000" step="100" onchange='setSpeed(this.value)' /> ms
                     <br />
-                    <code style="color:orange;font-size:small;">IMPORTANT!!<br/>Make adjustments to Read Interval BEFORE Connecting!
-</code>
+                    <code title="IMPORTANT!! Make adjustments to Read Interval BEFORE Connecting!" style="color:orange;font-size:small;">IMPORTANT!!<br/>Make adjustments to Read Interval BEFORE Connecting!</code>
                 </legend>
-                <legend style="color:orangered;background-color:#000000;width:fit-content;border-radius:10px;"
+                <legend style="min-width:414px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px 1px 10px 10px;cursor:default;"
                     title="Data Cmd's">
                     <code style="color:orange;font-size:small;">
-<b style="color:whitesmoke;">CAUTION!! Modifying Cmd Bytes may prevent ECM from responding!</b><br/><small style="color:lime;">Not Recommended Unless You know what your doing.</small><br/>
-<i>[Connect]</i>
-    <input id="s0" style="border-radius:10px;width:40px;" title="Connect Cmd" maxlength="4" onchange="ECM.EcmCmds.stopComCmd=createCmd('com');" value="0xE4" />
-    <input id="s1" style="border-radius:10px;width:40px;" title="Connect Cmd" maxlength="4" onchange="ECM.EcmCmds.stopComCmd=createCmd('com');" value="0x56" />
-    <input id="s2" style="border-radius:10px;width:40px;" title="Connect Cmd" maxlength="4" onchange="ECM.EcmCmds.stopComCmd=createCmd('com');" value="0x08" />
-    <input id="s3" style="border-radius:10px;width:40px;" title="Connect Cmd" maxlength="4" onchange="ECM.EcmCmds.stopComCmd=createCmd('com');" value="0xAE" />
+                    <small style="color:skyblue;" title="CAUTION!! Modifying Cmd Bytes may prevent ECM from responding!"><i style="color:lime;">CAUTION!!</i> Modifying Cmd Bytes may prevent ECM from responding!</small><br/>
+<i title="Connect to ECM">[Connect]</i>
+    <input id="s0" style="border-radius:10px;width:40px;" title="Connect" maxlength="4" onchange="ECM.EcmCmds.stopComCmd=createCmd('com');" value="0xE4" />
+    <input id="s1" style="border-radius:10px;width:40px;" title="Connect" maxlength="4" onchange="ECM.EcmCmds.stopComCmd=createCmd('com');" value="0x56" />
+    <input id="s2" style="border-radius:10px;width:40px;" title="Connect" maxlength="4" onchange="ECM.EcmCmds.stopComCmd=createCmd('com');" value="0x08" />
+    <input id="s3" style="border-radius:10px;width:40px;" title="Connect" maxlength="4" onchange="ECM.EcmCmds.stopComCmd=createCmd('com');" value="0xAE" />
 <br/>
-<i>[Engine Data]</i>
-    <input id="e0" style="border-radius:10px;width:40px;" title="Engine Data Cmd" maxlength="4" onchange="ECM.EcmCmds.engineDataCmd=createCmd('eng');" value="0xE4" />
-    <input id="e1" style="border-radius:10px;width:40px;" title="Engine Data Cmd" maxlength="4" onchange="ECM.EcmCmds.engineDataCmd=createCmd('eng');" value="0x57" />
-    <input id="e2" style="border-radius:10px;width:40px;" title="Engine Data Cmd" maxlength="4" onchange="ECM.EcmCmds.engineDataCmd=createCmd('eng');" value="0x01" />
-    <input id="e3" style="border-radius:10px;width:40px;" title="Engine Data Cmd" maxlength="4" onchange="ECM.EcmCmds.engineDataCmd=createCmd('eng');" value="0x00" />
-    <input id="e4" style="border-radius:10px;width:40px;" title="Engine Data Cmd" maxlength="4" onchange="ECM.EcmCmds.engineDataCmd=createCmd('eng');" value="0xC4" />
+<i title="Engine Data Request">[Engine Data]</i>
+    <input id="e0" style="border-radius:10px;width:40px;" title="Engine Data" maxlength="4" onchange="ECM.EcmCmds.engineDataCmd=createCmd('eng');" value="0xE4" />
+    <input id="e1" style="border-radius:10px;width:40px;" title="Engine Data" maxlength="4" onchange="ECM.EcmCmds.engineDataCmd=createCmd('eng');" value="0x57" />
+    <input id="e2" style="border-radius:10px;width:40px;" title="Engine Data" maxlength="4" onchange="ECM.EcmCmds.engineDataCmd=createCmd('eng');" value="0x01" />
+    <input id="e3" style="border-radius:10px;width:40px;" title="Engine Data" maxlength="4" onchange="ECM.EcmCmds.engineDataCmd=createCmd('eng');" value="0x00" />
+    <input id="e4" style="border-radius:10px;width:40px;" title="Engine Data" maxlength="4" onchange="ECM.EcmCmds.engineDataCmd=createCmd('eng');" value="0xC4" />
 <br/>
 </code>
                 </legend>
@@ -667,8 +606,8 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("f1")' class="guage">
-                                                        <fieldset align="center" id="f1" class="hide">
+                                                    <td id="f1" onclick='sH("f1")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("f1")' style="background:transparent;">
                                                                 Air/Fuel</legend>
                                                             <form align="center"
@@ -752,8 +691,8 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("actMilCodeField")' class="guage">
-                                                        <fieldset id="actMilCodeField" align="center" class="hide">
+                                                    <td id="actMilCodeField" onclick='sH("actMilCodeField")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("actMilCodeField")'
                                                                 style="background:transparent;">
                                                                 <img title="checkEngineLight" alt="checkEngineLight"
@@ -793,15 +732,15 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("fanField")' class="guage">
-                                                        <fieldset align="center" id="fanField" class="hide">
+                                                    <td id="fanField" onclick='sH("fanField")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("fanField")'>Coolant Fan</legend>
                                                             <form align="center">
-                                                                <label class="switch" for="fanOnOff">
+                                                                off<label class="switch" for="fanOnOff">
                                                                     <input id="fanOnOff" type="checkbox"
                                                                         disabled><!--onclick="if(this.checked){sendEcmCmd(ECM.EcmCmdNums.fanon);}else{sendEcmCmd(ECM.EcmCmdNums.fanoff);}"-->
                                                                     <span class="slider round"></span>
-                                                                </label>
+                                                                </label>on
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -810,14 +749,14 @@
                                         </div>
                                     </td>
 
-                                    <!-- item HIDDEN -->
+                                    <!-- item -->
                                     <td hidden class="chromeBorder" width="10%" id="autoTranTemp" onclick='sH("att")'>
                                         <div align="center">
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("att")' class="guage">
-                                                        <fieldset align="center" id="att" class="hide">
+                                                    <td id="att" onclick='sH("att")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("att")'>Trans Temp</legend>
                                                             <form align="center">
                                                                 <input type="number" step="1" id="tempf" name="tempf"
@@ -840,8 +779,8 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("coolField")' class="guage">
-                                                        <fieldset id="coolField" align="center" class="hide">
+                                                    <td id="coolField" onclick='sH("coolField")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("coolField")'>Coolant Temp</legend>
                                                             <form align="center">
                                                                 <input type="number" step="1" id="coolanttempf"
@@ -863,8 +802,8 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("airField")' class="guage">
-                                                        <fieldset id="airField" align="center" class="hide">
+                                                    <td id="airField" onclick='sH("airField")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("airField")'>Intake Air Temp</legend>
                                                             <form align="center">
                                                                 <input type="number" step="1" id="airtempf"
@@ -886,9 +825,9 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("fc")'
+                                                    <td id="fc" onclick='sH("fc")'
                                                         style="background-image: url('img/bat-guage.png');background-repeat: no-repeat;width:200px;height:200px;padding:0;">
-                                                        <fieldset align="center" id="fc" class="hide">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("fc")'>Battery +</legend>
                                                             <form align="center">
                                                                 <input
@@ -914,8 +853,8 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("throttleDis")' class="guage">
-                                                        <fieldset align="center" id="throttleDis" class="hide">
+                                                    <td id="throttleDis" onclick='sH("throttleDis")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("throttleDis")'>Throttle (tps)</legend>
                                                             <form align="center" style="margin-top:12px;">
                                                                 <input type="number" step="0.1" id="throttlev"
@@ -936,12 +875,13 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("iacField")' class="guage">
-                                                        <fieldset id="iacField" align="center" class="hide">
+                                                    <td id="iacField" onclick='sH("iacField")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("iacField")'>IAC</legend>
                                                             <form align="center" style="margin-top:12px;">
                                                                 <input type="number" step="1" id="iac" name="iac"
                                                                     value="0" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">position</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -957,12 +897,13 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("miniacField")' class="guage">
-                                                        <fieldset id="miniacField" align="center" class="hide">
+                                                    <td id="miniacField" onclick='sH("miniacField")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("miniacField")'>Min IAC</legend>
                                                             <form align="center" style="margin-top:12px;">
                                                                 <input type="number" step="1" id="miniac" name="miniac"
                                                                     value="0" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">position</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -976,12 +917,13 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("tiField")' class="guage">
-                                                        <fieldset id="tiField" align="center" class="hide">
+                                                    <td id="tiField" onclick='sH("tiField")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("tiField")'>Target Idle</legend>
                                                             <form align="center" style="margin-top:12px;">
                                                                 <input type="number" step="1" id="targetidle"
                                                                     name="targetidle" value="0" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">rpm</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -999,8 +941,8 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("sparkadvField")' class="guage">
-                                                        <fieldset id="sparkadvField" align="center" class="hide">
+                                                    <td id="sparkadvField" onclick='sH("sparkadvField")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("sparkadvField")'>Spark Advance</legend>
                                                             <form align="center" style="margin-top:12px;">
                                                                 <input type="number" step="1" id="sparkadvance"
@@ -1019,8 +961,8 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("knockField")' class="guage">
-                                                        <fieldset id="knockField" align="center" class="hide">
+                                                    <td id="knockField" onclick='sH("knockField")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("knockField")'>Knock Count</legend>
                                                             <form align="center" style="margin-top:12px;">
                                                                 <input type="number" step="1" id="knock" name="knock"
@@ -1038,8 +980,8 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("retardField")' class="guage">
-                                                        <fieldset id="retardField" align="center" class="hide">
+                                                    <td onclick='sH("retardField")' id="retardField" class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("retardField")'>Knock Retard</legend>
                                                             <form align="center" style="margin-top:12px;">
                                                                 <input type="number" step="1" id="knockretard"
@@ -1058,8 +1000,8 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("f2")' class="guage">
-                                                        <fieldset align="center" id="f2" class="hide">
+                                                    <td onclick='sH("f2")' id="f2" class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("f2")'>base inj p/w</legend>
                                                             <form align="center" style="margin-top:12px;">
                                                                 <input type="number" step="1" id="injp" name="injp"
@@ -1082,12 +1024,14 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("fe")'>
-                                                        <fieldset align="center" id="fe">
+                                                    <td onclick='sH("fe")' id="fe" class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("fe")'>EVAP Duty Cycle</legend>
                                                             <form align="center">
+                                                                <br />
                                                                 <input type="number" step="1" id="evap" name="evap"
-                                                                    value="0" readonly> %
+                                                                    value="0" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">%</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -1101,12 +1045,14 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("bar")'>
-                                                        <fieldset align="center" id="bar">
+                                                    <td onclick='sH("bar")' id="bar" class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("bar")'>Baro Pressure</legend>
                                                             <form align="center">
+                                                                <br />
                                                                 <input type="number" step="0.1" id="baro" name="baro"
-                                                                    value="0.0" readonly> v
+                                                                    value="0.0" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">volts</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -1120,13 +1066,15 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("f3")'>
-                                                        <fieldset align="center" id="f3">
-                                                            <legend onclick='sH("f3")'>BLM cell#</legend>
+                                                    <td onclick='sH("f3")' id="f3" class="guage">
+                                                        <fieldset align="center" class="hide">
+                                                            <legend onclick='sH("f3")'>BLM</legend>
                                                             <form align="center">
+                                                                <br />
                                                                 <input type="number" step="1" id="blm" name="blm"
                                                                     value="0" style="font-size:x-large;width:80px;"
                                                                     readonly>
+                                                                <br /><b style="margin-bottom:-50px;">cell</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -1140,12 +1088,14 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("fd")'>
-                                                        <fieldset align="center" id="fd">
-                                                            <legend onclick='sH("fd")'>Fuel Pump(volts)</legend>
+                                                    <td onclick='sH("fd")' id="fd" class="guage">
+                                                        <fieldset align="center" class="hide">
+                                                            <legend onclick='sH("fd")'>Fuel Pump</legend>
                                                             <form align="center">
+                                                                <br />
                                                                 <input type="number" step="0.1" id="fuelpumpv"
-                                                                    name="fuelpumpv" value="0.0" readonly> v
+                                                                    name="fuelpumpv" value="0.0" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">volts</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -1165,12 +1115,14 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("fa")'>
-                                                        <fieldset align="center" id="fa">
+                                                    <td id="fa" onclick='sH("fa")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("fa")'>Map Sensor</legend>
                                                             <form align="center">
+                                                                <br />
                                                                 <input type="number" step="0.1" id="mapvolts"
-                                                                    name="mapvolts" value="0.0" readonly> v
+                                                                    name="mapvolts" value="0.0" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">volts</b>
                                                                 <input hidden type="number" step="0.1" id="mapkpa"
                                                                     name="mapkpa" value="0.0" readonly><!-- kpa-->
                                                             </form>
@@ -1186,12 +1138,14 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("f4")'>
-                                                        <fieldset align="center" id="f4">
-                                                            <legend onclick='sH("f4")'>O2 bank L</legend>
+                                                    <td id="f4" onclick='sH("f4")' class="guage">
+                                                        <fieldset align="center" class="hide">
+                                                            <legend onclick='sH("f4")'>O2 Bank L</legend>
                                                             <form align="center">
+                                                                <br />
                                                                 <input type="number" step="0.01" id="o2bankL"
-                                                                    name="o2bankL" value="0.00" readonly> v
+                                                                    name="o2bankL" value="0.00" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">volts</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -1205,12 +1159,14 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("f5")'>
-                                                        <fieldset align="center" id="f5">
-                                                            <legend onclick='sH("f5")'>st-ft(int)bank L</legend>
+                                                    <td id="f5" onclick='sH("f5")' class="guage">
+                                                        <fieldset align="center" class="hide">
+                                                            <legend onclick='sH("f5")'>ST-FT Bank L</legend>
                                                             <form align="center">
+                                                                <br />
                                                                 <input type="number" step="0.01" id="stftbankL"
                                                                     name="stftbankL" value="0" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">int</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -1224,12 +1180,14 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("f6")'>
-                                                        <fieldset align="center" id="f6">
-                                                            <legend onclick='sH("f6")'>lt-ft(blm)bank L</legend>
+                                                    <td id="f6" onclick='sH("f6")' class="guage">
+                                                        <fieldset align="center" class="hide">
+                                                            <legend onclick='sH("f6")'>LT-FT Bank L</legend>
                                                             <form align="center">
+                                                                <br />
                                                                 <input type="number" step="1" id="ltftbankL"
                                                                     name="ltftbankL" value="0" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">blm</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -1249,15 +1207,18 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("runtimeField")'>
-                                                        <fieldset id="runtimeField" align="center">
+                                                    <td id="runtimeField" onclick='sH("runtimeField")' class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("runtimeField")'>Engine Run Time
                                                             </legend>
                                                             <form align="center">
+                                                                <br />
                                                                 <input type="number" step="1" id="runtime"
-                                                                    name="runtime" value="0" readonly> sec
+                                                                    name="runtime" value="0" readonly> msb
+                                                                <br />
                                                                 <input type="number" step="1" id="runtimelsb"
-                                                                    name="runtime" value="0" readonly> sec
+                                                                    name="runtime" value="0" readonly> lsb
+                                                                <br /><b style="margin-bottom:-50px;">seconds</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -1271,12 +1232,14 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("f7")'>
-                                                        <fieldset align="center" id="f7">
-                                                            <legend onclick='sH("f7")'>o2 bank R</legend>
+                                                    <td id="f7" onclick='sH("f7")' class="guage">
+                                                        <fieldset align="center" class="hide">
+                                                            <legend onclick='sH("f7")'>O2 Bank R</legend>
                                                             <form align="center">
+                                                                <br />
                                                                 <input type="number" step="0.01" id="o2bankR"
-                                                                    name="o2bankR" value="0.00" readonly> v
+                                                                    name="o2bankR" value="0.00" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">volts</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -1290,12 +1253,14 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("f8")'>
-                                                        <fieldset align="center" id="f8">
-                                                            <legend onclick='sH("f8")'>st-ft(int)bank R</legend>
+                                                    <td id="f8" onclick='sH("f8")' class="guage">
+                                                        <fieldset align="center" class="hide">
+                                                            <legend onclick='sH("f8")'>ST-FT Bank R</legend>
                                                             <form align="center">
+                                                                <br />
                                                                 <input type="number" step="0.01" id="stftbankR"
                                                                     name="stftbankR" value="0" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">int</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -1309,12 +1274,14 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("f9")'>
-                                                        <fieldset align="center" id="f9">
-                                                            <legend onclick='sH("f9")'>lt-ft(blm)bank R</legend>
+                                                    <td id="f9" onclick='sH("f9")' class="guage">
+                                                        <fieldset align="center" class="hide">
+                                                            <legend onclick='sH("f9")'>LT-FT Bank R</legend>
                                                             <form align="center">
+                                                                <br />
                                                                 <input type="number" step="1" id="ltftbankR"
                                                                     name="ltftbankR" value="0" readonly>
+                                                                <br /><b style="margin-bottom:-50px;">blm</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -1335,19 +1302,14 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("fb")'>
-                                                        <fieldset align="center" id="fb">
-                                                            <legend onclick='sH("fb")'>A/C</legend>
+                                                    <td onclick='sH("fb")' id="fb" class="guage">
+                                                        <fieldset align="center" class="hide">
+                                                            <legend onclick='sH("fb")'>A/C <small>EVAP-SENSOR</small></legend>
                                                             <form align="center">
-                                                                <label for="actempf" style="color:yellow;">EVAP
-                                                                    Sensor</label>
-                                                                <br />
                                                                 <br />
                                                                 <input type="number" step="1" id="actempf"
-                                                                    name="actempf" value="0" readonly>
-                                                                <small style="color:yellow;">°f</small>
-                                                                <br />
-                                                                <br />
+                                                                    name="actempf" value="0" readonly />
+                                                                <br /><b style="margin-bottom:-50px;">°f</b>
                                                             </form>
                                                         </fieldset>
                                                     </td>
@@ -1361,21 +1323,19 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("fb2")'>
-                                                        <fieldset align="center" id="fb2">
-                                                            <legend onclick='sH("fb2")'>A/C</legend>
+                                                    <td onclick='sH("fb2")' id="fb2" class="guage">
+                                                        <fieldset align="center" class="hide">
+                                                            <legend onclick='sH("fb2")'>A/C <small>TRANSDUCER</small></legend>
                                                             <form align="center">
-                                                                <label for="acpsi"
-                                                                    style="color:yellow;">TRANSDUCER</label>
-                                                                <br />
                                                                 <br />
                                                                 <input type="number" step="1" id="acpsi" name="acpsi"
                                                                     value="0" readonly>
-                                                                <small style="color:yellow;">psi</small>
+                                                                <small><b>psi</b></small>
+                                                                <br />
                                                                 <input type="number" step="0.1" id="acv" name="acv"
                                                                     value="0.0" readonly>
-                                                                <small style="color:yellow;">V</small>
-                                                                <br />
+                                                                <small><b>V</b></small>
+                                                                
                                                                 <br />
                                                             </form>
                                                         </fieldset>
@@ -1391,18 +1351,17 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td id="cb" onclick='sH("cb")'>
-                                                        <fieldset align="center" id="clutchdiv">
+                                                    <td id="cb" onclick='sH("cb")' class="guage">
+                                                        <fieldset align="center" id="clutchdiv" class="hide">
                                                             <legend onclick='sH("cb")'>Clutch</legend>
                                                             <form align="center">
                                                                 <label class="switch" for="clutchpressed">
-                                                                    <input type="checkbox" id="clutchpressed"
-                                                                        disabled />
+                                                                    <input type="checkbox" id="clutchpressed" disabled />
                                                                     <span class="slider round"></span>
                                                                 </label>
                                                             </form>
                                                         </fieldset>
-                                                        <fieldset align="center" id="tcc">
+                                                        <fieldset align="center" id="tcc" class="hide">
                                                             <legend onclick='sH("cb")'>TCC Brake</legend>
                                                             <form align="center">
                                                                 <label class="switch" for="brakepressed">
@@ -1422,8 +1381,8 @@
                                             <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
                                                 bordercolordark="#808080" bordercolorlight="#ffffff">
                                                 <tr>
-                                                    <td onclick='sH("b9")'>
-                                                        <fieldset align="center" id="b9">
+                                                    <td onclick='sH("b9")' id="b9" class="guage">
+                                                        <fieldset align="center" class="hide">
                                                             <legend onclick='sH("b9")'>BLM Reset</legend>
                                                             <form align="center">
                                                                 <button id="resetBlmBtn" class="btn resBtn"
@@ -1758,7 +1717,7 @@
                     <!-- Copyright -->
                     <script>
                         function yr() {
-                            const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL';
+                            const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL <small> v: 2024.07.1.3</small>';
                         }
                         /*document.write('<b style="color:#752975;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yr() + '" >' + yr() + "</b>");*/
                         document.write('<small onclick=window.open("https://toremetal.com") style="color:#752929;text-align: left;position: fixed;z-index:8; bottom: 6px; left: 5px;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yr() + '" >' + yr() + "</small>");
@@ -1772,33 +1731,33 @@
     const DEBUG = 2;
     const ECM = new ECM278;
     const CMD_CONTROL = {
+        noCmdNum: 99,
         lastCmd: 99,
         nextCmd: ECM.EcmCmdNums.vinDataCmdNum,
         sendCmd: ECM.EcmCmdNums.stopComCmdNum,
+        loopTime: 256,
+        delayTime: 512,
         sendCnt:0,
-        noCmdNum: 99,
-        loopTime: 512,/*1024*/
+        loopCount: 0,
         readCount: 0,
-        cdTime: 2000,
-        delayTime: 1500,/*3072*/
+        cdTime: Date.now(),
         vin: 0,
         mil: 0,
         eng: 0,
-        com: 0
+        com: 0,
+        msg: 0 /* PCM msg delivery scheduler. */
     };
 
     var COOKIE_PERMISSION = false;
     var myIntervalReader;
+    /* byte CACHE ARRAY[]'s */
+    var EcmStream = [];
     var engineDataResponse;
     var milDataResponse;
-    //var vinDataResponse;
-    var EcmStream = [];
 
-    document.getElementById("delayTimeValue").value = CMD_CONTROL.delayTime;
     document.getElementById("loopTimeValue").value = CMD_CONTROL.loopTime;
     document.getElementById("transmissionType").value = ECM.A_TRANSMISSION;
     document.getElementById("clutchdiv").hidden = ECM.A_TRANSMISSION;
-    document.getElementById("manF").hidden = ECM.A_TRANSMISSION;
     document.getElementById("fantd").hidden = ECM.A_TRANSMISSION;
     document.getElementById("tranTabBtn").hidden = !ECM.A_TRANSMISSION;
     document.getElementById("tcc").hidden = !ECM.A_TRANSMISSION;
@@ -1806,30 +1765,27 @@
     document.getElementById("autoTranTemp").hidden = !ECM.A_TRANSMISSION;
 
     async function readSerialData(myport) {
-        EcmStream = [];
+        var reader;
         while (myport.readable) {
             try {
-                var reader = myport.readable.getReader();
+                reader = myport.readable.getReader();
                 console.log("[READ-SERIAL-DATA]");
                 try {
                     var { value, done } = await reader.read();
                     if (done) { break; }
                     if (value != "") {
-                        /* ================================|
-                        *  Convert and Display Serial Data.
-                        * =============================== */
                         let conBit = "";
                         let conBin = "";
                         for (x in value) {
                             EcmStream.push(value[x]);
                             try {
-                                conBit += numericToAlpha(value[x]);
+                                conBit += ECM.numericToAlpha(value[x]);
                                 conBit += ",";
-                                conBin += numToBin(value[x]);
+                                conBin += ECM.numToBin(value[x]);
                                 conBin += ",";
                             } catch (error) {
                                 console.log("ERROR bitConvert:" + error.toString());
-                            }//if (EcmStream.length>=parseInt(mSize)) {break;}
+                            }
                         }
                         let curData = document.getElementById("sdata").innerHTML;
                         document.getElementById("sdata").innerHTML = CMD_CONTROL.readCount.toString() + ": " + conBit + "<br />" + curData;
@@ -1842,14 +1798,12 @@
             } catch (error) {
                 try {
                     await reader.releaseLock();
-                    console.log("RELEASE LOCK:[READ-SERIAL-DATA]");
                 } catch (err) {
-                    console.log("RELEASE LOCK:[READ-SERIAL-DATA]");
+                    //console.log("RELEASE LOCK:[READ-SERIAL-DATA]");
                 }
                 break;
             }
         }
-        //console.log("DATA: "+EcmStream);
         return EcmStream;
     }
 
@@ -1859,7 +1813,7 @@
             if (DEBUG == 2) { console.log("SEND CMD[" + ECM.CMDNAMES[CMD_CONTROL.sendCmd] + "]"); }
             document.getElementById("wait").innerHTML = "SENDING CMD[" + ECM.CMDNAMES[CMD_CONTROL.sendCmd] + "]<br/>Please Wait";
             CMD_CONTROL.lastCmd = CMD_CONTROL.sendCmd;
-            //CMD_CONTROL.lastCmd=cmdNum;//CMD_CONTROL.sendCmd;
+            clearCache();
             await writer.write(ECM.EcmCmds[ECM.CMDNAMES[CMD_CONTROL.sendCmd]]);
             await writer.releaseLock();
             document.getElementById("sendingEcmCmd").checked = false;
@@ -1869,11 +1823,11 @@
         } finally {
         }
     }
-    var msg = 0;
+    
     async function getSerialPortInfo() {
         try {
             const myport = await navigator.serial.requestPort();
-            await myport.open({ baudRate: 8192, dataBits: 8, stopBits: 1, parity: "none" });
+            await myport.open({ baudRate: ECM.COM_PORT.baudRate, dataBits: ECM.COM_PORT.dataBits, stopBits: ECM.COM_PORT.stopBits, parity: ECM.COM_PORT.parity });
             const { usbProductId, usbVendorId } = myport.getInfo();
             let portInfo = "[usbProductId:]" + usbProductId + " [usbVendorId:]" + usbVendorId + "<br />";
             document.getElementById("sdata").innerHTML = portInfo;
@@ -1884,62 +1838,67 @@
             cmdRunning(1);
             var firstrun = true;
             var proceed = true;
-            wait();
 
             /* CONTINUOUS READ-WRITE SEQUENCE */
             myIntervalReader = setInterval(function () {
                 if (proceed) {
                     proceed = false;
                     if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.disconnectEcmCmdNum && document.getElementById("sendingEcmCmd").checked == false && document.getElementById("connected").checked == false) {
+                        /* ECM-Returned to Normal. */
                         console.log("ECM: Dis-Connected!");
-                        clearInterval(myIntervalReader);
-                    } else if (document.getElementById("sendingEcmCmd").checked || document.getElementById("resettingMil").checked) {
-                        if (wait()) {
-                            if (document.getElementById("resettingMil").checked) {
-                                CMD_CONTROL.sendCmd = ECM.EcmCmdNums.resetMilCmdNum;
-                                document.getElementById("resettingMil").checked = false;
-                            }
-                            writeData(myport);
+                        CMD_CONTROL.lastCmd = CMD_CONTROL.noCmdNum;/* Prevent actions while looping. */
+                        if (document.getElementById("disconnect").disabled) {
+                            clearInterval(myIntervalReader);/* [Stop Loop]. */
                         }
+                    } else if (document.getElementById("sendingEcmCmd").checked || document.getElementById("resettingMil").checked) {
+                        /* Send Data to ECM. */
+                        if (document.getElementById("resettingMil").checked) {
+                            CMD_CONTROL.sendCmd = ECM.EcmCmdNums.resetMilCmdNum;
+                            document.getElementById("resettingMil").checked = false;
+                        }
+                        writeData(myport);
                     } else {
-                        /*readSerialData(myport).then((value, done)=>{*/
+                        /* Read Data from ECM. */
                         readSerialData(myport).then((value, done) => {
                             if (DEBUG == 2) { console.log(value) };
                             let y = 0;
                             for (x in value) {
-                                if (y + 2 < value.length && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdStopComDataStream)) {
+                                if (y + 2 < value.length && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdDisConnectDataStream)) {
+                                    document.getElementById("connected").checked = false;
+                                    clearCache();
+                                } else if (y + 2 < value.length && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdStopComDataStream)) {// && msgTest(value[y + 4], value[y + 5], value[y + 6], ECM.EcmCmdStopComDataStream)
                                     if (CMD_CONTROL.sendCnt < 2) {
-                                        document.getElementById("connected").checked = true;
                                         CMD_CONTROL.com = 1;
                                         CMD_CONTROL.sendCnt++;
-                                        console.log("[stopCom]");
                                         sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);
                                     } else {
+                                        console.log("[ECM-CONNECTED]");
+                                        document.getElementById("connected").checked = true;
                                         CMD_CONTROL.sendCnt = 0;
-                                        console.log("[CONNECTED]");
                                         CMD_CONTROL.com = 0;
                                         sendEcmCmd(CMD_CONTROL.nextCmd);
                                     }
-                                } else if (y + 2 < value.length && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdVinDataStream)) {
+                                } else if (y + 20 < value.length && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdVinDataStream) && CMD_CONTROL.vin == 0) {
                                     if (DEBUG == 2) { console.log("[VIN-DATA]-RECEIVED"); }
-                                    //vinDataResponse = value.slice(3,20);
                                     let vinStr = "";
                                     for (v = (y + 3); v < (y + 21); v++) {
                                         vinStr += String.fromCharCode(value[v]);
                                     }
                                     document.getElementById("dashTitle").innerHTML = "Dash (vin:" + vinStr + ")";
                                     CMD_CONTROL.vin = 1;
-                                    ECM.VIN = vinStr;
                                     if (firstrun) {
-                                        /* while(!wait()){} */
-                                        /* CMD_CONTROL.nextCmd=ECM.EcmCmdNums.engineDataCmdNum;
-                                        sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum); */
                                         sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
+                                        CMD_CONTROL.cdTime = Date.now();
                                         while (!wait()) { };
                                     } else {
+                                        if (document.getElementById("scan").value != "On") {
+                                            sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
+                                        } else {
+                                            clearCache();
+                                        }
                                         cmdRunning(0);
                                     }
-                                } else if (y + 2 < value.length && value.length > 24 && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdMilDataStream)) {
+                                } else if (y + 24 < value.length && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdMilDataStream) && CMD_CONTROL.mil == 0) {
                                     if (DEBUG == 2) { console.log("[MIL-DATA]-RECEIVED"); }
                                     CMD_CONTROL.mil = 1;
                                     let results = value.slice(parseInt(y), parseInt(y + 25));
@@ -1949,90 +1908,96 @@
                                     if (checkSumsTest == checkSums) {
                                         if (DEBUG == 2) { console.log("[CHECKSUM]-ok"); }
                                         milDataResponse = tmpmilDataResponse.slice(3, tmpmilDataResponse.length);
-                                        readMIL(milDataResponse);
-                                        cmdRunning(0);
-                                        if (firstrun) {
-                                            firstrun = false;
-                                            CMD_CONTROL.sendCmd = ECM.EcmCmdNums.engineDataCmdNum;
-                                        }
+                                        readMIL(milDataResponse).then((value) => {
+                                            if (firstrun) {
+                                                firstrun = false;
+                                            }
+                                            if (document.getElementById("scan").value != "On") {
+                                                sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
+                                            } else {
+                                                clearCache();
+                                            }
+                                            cmdRunning(0);
+                                        });
                                     } else {
                                         if (DEBUG == 2) { console.log("[BAD CHECKSUM]"); }
+                                        CMD_CONTROL.mil = 0;
                                         sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
                                     }
-                                } else if (y + 2 < value.length && value.length >= 69 && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdEngineDataStream)) {
+                                } else if (y + 69 < value.length && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdEngineDataStream) && CMD_CONTROL.eng == 0) {
                                     CMD_CONTROL.eng = 1;
                                     if (DEBUG == 2) { console.log("[ENGINE-DATA]-RECEIVED"); }
-                                    if (value.length == 69) {
-                                        engineDataResponse = value.slice(3, value.length);
+                                    let results = value.slice(parseInt(y), parseInt(y + 71));
+                                    let checkSums = results[parseInt(results.length - 1)].toString();
+                                    let tmpengineDataResponse = results.slice(0, 70);
+                                    let checkSumsTest = checkSum(tmpengineDataResponse);
+                                    let validCheckSum = document.getElementById("validate").checked == false;
+                                    console.log("CHECKSUM[" + checkSumsTest + "=" + checkSums + "] " + (checkSumsTest == checkSums).toString());
+                                    
+                                    if (checkSumsTest == checkSums) {validCheckSum=true;}
+                                    if (validCheckSum) {
+                                        engineDataResponse = tmpengineDataResponse.slice(3, tmpengineDataResponse.length);
                                         readEngine(ECM.ENGINE_DATA, engineDataResponse).then((value) => {
                                             if (firstrun) {
+                                                CMD_CONTROL.cdTime = Date.now();
                                                 while (!wait()) { }
                                                 sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
                                             } else {
+                                                if (document.getElementById("scan").value != "On") {
+                                                    sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
+                                                } else {
+                                                    clearCache();
+                                                }
                                                 cmdRunning(0);
                                             }
                                         });
                                     } else {
-                                        let chkTest = value.slice(0, parseInt(value.length - 2));
-                                        let checkSum2 = checkSum(chkTest);
-                                        let bchkTest = value[parseInt(value.length - 1)];
-                                        let results = value.slice(parseInt(y), parseInt(y + 71));
-                                        let checkSums = results[parseInt(results.length - 1)];//.toString();
-                                        let tmpengineDataResponse = results.slice(0, 70);
-                                        let checkSumsTest = checkSum(tmpengineDataResponse);
-                                        console.log("CHECKSUM[" + checkSumsTest + "=" + checkSums + "] " + (checkSumsTest == checkSums).toString());
-                                        if (checkSumsTest == checkSums) {
-                                            //if (DEBUG==2) {console.log("[CHECKSUM]-ok");}
-                                            engineDataResponse = tmpengineDataResponse.slice(3, tmpengineDataResponse.length);
-                                            readEngine(ECM.ENGINE_DATA, engineDataResponse).then((value) => {
-                                                if (firstrun) {
-                                                    while (!wait()) { }
-                                                    sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
-                                                } else {
-                                                    cmdRunning(0);
-                                                }
-                                            });
-                                        } else {
-                                            if (DEBUG == 2) { console.log("[BAD CHECKSUM]"); }
-                                            CMD_CONTROL.eng = 0;
-                                        }
+                                        if (DEBUG == 2) { console.log("[BAD CHECKSUM]"); }
+                                        CMD_CONTROL.eng = 0;
                                     }
                                 }
                                 y++;
                             }
+                            CMD_CONTROL.loopCount++;
+                            if (CMD_CONTROL.loopCount == 5) {clearCache();}
                         });
-
-                        if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.reset && document.getElementById("sendingEcmCmd").checked == false) {
+                        if (CMD_CONTROL.lastCmd > ECM.EcmCmdNums.disconnectEcmCmdNum) {
+                            clearCache();
+                        }
+                        if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.reset) {
                             sendEcmCmd(ECM.EcmCmdNums.reset2);
-                        } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.vinDataCmdNum && CMD_CONTROL.vin == 0) {
-                            if (wait()) { sendEcmCmd(ECM.EcmCmdNums.vinDataCmdNum); }
-                        } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.milDataCmdNum && CMD_CONTROL.mil == 0) {
-                            if (wait()) { sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum); }
-                        } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.engineDataCmdNum && CMD_CONTROL.eng == 0) {
-                            if (wait()) { sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum); }
-                        } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.stopComCmdNum && CMD_CONTROL.com == 0) {
-                            if (wait()) { sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum); }
+                        } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.vinDataCmdNum && CMD_CONTROL.vin == 0 && CMD_CONTROL.loopCount == 4) {
+                            sendEcmCmd(ECM.EcmCmdNums.vinDataCmdNum);
+                        } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.milDataCmdNum && CMD_CONTROL.mil == 0 && CMD_CONTROL.loopCount == 4) {
+                            sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
+                        } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.engineDataCmdNum && CMD_CONTROL.eng == 0 && CMD_CONTROL.loopCount == 4) {
+                            sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
+                        } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.stopComCmdNum && CMD_CONTROL.com == 0 && CMD_CONTROL.loopCount == 4) {
+                            sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);
                         } else if (document.getElementById("scan").value == "On") {
                             if (wait()) {
-                                if (msg == 0) {
-                                    msg = 1; CMD_CONTROL.sendCnt = 2
+                                if (CMD_CONTROL.msg == 0) {
+                                    CMD_CONTROL.msg = 1;
+                                    CMD_CONTROL.eng = 0;
                                     CMD_CONTROL.nextCmd = ECM.EcmCmdNums.engineDataCmdNum;
-                                    //CMD_CONTROL.sendCmd=ECM.EcmCmdNums.stopComCmdNum;
-                                    //document.getElementById("sendingEcmCmd").checked=true;
+                                    CMD_CONTROL.com = 0;
+                                    CMD_CONTROL.sendCnt = 0;
                                     sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);
-                                } else if (msg == 1) {
-                                    msg = 2;
-                                    sendEcmCmd(ECM.EcmCmdNums.msg2);
-                                } else if (msg == 2) {
-                                    msg = 3;
+                                } else if (CMD_CONTROL.msg == 1) {
+                                    if (CMD_CONTROL.eng == 1) {CMD_CONTROL.msg = 2;}
+                                } else if (CMD_CONTROL.msg == 2 && CMD_CONTROL.loopCount == 0) {
+                                    CMD_CONTROL.msg = 3;
                                     sendEcmCmd(ECM.EcmCmdNums.msg1);
-                                } else if (msg == 3) {
-                                    msg = 4;
+                                } else if (CMD_CONTROL.msg == 3 && CMD_CONTROL.loopCount == 0) {
+                                    CMD_CONTROL.msg = 4;
+                                    sendEcmCmd(ECM.EcmCmdNums.msg2);
+                                } else if (CMD_CONTROL.msg == 4 && CMD_CONTROL.loopCount == 0) {
+                                    CMD_CONTROL.msg = 5;
+                                    sendEcmCmd(ECM.EcmCmdNums.msg3);
+                                } else if (CMD_CONTROL.msg == 5) {
+                                    CMD_CONTROL.msg = 2;
                                     CMD_CONTROL.eng = 0;
                                     sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
-                                } else if (msg == 4) {
-                                    msg = 0;
-                                    sendEcmCmd(ECM.EcmCmdNums.msg3);
                                 }
                             }
                         }
@@ -2045,9 +2010,13 @@
         }
     }
 
-    /* ================================|
-     *  checkSum()-Check Sum Validation.
-     * ------------------------------ */
+    /* Clears Byte-Cache variable. */
+    function clearCache() {
+        CMD_CONTROL.loopCount = 0;
+        EcmStream = [];
+    }
+    
+    /* checkSum()-Check Sum Validation. */
     function checkSum(num) {
         let sum = 0;
         for (c in num) {
@@ -2077,33 +2046,32 @@
         }
     }
 
-    /* =========================================================|
-     *            disconnectECM()-Sends normal Mode
-     * ------------------------------------------------------ */
+    /* disconnectECM(): Stop Reading ECM Data. */
     function disconnectECM() {
         document.getElementById("disconnect").disabled = true;
         document.getElementById("scan").disabled = true;
-        document.getElementById("connected").checked = false;
+        document.getElementById("Mode1").disabled = true;
+        document.getElementById("Mode2").disabled = true;
+        document.getElementById("Mode4").disabled = true;
         document.getElementById("resetMilBtn").disabled = true;
         document.getElementById("resetBlmBtn").disabled = true;
         document.getElementById("actControls").hidden = true;
-        CMD_CONTROL.sendCmd = ECM.EcmCmdNums.disconnectEcmCmdNum;
-        document.getElementById("sendingEcmCmd").checked = true;
+        document.getElementById("connected").checked = false;
+        sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
     }
 
-    /* ===============================================|
-     *  startStopRealTime()-Sends Engine Data Requests
-     *  Continuously for realtime display data.
-     *   note: doesn't get the data very quick.
-     * -------------------------------------------- */
+    /* startStopRealTime()-Sends Engine Data Requests. */
     function startStopRealTime() {
         if (document.getElementById("scan").value != "On") {
+            CMD_CONTROL.msg = 0;
             document.getElementById("scan").value = "On";
         } else {
             document.getElementById("scan").value = "Rpt";
+            sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
         }
     }
 
+    /* Scanning Indicator. */
     function cmdRunning(d) {
         if (d == 1) {
             document.getElementById("Mode1").disabled = true;
@@ -2135,7 +2103,7 @@
         }
     }
 
-    /* Puts delay between serial writes to prevent data corruption.*/
+    /* adds delay for processing to prevent data corruption.*/
     function wait() {
         let currentTime = Date.now();
         if (parseInt(currentTime - CMD_CONTROL.cdTime) >= parseInt(CMD_CONTROL.delayTime)) {
@@ -2160,41 +2128,18 @@
         }
     }
 
-    /* Voltage Formula */
-    function setVolts(value) {
-        if (value != "" && value > 0) {
-            return (parseInt(value) * 5 / 255).toFixed(1);
-        } else { return 0; }
-    }
-
-    /* Tempature (F) Formula */
-    function setDegF(value) {
-        if (value != "") {
-            return (1.35 * parseInt(value) - 40).toFixed();
-        } else { return 0; }
-    }
-
-    /* set element value */
-    async function setValue(id, value) {
-        try {
-            if (value != "") {
-                document.getElementById(id).value = value;
-            }
-        } catch (error) {
-            console.error("setValue(id: " + id + ", value:" + value + ")", error);
-        }
-    }
-
     /* show hide elements */
     function sH(id) {
         document.getElementById(id).hidden = !document.getElementById(id).hidden;
     }
 
+    /* Set Loop Interval Timing. */
     function setSpeed(val) {
         CMD_CONTROL.loopTime = val;
         if (COOKIE_PERMISSION) { setCookie("speed", val * 100, 30); }
     }
 
+    /* Set RPM-Guage Needle Position. */
     function rotateRPM() {
         let cRpm = parseInt(document.getElementById("rpm").value);
         if (cRpm > 10000) { cRpm = 10000; } else if (cRpm < 0) { cRpm = 0; }
@@ -2202,6 +2147,7 @@
         document.getElementById("rpm-needle").style.rotate = r;
     }
 
+    /* Set MPH-Guage Needle Position. */
     function rotateMPH() {
         let cMph = parseInt(document.getElementById("mph").value);
         if (cMph > 105) { cMph = 105; } else if (cMph < 0) { cMph = 0; }
@@ -2209,6 +2155,7 @@
         document.getElementById("mph-needle").style.rotate = r;
     }
 
+    /* User Selected Info to View. */
     function selectTab(i) {
         document.getElementById("MainTab").hidden = true;
         document.getElementById("engTab").hidden = true;
@@ -2219,88 +2166,7 @@
         document.getElementById(i).hidden = false;
     }
 
-    function setTrans() {
-        ECM.A_TRANSMISSION = !ECM.A_TRANSMISSION;
-        document.getElementById("clutchdiv").hidden = !document.getElementById("clutchdiv").hidden;
-        document.getElementById("tcc").hidden = !document.getElementById("tcc").hidden;
-        document.getElementById("manF").hidden = !document.getElementById("manF").hidden;
-        document.getElementById("autoF").hidden = !document.getElementById("autoF").hidden;
-        document.getElementById("autoTranTemp").hidden = !document.getElementById("autoTranTemp").hidden;
-        document.getElementById("fantd").hidden = !document.getElementById("fantd").hidden;
-        document.getElementById("tranTabBtn").hidden = !document.getElementById("tranTabBtn").hidden;
-    }
-
-    /* ---------------------------------------------|
-     * Byte Converters (for translating serial data)
-     *   numericToAlpha(0-255)=00-FF
-     *   alphaToNumeric(00-FF)=0-255
-     *      numToBin(0-255) 00000000-11111111
-     * ------------------------------------------ */
-
-    function numToBin(i) {
-        let nBinary = "";
-        let tmpBinary = "";
-        let tmpBinary2 = "";
-/*1*/   nBinary = (i % 2).toFixed().toString();
-        tmpBinary = i / 2;
-/*2*/      nBinary = parseInt(tmpBinary % 2) + nBinary;
-        tmpBinary2 = tmpBinary / 2;
-/*3*/      nBinary = parseInt(tmpBinary2 % 2) + nBinary;
-        tmpBinary = tmpBinary2 / 2;
-/*4*/      nBinary = parseInt(tmpBinary % 2) + nBinary;
-        tmpBinary2 = tmpBinary / 2;
-/*5*/      nBinary = parseInt(tmpBinary2 % 2) + nBinary;
-        tmpBinary = tmpBinary2 / 2;
-/*6*/      nBinary = parseInt(tmpBinary % 2) + nBinary;
-        tmpBinary2 = tmpBinary / 2;
-/*7*/      nBinary = parseInt(tmpBinary2 % 2) + nBinary;
-        tmpBinary = tmpBinary2 / 2;
-/*8*/      nBinary = parseInt(tmpBinary % 2) + nBinary;
-        return nBinary;
-    }
-
-    function numericToAlpha(i) {
-        let j = (parseInt(i) % 16);
-        let d = (parseInt(i) - parseInt(j)) / 16;
-        var L = getVal(d);
-        var R = getVal(j);
-        return L + R;
-    }
-
-    function alphaToNumeric(l) {
-        for (let i = 0; i < 256; i++) {
-            let c = numericToAlpha(i);
-            if (c == l) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    function getVal(d) {
-        if (parseInt(d) >= 0 && parseInt(d) <= 9) {
-            return d.toString();
-        } else {
-            if (d == 10) {
-                return "A";
-            } else if (d == 11) {
-                return "B";
-            } else if (d == 12) {
-                return "C";
-            } else if (d == 13) {
-                return "D";
-            } else if (d == 14) {
-                return "E";
-            } else if (d == 15) {
-                return "F";
-            } else {
-                return "-1"
-            }
-        }
-    }
-    /* End:Byte Converters */
-
-    /* full screen*/
+    /* full screen. */
     var elem = document.documentElement;
     function openFullscreen() {
         if (elem.requestFullscreen) {
@@ -2328,22 +2194,24 @@
         } else {
             openFullscreen();
         }
-    }
-    /*end full screen*/
+    } /* [END] full screen*/
 
+    /* Transmission Shift Type Controller */
+    function setTrans() {
+        ECM.A_TRANSMISSION = !ECM.A_TRANSMISSION;
+        document.getElementById("clutchdiv").hidden = !document.getElementById("clutchdiv").hidden;
+        document.getElementById("tcc").hidden = !document.getElementById("tcc").hidden;
+        document.getElementById("autoF").hidden = !document.getElementById("autoF").hidden;
+        document.getElementById("autoTranTemp").hidden = !document.getElementById("autoTranTemp").hidden;
+        document.getElementById("fantd").hidden = !document.getElementById("fantd").hidden;
+        document.getElementById("tranTabBtn").hidden = !document.getElementById("tranTabBtn").hidden;
+    }
+    
     /* Transmission Gear Position Controller */
     var automatic = document.getElementById("gear");
-    var manual = document.getElementById("manualGear");
     var automaticGear = document.getElementById("prndlDis");
-    var manualGear = document.getElementById("manualDis");
 
     automatic.oninput = function () {
-        manual.value = this.value;
-        setLabel();
-    }
-
-    manual.oninput = function () {
-        automatic.value = this.value;
         setLabel();
     }
 
@@ -2365,25 +2233,7 @@
         } else {
             automaticGear.innerHTML = "P";
         }
-        if (manual.value == 0) {
-            manualGear.innerHTML = "1st";
-        } else if (manual.value == 1) {
-            manualGear.innerHTML = "2nd";
-        } else if (manual.value == 2) {
-            manualGear.innerHTML = "3rd";
-        } else if (manual.value == 3) {
-            manualGear.innerHTML = "4th";
-        } else if (manual.value == 4) {
-            manualGear.innerHTML = "5th";
-        } else if (manual.value == 5) {
-            manualGear.innerHTML = "R";
-        } else if (manual.value == 6) {
-            manualGear.innerHTML = "N";
-        } else {
-            manualGear.innerHTML = "N";
-        }
-    }
-    /* END Transmission Gear Position Controller */
+    } /* [END] Transmission Gear Position Controller */
 
     /* COOKIES */
     function setCookie(cname, cvalue, exdays) {
@@ -2423,29 +2273,16 @@
                 CMD_CONTROL.loopTime = speed;
             }
         }
-    }
-    /* END COOKIES */
+    } /* [END] COOKIES */
 
-    /* SERIAL DATA DECODERS */
-    async function readVIN(value) {
-        let vinStr = "";
-        for (v in value) {
-            vinStr += String.fromCharCode(value[v]);
-        }
-        document.getElementById("dashTitle").innerHTML = "Dash (vin:" + vinStr + ")";
-        CMD_CONTROL.vin = 1;
-        document.getElementById("wait").hidden = true;
-        cmdRunning(0);
-    }
-
+    /* MIL/DTC SERIAL DATA DECODER */
     async function readMIL(value) {
         let dtcStr = "";
         for (let k = 0; k <= 20; k++) {
-            if (DEBUG == 1) { console.log("value[" + k + "]:" + value[k]); }
             if (k == 0) {
-                setValue("actcodes", value[k]);
+                document.getElementById("actcodes").value = value[k];
             } else if (value[k] != 0) {
-                let dtcCode = numToBin(value[k]);
+                let dtcCode = ECM.numToBin(value[k]);
                 let tc = 7;
                 for (t in dtcCode) {
                     try {
@@ -2465,89 +2302,52 @@
             }
         }
         document.getElementById("dtcdata").innerHTML = dtcStr;
-    }
+        return 0;
+    } /* -- [End] function -- */
 
-    /* ===================================================================|
-     *  [function] readEngine(Decode Const:ecmFileConst, byteArray: value)
-     *   var ecmFileConst:Pointer to the address of the byte compare const.
-     *   var value:(byteArray) stream of bytes to decode.
-     * ----------------------------------------------------------------  */
-    async function readEngine(ecmFileConst,/*byteArray*/ value) {
+    /* [function] readEngine(const [byteArray]:ecmFileConst, var [byteArray]:value). */
+    async function readEngine(ecmFileConst, value) {
         let injector = -1;
         let y = 0;
         let engStr = "";
         let tranStr = "";
-        if (DEBUG == 2) { console.log("Set-Engine"); }
-        if (DEBUG == 1) { console.log(value); }
+        if (DEBUG == 2) { console.log("Set-Engine"); console.log(value); }
         let BYTEID = Object.keys(ecmFileConst);
         for (z in ecmFileConst) {
             try {
-                //if (DEBUG==1) {console.log("value[" + y + "]:" + value[y]);}
-                if (BYTEID[y] == "length" || y > ecmFileConst.length || y > value.length) {
+                if (BYTEID[y] == "length" || y >= ecmFileConst.length || y >= value.length) {
                     break;
-                } else if (ecmFileConst[z] == ecmFileConst.byte3 || ecmFileConst[z] == "coolanttempf") {
-
-                    /* ===== "coolant temp f" === */
-
-                    if (value[y] != "" && value[y] >= 0) {
-                        let newVal = (1.35 * parseInt(value[y]) - 40).toFixed();
-                        setValue(ecmFileConst[z], newVal);
-                    } else {
-                        setValue(ecmFileConst[z], 0);
-                    }
-                    //setValue(ecmFileConst[z], setDegF(value[y]));
-                } else if (ecmFileConst[z] == ecmFileConst.byte10 || ecmFileConst[z] == "tempf") {
-
-                    /* ===== "Auto-Trans temp f" === */
-                    //if (ECM.A_TRANSMISSION) {
-                    if (value[y] != "" && value[y] >= 0) {
-                        let newVal = (1.35 * parseInt(value[y]) - 40).toFixed();
-                        setValue(ecmFileConst[z], newVal);
-                    } else {
-                        setValue(ecmFileConst[z], 0);
-                    }
-                    //setValue(ecmFileConst[z], setDegF(value[y]));
-                    //}
+                } else if (ecmFileConst[z] == "NotUsed" || ecmFileConst[z] == "TODO" || ecmFileConst[z] == ecmFileConst.byte33 || ecmFileConst[z] == ecmFileConst.byte39) {
+                    /* Skip */
+                } else if (ecmFileConst[z] == ecmFileConst.byte3 || ecmFileConst[z] == "coolanttempf" || ecmFileConst[z] == ecmFileConst.byte10 || ecmFileConst[z] == "tempf") {
+                    document.getElementById(ecmFileConst[z]).value = (1.35 * parseInt(value[y]) - 40).toFixed();
                 } else if (ecmFileConst[z] == ecmFileConst.byte5 || ecmFileConst[z] == "airtempf") {
-
-                    /* ========= ManifoldAirTemp ================= */
-                    setValue(ecmFileConst[z], ECM.ManifoldAirTempF[value[y]]);
-
-                } else if (ecmFileConst[z] == ecmFileConst.byte12) {
-                    /* ===== "targetidle" === */
-                    setValue(ecmFileConst[z], (12.5 * value[y]).toFixed());
-                } else if (ecmFileConst[z] == ecmFileConst.byte14) {
-                    /* ===== "rpm24x" === */
+                    document.getElementById(ecmFileConst[z]).value = ECM.ManifoldAirTempF[parseInt(value[y])];
+                } else if (ecmFileConst[z] == "targetidle" || ecmFileConst[z] == ecmFileConst.byte12 || ecmFileConst[z] == "rpm" || ecmFileConst[z] == ecmFileConst.byte40) {
+                    document.getElementById(ecmFileConst[z]).value = (12.5 * value[y]).toFixed();
+                } else if (ecmFileConst[z] == ecmFileConst.byte14 || ecmFileConst[z] == "rpm24x") {
                     if (value[y] != 255) {
-                        setValue(ecmFileConst[z], (1310720 / parseInt(value[y])).toFixed());
-                    } else { setValue(ecmFileConst[z], 0); }
-                    if (DEBUG == 3) { console.log("rpm24x: 1310720/value[y]:" + (1310720 / value[y]).toFixed()); }
+                        document.getElementById(ecmFileConst[z]).value = (1310720 / parseInt(value[y])).toFixed();
+                    } else { document.getElementById(ecmFileConst[z]).value = 0; }
                 } else if (ecmFileConst[z] == ecmFileConst.byte15) {
-                    //if (ECM.A_TRANSMISSION) {
-                    let gear = numToBin(value[y]);
+                    let gear = ECM.numToBin(value[y]);
                     let gStr = "";
                     let tc = 7;
                     for (t in gear) {
                         if (gear[t] == "1") {
                             document.getElementById("gear").value = parseInt(tc);
-                            document.getElementById("manualGear").value = parseInt(tc);
                         }
                         tc--;
                     }
                     setLabel();
-                    //}
                 } else if (ecmFileConst[z] == "mapvolts" || ecmFileConst[z] == ecmFileConst.byte6 || ecmFileConst[z] == "baro" || ecmFileConst[z] == ecmFileConst.byte7 || ecmFileConst[z] == "throttlev" || ecmFileConst[z] == ecmFileConst.byte8) {
-                    setValue(ecmFileConst[z], setVolts(value[y]));
+                    document.getElementById(ecmFileConst[z]).value = (parseInt(value[y]) * 5 / 255).toFixed(1);
                 } else if (ecmFileConst[z] == "battery" || ecmFileConst[z] == ecmFileConst.byte4 || ecmFileConst[z] == "airfuel" || ecmFileConst[z] == ecmFileConst.byte20 || ecmFileConst[z] == "fuelpumpv" || ecmFileConst[z] == ecmFileConst.byte31) {
-                    try {
-                        setValue(ecmFileConst[z], (parseInt(value[y]) / 10).toFixed(1));
-                    } catch (error) {
-                        console.log("ERROR(" + ecmFileConst[z] + "): " + error);
-                    }
+                    document.getElementById(ecmFileConst[z]).value = (parseInt(value[y]) / 10).toFixed(1);
                 } else if (ecmFileConst[z] == "knockretard" || ecmFileConst[z] == ecmFileConst.byte17) {
-                    setValue(ecmFileConst[z], (45 * parseInt(value[y]) / 256).toFixed());
+                    document.getElementById(ecmFileConst[z]).value = (45 * parseInt(value[y]) / 256).toFixed();
                 } else if (ecmFileConst[z] == ecmFileConst.byte18) {
-                    let transState = numToBin(value[y]);
+                    let transState = ECM.numToBin(value[y]);
                     let tc = 7;
                     let title=true;
                     for (t in transState) {
@@ -2567,22 +2367,17 @@
                     injector = value[y];
                 } else if (ecmFileConst[z] == ecmFileConst.byte22) {
                     let newVal = ((parseInt(injector) * 256 + value[y]) / 65.536).toFixed();
-                    setValue(ecmFileConst[z], newVal);
+                    document.getElementById(ecmFileConst[z]).value = newVal;
                 } else if (ecmFileConst[z] == "o2bankR" || ecmFileConst[z] == ecmFileConst.byte25 || ecmFileConst[z] == "o2bankL" || ecmFileConst[z] == ecmFileConst.byte28) {
-                    setValue(ecmFileConst[z], (value[y] * 4.42).toFixed() * 0.001);
+                    document.getElementById(ecmFileConst[z]).value = (value[y] * 4.42).toFixed() * 0.001;
                 } else if (ecmFileConst[z] == ecmFileConst.byte32 || ecmFileConst[z] == "actempf") {
-                    try {
-                        setValue(ecmFileConst[z], ECM.ACEVAP[parseInt(value[y])]);
-                    } catch (error) {
-                        console.log("ERROR (AC-EVAP):" + error);
-                    }
-                } else if (ecmFileConst[z] == ecmFileConst.byte33) {
+                    document.getElementById(ecmFileConst[z]).value = ECM.ACEVAP[parseInt(value[y])];
                 } else if (ecmFileConst[z] == ecmFileConst.byte34 || ecmFileConst[z] == "sparkadvance") {
-                    setValue(ecmFileConst[z], (value[y] * 90 / 256).toFixed());
+                    document.getElementById(ecmFileConst[z]).value = (value[y] * 90 / 256).toFixed();
                 } else if (ecmFileConst[z] == "throttlep" || ecmFileConst[z] == ecmFileConst.byte35) {
-                    setValue(ecmFileConst[z], (value[y] / 2.55).toFixed());
+                    document.getElementById(ecmFileConst[z]).value = (value[y] / 2.55).toFixed();
                 } else if (ecmFileConst[z] == ecmFileConst.byte36) {
-                    let bitsSPI = numToBin(value[y]);
+                    let bitsSPI = ECM.numToBin(value[y]);
                     engStr += "<b style='color:yellow;'>SPI INPUT DISCRETES STATUS REGISTER #3:</b><br/><small style='color:aqua;'>(QDM FAULT CANNOT BE USED UNLESS ALL QDM OUTPUTS ARE CONTROLLED FOR TESTING)</small><br/>";
                     let tc = 7;
                     for (t in bitsSPI) {
@@ -2592,15 +2387,15 @@
                             engStr += "--A.I.R. DIVERT FLAG<br/>";
                         } else if (tc == 2) {
                             if (bitsSPI[t] == "1") {
-                                engStr += "LEFT, FRONT OXYGEN SENSOR [READY]<br/>";
+                                engStr += "[LEFT|FRONT] OXYGEN SENSOR [READY]<br/>";
                             } else if (bitsSPI[t] == "0") {
-                                engStr += "LEFT, FRONT OXYGEN SENSOR [NOT READY]<br/>";
+                                engStr += "[LEFT|FRONT] OXYGEN SENSOR [NOT READY]<br/>";
                             }
                         } else if (tc == 3) {
                             if (bitsSPI[t] == "1") {
-                                engStr += "RIGHT, REAR OXYGEN SENSOR [READY]<br/>";
+                                engStr += "[RIGHT|REAR] OXYGEN SENSOR [READY]<br/>";
                             } else if (bitsSPI[t] == "0") {
-                                engStr += "RIGHT, REAR OXYGEN SENSOR [NOT READY]<br/>";
+                                engStr += "[RIGHT|REAR] OXYGEN SENSOR [NOT READY]<br/>";
                             }
                         } else if (tc == 4 && bitsSPI[t] == "1") {
                             engStr += "--CLOSED LOOP A/F MODE ENABLED<br/>";
@@ -2614,7 +2409,7 @@
                         tc--;
                     }
                 } else if (ecmFileConst[z] == ecmFileConst.byte37 || ecmFileConst[z] == "ALDL-STATUS") {
-                    let bitsALDL = numToBin(value[y]);
+                    let bitsALDL = ECM.numToBin(value[y]);
                     let tc = 7;
                     let title = true;
                     for (t in bitsALDL) {
@@ -2645,7 +2440,7 @@
                         tc--;
                     }
                 } else if (ecmFileConst[z] == ecmFileConst.byte38 || ecmFileConst[z] == "fanOnOff") {
-                    let bits = numToBin(value[y]);
+                    let bits = ECM.numToBin(value[y]);
                     let tc = 7;
                     let tccStr = "";
                     let title = true;
@@ -2677,18 +2472,13 @@
                         }
                         tc--;
                     }
-                } else if (ecmFileConst[z] == ecmFileConst.byte39) {
-                    /* Not Used */
-                } else if (ecmFileConst[z] == ecmFileConst.byte40 || ecmFileConst[z] == "rpm") {
-                    setValue(ecmFileConst[z], (12.5 * value[y]).toFixed());
-                    if (DEBUG == 3) { console.log("12.5*value[y]:" + (12.5 * value[y]).toFixed()); }
                 } else if (ecmFileConst[z] == ecmFileConst.byte41 || ecmFileConst[z] == "acpsi") {
                     let newValPsi = (parseInt(value[y]) * 1.875 - 18.75).toFixed();
                     document.getElementById("acpsi").value = newValPsi;
                     let newValV = (parseInt(value[y]) * 5 / 255).toFixed(1);
                     document.getElementById("acv").value = newValV;
                 } else if (ecmFileConst[z] == ecmFileConst.byte42)/*"A-C STATUS"*/ {
-                    let bitsAC = numToBin(value[y]);
+                    let bitsAC = ECM.numToBin(value[y]);
                     let tc = 7;
                     let title = true;
                     for (t in bitsAC) {
@@ -2717,7 +2507,7 @@
                         tc--;
                     }
                 } else if (ecmFileConst[z] == ecmFileConst.byte43) {
-                    let brakes = numToBin(value[y]);
+                    let brakes = ECM.numToBin(value[y]);
                     let tc = 7;
                     for (t in brakes) {
                         if (tc == 5) {
@@ -2731,20 +2521,7 @@
                         tc--;
                     }
                 } else if (ecmFileConst[z] == ecmFileConst.byte44) {
-                    /*******************************************************************************
-                    * PRNDL DECODE TABLE FOR F CARS                                               *
-                    * ----------------------------------                                          *
-                    *    INP A   INP B   INP C    PRNDL POSITION                             *
-                    *    -----   -----   -----    --------------                             *
-                    *      0       1       1      DRIVE 4                                    *
-                    *      1       0       0      DRIVE 2                                    *
-                    *      1       1       0      REVERSE                                    *
-                    *      1       0       0      LOW                                        *
-                    *      0       1       0      NEUTRAL                                    *
-                    *      0       1       0      PARK                                       *
-                    *      0       0       1      DRIVE 3                                    *
-                    *******************************************************************************/
-                    let gear = numToBin(value[y]);
+                    let gear = ECM.numToBin(value[y]);
                     let gStr = "";
                     let tc = 7;
                     for (t in gear) {
@@ -2761,114 +2538,70 @@
                             } else if (tc == 4) {
                                 gStr += gear[t];
                             } else if (tc == 5 && gear[t] == "0") {
-                                engStr += "INJECTOR FAULT<br/>";
+                                engStr += "[ENGINE] INJECTOR FAULT<br/>";
                             }
                         }
                         tc--;
                     }
-
                     if (gStr == "011") {/*D4*/
                         document.getElementById("prndlDis2").innerHTML = " (Drive-4)";
-                        document.getElementById("manualDis2").innerHTML = " (4th)";
                     } else if (gStr == "100") {/*D2*/
                         document.getElementById("prndlDis2").innerHTML = " (Low / Drive-2)";
-                        document.getElementById("manualDis2").innerHTML = " (1st / 2nd)";
                     } else if (gStr == "110") {/*Reverse*/
                         document.getElementById("prndlDis2").innerHTML = " (Reverse)";
-                        document.getElementById("manualDis2").innerHTML = " (Reverse)";
                     } else if (gStr == "001") {/*D3*/
                         document.getElementById("prndlDis2").innerHTML = " (Drive-3)";
-                        document.getElementById("manualDis2").innerHTML = " (3rd)";
                     } else if (gStr == "010") {/*Park Nuetral*/
                         document.getElementById("prndlDis2").innerHTML = " (Park/Neutral)";
-                        document.getElementById("manualDis2").innerHTML = " (Park/Neutral)";
                     }
                 } else if (ecmFileConst[z] == ecmFileConst.byte45)/*MIL CODES*/ {
+                    document.getElementById(ecmFileConst[z]).value = value[y];
                     if (value[y] > 0) {
                         document.getElementById("checkEngineLight").hidden = false;
                     } else { document.getElementById("checkEngineLight").hidden = true; }
-                    setValue(ecmFileConst[z], value[y]);
-                    if (DEBUG == 3) { console.log("setValues-[" + z.toString() + "]:" + ecmFileConst[z] + value[y].toString()); }
                 } else if (ecmFileConst[z] == ecmFileConst.byte46) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "TCC DUTY CYCLE: " + ((value[y] / 2.55).toFixed(2)).toString() + " %<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte47) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "FORCE MOTOR DUTY CYCLE: " + (value[y] / 2.55).toFixed(2) + " %<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte48) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "3->2 DOWNSHIFT SOLENOID DUTY CYCLE: " + (value[y] / 2.55).toFixed(2) + " %<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte49) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "AMOUNT OF TCC SLIPPAGE MSB: " + value[y] + "<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte50) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "AMOUNT OF TCC SLIPPAGE LSB: " + (value[y] / 8).toFixed(2) + " (RPM)<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte51) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "FILTERED OUTPUT SHAFT SPEED MSB: " + value[y] + "<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte52) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "FILTERED OUTPUT SHAFT SPEED LSB: " + (value[y] / 8).toFixed(2) + " (RPM)<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte53) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "FILTERED INPUT SHAFT SPEED MSB: " + value[y] + "<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte54) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "FILTERED INPUT SHAFT SPEED LSB: " + (value[y] / 8).toFixed(2) + " (RPM)<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte55) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "COMMANDED PRESSURE: " + value[y] + " Psi<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte56) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "FORCE MOTOR COMMAND CURRENT: " + (value[y] / 51).toFixed(1) + " (AMPS)<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte57) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "FORCE MOTOR ACTUAL CURRENT: " + (value[y] / 51).toFixed(1) + " (AMPS)<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte58) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "CURRENT ADAPTIVE MODIFIER: " + value[y] + "<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte59) {
-                    //if (ECM.A_TRANSMISSION) {
                     let cCell = value[y];
                     if (cCell >= 0 && cCell <= 16) {
                         tranStr += "CURRENT ADAPTIVE CELL: " + (cCell / 0.16).toFixed() + " %<br/>";
                     } else {
                         tranStr += "CURRENT ADAPTIVE CELL: Invalid Reading<br/>";
                     }
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte60) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "1->2 SHIFT ERROR: " + (value[y] / 40).toFixed() + " (Sec)<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte61) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "2->3 SHIFT ERROR: " + (value[y] / 40).toFixed() + " (Sec)<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte62) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "1->2 SHIFT TIME: " + (value[y] / 40).toFixed() + " (Sec)<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte63) {
-                    //if (ECM.A_TRANSMISSION) {
                     tranStr += "2->3 SHIFT TIME: " + (value[y] / 40).toFixed() + " (Sec)<br/>";
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte64) {
-                    //if (ECM.A_TRANSMISSION) {
-                    let transState = numToBin(value[y]);
+                    let transState = ECM.numToBin(value[y]);
                     let tc = 7;
                     let title = true;
                     for (t in transState) {
@@ -2894,10 +2627,8 @@
                         }
                         tc--;
                     }
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte65) {
-                    //if (ECM.A_TRANSMISSION) {
-                    let transState = numToBin(value[y]);
+                    let transState = ECM.numToBin(value[y]);
                     let tc = 7;
                     let title = true;
                     for (t in transState) {
@@ -2923,10 +2654,8 @@
                         }
                         tc--;
                     }
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte66) {
-                    //if (ECM.A_TRANSMISSION) {
-                    let transState = numToBin(value[y]);
+                    let transState = ECM.numToBin(value[y]);
                     let tc = 7;
                     let title = true;
                     for (t in transState) {
@@ -2952,10 +2681,8 @@
                         }
                         tc--;
                     }
-                    //}
                 } else if (ecmFileConst[z] == ecmFileConst.byte67) {
-                    //if (ECM.A_TRANSMISSION) {
-                    let transState = numToBin(value[y]);
+                    let transState = ECM.numToBin(value[y]);
                     let tc = 7;
                     for (t in transState) {
                         if (transState[t] == "1") {
@@ -2975,38 +2702,21 @@
                         }
                         tc--;
                     }
-                    //}
-                    if (DEBUG == 1) { console.log("setValues [COMPLETE!]: " + y); }
-                } else if (ecmFileConst[z] == "NotUsed") {
-                    /* Skip */
-                } else if (ecmFileConst[z] == "TODO") {
-                    /* Skip */
                 } else {
-                    try {
-                        //if (y<ecmFileConst.length && y<value.length) {
-                        setValue(ecmFileConst[z], value[y]);
-                        //}
-                        //if (DEBUG==3) {console.log("setValues-["+ z.toString() +"]:" + ecmFileConst[z] + value[y].toString());}
-                    } catch (error) {
-                        console.error("ERROR setValues-ecmFileConst[" + z.toString() + "]:" + ecmFileConst[z] + " value[" + y + "]:" + value[y].toString(), error);
-                    }
+                    document.getElementById(ecmFileConst[z]).value = value[y];
                 }
             } catch (error) {
-                console.log("ERROR setValues" + ecmFileConst[z] + ": " + error);
+                console.error("ERROR setValues-ecmFileConst[" + z.toString() + "]:" + ecmFileConst[z] + " value[" + y + "]:" + value[y].toString(), error);
             }
             y++;
         }
         document.getElementById("EngineData").innerHTML = engStr;
-        //if (ECM.A_TRANSMISSION) {
         document.getElementById("TransData").innerHTML = tranStr;
-        //}
         rotateRPM();
         rotateMPH();
-    }
- /* End Function ----------------------------------------------------------------------- */
-
+    } /* -- [End] function -- */
+    
     //setTimeout(function() {checkCookie();}, 10000);
-
 </script>
 
 </html>
