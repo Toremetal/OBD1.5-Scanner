@@ -2,7 +2,8 @@
  **  ECM Class for data stream A278 (& A258).
  **    JavaScript ECM Serial Data Decoder
  **     for 95 3.4L SFI-66U (L32) VIN: S
- ** F-CAR WITH ELECTRONIC TRANSMISSION (4L60E)
+ ** A278: F-CAR WITH ELECTRONIC TRANS (4L60E)
+ **   A258: F-CAR WITH MANUAL TRANSMISSION
  ** ------------------------------------------
  ** SPECIFICATIONS FOR DATA STREAM INFORMATION
  **      DATA PIN: "M" ON 12 PIN DLC
@@ -13,15 +14,202 @@ class ECM278 {
 
     constructor() {
 
-        /** PUBLIC Variable: this.A_TRANSMISSION
+        /** Variable: this.A_TRANSMISSION
          * * A278-Automatic [true],
          * * A258-Manual [false]. */
         this.A_TRANSMISSION = false;
+        
+        this.COM_PORT = {
+            baudRate: 8192,
+            dataBits: 8,
+            stopBits: 1,
+            parity: "none"
+        };
+        
+        /** DATA-REQUEST Response validation. */
+        this.EcmCmdDisConnectDataStream = {
+            /* ----Mode [0] Response */
+            id: 0xE4,
+            messageLength: 0x56,
+            mode: 0x00
+        };
+
+        /** DATA-REQUEST Response validation. */
+        this.EcmCmdStopComDataStream = {
+            /* ----Mode [8] Response */
+            id: 0xE4,
+            messageLength: 0x56,
+            mode: 0x08
+        };
+
+        /** DATA-REQUEST Response validation. */
+        this.EcmCmdMilDataStream = {
+            /* ----Mode [1] Message(2) Response */
+            id: 0xE4,
+            messageLength: 0x6B,
+            mode: 0x01
+        };
+
+        /** DATA-REQUEST Response validation. */
+        this.EcmCmdVinDataStream = {
+            /* ----Mode [1] Message(4) Response */
+            id: 0xE4,
+            messageLength: 0x83,
+            mode: 0x01
+        };
+
+        /** DATA-REQUEST Response validation. */
+        this.EcmCmdEngineDataStream = {
+            /* ----Mode [1] Message(0) Response */
+            id: 0xE4,
+            messageLength: 0x99,
+            mode: 0x01
+        };
+
+        /** Ecm Cmds order number */
+        this.EcmCmdNums = {
+            engineDataCmdNum: 0,
+            milDataCmdNum: 1,
+            vinDataCmdNum: 2,
+            resetMilCmdNum: 3,
+            stopComCmdNum: 4,
+            disconnectEcmCmdNum: 5,
+            reset: 6,
+            fanon: 7,
+            fanoff: 8,
+            milon: 9,
+            miloff: 10,
+            evapon: 11,
+            evapoff: 12,
+            acon: 13,
+            acoff: 14,
+            egr1on: 15,
+            egr1off: 16,
+            egr2on: 17,
+            egr2off: 18,
+            egr3on: 19,
+            egr3off: 20,
+            idle6: 21,
+            idle8: 22,
+            idle10: 23,
+            idle12: 24,
+            ResetBLM: 25,
+            reset2: 26,
+            msg1: 27,
+            msg2: 28,
+            msg3: 29
+        };
+
+        /** DATA-REQUEST COMMANDS. */
+        this.EcmCmds = {
+/*0*/ engineDataCmd: new Uint8Array([0xE4, 0x57, 0x01, 0x00, 0xC4]),
+/*1*/  milDataCmd: new Uint8Array([0xE4, 0x57, 0x01, 0x02, 0xC2]),
+/*2*/  vinDataCmd: new Uint8Array([0xE4, 0x57, 0x01, 0x04, 0xC0]),
+/*3*/ resetMilCmd: new Uint8Array([0xE4, 0x56, 0x0A, 0xBC]),
+/*4*/  stopComCmd: new Uint8Array([0xE4, 0x56, 0x08, 0xBE]),
+/*5*/ disconnectEcmCmd: new Uint8Array([0xE4, 0x56, 0x00, 0xC6]),
+/*6*/    reset: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB6]),
+/*7*/    fanon: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB6]),
+/*8*/   fanoff: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x36]),
+/*9*/    milon: new Uint8Array([0xE4, 0x62, 0x04, 0x02, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB2]),
+/*10*/  miloff: new Uint8Array([0xE4, 0x62, 0x04, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB4]),
+/*11*/  evapon: new Uint8Array([0xE4, 0x62, 0x04, 0x10, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x96]),
+/*12*/ evapoff: new Uint8Array([0xE4, 0x62, 0x04, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xA6]),
+/*13*/    acon: new Uint8Array([0xE4, 0x62, 0x04, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB4]),
+/*14*/   acoff: new Uint8Array([0xE4, 0x62, 0x04, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB5]),
+/*15*/  egr1on: new Uint8Array([0xE4, 0x62, 0x04, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB6]),
+/*16*/ egr1off: new Uint8Array([0xE4, 0x62, 0x04, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x36]),
+/*17*/  egr2on: new Uint8Array([0xE4, 0x62, 0x04, 0x40, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x36]),
+/*18*/ egr2off: new Uint8Array([0xE4, 0x62, 0x04, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x76]),
+/*19*/  egr3on: new Uint8Array([0xE4, 0x62, 0x04, 0x20, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x76]),
+/*20*/ egr3off: new Uint8Array([0xE4, 0x62, 0x04, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x96]),
+/*21*/   idle6: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x30, 0x00, 0x00, 0x56]),
+/*22*/   idle8: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x40, 0x00, 0x00, 0x46]),
+/*23*/  idle10: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x50, 0x00, 0x00, 0x36]),
+/*24*/  idle12: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x60, 0x00, 0x00, 0x26]),
+/*25*/ResetBLM: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB6]),
+/*26*/  reset2: new Uint8Array([0xF9, 0x5B, 0x04, 0xA0, 0x00, 0x00, 0x00, 0x00, 0x08]),
+/*27*/    msg1: new Uint8Array([0xE4, 0x57, 0x07, 0x05, 0xB9]),
+/*28*/    msg2: new Uint8Array([0xE4, 0x57, 0x07, 0x0A, 0xB4]),
+/*29*/    msg3: new Uint8Array([0xE4, 0x57, 0x07, 0xF0, 0xCE])
+        };
+
+        this.CMDNAMES = Object.keys(this.EcmCmds);
+
+        /** Elements to Assign Values. */
+        this.ENGINE_DATA = {
+            byte1: "runtime",
+            byte2: "runtimelsb",
+            byte3: "coolanttempf",
+            byte4: "battery",
+            byte5: "airtempf",
+            byte6: "mapvolts",
+            byte7: "baro",
+            byte8: "throttlev",
+            byte9: "throttlep",
+            byte10: "tempf",
+            byte11: "mph",
+            byte12: "targetidle",
+            byte13: "NotUsed",
+            byte14: "rpm24x",
+            byte15: "gear",
+            byte16: "knock",
+            byte17: "knockretard",
+            byte18: "EGR STATUS",
+            byte19: "blm",
+            byte20: "airfuel",
+            byte21: "injp",
+            byte22: "injp",
+            byte23: "stftbankR",
+            byte24: "ltftbankR",
+            byte25: "o2bankR",
+            byte26: "stftbankL",
+            byte27: "ltftbankL",
+            byte28: "o2bankL",
+            byte29: "iac",
+            byte30: "miniac",
+            byte31: "fuelpumpv",
+            byte32: "actempf",
+            byte33: "NotUsed",
+            byte34: "sparkadvance",
+            byte35: "evap",
+            byte36: "SPI-INPUT-DISCRETES-STATUS-REGISTER-3",
+            byte37: "ALDL-STATUS",
+            byte38: "fanOnOff",
+            byte39: "NotUsed",
+            byte40: "rpm",
+            byte41: "acpsi",
+            byte42: "A-C STATUS",
+            byte43: "brakepressed",
+            byte44: "INJECTOR FAULT",
+            byte45: "milcodes",
+            byte46: "TCC DUTY CYCLE",
+            byte47: "ForcedMotorDutyCycle",
+            byte48: "DownshiftSolenoid",
+            byte49: "TCC SLIPPAGE MSB",
+            byte50: "TCC SLIPPAGE LSB",
+            byte51: "OUTPUT SHAFT SPEED MSB",
+            byte52: "OUTPUT SHAFT SPEED LSB",
+            byte53: "INPUT SHAFT SPEED MSB",
+            byte54: "INPUT SHAFT SPEED LSB",
+            byte55: "COMMANDED PRESSURE",
+            byte56: "FORCE MOTOR COMMAND CURRENT",
+            byte57: "FORCE MOTOR ACTUAL CURRENT",
+            byte58: "CURRENT ADAPTIVE MODIFIER",
+            byte59: "CURRENT ADAPTIVE CELL",
+            byte60: "1->2 SHIFT ERROR",
+            byte61: "2->3 SHIFT ERROR",
+            byte62: "1->2 SHIFT TIME",
+            byte63: "2->3 SHIFT TIME",
+            byte64: "TRANS SHIFT ADAPT STATUS",
+            byte65: "TRANS ADAPTIVE SHIFT CONDITION VIOLATIONS",
+            byte66: "TCC STATUS",
+            byte67: "TCC STATUS CONT",
+            length: 67
+        };
 
         /** Diagnostic Trouble Codes / Malfunction Indicator Light.
-         **  DTCCODES[(code + Byte# + bit#) as String]: returns value.
-         ** * note: values assigned parallel to byte stream read.
-         *  ----------------------------------------------------- */
+         ** DTCCODES[(code + Byte# + bit#) as String]: returns value. */
         this.DTCCODES = {
             code20: "",
             code21: "",
@@ -185,202 +373,19 @@ class ECM278 {
             code217: ""
         }; //this.MILCODEIDS = Object.keys(this.DTCCODES);
 
-        /** DATA-REQUEST Response validation. */
-        this.EcmCmdDisConnectDataStream = {
-            /* ----Mode [0] Response */
-            id: 0xE4,
-            messageLength: 0x56,
-            mode: 0x00
-        };
-
-        /** DATA-REQUEST Response validation. */
-        this.EcmCmdStopComDataStream = {
-            /* ----Mode [8] Response */
-            id: 0xE4,
-            messageLength: 0x56,
-            mode: 0x08
-        };
-
-        /** DATA-REQUEST Response validation. */
-        this.EcmCmdMilDataStream = {
-            /* ----Mode [1] Message(2) Response */
-            id: 0xE4,
-            messageLength: 0x6B,
-            mode: 0x01
-        };
-
-        /** DATA-REQUEST Response validation. */
-        this.EcmCmdVinDataStream = {
-            /* ----Mode [1] Message(4) Response */
-            id: 0xE4,
-            messageLength: 0x83,
-            mode: 0x01
-        };
-
-        /** DATA-REQUEST Response validation. */
-        this.EcmCmdEngineDataStream = {
-            /* ----Mode [1] Message(0) Response */
-            /* -byte id : Element id (DO NOT CHANGE VALUES) */
-            id: 0xE4,
-            messageLength: 0x99,
-            mode: 0x01
-        };
-
-        /** Elements to Assign Values. */
-        this.ENGINE_DATA = {
-            byte1: "runtime",
-            byte2: "runtimelsb",
-            byte3: "coolanttempf",
-            byte4: "battery",
-            byte5: "airtempf",
-            byte6: "mapvolts",
-            byte7: "baro",
-            byte8: "throttlev",
-            byte9: "throttlep",
-            byte10: "tempf",
-            byte11: "mph",
-            byte12: "targetidle",
-            byte13: "NotUsed",
-            byte14: "rpm24x",
-            byte15: "gear",
-            byte16: "knock",
-            byte17: "knockretard",
-            byte18: "byte18",
-            byte19: "blm",
-            byte20: "airfuel",
-            byte21: "injp",
-            byte22: "injp",
-            byte23: "stftbankR",
-            byte24: "ltftbankR",
-            byte25: "o2bankR",
-            byte26: "stftbankL",
-            byte27: "ltftbankL",
-            byte28: "o2bankL",
-            byte29: "iac",
-            byte30: "miniac",
-            byte31: "fuelpumpv",
-            byte32: "actempf",
-            byte33: "NotUsed",
-            byte34: "sparkadvance",
-            byte35: "evap",
-            byte36: "SPI-INPUT-DISCRETES-STATUS-REGISTER-3",
-            byte37: "ALDL-STATUS",
-            byte38: "fanOnOff",
-            byte39: "NotUsed",
-            byte40: "rpm",
-            byte41: "acpsi",
-            byte42: "A-C STATUS",
-            byte43: "brakepressed",
-            byte44: "byte44",
-            byte45: "milcodes",
-            byte46: "TCC DUTY CYCLE",
-            byte47: "ForcedMotorDutyCycle",
-            byte48: "DownshiftSolenoid",
-            byte49: "TCC SLIPPAGE MSB",
-            byte50: "TCC SLIPPAGE LSB",
-            byte51: "OUTPUT SHAFT SPEED MSB",
-            byte52: "OUTPUT SHAFT SPEED LSB",
-            byte53: "INPUT SHAFT SPEED MSB",
-            byte54: "INPUT SHAFT SPEED LSB",
-            byte55: "COMMANDED PRESSURE",
-            byte56: "FORCE MOTOR COMMAND CURRENT",
-            byte57: "byte57",
-            byte58: "byte58",
-            byte59: "byte59",
-            byte60: "byte60",
-            byte61: "byte61",
-            byte62: "byte62",
-            byte63: "byte63",
-            byte64: "byte64",
-            byte65: "byte65",
-            byte66: "byte66",
-            byte67: "byte67",
-            length: 69
-        };
-
-        /** Ecm Cmds order number */
-        this.EcmCmdNums = {
-            engineDataCmdNum: 0,
-            milDataCmdNum: 1,
-            vinDataCmdNum: 2,
-            resetMilCmdNum: 3,
-            stopComCmdNum: 4,
-            disconnectEcmCmdNum: 5,
-            reset: 6,
-            fanon: 7,
-            fanoff: 8,
-            milon: 9,
-            miloff: 10,
-            evapon: 11,
-            evapoff: 12,
-            acon: 13,
-            acoff: 14,
-            egr1on: 15,
-            egr1off: 16,
-            egr2on: 17,
-            egr2off: 18,
-            egr3on: 19,
-            egr3off: 20,
-            idle6: 21,
-            idle8: 22,
-            idle10: 23,
-            idle12: 24,
-            ResetBLM: 25,
-            reset2: 26,
-            msg1: 27,
-            msg2: 28,
-            msg3: 29
-        };
-
-        /** DATA-REQUEST COMMANDS. */
-        this.EcmCmds = {
-/*0*/ engineDataCmd: new Uint8Array([0xE4, 0x57, 0x01, 0x00, 0xC4]),
-/*1*/  milDataCmd: new Uint8Array([0xE4, 0x57, 0x01, 0x02, 0xC2]),
-/*2*/  vinDataCmd: new Uint8Array([0xE4, 0x57, 0x01, 0x04, 0xC0]),
-/*3*/ resetMilCmd: new Uint8Array([0xE4, 0x56, 0x0A, 0xBC]),
-/*4*/  stopComCmd: new Uint8Array([0xE4, 0x56, 0x08, 0xBE]),
-/*5*/ disconnectEcmCmd: new Uint8Array([0xE4, 0x56, 0x00, 0xC6]),
-/*6 */   reset: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB6]),
-/*7*/    fanon: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB6]),
-/*8*/   fanoff: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x36]),
-/*9*/    milon: new Uint8Array([0xE4, 0x62, 0x04, 0x02, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB2]),
-/*10*/  miloff: new Uint8Array([0xE4, 0x62, 0x04, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB4]),
-/*11*/  evapon: new Uint8Array([0xE4, 0x62, 0x04, 0x10, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x96]),
-/*12*/ evapoff: new Uint8Array([0xE4, 0x62, 0x04, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xA6]),
-/*13*/    acon: new Uint8Array([0xE4, 0x62, 0x04, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB4]),
-/*14*/   acoff: new Uint8Array([0xE4, 0x62, 0x04, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB5]),
-/*15*/  egr1on: new Uint8Array([0xE4, 0x62, 0x04, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB6]),
-/*16*/ egr1off: new Uint8Array([0xE4, 0x62, 0x04, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x36]),
-/*17*/  egr2on: new Uint8Array([0xE4, 0x62, 0x04, 0x40, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x36]),
-/*18*/ egr2off: new Uint8Array([0xE4, 0x62, 0x04, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x76]),
-/*19*/  egr3on: new Uint8Array([0xE4, 0x62, 0x04, 0x20, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x76]),
-/*20*/ egr3off: new Uint8Array([0xE4, 0x62, 0x04, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x96]),
-/*21*/   idle6: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x30, 0x00, 0x00, 0x56]),
-/*22*/   idle8: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x40, 0x00, 0x00, 0x46]),
-/*23*/  idle10: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x50, 0x00, 0x00, 0x36]),
-/*24*/  idle12: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x60, 0x00, 0x00, 0x26]),
-/*25*/ResetBLM: new Uint8Array([0xE4, 0x62, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB6]),
-/*26*/  reset2: new Uint8Array([0xF9, 0x5B, 0x04, 0xA0, 0x00, 0x00, 0x00, 0x00, 0x08]),
-/*27*/    msg1: new Uint8Array([0xE4, 0x57, 0x07, 0x05, 0xB9]),
-/*28*/    msg2: new Uint8Array([0xE4, 0x57, 0x07, 0x0A, 0xB4]),
-/*29*/    msg3: new Uint8Array([0xE4, 0x57, 0x07, 0xF0, 0xCE])
-        };
-
-        this.CMDNAMES = Object.keys(this.EcmCmds);
-
         /* Manifold Air Temp # vs AD (F). */
         this.ManifoldAirTempF = [
             -31.2, -30.5, -29.9, -29.2, -25.8, -22.5, -19.1, -15.7, -12.3, -8.9, -5.6, -2.2, 1.2, 4.6, 7.9, 11.3, 14.7, 18.0, 21.4, 24.8, 26.2, 27.7, 29.1, 30.5, 32.0, 33.4, 34.8, 36.3, 37.7, 39.1, 40.6, 42.0, 43.4, 44.9, 46.3, 47.8, 48.8, 49.8, 50.8, 51.8, 52.8, 53.8, 54.8, 55.8, 56.9, 57.9, 58.9, 59.9, 60.9, 61.9, 62.9, 64.0, 64.8, 65.6, 66.5, 67.3, 68.2, 69.0, 69.9, 70.7, 71.5, 72.4, 73.2, 74.1, 74.9, 75.8, 76.6, 77.4, 78.2, 79.0, 79.7, 80.5, 81.2, 82.0, 82.8, 83.5, 84.3, 85.0, 85.8, 86.6, 87.3, 88.1, 88.8, 89.6, 90.4, 91.1, 91.9, 92.6, 93.4, 94.2, 94.9, 95.7, 96.4, 97.2, 98.0, 98.7, 99.5, 100.2, 101.0, 101.8, 102.4, 103.1, 103.8, 104.4, 105.1, 105.8, 106.5, 107.2, 107.8, 108.5, 109.2, 109.8, 110.5, 111.2, 111.9, 112.6, 113.2, 113.9, 114.6, 115.3, 115.9, 116.6, 117.3, 117.9, 118.6, 119.3, 120.0, 120.7, 121.3, 122.0, 122.7, 123.3, 124.1, 124.9, 125.6, 126.4, 127.1, 127.9, 128.7, 129.4, 130.2, 130.9, 131.7, 132.5, 133.2, 134.0, 134.7, 135.5, 136.3, 137.2, 138.0, 138.9, 139.7, 140.6, 141.4, 142.3, 143.1, 143.9, 144.8, 145.6, 146.5, 147.3, 148.2, 149.0, 149.9, 150.9, 151.8, 152.7, 153.6, 154.6, 155.5, 156.4, 157.4, 158.3, 159.2, 160.1, 161.1, 162.0, 162.9, 163.9, 164.9, 165.9, 166.9, 167.9, 168.9, 169.9, 170.9, 171.9, 173.0, 174.0, 175.0, 176.0, 177.0, 178.0, 179.0, 180.1, 181.5, 182.9, 184.4, 185.8, 187.2, 188.7, 190.1, 191.5, 193.0, 194.4, 195.8, 197.3, 198.7, 200.1, 201.6, 203.0, 204.9, 206.9, 208.8, 210.8, 212.7, 214.6, 216.6, 218.5, 220.5, 222.4, 224.3, 226.3, 228.2, 230.2, 232.1, 234.1, 238.1, 242.1, 246.2, 250.3, 254.3, 258.4, 262.4, 266.5, 270.5, 274.5, 278.6, 282.6, 286.7, 290.8, 294.8, 294.8, 294.8, 294.8, 294.8, 294.8, 294.8, 294.8, 294.8, 294.8, 294.8, 294.8, 294.8, 294.8
         ];
 
         /* AC EVAP Temp # vs AD (F). */
-        this.ACEVAP = [126.5, 125.5, 125, 124.5, 123.5, 123, 122.5, 121.5, 121, 120.5, 119.5, 119, 118.5, 118, 117, 116.5, 116, 115, 114.5, 114, 113, 112.5, 112, 111.5, 110.5, 110, 109.5, 108.5, 108, 107.5, 106.5, 106, 105.5, 105, 104, 103.5, 103, 102, 101.5, 101, 100, 99.5, 99, 98.5, 97.5, 97, 96.5, 96, 95, 94.5, 93.5, 93, 92.5, 92, 91, 90.5, 90, 89.5, 88.5, 87.5, 86.5, 85.5, 84.5, 84, 83, 82, 81, 80.5, 79.5, 78.5, 78, 77, 76.5, 75.5, 74.5, 74, 73, 72.5, 71.5, 71, 70, 69.5, 69, 68, 67.5, 66.5, 66, 65.5, 64.5, 64, 63, 62.5, 62, 61, 60.5, 60, 59.5, 58.5, 58, 57.5, 56.5, 56, 55.5, 55, 54, 53.5, 53, 52.5, 52, 51, 50.5, 50, 49.5, 49, 48, 47.5, 47, 46.5, 46, 45.5, 44.5, 44, 43.5, 43, 42.5, 42, 41.5, 40.5, 40, 39.5, 39, 38.5, 38, 37.5, 37, 36, 35.5, 35, 34.5, 34, 33.5, 33, 32.5, 31.5, 31, 30.5, 30, 29.5, 29, 28.5, 28, 27.5, 26.5, 26, 25.5, 25, 24.5, 24, 23.5, 23, 22, 21.5, 21, 20.5, 19.5, 19, 18.5, 17.5, 17, 16.5, 15.5, 15, 14.5, 14, 13, 12.5, 12, 11, 10.5, 10, 9, 8.5, 8, 7.5, 6.5, 6, 5.5, 4.5, 4, 3.5, 2.5, 2, 1.5, 1, 0, -0.5, -1, -2, -2.5, -3, -4, -4.5, -5, -5.5, -6.5, -7, -7.5, -8.5, -9, -9.5, -10.5, -11, -11.5, -12, -13, -13.5, -14, -15, -15.5, -16, -17, -17.5, -18, -18.5, -19.5, -20, -20.5, -21.5, -22, -22.5, -23.5, -24, -24.5, -25, -26, -26.5, -27, -28, -28.5, -29, -30, -30.5, -31, -31.5, -32.5, -33, -33.5, -34.5, -35, -35.5, -36.5, -37, -37.5, -38, -39, -39.5];
+        this.ACEVAP = [
+            126.5, 125.5, 125, 124.5, 123.5, 123, 122.5, 121.5, 121, 120.5, 119.5, 119, 118.5, 118, 117, 116.5, 116, 115, 114.5, 114, 113, 112.5, 112, 111.5, 110.5, 110, 109.5, 108.5, 108, 107.5, 106.5, 106, 105.5, 105, 104, 103.5, 103, 102, 101.5, 101, 100, 99.5, 99, 98.5, 97.5, 97, 96.5, 96, 95, 94.5, 93.5, 93, 92.5, 92, 91, 90.5, 90, 89.5, 88.5, 87.5, 86.5, 85.5, 84.5, 84, 83, 82, 81, 80.5, 79.5, 78.5, 78, 77, 76.5, 75.5, 74.5, 74, 73, 72.5, 71.5, 71, 70, 69.5, 69, 68, 67.5, 66.5, 66, 65.5, 64.5, 64, 63, 62.5, 62, 61, 60.5, 60, 59.5, 58.5, 58, 57.5, 56.5, 56, 55.5, 55, 54, 53.5, 53, 52.5, 52, 51, 50.5, 50, 49.5, 49, 48, 47.5, 47, 46.5, 46, 45.5, 44.5, 44, 43.5, 43, 42.5, 42, 41.5, 40.5, 40, 39.5, 39, 38.5, 38, 37.5, 37, 36, 35.5, 35, 34.5, 34, 33.5, 33, 32.5, 31.5, 31, 30.5, 30, 29.5, 29, 28.5, 28, 27.5, 26.5, 26, 25.5, 25, 24.5, 24, 23.5, 23, 22, 21.5, 21, 20.5, 19.5, 19, 18.5, 17.5, 17, 16.5, 15.5, 15, 14.5, 14, 13, 12.5, 12, 11, 10.5, 10, 9, 8.5, 8, 7.5, 6.5, 6, 5.5, 4.5, 4, 3.5, 2.5, 2, 1.5, 1, 0, -0.5, -1, -2, -2.5, -3, -4, -4.5, -5, -5.5, -6.5, -7, -7.5, -8.5, -9, -9.5, -10.5, -11, -11.5, -12, -13, -13.5, -14, -15, -15.5, -16, -17, -17.5, -18, -18.5, -19.5, -20, -20.5, -21.5, -22, -22.5, -23.5, -24, -24.5, -25, -26, -26.5, -27, -28, -28.5, -29, -30, -30.5, -31, -31.5, -32.5, -33, -33.5, -34.5, -35, -35.5, -36.5, -37, -37.5, -38, -39, -39.5
+        ];
 
     } /* ================================ End Constructor ================================ */
 
-    /* ========================== *|
-     * Byte Conversion Algorythms.
-     * -------------------------- */
+    /* Byte Conversion Algorithms. */
     alphaToNumeric(l) {
         let nl = "0x" + l;
         let abn = parseInt(nl);
@@ -412,6 +417,5 @@ class ECM278 {
         }
         return -1;
     }
-    /* --------------- [END]: Byte Conversion Algorythms. ----------------- */
-
+    /* [END]: Byte Conversion Algorithms. */
 }
