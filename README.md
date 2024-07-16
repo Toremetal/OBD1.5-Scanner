@@ -8,7 +8,8 @@
 <br/>
   https://toremetal.com/OBD1.5-Scanner
 <br/><img src='https://github.com/Toremetal/OBD1.5-Scanner/assets/95604373/49ab1a04-93d2-41cc-8341-550e36890f0f'/>
-</p>
+<br/><sub>( Download Code.zip-file to use off-line )</sub>
+ </p>
  
  <!--<img src='https://github.com/Toremetal/OBD1.5-Scanner/assets/95604373/356b540d-90ee-4d64-ba7d-ce83bc5a74c8'/>-->
 <p align="center">     ***************************************************************************************
