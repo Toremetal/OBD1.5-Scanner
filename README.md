@@ -16,7 +16,7 @@
 <br/>                                    ™T©ReMeTaL Technology.
 <br/>                             Technology, Software, and Solutions.
 <br/>                              visit us at https://toremetal.com
-<br/>                             Copyright (C) 2024: ©2024™T©ReMeTaL.
+<br/>                             Copyright (C) ©2024™T©ReMeTaL.
 <br/>                             Computer Scientist: (David W. Rick).
 <br/>     **************************************************************************************
 </p>
