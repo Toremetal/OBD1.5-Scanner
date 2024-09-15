@@ -37,12 +37,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=2.0, user-scalable=1, shrink-to-fit=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=2.0, user-scalable=1, shrink-to-fit=yes" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta name="copyright" content="&#8482;T&#169;ReMeTaL" />
     <meta name="author" content="&#8482;T&#169;ReMeTaL" />
-    <meta name="Description" content="95 OBD 1.5 Scanner - Index">
+    <meta name="Description" content="95 OBD 1.5 Scanner">
     <title>OBD 1.5 Scanner - &#8482;T&#169;ReMeTaL</title>
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
@@ -108,7 +107,6 @@
                 </select>
                 <label for="transmissionType" style="font-size:x-small;margin-right:50px;">Transmission</label>
 
-
                 <div>
                     <code id="autoF" class="slidecontainer" hidden>
                       <label for="gear">Automatic- </label>
@@ -144,17 +142,17 @@
                     <input id="msg" style="border-radius:10px;cursor:pointer;" title="Check to Disable ECM(Eng) to ECM(ABS,Trans,etc.) Messaging." type="checkbox" />
                 </legend>
                 <legend style="min-width:414px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding-top:10px;cursor:default;">
-                    <!--<i title="Send Request Interval.">Request Data every, [1 sec = 1000 ms]</i>
-                    <input id="delayTimeValue" style="border-radius:10px;width:100px;" title="Stream Read delay."
-                        value="3000" type="number" min="10" max="10000" step="10"
-                        onchange='CMD_CONTROL.delayTime=parseInt(this.value);' /> ms
-                    <br />-->
+                    <i title="Send Request Interval.">Retry every,</i>
+                    <input id="delayTimeValue" style="border-radius:10px;width:100px;" title="Retry delay."
+                        value="9" type="number" min="1" max="100" step="1"
+                        onchange='CMD_CONTROL.delayTime=parseInt(this.value);' /> Reads
+                    <br />
                     <i title="Serial Read Interval." style="margin-bottom:-30px;">Send Cmd's every [1 sec = 1000 ms]</i>
                     <input id="loopTimeValue" style="border-radius:10px;width:100px;margin-bottom:-30px;"
-                        title="Read Interval. IMPORTANT!! Set BEFORE Connecting!" value="1000" type="number" min="100"
+                        title="Send Interval. IMPORTANT!! Set BEFORE Connecting!" value="1000" type="number" min="100"
                         max="10000" step="100" onchange='setSpeed(this.value)' /> ms
                     <br />
-                    <code title="IMPORTANT!! Make adjustments to Read Interval BEFORE Connecting!" style="color:orange;font-size:small;">IMPORTANT!!<br/>Make adjustments to Read Interval BEFORE Connecting!</code>
+                    <code title="IMPORTANT!! Make adjustments to Send Interval BEFORE Connecting!" style="color:orange;font-size:small;">IMPORTANT!!<br/>Make adjustments to Send Interval BEFORE Connecting!</code>
                 </legend>
                 <legend style="min-width:414px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px 1px 10px 10px;cursor:default;"
                     title="Data Cmd's">
@@ -936,7 +934,6 @@
                                                                 <input type="number" step="0.1" id="acv" name="acv"
                                                                     value="0.0" readonly>
                                                                 <small><b>V</b></small>
-                                                                
                                                                 <br />
                                                             </form>
                                                         </fieldset>
@@ -985,17 +982,17 @@
                                                     <td onclick='sH("b9")' id="b9" class="guage">
                                                         <fieldset align="center" class="hide">
                                                             <legend onclick='sH("b9")'>BLM Reset</legend>
-                                                            <form align="center">
-                                                                <button id="resetBlmBtn" class="btn resBtn"
+                                                            <div align="center">
+                                                                <button onclick="sendEcmCmd(ECM.EcmCmdNums.ResetBLM);" id="resetBlmBtn" class="btn resBtn"
                                                                     disabled>Reset BLM Value</button>
-                                                            </form>
+                                                            </div>
                                                         </fieldset>
                                                     </td>
                                                 </tr>
                                             </table>
                                         </div>
                                     </td>
-
+                                    
                                 </tr>
                                 <!--(6.2) end set of 3-->
                             </table>
@@ -1314,16 +1311,14 @@
         <table width="95%" align="center">
             <tr>
                 <td class="hide">
-
                     <!-- Copyright -->
                     <script>
                         function yrTitle() {
-                            const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL v: 24.9.1.4';
+                            const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL v: 24.9.1.5';
                         }
                         function yr() {
-                            const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL <sub> v: 24.9.1.4</sub>';
+                            const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL <sub> v: 24.9.1.5</sub>';
                         }
-                        /*document.write('<b style="color:#752975;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yr() + '" >' + yr() + "</b>");*/
                         document.write('<small onclick=window.open("https://toremetal.com") style="color:#752929;text-align: left;position: fixed;z-index:8; bottom: 6px; left: 5px;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yrTitle() + '" >' + yr() + "</small>");
                     </script>
                     <!-- End Copyright -->
@@ -1338,12 +1333,12 @@
         lastCmd: ECM.EcmCmdNums.noCmdNum,
         nextCmd: ECM.EcmCmdNums.vinDataCmdNum,
         sendCmd: ECM.EcmCmdNums.stopComCmdNum,
-        loopTime: 64,//128,//256
-        delayTime: 512,
+        loopTime: 64,
+        delayTime: 9,
         sendCnt:0,
         loopCount: 0,
         readCount: 0,
-        cdTime: Date.now(),
+        resetDelay: 0,
         scanCheck: false,
         firstrun: true,
         com: 0,
@@ -1374,7 +1369,6 @@
     document.getElementById("tcc").hidden = !ECM.A_TRANSMISSION;
     document.getElementById("autoF").hidden = !ECM.A_TRANSMISSION;
     document.getElementById("autoTranTemp").hidden = !ECM.A_TRANSMISSION;
-
     
     async function readSerialData(value) {
         let y = 0;
@@ -1402,10 +1396,7 @@
                 if (DEBUG == 2) { console.log("[VIN-DATA]-RECEIVED"); }
                 vinDataResponse = value.slice(parseInt(y + 3), parseInt(y + 21));
                 readVIN(vinDataResponse).then((vinStr) => {
-                    //document.getElementById("dashTitle").innerHTML = "Dash (vin:" + vinStr + ")";
                     if (CMD_CONTROL.firstrun) {
-                        //CMD_CONTROL.cdTime = Date.now();
-                        //while (!wait()) { };
                         sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
                     } else {
                         if (document.getElementById("scan").value != "On") {
@@ -1414,21 +1405,6 @@
                         cmdRunning(0);
                     }
                 });
-                /*let vinStr = "";
-                for (v = (y + 3); v < (y + 21); v++) {
-                    vinStr += String.fromCharCode(value[v]);
-                }
-                document.getElementById("dashTitle").innerHTML = "Dash (vin:" + vinStr + ")";
-                if (CMD_CONTROL.firstrun) {
-                    //CMD_CONTROL.cdTime = Date.now();
-                    //while (!wait()) { };
-                    sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
-                } else {
-                    if (document.getElementById("scan").value != "On") {
-                        sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
-                    } else {CMD_CONTROL.scanCheck = true;}
-                    cmdRunning(0);
-                }*/
                 break;
             } else if ((CMD_CONTROL.mil == 0) && (y + 25 <= value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdMilDataStream)) {// && CMD_CONTROL.mil == 0
                 CMD_CONTROL.mil = 1;
@@ -1449,21 +1425,19 @@
                     });
                 } else {
                     if (DEBUG == 2) {console.log("[CHECKSUM(MIL)]:bad");}
-                    //CMD_CONTROL.mil = 0;
                     sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
                 }
                 break;
-            } else if ((CMD_CONTROL.eng == 0) && (y + 71 /*69 70*/< value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdEngineDataStream)) {// && CMD_CONTROL.eng == 0
+            } else if ((CMD_CONTROL.eng == 0) && (y + 70 /*69 70*/< value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdEngineDataStream)) {// && CMD_CONTROL.eng == 0
                 CMD_CONTROL.eng = 1;
                 if (DEBUG == 2) {console.log("[ENGINE-DATA]-RECEIVED");}
                 let results = value.slice(parseInt(y), parseInt(y + 71));
-                engCheckSum = results[70].toString();
+                engCheckSum = results[70];
                 tmpEngineDataResponse = results.slice(0, 70);
-                //let checkSumsTest = checkSum(tmpEngineDataResponse);
-                checkSumTest(tmpEngineDataResponse).then((checkSumsTest) => {
+                checkSumTest(tmpEngineDataResponse, engCheckSum).then((checkSumsTest) => {
                     let validCheckSum = document.getElementById("validate").checked == false;
-                    console.log("(eng)CHECKSUM[" + checkSumsTest + "=" + engCheckSum + "] " + (checkSumsTest == engCheckSum).toString());
-                    if (checkSumsTest == engCheckSum) {
+                    console.log("(eng)CHECKSUM[" + checkSumsTest + "=" + engCheckSum.toString() + "] " + (checkSumsTest == engCheckSum).toString());
+                    if (checkSumsTest) {
                         validCheckSum = true;
                         console.log("[CHECKSUM(ENG)]:ok");
                         //alert("[CHECKSUM(ENG)]:ok");
@@ -1481,33 +1455,9 @@
                             }
                         });
                     } else {
-                        //CMD_CONTROL.eng = 0;
                         sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
                     }
                 });
-                /*let validCheckSum = document.getElementById("validate").checked == false;
-                console.log("(eng)CHECKSUM[" + checkSumsTest + "=" + engCheckSum + "] " + (checkSumsTest == engCheckSum).toString());
-                if (checkSumsTest == engCheckSum) {
-                    validCheckSum=true;
-                    console.log("[CHECKSUM(ENG)]:ok");
-                    //alert("[CHECKSUM(ENG)]:ok");
-                } else {
-                    console.log("[CHECKSUM(ENG)]:bad");
-                }
-                if (validCheckSum) {
-                    engineDataResponse = tmpEngineDataResponse.slice(3, tmpEngineDataResponse.length);
-                    readEngine(ECM.ENGINE_DATA, engineDataResponse).then((value) => {
-                        if (CMD_CONTROL.firstrun) {
-                            sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
-                        } else {
-                            if (document.getElementById("scan").value != "On") {sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);} else {CMD_CONTROL.scanCheck = true;}
-                            cmdRunning(0);
-                        }
-                    });
-                } else {
-                    //CMD_CONTROL.eng = 0;
-                    sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
-                }*/
                 break;
             }
             } catch (error) {
@@ -1545,22 +1495,26 @@
             } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.stopComCmdNum && EcmStream.length >= 4) {
                 CMD_CONTROL.com = 0;
                 readSerialData(EcmStream); 
-            } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.engineDataCmdNum && EcmStream.length >= 76) {
+            } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.engineDataCmdNum && EcmStream.length >= 75) {
                 CMD_CONTROL.eng = 0;
                 engineDataResponseT = EcmStream.slice(0, EcmStream.length);
-                readSerialData(engineDataResponseT);//readSerialData(EcmStream);
+                readSerialData(engineDataResponseT);
             } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.vinDataCmdNum && EcmStream.length >= 25) {
                 CMD_CONTROL.vin = 0;
                 readSerialData(EcmStream);
             } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.milDataCmdNum && EcmStream.length >= 29) {
                 CMD_CONTROL.mil = 0;
                 milDataResponseT = EcmStream.slice(0, EcmStream.length);
-                readSerialData(milDataResponseT);//readSerialData(EcmStream);
-            } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.reset) {
-                sendEcmCmd(ECM.EcmCmdNums.reset2);
-            } else if (CMD_CONTROL.lastCmd > ECM.EcmCmdNums.disconnectEcmCmdNum && CMD_CONTROL.lastCmd < ECM.EcmCmdNums.noCmdNum) {
-                //CMD_CONTROL.eng = 0;
-                sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
+                readSerialData(milDataResponseT);
+            } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.reset || CMD_CONTROL.resetDelay > 0) {
+                if (CMD_CONTROL.resetDelay > 1) {
+                    CMD_CONTROL.resetDelay = 0;
+                    sendEcmCmd(ECM.EcmCmdNums.reset2);
+                } else {
+                    CMD_CONTROL.resetDelay++;
+                }
+            } else if (CMD_CONTROL.lastCmd > ECM.EcmCmdNums.disconnectEcmCmdNum && CMD_CONTROL.lastCmd <= ECM.EcmCmdNums.noCmdNum) {
+                CMD_CONTROL.scanCheck = true;
             } else if (CMD_CONTROL.lastCmd >= ECM.EcmCmdNums.msg1 && CMD_CONTROL.lastCmd <= ECM.EcmCmdNums.msg3) {
                 CMD_CONTROL.scanCheck = true;
             }
@@ -1616,13 +1570,12 @@
                 }
                 if (document.getElementById("sendingEcmCmd").checked) {
                     writeData(myport);
-                } else if (CMD_CONTROL.lastCmd < ECM.EcmCmdNums.msg1 && CMD_CONTROL.loopCount > 9) {
+                } else if (CMD_CONTROL.lastCmd < ECM.EcmCmdNums.msg1 && CMD_CONTROL.loopCount > CMD_CONTROL.delayTime) {
                     writeData(myport);
                 } else if (CMD_CONTROL.scanCheck && document.getElementById("scan").value == "On") {
                     let autoMsg = !document.getElementById("msg").checked;
                     if (CMD_CONTROL.msg == 0) {
                         CMD_CONTROL.msg = 1;
-                        //CMD_CONTROL.eng = 0;
                         CMD_CONTROL.nextCmd = ECM.EcmCmdNums.engineDataCmdNum;
                         CMD_CONTROL.sendCnt = 0;
                         sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);
@@ -1637,7 +1590,6 @@
                         if (autoMsg) {sendEcmCmd(ECM.EcmCmdNums.msg3);} else {sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);}
                     } else if (CMD_CONTROL.msg == 4) {
                         CMD_CONTROL.msg = 1;
-                        //CMD_CONTROL.eng = 0;
                         sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
                     }
                 }
@@ -1709,9 +1661,11 @@
             document.getElementById("scan").disabled = true;
             document.getElementById("wait").hidden = false;
         } else {
-            document.getElementById("Mode1").disabled = false;
-            document.getElementById("Mode4").disabled = false;
-            document.getElementById("Mode2").disabled = false;
+            if (document.getElementById("scan").value == "Rpt") {
+                document.getElementById("Mode1").disabled = false;
+                document.getElementById("Mode4").disabled = false;
+                document.getElementById("Mode2").disabled = false;
+            }
             document.getElementById("resetMilBtn").disabled = false;
             document.getElementById("resetBlmBtn").disabled = false;
             document.getElementById("disconnect").disabled = false;
@@ -1727,17 +1681,6 @@
             return new Uint8Array([document.getElementById("s0").value, document.getElementById("s1").value, document.getElementById("s2").value, document.getElementById("s3").value]);
         } else {
             return new Uint8Array([document.getElementById("e0").value, document.getElementById("e1").value, document.getElementById("e2").value, document.getElementById("e3").value, document.getElementById("e4").value]);
-        }
-    }
-
-    /* adds delay for processing to prevent data corruption.*/
-    function wait() {
-        let currentTime = Date.now();
-        if (parseInt(currentTime - CMD_CONTROL.cdTime) >= parseInt(CMD_CONTROL.delayTime)) {
-            CMD_CONTROL.cdTime = Date.now();
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -1886,7 +1829,8 @@
         }
         return "";
     }
-
+    
+    /* Cookies are blocked when using offline, (Not-Used) */
     function checkCookie() {
         let allowCookies = getCookie("allowCookies");
         if (allowCookies == "" || allowCookies == null) {
@@ -1923,14 +1867,14 @@
     }
     
     /* ENGINE DATA CHECKSUM TEST */
-    async function checkSumTest(num) {
+    async function checkSumTest(num, engCheckSum) {
         let sum = 0;
         for (c in num) {
             let nVal = (256 - parseInt(num[c]));
             sum = sum + nVal;
         }
         let retVal = (sum % 256);
-        return retVal.toString();
+        return retVal == engCheckSum;
     }
     
     /* VIN SERIAL DATA HANDLER. */
@@ -1961,7 +1905,6 @@
                                 dtcStr += MilCode + "<br/>";
                             }
                         }
-
                     } catch (error) {
                         console.error("ERROR (value[" + k + "]:" + value[k] + " dtcCode:" + dtcCode + ") " + " bit:" + tc, error);
                     }
@@ -1989,7 +1932,7 @@
                     rotateRPM();
                     rotateMPH();
                     if (DEBUG) { console.log("BytesProcessed:" + y + " [ENGINE COMPLETE]"); }
-                    return;
+                    return 0;
                 } else if (ecmFileConst[z] == "NotUsed" || ecmFileConst[z] == "TODO" || (ecmFileConst[z] == ecmFileConst.byte33 && y == 32) || (ecmFileConst[z] == ecmFileConst.byte39 && y == 38)) {
                     /* Skip */
                     if (DEBUG) { console.log(y + ":(Not-Used)" + value[y]); }
@@ -2050,7 +1993,6 @@
                     injector = value[y];
                     if (DEBUG) { console.log(y + "|" + ecmFileConst[z] + "(injector): " + value[y]); }
                 } else if (ecmFileConst[z] == ecmFileConst.byte22 && y == 21) {
-                    //let newVal = ((parseInt(injector) * 256 + value[y]) / 65.536).toFixed();
                     document.getElementById(ecmFileConst[z]).value = ((parseInt(injector) * 256 + value[y]) / 65.536).toFixed();
                     if (DEBUG) { let newVal = ((parseInt(injector) * 256 + value[y]) / 65.536).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
                 } else if (ecmFileConst[z] == "o2bankR" || (ecmFileConst[z] == ecmFileConst.byte25 && y == 24) || ecmFileConst[z] == "o2bankL" || (ecmFileConst[z] == ecmFileConst.byte28 && y == 27)) {
@@ -2429,14 +2371,9 @@
             }
             y++;
         }
-        //document.getElementById("EngineData").innerHTML = engStr;
-        //document.getElementById("TransData").innerHTML = tranStr;
-        //rotateRPM();
-        //rotateMPH();
         //return;
     } /* -- [End] function -- */
     
-    //setTimeout(function() {checkCookie();}, 10000);
 </script>
-
+    
 </html>
