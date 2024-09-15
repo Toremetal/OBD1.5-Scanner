@@ -29,7 +29,7 @@
     ~    SOFTWARE.
     ~    Created with best intent, Use at your own risk.
     ~    ™T©ReMeTaL Assumes No Liability of any kind.
-    ~UTF-8
+    ~
     ~   ************************************************************************
     -->
     <meta http-equiv="language" content="en_US">
@@ -38,7 +38,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=1, shrink-to-fit=yes" />
+        content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=2.0, user-scalable=1, shrink-to-fit=yes" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta name="copyright" content="&#8482;T&#169;ReMeTaL" />
     <meta name="author" content="&#8482;T&#169;ReMeTaL" />
@@ -46,416 +46,21 @@
     <title>OBD 1.5 Scanner - &#8482;T&#169;ReMeTaL</title>
     <link rel="icon" href="img/favicon.png" type="image/png" />
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-    <link href="font/im-fell-english-sc.css" rel="stylesheet" />
+    <link href="font/obdscanner.css" rel="stylesheet" />
     <script src="ds/ECM278.js"></script>
-    <style>
-        
-        * {
-            text-shadow: 0.5px 0.5px 1px ThreeDFace, 0 0 0.1em ThreeDLightShadow, 0 0 0 ThreeDDarkShadow;
-
-            font-family: 'IM Fell English SC', serif;
-            width: auto;
-            padding: 0 1px 0;
-            margin: 1px;
-        }
-
-        .data {
-            font-family: "Lucida Console", "Courier New", monospace;
-            color: #6ea4fa;
-            font-size: larger;
-            height: 330px;
-            padding: 4px;
-            border-radius: 8px;
-            border: solid 0.4px #cbc9c9;
-            text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            background: transparent;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            overflow: auto;
-        }
-
-        #sdata {
-            color: red;
-            font-size: larger;
-            height: 330px;
-            padding: 4px;
-            border-radius: 8px;
-            border: solid 0.4px #cbc9c9;
-            text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            background: transparent;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            overflow: auto;
-        }
-
-        #sdata.i {
-            color: green;
-        }
-
-        .chromeBorder {
-            box-sizing: border-box;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, .31);
-            border: 1px solid rgb(177, 176, 176);
-            border: inset 10px #57F2FF;
-            border-style: groove ridge ridge groove;
-            border-style: outset inset inset outset;
-            border-radius: 35%;
-            padding-top: 0;
-            padding-bottom: 0;
-            height: fit-content;
-            opacity: 0.7;
-            background: transparent;
-            border: none;
-            box-shadow: none;
-            padding: 0 0 0 0;
-        }
-
-        #shact {
-            color: darkgreen;
-            font-size: 20px;
-            padding: 4px;
-            border: solid 0.4px #cbc9c9;
-            text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            background: transparent;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            cursor: default;
-            width: fit-content;
-            margin: 0 auto;
-            padding: 0 120px;
-            border-radius: 2px;
-            border-start-start-radius: 20px;
-            border-start-end-radius: 20px;
-        }
-
-        #shact:hover {
-            color: red;
-            border: solid 0.5px #cbc9c9;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.09);
-            opacity: 0.8;
-            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.09);
-            -webkit-transition: all .3s ease-in-out;
-            -moz-transition: all .3s ease-in-out;
-            -o-transition: all .3s ease-in-out;
-            transition: all .3s ease-in-out;
-        }
-
-        .tab {
-            color: darkgreen;
-            font-size: 20px;
-            padding: 4px;
-            border: solid 0.4px #cbc9c9;
-            text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            background: transparent;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            cursor: default;
-            width: fit-content;
-            margin: 0 auto;
-            padding: 0 120px;
-            border-radius: 2px;
-            border-start-start-radius: 20px;
-            border-start-end-radius: 20px;
-        }
-
-        .resBtn {
-            border-radius: 16px;
-        }
-
-
-        .wait {
-            width: 300px;
-            height: 60px;
-            background-color: red;
-            border-radius: 10px;
-            padding-top: 20px;
-            position: absolute;
-            z-index: 2;
-            animation-name: example;
-            animation-duration: 9s;
-            animation-iteration-count: infinite;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.09);
-            opacity: 0.8;
-            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.09);
-            -webkit-transition: all .3s ease-in-out;
-            -moz-transition: all .3s ease-in-out;
-            -o-transition: all .3s ease-in-out;
-            transition: all .3s ease-in-out;
-        }
-
-        @keyframes example {
-            0% {
-                background-color: red;
-                color: green;
-                left: 1%;
-                top: 70px;
-            }
-
-            14% {
-                background-color: yellow;
-                color: blue;
-                left: 38%;
-                top: 70px;
-            }
-
-            28% {
-                background-color: blue;
-                color: yellow;
-                left: 76%;
-                top: 70px;
-            }
-
-            42% {
-                background-color: green;
-                color: red;
-                left: 38%;
-                top: 70px;
-            }
-
-            56% {
-                background-color: orange;
-                color: blue;
-                left: 1%;
-                top: 70px;
-            }
-
-            70% {
-                background-color: red;
-                color: green;
-                left: 38%;
-                top: 70px;
-            }
-
-            84% {
-                background-color: yellow;
-                color: blue;
-                left: 76%;
-                top: 70px;
-            }
-
-            98% {
-                background-color: blue;
-                color: yellow;
-                left: 38%;
-                top: 70px;
-            }
-        }
-
-        .btn {
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            color: orangered;
-            padding: 3.5px;
-            border: solid 0.5px #cbc9c9;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.09);
-            opacity: 0.8;
-            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.09);
-            -webkit-transition: all .3s ease-in-out;
-            -moz-transition: all .3s ease-in-out;
-            -o-transition: all .3s ease-in-out;
-            transition: all .3s ease-in-out;
-            -webkit-transform: scale(0.95);
-            -ms-transform: scale(0.95);
-            -moz-transform: scale(0.95);
-            -o-transform: scale(0.95);
-            transform: scale(0.95);
-        }
-
-        input[type=number] {
-            font-size: xx-large;
-            font-family: 'IM Fell English SC', serif;
-            width: 78px;
-            padding: 0 0 0 9px;
-            margin: -10px 0 12px;
-            text-align: center;
-            color: orangered;
-            background: transparent;
-            box-sizing: border-box;
-            border-radius: 6px;
-            border: ridge 0.4px #cbc9c9;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-        }
-
-        td {
-            border-radius: 40%;
-            border: ridge 0.4px #cbc9c9;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            background: transparent;
-            background-color: #36454F;
-        }
-
-        td .td1 {
-            border-radius: 5%;
-            border: ridge 0.4px #cbc9c9;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            background: transparent;
-        }
-
-        .td2 {
-            border-radius: 5px;
-            border: none;
-            box-shadow: none;
-            background: transparent;
-        }
-
-        fieldset {
-            min-width: 160px;
-            border-radius: 40%;
-            border: ridge 0.4px #cbc9c9;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            background: transparent;
-        }
-
-        legend {
-            color: darkgreen;
-            font-size: 20px;
-            padding: 4px;
-            border-radius: 50%;
-            border: solid 0.4px #cbc9c9;
-            text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-            background: #D1E1F6;
-            cursor: pointer;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.31);
-        }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        .switch input:checked+.slider {
-            background-color: #2196F3;
-        }
-
-        .switch input:focus+.slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
-
-        .switch input:checked+.slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
-
-        form {
-            background: transparent;
-        }
-
-        table {
-            border: none;
-            background: transparent;
-        }
-
-        /* Rounded sliders */
-        .slider.round {
-            border-radius: 34px;
-        }
-
-        .slider.round:before {
-            border-radius: 50%;
-        }
-
-
-        .slidecontainer {
-            width: 180px;
-        }
-
-        .slider2 {
-            -webkit-appearance: none;
-            appearance: none;
-            height: 12px;
-            border-radius: 5px;
-            background: #d3d3d3;
-            outline: none;
-            opacity: 0.7;
-            -webkit-transition: .2s;
-            transition: opacity .2s;
-        }
-
-        .slider2:hover {
-            opacity: 1;
-        }
-
-        .slider2::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background: #04AA6D;
-            cursor: pointer;
-        }
-
-        .slider2::-moz-range-thumb {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background: #04AA6D;
-            cursor: pointer;
-        }
-
-        .hide {
-            background: transparent;
-            border: none;
-            box-shadow: none;
-            padding: 0 0 0 0;
-        }
-
-        .scanControl {
-            opacity: 0.9;
-            background-color: #0f0f0f;
-        }
-
-        .guage {
-            background-image: url('img/blank-guage.png');
-            background-repeat: no-repeat;
-            width: 200px;
-            height: 200px;
-            padding: 0;
-        }
-        
-    </style>
+    <!--
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8927593002808864" crossorigin="anonymous"></script>
+    -->
 </head>
 
-<body bgcolor="#000000" text="#303020" link="#006677" vlink="#334460" alink="#cc0055"><!--onload="checkCookie()"-->
+<body><!--onload="checkCookie()"-->
     <div align="center">
         <header>
             <i style="position:absolute;top:4px;right:4px;z-index:1;">
                 <img title="&#8482;T&#169;ReMeTaL" alt="&#8482;T&#169;ReMeTaL" src="img/toremetal.png"
                     style="width:108px;height:74px;border-radius:25%;" />
                 <br />
-                &#8482;T&#169;ReMeTaL</i>
+                <a href="https://toremetal.com" target="_blank">&#8482;T&#169;ReMeTaL</a></i>
             <fieldset class="scanControl">
 
                 <div hidden id="wait" class="wait" align="center">-Connecting to ECM-<br />Please Wait</div>
@@ -466,8 +71,7 @@
                     type="button" onclick="disconnectECM();" disabled />
                 <input id="connected" type="checkbox" disabled />
                 <input title="Connect to Ecm" style="cursor:pointer;" id="connect" value="Connect to ECM" type="button"
-                    onclick='getSerialPortInfo();' />
-                |
+                    onclick="if ('serial' in navigator) {getSerialPortInfo();} else {alert('OBD-1.5 SCANNER:\r\nSupport for Serial Web API not enabled.\r\nPlease enable it using chrome://flags/ and enable Experimental Web Platform features');}" />
                 <fieldset
                     style="border-radius:10px;width:fit-content;display:inline-flex;float:left;margin:12px 0 0 140px;background-color:#18c7f245;padding-left:8px;padding-right:8px;">
                     <legend
@@ -475,16 +79,16 @@
                         Scans</legend>
 
                     <input style="cursor:pointer;" disabled type="radio" id="Mode1"
-                        onclick="cmdRunning(1);CMD_CONTROL.com=0;CMD_CONTROL.eng=0;CMD_CONTROL.nextCmd=ECM.EcmCmdNums.engineDataCmdNum;sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);"
+                        onclick="cmdRunning(1);CMD_CONTROL.nextCmd=ECM.EcmCmdNums.engineDataCmdNum;sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);"
                         name="idle" value="Mode1" title="Request Engine Data">
                     <label for="Mode1">ENG</label>
 
                     <input style="cursor:pointer;" disabled type="radio" id="Mode2"
-                        onclick="cmdRunning(1);CMD_CONTROL.com=0;CMD_CONTROL.mil=0;CMD_CONTROL.nextCmd=ECM.EcmCmdNums.milDataCmdNum;sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);"
+                        onclick="cmdRunning(1);CMD_CONTROL.nextCmd=ECM.EcmCmdNums.milDataCmdNum;sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);"
                         name="idle" value="Mode2" title="Request MIL Codes.">
                     <label for="Mode2">MIL</label>
                     <input style="cursor:pointer;" disabled type="radio" id="Mode4"
-                        onclick="cmdRunning(1);CMD_CONTROL.com=0;CMD_CONTROL.vin=0;CMD_CONTROL.nextCmd=ECM.EcmCmdNums.vinDataCmdNum;sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);"
+                        onclick="cmdRunning(1);CMD_CONTROL.nextCmd=ECM.EcmCmdNums.vinDataCmdNum;sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);"
                         name="idle" value="Mode4" title="Update VIN Data">
                     <label for="Mode4">VIN</label>
                 </fieldset>
@@ -493,9 +97,6 @@
 
                 [<input id="sendingEcmCmd" type="checkbox" disabled />
                 <label for="sendingEcmCmd">Send Request</label> ]
-
-                [<input id="resettingMil" type="checkbox" disabled />
-                <label for="resettingMil">Reset MIL</label>]
 
                 <input type="button" id="fs" value="F Screen" style="cursor:pointer;" onclick="getFScreen()" />
                 |
@@ -538,9 +139,11 @@
                     <i style="color:yellow;">Gnd to Pins <sup style="color:goldenrod;font-size:larger;">4</sup> <small>&</small> <sup style="font-size:larger;color:gold;">5<small><sub style="color:grey;font-size:small;">( A on 12 pin-dlc )</sub></small></sup>.</i>
                 </legend>
                 <legend style="min-width:414px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding:4px 4px;cursor:default;"
-                    title="Validate Check-Sum">
-                    <i title="Un-Check if Not Reading Engine Data.">Verify Engine Data Check-Sum</i>
+                    title="Scan Settings">
+                    <i title="Un-Check if Not Receiving Engine Data.">Verify Engine Data Check-Sum</i>
                     <input id="validate" style="border-radius:10px;cursor:pointer;" title="Not-Compatible with all OS's." type="checkbox" />
+                    <br/><i title="Check to Disable ECM(Eng) to ECM(ABS,Trans,etc.) Messaging.">(Rpt-On) Disable ECM Messages</i>
+                    <input id="msg" style="border-radius:10px;cursor:pointer;" title="Check to Disable ECM(Eng) to ECM(ABS,Trans,etc.) Messaging." type="checkbox" />
                 </legend>
                 <legend style="min-width:414px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding-top:10px;cursor:default;">
                     <!--<i title="Send Request Interval.">Request Data every, [1 sec = 1000 ms]</i>
@@ -548,7 +151,7 @@
                         value="3000" type="number" min="10" max="10000" step="10"
                         onchange='CMD_CONTROL.delayTime=parseInt(this.value);' /> ms
                     <br />-->
-                    <i title="Serial Read Interval." style="margin-bottom:-30px;">Read Data every [1 sec = 1000 ms]</i>
+                    <i title="Serial Read Interval." style="margin-bottom:-30px;">Send Cmd's every [1 sec = 1000 ms]</i>
                     <input id="loopTimeValue" style="border-radius:10px;width:100px;margin-bottom:-30px;"
                         title="Read Interval. IMPORTANT!! Set BEFORE Connecting!" value="1000" type="number" min="100"
                         max="10000" step="100" onchange='setSpeed(this.value)' /> ms
@@ -1438,7 +1041,7 @@
                         style="cursor:default;width:auto;margin:0 auto;padding:0 60px;border-radius:2px;border-start-start-radius:20px;border-start-end-radius:20px;">
                         Diagnostic Trouble Codes
                         &nbsp;&nbsp;&nbsp; &nbsp;
-                        <button id="resetMilBtn" onclick="resetMil()" class="btn resBtn" disabled>
+                        <button id="resetMilBtn" onclick="sendEcmCmd(ECM.EcmCmdNums.resetMilCmdNum)" class="btn resBtn" disabled>
                             Reset MIL Codes
                         </button>
                     </legend>
@@ -1716,11 +1319,14 @@
 
                     <!-- Copyright -->
                     <script>
+                        function yrTitle() {
+                            const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL v: 24.9.1.4';
+                        }
                         function yr() {
-                            const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL <small> v: 2024.07.1.3</small>';
+                            const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL <sub> v: 24.9.1.4</sub>';
                         }
                         /*document.write('<b style="color:#752975;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yr() + '" >' + yr() + "</b>");*/
-                        document.write('<small onclick=window.open("https://toremetal.com") style="color:#752929;text-align: left;position: fixed;z-index:8; bottom: 6px; left: 5px;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yr() + '" >' + yr() + "</small>");
+                        document.write('<small onclick=window.open("https://toremetal.com") style="color:#752929;text-align: left;position: fixed;z-index:8; bottom: 6px; left: 5px;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yrTitle() + '" >' + yr() + "</small>");
                     </script>
                     <!-- End Copyright -->
                 </td>
@@ -1728,23 +1334,25 @@
         </table><!-- end footer -->
 </body>
 <script>
-    const DEBUG = 2;
+    const DEBUG = true;
     const ECM = new ECM278;
     const CMD_CONTROL = {
-        noCmdNum: 99,
-        lastCmd: 99,
+        lastCmd: ECM.EcmCmdNums.noCmdNum,
         nextCmd: ECM.EcmCmdNums.vinDataCmdNum,
         sendCmd: ECM.EcmCmdNums.stopComCmdNum,
-        loopTime: 256,
+        loopTime: 64,//128,//256
         delayTime: 512,
         sendCnt:0,
         loopCount: 0,
         readCount: 0,
         cdTime: Date.now(),
+        scanCheck: false,
+        firstrun: true,
+        com: 0,
+        dCom: 0,
         vin: 0,
         mil: 0,
         eng: 0,
-        com: 0,
         msg: 0 /* PCM msg delivery scheduler. */
     };
 
@@ -1752,8 +1360,13 @@
     var myIntervalReader;
     /* byte CACHE ARRAY[]'s */
     var EcmStream = [];
+    var engCheckSum;
+    var tmpEngineDataResponse;
+    var engineDataResponseT;
     var engineDataResponse;
+    var milDataResponseT;
     var milDataResponse;
+    var vinDataResponse;
 
     document.getElementById("loopTimeValue").value = CMD_CONTROL.loopTime;
     document.getElementById("transmissionType").value = ECM.A_TRANSMISSION;
@@ -1764,56 +1377,214 @@
     document.getElementById("autoF").hidden = !ECM.A_TRANSMISSION;
     document.getElementById("autoTranTemp").hidden = !ECM.A_TRANSMISSION;
 
-    async function readSerialData(myport) {
-        var reader;
-        while (myport.readable) {
+    
+    async function readSerialData(value) {
+        let y = 0;
+        for (x in value) {
             try {
-                reader = myport.readable.getReader();
-                console.log("[READ-SERIAL-DATA]");
-                try {
-                    var { value, done } = await reader.read();
-                    if (done) { break; }
-                    if (value != "") {
-                        let conBit = "";
-                        let conBin = "";
-                        for (x in value) {
-                            EcmStream.push(value[x]);
-                            try {
-                                conBit += ECM.numericToAlpha(value[x]);
-                                conBit += ",";
-                                conBin += ECM.numToBin(value[x]);
-                                conBin += ",";
-                            } catch (error) {
-                                console.log("ERROR bitConvert:" + error.toString());
-                            }
-                        }
-                        let curData = document.getElementById("sdata").innerHTML;
-                        document.getElementById("sdata").innerHTML = CMD_CONTROL.readCount.toString() + ": " + conBit + "<br />" + curData;
-                        //document.getElementById("sdata").innerHTML= CMD_CONTROL.readCount.toString() + ": " + value + "<br />" + CMD_CONTROL.readCount.toString() + ": " + conBit + "<br />" + CMD_CONTROL.readCount.toString() + ": " + conBin + "<br />" + curData;
-                        CMD_CONTROL.readCount += 1;
-                    }
-                } catch (error) {
-                    console.log("RETRY:[READ-SERIAL-DATA]");
-                }
-            } catch (error) {
-                try {
-                    await reader.releaseLock();
-                } catch (err) {
-                    //console.log("RELEASE LOCK:[READ-SERIAL-DATA]");
+            if ((CMD_CONTROL.dCom == 0) && (y + 2 < value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdDisConnectDataStream)) {
+                CMD_CONTROL.dCom = 1;
+                document.getElementById("connected").checked = false;
+                console.log("ECM: Dis-Connected!");
+                break;
+            } else if ((CMD_CONTROL.com == 0) && (y + 2 < value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdStopComDataStream)) {// && CMD_CONTROL.com == 0
+                CMD_CONTROL.com = 1;
+                if (CMD_CONTROL.sendCnt < 2) {
+                    CMD_CONTROL.sendCnt++;
+                    sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);
+                } else {
+                    console.log("[ECM-CONNECTED]");
+                    document.getElementById("connected").checked = true;
+                    CMD_CONTROL.sendCnt = 0;
+                    sendEcmCmd(CMD_CONTROL.nextCmd);
                 }
                 break;
+            } else if ((CMD_CONTROL.vin == 0) && (y + 21 <= value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdVinDataStream)) {// && CMD_CONTROL.vin == 0
+                CMD_CONTROL.vin = 1;
+                if (DEBUG == 2) { console.log("[VIN-DATA]-RECEIVED"); }
+                vinDataResponse = value.slice(parseInt(y + 3), parseInt(y + 21));
+                readVIN(vinDataResponse).then((vinStr) => {
+                    //document.getElementById("dashTitle").innerHTML = "Dash (vin:" + vinStr + ")";
+                    if (CMD_CONTROL.firstrun) {
+                        //CMD_CONTROL.cdTime = Date.now();
+                        //while (!wait()) { };
+                        sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
+                    } else {
+                        if (document.getElementById("scan").value != "On") {
+                            sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
+                        } else {CMD_CONTROL.scanCheck = true;}
+                        cmdRunning(0);
+                    }
+                });
+                /*let vinStr = "";
+                for (v = (y + 3); v < (y + 21); v++) {
+                    vinStr += String.fromCharCode(value[v]);
+                }
+                document.getElementById("dashTitle").innerHTML = "Dash (vin:" + vinStr + ")";
+                if (CMD_CONTROL.firstrun) {
+                    //CMD_CONTROL.cdTime = Date.now();
+                    //while (!wait()) { };
+                    sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
+                } else {
+                    if (document.getElementById("scan").value != "On") {
+                        sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
+                    } else {CMD_CONTROL.scanCheck = true;}
+                    cmdRunning(0);
+                }*/
+                break;
+            } else if ((CMD_CONTROL.mil == 0) && (y + 25 <= value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdMilDataStream)) {// && CMD_CONTROL.mil == 0
+                CMD_CONTROL.mil = 1;
+                if (DEBUG == 2) {console.log("[MIL-DATA]-RECEIVED");}
+                let results = value.slice(parseInt(y), parseInt(y + 25));
+                let checkSums = results[24].toString();
+                let tmpmilDataResponse = results.slice(0, 24);
+                let checkSumsTest = checkSum(tmpmilDataResponse);
+                if (checkSumsTest == checkSums) {
+                    if (DEBUG == 2) {console.log("[CHECKSUM(MIL)]:ok");}
+                    milDataResponse = tmpmilDataResponse.slice(3, tmpmilDataResponse.length);
+                    readMIL(milDataResponse).then((value) => {
+                        if (CMD_CONTROL.firstrun) {CMD_CONTROL.firstrun = false;}
+                        if (document.getElementById("scan").value != "On") {
+                            sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
+                        } else {CMD_CONTROL.scanCheck = true;}
+                        cmdRunning(0);
+                    });
+                } else {
+                    if (DEBUG == 2) {console.log("[CHECKSUM(MIL)]:bad");}
+                    //CMD_CONTROL.mil = 0;
+                    sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
+                }
+                break;
+            } else if ((CMD_CONTROL.eng == 0) && (y + 71 /*69 70*/< value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdEngineDataStream)) {// && CMD_CONTROL.eng == 0
+                CMD_CONTROL.eng = 1;
+                if (DEBUG == 2) {console.log("[ENGINE-DATA]-RECEIVED");}
+                let results = value.slice(parseInt(y), parseInt(y + 71));
+                engCheckSum = results[70].toString();
+                tmpEngineDataResponse = results.slice(0, 70);
+                //let checkSumsTest = checkSum(tmpEngineDataResponse);
+                checkSumTest(tmpEngineDataResponse).then((checkSumsTest) => {
+                    let validCheckSum = document.getElementById("validate").checked == false;
+                    console.log("(eng)CHECKSUM[" + checkSumsTest + "=" + engCheckSum + "] " + (checkSumsTest == engCheckSum).toString());
+                    if (checkSumsTest == engCheckSum) {
+                        validCheckSum = true;
+                        console.log("[CHECKSUM(ENG)]:ok");
+                        //alert("[CHECKSUM(ENG)]:ok");
+                    } else {
+                        console.log("[CHECKSUM(ENG)]:bad");
+                    }
+                    if (validCheckSum) {
+                        engineDataResponse = tmpEngineDataResponse.slice(3, tmpEngineDataResponse.length);
+                        readEngine(ECM.ENGINE_DATA, engineDataResponse).then((value) => {
+                            if (CMD_CONTROL.firstrun) {
+                                sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
+                            } else {
+                                if (document.getElementById("scan").value != "On") {sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);} else {CMD_CONTROL.scanCheck = true;}
+                                cmdRunning(0);
+                            }
+                        });
+                    } else {
+                        //CMD_CONTROL.eng = 0;
+                        sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
+                    }
+                });
+                /*let validCheckSum = document.getElementById("validate").checked == false;
+                console.log("(eng)CHECKSUM[" + checkSumsTest + "=" + engCheckSum + "] " + (checkSumsTest == engCheckSum).toString());
+                if (checkSumsTest == engCheckSum) {
+                    validCheckSum=true;
+                    console.log("[CHECKSUM(ENG)]:ok");
+                    //alert("[CHECKSUM(ENG)]:ok");
+                } else {
+                    console.log("[CHECKSUM(ENG)]:bad");
+                }
+                if (validCheckSum) {
+                    engineDataResponse = tmpEngineDataResponse.slice(3, tmpEngineDataResponse.length);
+                    readEngine(ECM.ENGINE_DATA, engineDataResponse).then((value) => {
+                        if (CMD_CONTROL.firstrun) {
+                            sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
+                        } else {
+                            if (document.getElementById("scan").value != "On") {sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);} else {CMD_CONTROL.scanCheck = true;}
+                            cmdRunning(0);
+                        }
+                    });
+                } else {
+                    //CMD_CONTROL.eng = 0;
+                    sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
+                }*/
+                break;
             }
+            } catch (error) {
+                console.error("readSerialData(" + y + "):", error);
+            }
+            y++;
         }
-        return EcmStream;
     }
 
+    const serialStreamHandler = new WritableStream({
+        write(value) {
+            let curData = document.getElementById("sdata").innerHTML;
+            let conbit="";
+            let y = 0;
+            for (x in value) {
+                try {
+                    EcmStream.push(value[x]);
+                    conbit += ECM.numericToAlpha(value[x]);
+                    conbit += ",";
+                } catch (error) {
+                    console.error("Byte:" + value[x], error);
+                }
+            }
+            try {
+                document.getElementById("sdata").innerHTML = CMD_CONTROL.readCount.toString() + ":" + conbit + "</br>" + curData;
+            } catch (error) {
+                console.error("(Raw)Writer:", error);
+            }
+            CMD_CONTROL.readCount++;
+            try {
+            if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.disconnectEcmCmdNum && EcmStream.length >= 4) {
+                CMD_CONTROL.dCom = 0;
+                CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
+                readSerialData(EcmStream);
+            } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.stopComCmdNum && EcmStream.length >= 4) {
+                CMD_CONTROL.com = 0;
+                readSerialData(EcmStream); 
+            } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.engineDataCmdNum && EcmStream.length >= 76) {
+                CMD_CONTROL.eng = 0;
+                engineDataResponseT = EcmStream.slice(0, EcmStream.length);
+                readSerialData(engineDataResponseT);//readSerialData(EcmStream);
+            } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.vinDataCmdNum && EcmStream.length >= 25) {
+                CMD_CONTROL.vin = 0;
+                readSerialData(EcmStream);
+            } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.milDataCmdNum && EcmStream.length >= 29) {
+                CMD_CONTROL.mil = 0;
+                milDataResponseT = EcmStream.slice(0, EcmStream.length);
+                readSerialData(milDataResponseT);//readSerialData(EcmStream);
+            } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.reset) {
+                sendEcmCmd(ECM.EcmCmdNums.reset2);
+            } else if (CMD_CONTROL.lastCmd > ECM.EcmCmdNums.disconnectEcmCmdNum && CMD_CONTROL.lastCmd < ECM.EcmCmdNums.noCmdNum) {
+                //CMD_CONTROL.eng = 0;
+                sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
+            } else if (CMD_CONTROL.lastCmd >= ECM.EcmCmdNums.msg1 && CMD_CONTROL.lastCmd <= ECM.EcmCmdNums.msg3) {
+                CMD_CONTROL.scanCheck = true;
+            }
+            } catch (error) {
+                console.error("(Serial):", error);
+            }
+        }
+    });
+    
     async function writeData(myport) {
         const writer = myport.writable.getWriter();
         try {
-            if (DEBUG == 2) { console.log("SEND CMD[" + ECM.CMDNAMES[CMD_CONTROL.sendCmd] + "]"); }
+            if (DEBUG) { console.log("SEND CMD[" + ECM.CMDNAMES[CMD_CONTROL.sendCmd] + "]"); }
             document.getElementById("wait").innerHTML = "SENDING CMD[" + ECM.CMDNAMES[CMD_CONTROL.sendCmd] + "]<br/>Please Wait";
             CMD_CONTROL.lastCmd = CMD_CONTROL.sendCmd;
-            clearCache();
+            CMD_CONTROL.loopCount = 0;
+            if (CMD_CONTROL.sendCmd == ECM.EcmCmdNums.disconnectEcmCmdNum) {
+                CMD_CONTROL.scanCheck = true;
+            } else {
+                CMD_CONTROL.scanCheck = false;
+            }
+            EcmStream = [];
             await writer.write(ECM.EcmCmds[ECM.CMDNAMES[CMD_CONTROL.sendCmd]]);
             await writer.releaseLock();
             document.getElementById("sendingEcmCmd").checked = false;
@@ -1834,196 +1605,48 @@
             document.getElementById("loopTimeValue").disabled = true;
             document.getElementById("connect").disabled = true;
             document.getElementById("wait").hidden = false;
-            document.getElementById("sendingEcmCmd").checked = true;
             cmdRunning(1);
-            var firstrun = true;
-            var proceed = true;
-
-            /* CONTINUOUS READ-WRITE SEQUENCE */
+            sendingEcmCmd.checked = true;
+            
+            const reader = myport.readable
+            .pipeTo(serialStreamHandler);
+            
             myIntervalReader = setInterval(function () {
-                if (proceed) {
-                    proceed = false;
-                    if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.disconnectEcmCmdNum && document.getElementById("sendingEcmCmd").checked == false && document.getElementById("connected").checked == false) {
-                        /* ECM-Returned to Normal. */
-                        console.log("ECM: Dis-Connected!");
-                        CMD_CONTROL.lastCmd = CMD_CONTROL.noCmdNum;/* Prevent actions while looping. */
-                        if (document.getElementById("disconnect").disabled) {
-                            clearInterval(myIntervalReader);/* [Stop Loop]. */
-                        }
-                    } else if (document.getElementById("sendingEcmCmd").checked || document.getElementById("resettingMil").checked) {
-                        /* Send Data to ECM. */
-                        if (document.getElementById("resettingMil").checked) {
-                            CMD_CONTROL.sendCmd = ECM.EcmCmdNums.resetMilCmdNum;
-                            document.getElementById("resettingMil").checked = false;
-                        }
-                        writeData(myport);
-                    } else {
-                        /* Read Data from ECM. */
-                        readSerialData(myport).then((value, done) => {
-                            if (DEBUG == 2) { console.log(value) };
-                            let y = 0;
-                            for (x in value) {
-                                if (y + 2 < value.length && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdDisConnectDataStream)) {
-                                    document.getElementById("connected").checked = false;
-                                    clearCache();
-                                } else if (y + 2 < value.length && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdStopComDataStream)) {// && msgTest(value[y + 4], value[y + 5], value[y + 6], ECM.EcmCmdStopComDataStream)
-                                    if (CMD_CONTROL.sendCnt < 2) {
-                                        CMD_CONTROL.com = 1;
-                                        CMD_CONTROL.sendCnt++;
-                                        sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);
-                                    } else {
-                                        console.log("[ECM-CONNECTED]");
-                                        document.getElementById("connected").checked = true;
-                                        CMD_CONTROL.sendCnt = 0;
-                                        CMD_CONTROL.com = 0;
-                                        sendEcmCmd(CMD_CONTROL.nextCmd);
-                                    }
-                                } else if (y + 20 < value.length && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdVinDataStream) && CMD_CONTROL.vin == 0) {
-                                    if (DEBUG == 2) { console.log("[VIN-DATA]-RECEIVED"); }
-                                    let vinStr = "";
-                                    for (v = (y + 3); v < (y + 21); v++) {
-                                        vinStr += String.fromCharCode(value[v]);
-                                    }
-                                    document.getElementById("dashTitle").innerHTML = "Dash (vin:" + vinStr + ")";
-                                    CMD_CONTROL.vin = 1;
-                                    if (firstrun) {
-                                        sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
-                                        CMD_CONTROL.cdTime = Date.now();
-                                        while (!wait()) { };
-                                    } else {
-                                        if (document.getElementById("scan").value != "On") {
-                                            sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
-                                        } else {
-                                            clearCache();
-                                        }
-                                        cmdRunning(0);
-                                    }
-                                } else if (y + 24 < value.length && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdMilDataStream) && CMD_CONTROL.mil == 0) {
-                                    if (DEBUG == 2) { console.log("[MIL-DATA]-RECEIVED"); }
-                                    CMD_CONTROL.mil = 1;
-                                    let results = value.slice(parseInt(y), parseInt(y + 25));
-                                    let checkSums = results[24].toString();
-                                    let tmpmilDataResponse = results.slice(0, 24);
-                                    let checkSumsTest = checkSum(tmpmilDataResponse);
-                                    if (checkSumsTest == checkSums) {
-                                        if (DEBUG == 2) { console.log("[CHECKSUM]-ok"); }
-                                        milDataResponse = tmpmilDataResponse.slice(3, tmpmilDataResponse.length);
-                                        readMIL(milDataResponse).then((value) => {
-                                            if (firstrun) {
-                                                firstrun = false;
-                                            }
-                                            if (document.getElementById("scan").value != "On") {
-                                                sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
-                                            } else {
-                                                clearCache();
-                                            }
-                                            cmdRunning(0);
-                                        });
-                                    } else {
-                                        if (DEBUG == 2) { console.log("[BAD CHECKSUM]"); }
-                                        CMD_CONTROL.mil = 0;
-                                        sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
-                                    }
-                                } else if (y + 69 < value.length && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdEngineDataStream) && CMD_CONTROL.eng == 0) {
-                                    CMD_CONTROL.eng = 1;
-                                    if (DEBUG == 2) { console.log("[ENGINE-DATA]-RECEIVED"); }
-                                    let results = value.slice(parseInt(y), parseInt(y + 71));
-                                    let checkSums = results[parseInt(results.length - 1)].toString();
-                                    let tmpengineDataResponse = results.slice(0, 70);
-                                    let checkSumsTest = checkSum(tmpengineDataResponse);
-                                    let validCheckSum = document.getElementById("validate").checked == false;
-                                    console.log("CHECKSUM[" + checkSumsTest + "=" + checkSums + "] " + (checkSumsTest == checkSums).toString());
-                                    
-                                    if (checkSumsTest == checkSums) {validCheckSum=true;}
-                                    if (validCheckSum) {
-                                        engineDataResponse = tmpengineDataResponse.slice(3, tmpengineDataResponse.length);
-                                        readEngine(ECM.ENGINE_DATA, engineDataResponse).then((value) => {
-                                            if (firstrun) {
-                                                CMD_CONTROL.cdTime = Date.now();
-                                                while (!wait()) { }
-                                                sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
-                                            } else {
-                                                if (document.getElementById("scan").value != "On") {
-                                                    sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
-                                                } else {
-                                                    clearCache();
-                                                }
-                                                cmdRunning(0);
-                                            }
-                                        });
-                                    } else {
-                                        if (DEBUG == 2) { console.log("[BAD CHECKSUM]"); }
-                                        CMD_CONTROL.eng = 0;
-                                    }
-                                }
-                                y++;
-                            }
-                            CMD_CONTROL.loopCount++;
-                            if (CMD_CONTROL.loopCount == 5) {clearCache();}
-                        });
-                        if (CMD_CONTROL.lastCmd > ECM.EcmCmdNums.disconnectEcmCmdNum) {
-                            clearCache();
-                        }
-                        if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.reset) {
-                            sendEcmCmd(ECM.EcmCmdNums.reset2);
-                        } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.vinDataCmdNum && CMD_CONTROL.vin == 0 && CMD_CONTROL.loopCount == 4) {
-                            sendEcmCmd(ECM.EcmCmdNums.vinDataCmdNum);
-                        } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.milDataCmdNum && CMD_CONTROL.mil == 0 && CMD_CONTROL.loopCount == 4) {
-                            sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
-                        } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.engineDataCmdNum && CMD_CONTROL.eng == 0 && CMD_CONTROL.loopCount == 4) {
-                            sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
-                        } else if (CMD_CONTROL.lastCmd == ECM.EcmCmdNums.stopComCmdNum && CMD_CONTROL.com == 0 && CMD_CONTROL.loopCount == 4) {
-                            sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);
-                        } else if (document.getElementById("scan").value == "On") {
-                            if (wait()) {
-                                if (CMD_CONTROL.msg == 0) {
-                                    CMD_CONTROL.msg = 1;
-                                    CMD_CONTROL.eng = 0;
-                                    CMD_CONTROL.nextCmd = ECM.EcmCmdNums.engineDataCmdNum;
-                                    CMD_CONTROL.com = 0;
-                                    CMD_CONTROL.sendCnt = 0;
-                                    sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);
-                                } else if (CMD_CONTROL.msg == 1) {
-                                    if (CMD_CONTROL.eng == 1) {CMD_CONTROL.msg = 2;}
-                                } else if (CMD_CONTROL.msg == 2 && CMD_CONTROL.loopCount == 0) {
-                                    CMD_CONTROL.msg = 3;
-                                    sendEcmCmd(ECM.EcmCmdNums.msg1);
-                                } else if (CMD_CONTROL.msg == 3 && CMD_CONTROL.loopCount == 0) {
-                                    CMD_CONTROL.msg = 4;
-                                    sendEcmCmd(ECM.EcmCmdNums.msg2);
-                                } else if (CMD_CONTROL.msg == 4 && CMD_CONTROL.loopCount == 0) {
-                                    CMD_CONTROL.msg = 5;
-                                    sendEcmCmd(ECM.EcmCmdNums.msg3);
-                                } else if (CMD_CONTROL.msg == 5) {
-                                    CMD_CONTROL.msg = 2;
-                                    CMD_CONTROL.eng = 0;
-                                    sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
-                                }
-                            }
-                        }
+                CMD_CONTROL.loopCount++;
+                if (document.getElementById("disconnect").disabled && CMD_CONTROL.firstrun == false) {
+                    clearInterval(myIntervalReader);
+                }
+                if (document.getElementById("sendingEcmCmd").checked) {
+                    writeData(myport);
+                } else if (CMD_CONTROL.lastCmd < ECM.EcmCmdNums.msg1 && CMD_CONTROL.loopCount > 9) {
+                    writeData(myport);
+                } else if (CMD_CONTROL.scanCheck && document.getElementById("scan").value == "On") {
+                    let autoMsg = !document.getElementById("msg").checked;
+                    if (CMD_CONTROL.msg == 0) {
+                        CMD_CONTROL.msg = 1;
+                        //CMD_CONTROL.eng = 0;
+                        CMD_CONTROL.nextCmd = ECM.EcmCmdNums.engineDataCmdNum;
+                        CMD_CONTROL.sendCnt = 0;
+                        sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);
+                    } else if (CMD_CONTROL.msg == 1 && CMD_CONTROL.eng == 1) {
+                        CMD_CONTROL.msg = 2;
+                        if (autoMsg) {sendEcmCmd(ECM.EcmCmdNums.msg1);} else {sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);}
+                    } else if (CMD_CONTROL.msg == 2) {
+                        CMD_CONTROL.msg = 3;
+                        if (autoMsg) {sendEcmCmd(ECM.EcmCmdNums.msg2);} else {sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);}
+                    } else if (CMD_CONTROL.msg == 3) {
+                        CMD_CONTROL.msg = 4;
+                        if (autoMsg) {sendEcmCmd(ECM.EcmCmdNums.msg3);} else {sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);}
+                    } else if (CMD_CONTROL.msg == 4) {
+                        CMD_CONTROL.msg = 1;
+                        //CMD_CONTROL.eng = 0;
+                        sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
                     }
-                    proceed = true;
                 }
             }, CMD_CONTROL.loopTime);
         } catch (error) {
             console.error("getSerialPortInfo():", error);
         }
-    }
-
-    /* Clears Byte-Cache variable. */
-    function clearCache() {
-        CMD_CONTROL.loopCount = 0;
-        EcmStream = [];
-    }
-    
-    /* checkSum()-Check Sum Validation. */
-    function checkSum(num) {
-        let sum = 0;
-        for (c in num) {
-            let nVal = (256 - parseInt(num[c]));
-            sum = sum + nVal;
-        }
-        return (sum % 256);
     }
 
     /* =====================================================|
@@ -2042,7 +1665,7 @@
             CMD_CONTROL.sendCmd = cmdNum;
             document.getElementById("sendingEcmCmd").checked = true;
         } catch (error) {
-            console.log("ERROR [sendEcmCmd(" + cmdNum.toString() + ")]: " + error.toString());
+            console.error("ERROR [sendEcmCmd(" + cmdNum.toString() + ")]: ", error);
         }
     }
 
@@ -2063,9 +1686,15 @@
     /* startStopRealTime()-Sends Engine Data Requests. */
     function startStopRealTime() {
         if (document.getElementById("scan").value != "On") {
+            document.getElementById("Mode1").disabled = true;
+            document.getElementById("Mode2").disabled = true;
+            document.getElementById("Mode4").disabled = true;
             CMD_CONTROL.msg = 0;
             document.getElementById("scan").value = "On";
         } else {
+            document.getElementById("Mode1").disabled = false;
+            document.getElementById("Mode2").disabled = false;
+            document.getElementById("Mode4").disabled = false;
             document.getElementById("scan").value = "Rpt";
             sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
         }
@@ -2119,24 +1748,9 @@
         return v0.toString() + "," + v1.toString() + "," + v2.toString() == msg.id.toString() + "," + msg.messageLength.toString() + "," + msg.mode.toString();
     }
 
-    /* Reset MIL light and dtc codes */
-    function resetMil() {
-        try {
-            document.getElementById("resettingMil").checked = true;
-        } catch (error) {
-            console.log("ERROR resetMilCmd: " + error.toString());
-        }
-    }
-
     /* show hide elements */
     function sH(id) {
         document.getElementById(id).hidden = !document.getElementById(id).hidden;
-    }
-
-    /* Set Loop Interval Timing. */
-    function setSpeed(val) {
-        CMD_CONTROL.loopTime = val;
-        if (COOKIE_PERMISSION) { setCookie("speed", val * 100, 30); }
     }
 
     /* Set RPM-Guage Needle Position. */
@@ -2235,6 +1849,22 @@
         }
     } /* [END] Transmission Gear Position Controller */
 
+    /* Set Loop Interval Timing. */
+    function setSpeed(val) {
+        CMD_CONTROL.loopTime = val;
+        if (COOKIE_PERMISSION) {setCookie("speed", val, 30);}
+    }
+    
+    const msgssnd = document.getElementById("msg");
+    msgssnd.onchange = function () {
+        if (COOKIE_PERMISSION) {setCookie("msgs", msgssnd.checked, 30);}
+    }
+    
+    const vchksum = document.getElementById("validate");
+    vchksum.onchange = function () {
+        if (COOKIE_PERMISSION) {setCookie("vchk", vchksum.checked, 30);}
+    }
+    
     /* COOKIES */
     function setCookie(cname, cvalue, exdays) {
         const d = new Date();
@@ -2263,19 +1893,59 @@
         let allowCookies = getCookie("allowCookies");
         if (allowCookies == "" || allowCookies == null) {
             allowCookies = confirm("Do You Give Permission to uses Cookies to Save Changes to Settings? [Permission & Cookies Saved for 30 days.]");
-            setCookie("allowCookies", allowCookies, 0);
             COOKIE_PERMISSION = allowCookies;
-        } else if (allowCookies) {
+            console.log("allowCookies:" + allowCookies);
+            setCookie("allowCookies", allowCookies, 30);
+        } else if (allowCookies == true) {
             COOKIE_PERMISSION = true;
             let speed = getCookie("speed");
             if (speed != "" && speed != null) {
                 document.getElementById("loopTimeValue").value = speed;
                 CMD_CONTROL.loopTime = speed;
             }
+            let msgs = getCookie("msgs");
+            if (msgs != "" && msgs != null) {
+                document.getElementById("msg").checked = msgs;
+            }
+            let vchk = getCookie("vchk");
+            if (vchk != "" && vchk != null) {
+                document.getElementById("validate").checked = vchk;
+            }
         }
     } /* [END] COOKIES */
 
-    /* MIL/DTC SERIAL DATA DECODER */
+    /* MIL/DTC DATA CHECKSUM TEST */
+    function checkSum(num) {
+        let sum = 0;
+        for (c in num) {
+            let nVal = (256 - parseInt(num[c]));
+            sum = sum + nVal;
+        }
+        return (sum % 256);
+    }
+    
+    /* ENGINE DATA CHECKSUM TEST */
+    async function checkSumTest(num) {
+        let sum = 0;
+        for (c in num) {
+            let nVal = (256 - parseInt(num[c]));
+            sum = sum + nVal;
+        }
+        let retVal = (sum % 256);
+        return retVal.toString();
+    }
+    
+    /* VIN SERIAL DATA HANDLER. */
+    async function readVIN(vin) {
+        let vinStr = "";
+        for (c in vin) {
+            vinStr += String.fromCharCode(vin[c]);
+        }
+        document.getElementById("dashTitle").innerHTML = "Dash (vin:" + vinStr + ")";
+        return vinStr;
+    }
+    
+    /* MIL/DTC SERIAL DATA HANDLER. */
     async function readMIL(value) {
         let dtcStr = "";
         for (let k = 0; k <= 20; k++) {
@@ -2288,7 +1958,7 @@
                     try {
                         if (dtcCode[t] == "1") {
                             let MilCode = ECM.DTCCODES["code" + (k + 1).toString() + tc.toString()];
-                            if (DEBUG == 2) { console.log("byte[" + k + "]:" + dtcCode + " bit:" + tc.toString() + " [MilCode]" + MilCode); }
+                            if (DEBUG) { console.log("byte[" + k + "]:" + dtcCode + " bit:" + tc.toString() + " [MilCode]" + MilCode); }
                             if (MilCode != "") {
                                 dtcStr += MilCode + "<br/>";
                             }
@@ -2305,31 +1975,41 @@
         return 0;
     } /* -- [End] function -- */
 
-    /* [function] readEngine(const [byteArray]:ecmFileConst, var [byteArray]:value). */
+    /* ENGINE SERIAL DATA HANDLER. */
     async function readEngine(ecmFileConst, value) {
         let injector = -1;
         let y = 0;
         let engStr = "";
         let tranStr = "";
-        if (DEBUG == 2) { console.log("Set-Engine"); console.log(value); }
+        if (DEBUG) { console.log("Set-Engine"); console.log(value); }
         let BYTEID = Object.keys(ecmFileConst);
         for (z in ecmFileConst) {
             try {
                 if (BYTEID[y] == "length" || y >= ecmFileConst.length || y >= value.length) {
-                    break;
-                } else if (ecmFileConst[z] == "NotUsed" || ecmFileConst[z] == "TODO" || ecmFileConst[z] == ecmFileConst.byte33 || ecmFileConst[z] == ecmFileConst.byte39) {
+                    document.getElementById("EngineData").innerHTML = engStr;
+                    document.getElementById("TransData").innerHTML = tranStr;
+                    rotateRPM();
+                    rotateMPH();
+                    if (DEBUG) { console.log("BytesProcessed:" + y + " [ENGINE COMPLETE]"); }
+                    return;
+                } else if (ecmFileConst[z] == "NotUsed" || ecmFileConst[z] == "TODO" || (ecmFileConst[z] == ecmFileConst.byte33 && y == 32) || (ecmFileConst[z] == ecmFileConst.byte39 && y == 38)) {
                     /* Skip */
-                } else if (ecmFileConst[z] == ecmFileConst.byte3 || ecmFileConst[z] == "coolanttempf" || ecmFileConst[z] == ecmFileConst.byte10 || ecmFileConst[z] == "tempf") {
+                    if (DEBUG) { console.log(y + ":(Not-Used)" + value[y]); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte3 || ecmFileConst[z] == "coolanttempf" || (ecmFileConst[z] == ecmFileConst.byte10 && y == 9) || ecmFileConst[z] == "tempf") {
                     document.getElementById(ecmFileConst[z]).value = (1.35 * parseInt(value[y]) - 40).toFixed();
+                    if (DEBUG) {let newVal = (1.35 * parseInt(value[y]) - 40).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
                 } else if (ecmFileConst[z] == ecmFileConst.byte5 || ecmFileConst[z] == "airtempf") {
                     document.getElementById(ecmFileConst[z]).value = ECM.ManifoldAirTempF[parseInt(value[y])];
-                } else if (ecmFileConst[z] == "targetidle" || ecmFileConst[z] == ecmFileConst.byte12 || ecmFileConst[z] == "rpm" || ecmFileConst[z] == ecmFileConst.byte40) {
+                    if (DEBUG) {let newVal = ECM.ManifoldAirTempF[parseInt(value[y])]; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == "targetidle" || (ecmFileConst[z] == ecmFileConst.byte12 && y == 11) || ecmFileConst[z] == "rpm" || (ecmFileConst[z] == ecmFileConst.byte40 && y == 39)) {
                     document.getElementById(ecmFileConst[z]).value = (12.5 * value[y]).toFixed();
-                } else if (ecmFileConst[z] == ecmFileConst.byte14 || ecmFileConst[z] == "rpm24x") {
+                    if (DEBUG) { let newVal = (12.5 * value[y]).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if ((ecmFileConst[z] == ecmFileConst.byte14 && y == 13) || ecmFileConst[z] == "rpm24x") {
                     if (value[y] != 255) {
                         document.getElementById(ecmFileConst[z]).value = (1310720 / parseInt(value[y])).toFixed();
+                        if (DEBUG) { let newVal = (1310720 / parseInt(value[y])).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
                     } else { document.getElementById(ecmFileConst[z]).value = 0; }
-                } else if (ecmFileConst[z] == ecmFileConst.byte15) {
+                } else if (ecmFileConst[z] == ecmFileConst.byte15 && y == 14) {
                     let gear = ECM.numToBin(value[y]);
                     let gStr = "";
                     let tc = 7;
@@ -2340,13 +2020,17 @@
                         tc--;
                     }
                     setLabel();
-                } else if (ecmFileConst[z] == "mapvolts" || ecmFileConst[z] == ecmFileConst.byte6 || ecmFileConst[z] == "baro" || ecmFileConst[z] == ecmFileConst.byte7 || ecmFileConst[z] == "throttlev" || ecmFileConst[z] == ecmFileConst.byte8) {
+                    if (DEBUG) { let newVal = gear; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == "mapvolts" || (ecmFileConst[z] == ecmFileConst.byte6 && y == 5) || ecmFileConst[z] == "baro" || (ecmFileConst[z] == ecmFileConst.byte7 && y == 6) || ecmFileConst[z] == "throttlev" || (ecmFileConst[z] == ecmFileConst.byte8 && y == 7)) {
                     document.getElementById(ecmFileConst[z]).value = (parseInt(value[y]) * 5 / 255).toFixed(1);
-                } else if (ecmFileConst[z] == "battery" || ecmFileConst[z] == ecmFileConst.byte4 || ecmFileConst[z] == "airfuel" || ecmFileConst[z] == ecmFileConst.byte20 || ecmFileConst[z] == "fuelpumpv" || ecmFileConst[z] == ecmFileConst.byte31) {
+                    if (DEBUG) { let newVal = (parseInt(value[y]) * 5 / 255).toFixed(1); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == "battery" || (ecmFileConst[z] == ecmFileConst.byte4 && y == 3) || ecmFileConst[z] == "airfuel" || (ecmFileConst[z] == ecmFileConst.byte20 && y == 19) || ecmFileConst[z] == "fuelpumpv" || (ecmFileConst[z] == ecmFileConst.byte31 && y == 30)) {
                     document.getElementById(ecmFileConst[z]).value = (parseInt(value[y]) / 10).toFixed(1);
-                } else if (ecmFileConst[z] == "knockretard" || ecmFileConst[z] == ecmFileConst.byte17) {
+                    if (DEBUG) { let newVal = (parseInt(value[y]) / 10).toFixed(1); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == "knockretard" || (ecmFileConst[z] == ecmFileConst.byte17 && y == 16)) {
                     document.getElementById(ecmFileConst[z]).value = (45 * parseInt(value[y]) / 256).toFixed();
-                } else if (ecmFileConst[z] == ecmFileConst.byte18) {
+                    if (DEBUG) { let newVal = (45 * parseInt(value[y]) / 256).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte18 && y == 17) {
                     let transState = ECM.numToBin(value[y]);
                     let tc = 7;
                     let title=true;
@@ -2363,20 +2047,27 @@
                         }
                         tc--;
                     }
-                } else if (ecmFileConst[z] == ecmFileConst.byte21 && injector == -1) {
+                    if (DEBUG) { let newVal = transState; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte21 && y == 20 && injector == -1) {
                     injector = value[y];
-                } else if (ecmFileConst[z] == ecmFileConst.byte22) {
-                    let newVal = ((parseInt(injector) * 256 + value[y]) / 65.536).toFixed();
-                    document.getElementById(ecmFileConst[z]).value = newVal;
-                } else if (ecmFileConst[z] == "o2bankR" || ecmFileConst[z] == ecmFileConst.byte25 || ecmFileConst[z] == "o2bankL" || ecmFileConst[z] == ecmFileConst.byte28) {
+                    if (DEBUG) { console.log(y + "|" + ecmFileConst[z] + "(injector): " + value[y]); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte22 && y == 21) {
+                    //let newVal = ((parseInt(injector) * 256 + value[y]) / 65.536).toFixed();
+                    document.getElementById(ecmFileConst[z]).value = ((parseInt(injector) * 256 + value[y]) / 65.536).toFixed();
+                    if (DEBUG) { let newVal = ((parseInt(injector) * 256 + value[y]) / 65.536).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == "o2bankR" || (ecmFileConst[z] == ecmFileConst.byte25 && y == 24) || ecmFileConst[z] == "o2bankL" || (ecmFileConst[z] == ecmFileConst.byte28 && y == 27)) {
                     document.getElementById(ecmFileConst[z]).value = (value[y] * 4.42).toFixed() * 0.001;
-                } else if (ecmFileConst[z] == ecmFileConst.byte32 || ecmFileConst[z] == "actempf") {
+                    if (DEBUG) { let newVal = (value[y] * 4.42).toFixed() * 0.001; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if ((ecmFileConst[z] == ecmFileConst.byte32 && y == 31) || ecmFileConst[z] == "actempf") {
                     document.getElementById(ecmFileConst[z]).value = ECM.ACEVAP[parseInt(value[y])];
-                } else if (ecmFileConst[z] == ecmFileConst.byte34 || ecmFileConst[z] == "sparkadvance") {
+                    if (DEBUG) { let newVal = ECM.ACEVAP[parseInt(value[y])]; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if ((ecmFileConst[z] == ecmFileConst.byte34 && y == 33) || ecmFileConst[z] == "sparkadvance") {
                     document.getElementById(ecmFileConst[z]).value = (value[y] * 90 / 256).toFixed();
-                } else if (ecmFileConst[z] == "throttlep" || ecmFileConst[z] == ecmFileConst.byte35) {
+                    if (DEBUG) { let newVal = (value[y] * 90 / 256).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == "throttlep" || (ecmFileConst[z] == ecmFileConst.byte35 && y == 34)) {
                     document.getElementById(ecmFileConst[z]).value = (value[y] / 2.55).toFixed();
-                } else if (ecmFileConst[z] == ecmFileConst.byte36) {
+                    if (DEBUG) { let newVal = (value[y] / 2.55).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte36 && y == 35) {
                     let bitsSPI = ECM.numToBin(value[y]);
                     engStr += "<b style='color:yellow;'>SPI INPUT DISCRETES STATUS REGISTER #3:</b><br/><small style='color:aqua;'>(QDM FAULT CANNOT BE USED UNLESS ALL QDM OUTPUTS ARE CONTROLLED FOR TESTING)</small><br/>";
                     let tc = 7;
@@ -2408,7 +2099,8 @@
                         }
                         tc--;
                     }
-                } else if (ecmFileConst[z] == ecmFileConst.byte37 || ecmFileConst[z] == "ALDL-STATUS") {
+                    if (DEBUG) { let newVal = bitsSPI; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if ((ecmFileConst[z] == ecmFileConst.byte37 && y == 36) || ecmFileConst[z] == "ALDL-STATUS") {
                     let bitsALDL = ECM.numToBin(value[y]);
                     let tc = 7;
                     let title = true;
@@ -2439,7 +2131,8 @@
                         }
                         tc--;
                     }
-                } else if (ecmFileConst[z] == ecmFileConst.byte38 || ecmFileConst[z] == "fanOnOff") {
+                    if (DEBUG) { let newVal = bitsALDL; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if ((ecmFileConst[z] == ecmFileConst.byte38 && y == 37) || ecmFileConst[z] == "fanOnOff") {
                     let bits = ECM.numToBin(value[y]);
                     let tc = 7;
                     let tccStr = "";
@@ -2472,12 +2165,13 @@
                         }
                         tc--;
                     }
-                } else if (ecmFileConst[z] == ecmFileConst.byte41 || ecmFileConst[z] == "acpsi") {
-                    let newValPsi = (parseInt(value[y]) * 1.875 - 18.75).toFixed();
-                    document.getElementById("acpsi").value = newValPsi;
-                    let newValV = (parseInt(value[y]) * 5 / 255).toFixed(1);
-                    document.getElementById("acv").value = newValV;
-                } else if (ecmFileConst[z] == ecmFileConst.byte42)/*"A-C STATUS"*/ {
+                    if (DEBUG) { let newVal = bits; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if ((ecmFileConst[z] == ecmFileConst.byte41 && y == 40) || ecmFileConst[z] == "acpsi") {
+                    document.getElementById("acpsi").value = (parseInt(value[y]) * 1.875 - 18.75).toFixed();
+                    if (DEBUG) { let newVal = (parseInt(value[y]) * 1.875 - 18.75).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                    document.getElementById("acv").value = (parseInt(value[y]) * 5 / 255).toFixed(1);
+                    if (DEBUG) { let newVal = (parseInt(value[y]) * 5 / 255).toFixed(1); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte42 && y == 41)/*"A-C STATUS"*/ {
                     let bitsAC = ECM.numToBin(value[y]);
                     let tc = 7;
                     let title = true;
@@ -2506,7 +2200,8 @@
                         }
                         tc--;
                     }
-                } else if (ecmFileConst[z] == ecmFileConst.byte43) {
+                    if (DEBUG) { let newVal = bitsAC; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte43 && y == 42) {
                     let brakes = ECM.numToBin(value[y]);
                     let tc = 7;
                     for (t in brakes) {
@@ -2520,7 +2215,8 @@
                         }
                         tc--;
                     }
-                } else if (ecmFileConst[z] == ecmFileConst.byte44) {
+                    if (DEBUG) { let newVal = brakes; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte44 && y == 43) {
                     let gear = ECM.numToBin(value[y]);
                     let gStr = "";
                     let tc = 7;
@@ -2554,53 +2250,73 @@
                     } else if (gStr == "010") {/*Park Nuetral*/
                         document.getElementById("prndlDis2").innerHTML = " (Park/Neutral)";
                     }
-                } else if (ecmFileConst[z] == ecmFileConst.byte45)/*MIL CODES*/ {
+                    if (DEBUG) { let newVal = gear; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte45 && y == 44)/*MIL CODES*/ {
                     document.getElementById(ecmFileConst[z]).value = value[y];
                     if (value[y] > 0) {
                         document.getElementById("checkEngineLight").hidden = false;
                     } else { document.getElementById("checkEngineLight").hidden = true; }
-                } else if (ecmFileConst[z] == ecmFileConst.byte46) {
+                    if (DEBUG) { console.log(y + "|" + ecmFileConst[z] + ":" + value[y]); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte46 && y == 45) {
                     tranStr += "TCC DUTY CYCLE: " + ((value[y] / 2.55).toFixed(2)).toString() + " %<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte47) {
+                    if (DEBUG) { let newVal = (value[y] / 2.55).toFixed(2); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte47 && y == 46) {
                     tranStr += "FORCE MOTOR DUTY CYCLE: " + (value[y] / 2.55).toFixed(2) + " %<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte48) {
+                    if (DEBUG) { let newVal = (value[y] / 2.55).toFixed(2); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte48 && y == 47) {
                     tranStr += "3->2 DOWNSHIFT SOLENOID DUTY CYCLE: " + (value[y] / 2.55).toFixed(2) + " %<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte49) {
+                    if (DEBUG) { let newVal = (value[y] / 2.55).toFixed(2); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte49 && y == 48) {
                     tranStr += "AMOUNT OF TCC SLIPPAGE MSB: " + value[y] + "<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte50) {
+                    if (DEBUG) { console.log(y + "|" + ecmFileConst[z] + ":" + value[y]); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte50 && y == 49) {
                     tranStr += "AMOUNT OF TCC SLIPPAGE LSB: " + (value[y] / 8).toFixed(2) + " (RPM)<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte51) {
+                    if (DEBUG) { let newVal = (value[y] / 8).toFixed(2); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte51 && y == 50) {
                     tranStr += "FILTERED OUTPUT SHAFT SPEED MSB: " + value[y] + "<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte52) {
+                    if (DEBUG) { console.log(y + "|" + ecmFileConst[z] + ":" + value[y]); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte52 && y == 51) {
                     tranStr += "FILTERED OUTPUT SHAFT SPEED LSB: " + (value[y] / 8).toFixed(2) + " (RPM)<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte53) {
+                    if (DEBUG) { let newVal = (value[y] / 8).toFixed(2); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte53 && y == 52) {
                     tranStr += "FILTERED INPUT SHAFT SPEED MSB: " + value[y] + "<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte54) {
+                    if (DEBUG) { console.log(y + "|" + ecmFileConst[z] + ":" + value[y]); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte54 && y == 53) {
                     tranStr += "FILTERED INPUT SHAFT SPEED LSB: " + (value[y] / 8).toFixed(2) + " (RPM)<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte55) {
+                    if (DEBUG) { let newVal = (value[y] / 8).toFixed(2); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte55 && y == 54) {
                     tranStr += "COMMANDED PRESSURE: " + value[y] + " Psi<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte56) {
+                    if (DEBUG) { console.log(y + "|" + ecmFileConst[z] + ":" + value[y]); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte56 && y == 55) {
                     tranStr += "FORCE MOTOR COMMAND CURRENT: " + (value[y] / 51).toFixed(1) + " (AMPS)<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte57) {
+                    if (DEBUG) { let newVal = (value[y] / 51).toFixed(1); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte57 && y == 56) {
                     tranStr += "FORCE MOTOR ACTUAL CURRENT: " + (value[y] / 51).toFixed(1) + " (AMPS)<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte58) {
+                    if (DEBUG) { let newVal = (value[y] / 51).toFixed(1); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte58 && y == 57) {
                     tranStr += "CURRENT ADAPTIVE MODIFIER: " + value[y] + "<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte59) {
+                    if (DEBUG) { console.log(y + "|" + ecmFileConst[z] + ":" + value[y]); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte59 && y == 58) {
                     let cCell = value[y];
                     if (cCell >= 0 && cCell <= 16) {
                         tranStr += "CURRENT ADAPTIVE CELL: " + (cCell / 0.16).toFixed() + " %<br/>";
                     } else {
                         tranStr += "CURRENT ADAPTIVE CELL: Invalid Reading<br/>";
                     }
-                } else if (ecmFileConst[z] == ecmFileConst.byte60) {
+                    if (DEBUG) { console.log(y + "|" + ecmFileConst[z] + ":" + value[y]); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte60 && y == 59) {
                     tranStr += "1->2 SHIFT ERROR: " + (value[y] / 40).toFixed() + " (Sec)<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte61) {
+                    if (DEBUG) { let newVal = (value[y] / 40).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte61 && y == 60) {
                     tranStr += "2->3 SHIFT ERROR: " + (value[y] / 40).toFixed() + " (Sec)<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte62) {
+                    if (DEBUG) { let newVal = (value[y] / 40).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte62 && y == 61) {
                     tranStr += "1->2 SHIFT TIME: " + (value[y] / 40).toFixed() + " (Sec)<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte63) {
+                    if (DEBUG) { let newVal = (value[y] / 40).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte63 && y == 62) {
                     tranStr += "2->3 SHIFT TIME: " + (value[y] / 40).toFixed() + " (Sec)<br/>";
-                } else if (ecmFileConst[z] == ecmFileConst.byte64) {
+                    if (DEBUG) { let newVal = (value[y] / 40).toFixed(); console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte64 && y == 63) {
                     let transState = ECM.numToBin(value[y]);
                     let tc = 7;
                     let title = true;
@@ -2627,7 +2343,8 @@
                         }
                         tc--;
                     }
-                } else if (ecmFileConst[z] == ecmFileConst.byte65) {
+                    if (DEBUG) { let newVal = transState; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte65 && y == 64) {
                     let transState = ECM.numToBin(value[y]);
                     let tc = 7;
                     let title = true;
@@ -2654,7 +2371,8 @@
                         }
                         tc--;
                     }
-                } else if (ecmFileConst[z] == ecmFileConst.byte66) {
+                    if (DEBUG) { let newVal = transState; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte66 && y == 65) {
                     let transState = ECM.numToBin(value[y]);
                     let tc = 7;
                     let title = true;
@@ -2681,7 +2399,8 @@
                         }
                         tc--;
                     }
-                } else if (ecmFileConst[z] == ecmFileConst.byte67) {
+                    if (DEBUG) { let newVal = transState; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
+                } else if (ecmFileConst[z] == ecmFileConst.byte67 && y == 66) {
                     let transState = ECM.numToBin(value[y]);
                     let tc = 7;
                     for (t in transState) {
@@ -2702,18 +2421,21 @@
                         }
                         tc--;
                     }
+                    if (DEBUG) { let newVal = transState; console.log(y + "|" + ecmFileConst[z] + ":(" + value[y] + ")=" + newVal); }
                 } else {
                     document.getElementById(ecmFileConst[z]).value = value[y];
+                    if (DEBUG) { console.log(y + "|" + ecmFileConst[z] + ":" + value[y]); }
                 }
             } catch (error) {
                 console.error("ERROR setValues-ecmFileConst[" + z.toString() + "]:" + ecmFileConst[z] + " value[" + y + "]:" + value[y].toString(), error);
             }
             y++;
         }
-        document.getElementById("EngineData").innerHTML = engStr;
-        document.getElementById("TransData").innerHTML = tranStr;
-        rotateRPM();
-        rotateMPH();
+        //document.getElementById("EngineData").innerHTML = engStr;
+        //document.getElementById("TransData").innerHTML = tranStr;
+        //rotateRPM();
+        //rotateMPH();
+        //return;
     } /* -- [End] function -- */
     
     //setTimeout(function() {checkCookie();}, 10000);
