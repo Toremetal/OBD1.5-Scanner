@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <!--
     ~   ************************************************************************
@@ -49,7 +48,6 @@
     <script src="ds/ECM278.js"></script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8927593002808864" crossorigin="anonymous"></script>
 </head>
-
 <body><!--onload="checkCookie()"-->
     <div align="center">
         <header>
@@ -120,41 +118,64 @@
                 </div>
             </fieldset>
             <div hidden id="usbHelp"
-                style="position:fixed;top:0;bottom:0;right:0;left:0;width:100%;margin-top:8px;z-index:1;background:transparent;"
-                align="center">
-                <legend style="min-width:414px;color:orangered;background-color:#000000;width:fit-content;border-radius:10px 10px 1px 1px;cursor:default;"
+                style="opacity: 0.7;position:fixed;top:0;bottom:0;right:0;left:0;height:fit-content;width:fit-content;margin:8px auto 0;z-index:1;background:transparent;background-color:#000000;
+                
+            border-radius: 18px;
+            border: ridge 0.4px #cbc9c9;
+            box-sizing: border-box;
+            box-shadow: 1px 2px 5px rgba(0, 0, 0, .31);
+            /*border: 1px solid rgb(177, 176, 176);
+            border: inset 10px #57F2FF;
+            border-style: groove ridge ridge groove;
+            border-style: outset inset inset outset;*/"
+                align="center" class="chromeBorder">
+                <legend style="min-width:664px;color:orangered;background-color:#000000;width:fit-content;border-radius:15px 15px 1px 1px;cursor:default;"
                     title="Connection Diagram."><b title="Close." onclick='sH("usbHelp")' style="cursor:pointer;color:black;float:left;background-color:white;border:1px ridge red;border-radius:4px;padding:4px 4px 0;">X</b>
                     <label style="margin-left:-30px;">
                         PC-USB to OBD1.5 ECM<br />(with OBD2 plug) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </label>
                     <br />
-                    <img id="usbImage" title="USB" alt="USB" src="img/usb.png"/>
-                    <br />
-                    <i style="color:skyblue;">Rx/Tx to Pin <sup style="color:blue;font-size:xx-large;"><sub>9</sub></sup><small><sup><sub style="color:grey;">( M on 12 pin-dlc )</sub></sup></small>.</i>
-                    <br />
-                    <i style="color:yellow;">Gnd to Pins <sup style="color:goldenrod;font-size:larger;">4</sup> <small>&</small> <sup style="font-size:larger;color:gold;">5<small><sub style="color:grey;font-size:small;">( A on 12 pin-dlc )</sub></small></sup>.</i>
+                    <img style="margin-bottom:-20px;" id="usbImage" title="USB" alt="USB" src="img/usb.png"/>
+                    <br/>
+                    <i style="color:skyblue;margin-bottom:-20px;">Rx/Tx to Pin <sup style="color:blue;font-size:xx-large;"><sub>9</sub></sup><small><sup><sub style="color:grey;">( M on 12 pin-dlc )</sub></sup></small>.</i>
+                    <br/>
+                    <i style="color:yellow;margin-bottom:-20px;">Gnd to Pins <sup style="color:goldenrod;font-size:larger;">4</sup> <small>&</small> <sup style="font-size:larger;color:gold;">5<small><sub style="color:grey;font-size:small;">( A on 12 pin-dlc )</sub></small></sup>.</i>
                 </legend>
-                <legend style="min-width:414px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding:4px 4px;cursor:default;"
+                <legend style="min-width:664px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding:4px 4px;cursor:default;"
                     title="Scan Settings">
-                    <i title="Un-Check if Not Receiving Engine Data.">Verify Engine Data Check-Sum</i>
+                    <i title="Un-Check if Not Receiving Engine Data.">Verify Engine Data</i>
                     <input id="validate" style="border-radius:10px;cursor:pointer;" title="Not-Compatible with all OS's." type="checkbox" />
-                    <br/><i title="Check to Disable ECM(Eng) to ECM(ABS,Trans,etc.) Messaging.">(Rpt-On) Disable ECM Messages</i>
-                    <input id="msg" style="border-radius:10px;cursor:pointer;" title="Check to Disable ECM(Eng) to ECM(ABS,Trans,etc.) Messaging." type="checkbox" />
+                    |<i title="Check to Disable ECM(Eng) to ECM(ABS,Trans,etc.) Messaging.">Disable ECM Messages</i>
+                    <input id="msg" style="border-radius:10px;cursor:pointer;" title="Check to Disable ECM(Eng) to ECM(ABS,Trans,etc.) Messaging while Scanning." type="checkbox" />
                 </legend>
-                <legend style="min-width:414px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding-top:10px;cursor:default;">
-                    <i title="Send Request Interval.">Retry every,</i>
-                    <input id="delayTimeValue" style="border-radius:10px;width:100px;" title="Retry delay."
+                <legend style="min-width:664px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding-top:10px;cursor:default;">
+                    <i title="Retry Interval." style="margin-bottom:-4px;">Retry at,</i>
+                    <input id="delayTime" style="border-radius:10px;width:100px;margin-bottom:-4px;" title="Retry delay."
                         value="9" type="number" min="1" max="100" step="1"
                         onchange='CMD_CONTROL.delayTime=parseInt(this.value);' /> Reads
-                    <br />
-                    <i title="Serial Read Interval." style="margin-bottom:-30px;">Send Cmd's every [1 sec = 1000 ms]</i>
-                    <input id="loopTimeValue" style="border-radius:10px;width:100px;margin-bottom:-30px;"
-                        title="Send Interval. IMPORTANT!! Set BEFORE Connecting!" value="1000" type="number" min="100"
-                        max="10000" step="100" onchange='setSpeed(this.value)' /> ms
-                    <br />
-                    <code title="IMPORTANT!! Make adjustments to Send Interval BEFORE Connecting!" style="color:orange;font-size:small;">IMPORTANT!!<br/>Make adjustments to Send Interval BEFORE Connecting!</code>
+                    <i title="Retry Interval." style="margin-bottom:-4px;">or </i>
+                    <input id="delayBytes" style="border-radius:10px;width:100px;margin-bottom:-4px;" title="Retry delay."
+                        value="255" type="number" min="76" max="1024" step="1"
+                        onchange='CMD_CONTROL.delayBytes=parseInt(this.value);' /> Bytes
+                    
+                    <i title="Cache Size." style="margin-bottom:-4px;">Flush at</i>
+                    <input id="cacheSize" style="border-radius:10px;width:100px;margin-bottom:-4px;"
+                        title="Cache Size." value="510" type="number" min="76"
+                        max="1024" step="16" onchange='CMD_CONTROL.cacheSize=parseInt(this.value);' /> bytes
                 </legend>
-                <legend style="min-width:414px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px 1px 10px 10px;cursor:default;"
+                <legend style="min-width:664px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding-top:10px;cursor:default;">
+                    <i title="Send Cmd Interval." style="margin-bottom:-4px;">Send Cmd's every</i>
+                    <input id="loopTimeValue" style="border-radius:10px;width:100px;margin-bottom:-4px;"
+                        title="Send Interval. IMPORTANT!! Set BEFORE Connecting!" value="64" type="number" min="64"
+                        max="10240" step="64" onchange='CMD_CONTROL.loopTime=parseInt(this.value);' /> ms
+                    <i title="Com Port buffer." style="margin-bottom:-4px;">Buffer Size</i>
+                    <input id="bufferSize" style="border-radius:10px;width:100px;margin-bottom:-4px;" title="COM-Port buffer. IMPORTANT!! Set BEFORE Connecting!"
+                        value="77" type="number" min="75" max="1024" step="1"
+                        onchange='CMD_CONTROL.bufferSize=parseInt(this.value);' /> Bytes
+                    <br />
+                    <code title="IMPORTANT!! Make these adjustments BEFORE Connecting!" style="color:orange;font-size:small;">IMPORTANT!! Set these BEFORE Connecting! [1 sec = 1000 ms]</code>
+                </legend>
+                <legend style="min-width:664px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px 1px 15px 15px;cursor:default;"
                     title="Data Cmd's">
                     <code style="color:orange;font-size:small;">
                     <small style="color:skyblue;" title="CAUTION!! Modifying Cmd Bytes may prevent ECM from responding!"><i style="color:lime;">CAUTION!!</i> Modifying Cmd Bytes may prevent ECM from responding!</small><br/>
@@ -1333,9 +1354,12 @@
         lastCmd: ECM.EcmCmdNums.noCmdNum,
         nextCmd: ECM.EcmCmdNums.vinDataCmdNum,
         sendCmd: ECM.EcmCmdNums.stopComCmdNum,
+        bufferSize: 76, // ECM.COM_PORT.bufferSize,
         loopTime: 64,
         delayTime: 9,
-        sendCnt:0,
+        delayBytes: 128,
+        cacheSize: 1024,
+        sendCnt: 0,
         loopCount: 0,
         readCount: 0,
         resetDelay: 0,
@@ -1361,7 +1385,26 @@
     var milDataResponse;
     var vinDataResponse;
 
+    /*const loopTime = document.getElementById("loopTimeValue");
+    loopTime.onchange = function () {
+        if (COOKIE_PERMISSION) {setCookie("speed", loopTime.value, 30);}
+    }
+    
+    const msgssnd = document.getElementById("msg");
+    msgssnd.onchange = function () {
+        if (COOKIE_PERMISSION) {setCookie("msgs", msgssnd.checked, 30);}
+    }
+    
+    const vchksum = document.getElementById("validate");
+    vchksum.onchange = function () {
+        if (COOKIE_PERMISSION) {setCookie("vchk", vchksum.checked, 30);}
+    }*/
+    
     document.getElementById("loopTimeValue").value = CMD_CONTROL.loopTime;
+    document.getElementById("delayTime").value = CMD_CONTROL.delayTime;
+    document.getElementById("delayBytes").value = CMD_CONTROL.delayBytes;
+    document.getElementById("cacheSize").value = CMD_CONTROL.cacheSize;
+    document.getElementById("bufferSize").value = CMD_CONTROL.bufferSize;
     document.getElementById("transmissionType").value = ECM.A_TRANSMISSION;
     document.getElementById("clutchdiv").hidden = ECM.A_TRANSMISSION;
     document.getElementById("fantd").hidden = ECM.A_TRANSMISSION;
@@ -1476,7 +1519,7 @@
         write(value) {
             let curData = document.getElementById("sdata").innerHTML;
             let conbit="";
-            let y = 0;
+            //let y = 0;
             for (x in value) {
                 try {
                     EcmStream.push(value[x]);
@@ -1485,6 +1528,10 @@
                 } catch (error) {
                     console.error("Byte:" + value[x], error);
                 }
+                /*y++;
+                if (y == value.length) {
+                    
+                }*/
             }
             try {
                 document.getElementById("sdata").innerHTML = CMD_CONTROL.readCount.toString() + ":" + conbit + "</br>" + curData;
@@ -1520,8 +1567,16 @@
                 }
             } else if (CMD_CONTROL.lastCmd > ECM.EcmCmdNums.disconnectEcmCmdNum && CMD_CONTROL.lastCmd < ECM.EcmCmdNums.noCmdNum) {
                 sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
-            } else if (CMD_CONTROL.lastCmd >= ECM.EcmCmdNums.msg1 && CMD_CONTROL.lastCmd <= ECM.EcmCmdNums.msg3) {
+            } else if (CMD_CONTROL.lastCmd >= ECM.EcmCmdNums.msg1 && CMD_CONTROL.lastCmd <= ECM.EcmCmdNums.disconnectEcmCmdNum) {
                 CMD_CONTROL.scanCheck = true;
+            } 
+            if (EcmStream.length >= CMD_CONTROL.delayBytes) {
+                if (CMD_CONTROL.lastCmd < ECM.EcmCmdNums.msg1) {
+                    document.getElementById("sendingEcmCmd").checked = true;
+                }
+            }
+            if (EcmStream.length >= CMD_CONTROL.cacheSize) {
+                EcmStream = [];
             }
             } catch (error) {
                 console.error("(Serial):", error);
@@ -1555,24 +1610,21 @@
     async function getSerialPortInfo() {
         try {
             const myport = await navigator.serial.requestPort();
-            await myport.open({ baudRate: ECM.COM_PORT.baudRate, dataBits: ECM.COM_PORT.dataBits, stopBits: ECM.COM_PORT.stopBits, parity: ECM.COM_PORT.parity });
+            await myport.open({ baudRate: ECM.COM_PORT.baudRate, dataBits: ECM.COM_PORT.dataBits, stopBits: ECM.COM_PORT.stopBits, parity: ECM.COM_PORT.parity, bufferSize: CMD_CONTROL.bufferSize });
             const { usbProductId, usbVendorId } = myport.getInfo();
             let portInfo = "[usbProductId:]" + usbProductId + " [usbVendorId:]" + usbVendorId + "<br />";
             document.getElementById("sdata").innerHTML = portInfo;
             document.getElementById("loopTimeValue").disabled = true;
+            document.getElementById("bufferSize").disabled = true;
             document.getElementById("connect").disabled = true;
             document.getElementById("wait").hidden = false;
             cmdRunning(1);
             sendingEcmCmd.checked = true;
             
-            const reader = myport.readable
-            .pipeTo(serialStreamHandler);
+            const reader = myport.readable.pipeTo(serialStreamHandler);
             
             myIntervalReader = setInterval(function () {
                 CMD_CONTROL.loopCount++;
-                if (document.getElementById("disconnect").disabled && CMD_CONTROL.firstrun == false) {
-                    clearInterval(myIntervalReader);
-                }
                 if (document.getElementById("sendingEcmCmd").checked) {
                     writeData(myport);
                 } else if (CMD_CONTROL.lastCmd < ECM.EcmCmdNums.msg1 && CMD_CONTROL.loopCount > CMD_CONTROL.delayTime) {
@@ -1598,10 +1650,11 @@
                         sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
                     }
                 }
+                if (document.getElementById("disconnect").disabled && CMD_CONTROL.firstrun == false) {
+                    clearInterval(myIntervalReader);
+                }
             }, CMD_CONTROL.loopTime);
-        } catch (error) {
-            console.error("getSerialPortInfo():", error);
-        }
+        } catch (error) {console.error("getSerialPortInfo():", error);}
     }
 
     /* =====================================================|
@@ -1794,22 +1847,6 @@
             automaticGear.innerHTML = "P";
         }
     } /* [END] Transmission Gear Position Controller */
-
-    /* Set Loop Interval Timing. */
-    function setSpeed(val) {
-        CMD_CONTROL.loopTime = val;
-        if (COOKIE_PERMISSION) {setCookie("speed", val, 30);}
-    }
-    
-    const msgssnd = document.getElementById("msg");
-    msgssnd.onchange = function () {
-        if (COOKIE_PERMISSION) {setCookie("msgs", msgssnd.checked, 30);}
-    }
-    
-    const vchksum = document.getElementById("validate");
-    vchksum.onchange = function () {
-        if (COOKIE_PERMISSION) {setCookie("vchk", vchksum.checked, 30);}
-    }
     
     /* COOKIES */
     function setCookie(cname, cvalue, exdays) {
