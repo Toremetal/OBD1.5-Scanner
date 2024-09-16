@@ -1450,7 +1450,12 @@
                             if (CMD_CONTROL.firstrun) {
                                 sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
                             } else {
-                                if (document.getElementById("scan").value != "On") {sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);} else {CMD_CONTROL.scanCheck = true;}
+                                if (document.getElementById("scan").value != "On") {
+                                    sendEcmCmd(ECM.EcmCmdNums.disconnectEcmCmdNum);
+                                } else {
+                                    CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
+                                    CMD_CONTROL.scanCheck = true;
+                                }
                                 cmdRunning(0);
                             }
                         });
@@ -1513,8 +1518,8 @@
                 } else {
                     CMD_CONTROL.resetDelay++;
                 }
-            } else if (CMD_CONTROL.lastCmd > ECM.EcmCmdNums.disconnectEcmCmdNum && CMD_CONTROL.lastCmd <= ECM.EcmCmdNums.noCmdNum) {
-                CMD_CONTROL.scanCheck = true;
+            } else if (CMD_CONTROL.lastCmd > ECM.EcmCmdNums.disconnectEcmCmdNum && CMD_CONTROL.lastCmd < ECM.EcmCmdNums.noCmdNum) {
+                sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
             } else if (CMD_CONTROL.lastCmd >= ECM.EcmCmdNums.msg1 && CMD_CONTROL.lastCmd <= ECM.EcmCmdNums.msg3) {
                 CMD_CONTROL.scanCheck = true;
             }
