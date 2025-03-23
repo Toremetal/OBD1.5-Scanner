@@ -174,8 +174,10 @@
                 </fieldset>
                 <input title="Continiously Request Engine Data" id="scan" value="Rpt" type="button"
                        onclick='startStopRealTime()' style="cursor:pointer;" disabled />
-                <select id="ecmfile" style="cursor:pointer;width:100px;" name="ECM FILE" onchange='setECM(this.value);'>
-                    <script>document.write(ecmOptions);</script></select>
+                <select id="ecmfile" style="cursor:pointer;width:100px;" name="ECM FILE" onchange='setECM(this.value);'></select>
+                <script>
+                    document.getElementById("ecmfile").innerHTML = ecmOptions;
+                </script>
                 [<sub>
                     <input id="sendingEcmCmd" type="checkbox" style="max-width:4px;" />
                     <label for="sendingEcmCmd">TxRx</label>
@@ -513,10 +515,8 @@
 
                                 </tr>
                                 <table id="dynamic-gauges"></table>
-                                <script>
-                                    generateUI();
-                                </script>
                             </table>
+                            <script>generateUI();</script>
                         </div><!-- outer table -->
                     </div>
                 </div>
@@ -840,24 +840,20 @@
         <hr size="3">
         <table width="95%" align="center">
             <tr>
-                <td class="hide">
-                    <!-- Copyright -->
-                    <script>
-                        function yrTitle() {
-                            const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL v: ' + APPVERSION;
-                        }
-                        function yr() {
-                            const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL <sub> v: ' + APPVERSION + '</sub>';
-                        }
-                        document.write('<small onclick=window.open("https://toremetal.com") style="color:#752929;text-align: left;position: fixed;z-index:8; bottom: 6px; left: 5px;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yrTitle() + '" >' + yr() + "</small>");
-                    </script>
-                    <!-- End Copyright -->
+                <td class="hide" id="CopyRight">
                 </td>
                 <img title="1995 Camaro" alt="1995 Camaro" src="img/camaro1.png"
                      style="margin-left:-108px;float:right;border:none;height:48px;width:100px;position:fixed;bottom:4px;right:4px;" />
             </tr>
-        </table><!-- end footer -->
+        </table>
         <script>
+            function yrTitle() {
+                const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL v: ' + APPVERSION;
+            }
+            function yr() {
+                const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL <sub> v: ' + APPVERSION + '</sub>';
+            }
+            document.getElementById("CopyRight").innerHTML='<small onclick=window.open("https://toremetal.com") style="color:#752929;text-align: left;position: fixed;z-index:8; bottom: 6px; left: 5px;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yrTitle() + '" >' + yr() + "</small>";
             const egrOne = document.getElementById("egr1");
             const egrTwo = document.getElementById("egr2");
             const egrThree = document.getElementById("egr3");
@@ -1428,12 +1424,14 @@
                     document.getElementById("Mode1").disabled = true;
                     document.getElementById("Mode2").disabled = true;
                     document.getElementById("Mode4").disabled = true;
+                    document.getElementById("disconnect").disabled = true;
                     CMD_CONTROL.msg = 0;
                     document.getElementById("scan").value = "On";
                 } else {
                     document.getElementById("Mode1").disabled = false;
                     document.getElementById("Mode2").disabled = false;
                     document.getElementById("Mode4").disabled = false;
+                    document.getElementById("disconnect").disabled = false;
                     document.getElementById("scan").value = "Rpt";
                     CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
                 }
