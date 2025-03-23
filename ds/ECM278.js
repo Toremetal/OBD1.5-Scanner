@@ -551,7 +551,7 @@ TRANSMISSION: ELECTRONIC TRANS (4L60E)
     byte6(v, ecmValues) {return (parseInt(v) * 5 / 255).toFixed(1);}
     byte7(v, ecmValues) {return (parseInt(v) * 5 / 255).toFixed(1);}
     byte8(v, ecmValues) {return (parseInt(v) * 5 / 255).toFixed(1);}
-    byte9(v, ecmValues) {return v;}
+    byte9(v, ecmValues) {return (parseInt(v) / 2.55).toFixed();}
     byte10(v, ecmValues) {return (1.35 * parseInt(v) - 40).toFixed();}
     byte11(v, ecmValues) {return v;}
     byte12(v, ecmValues) {return (12.5 * parseInt(v)).toFixed();}
