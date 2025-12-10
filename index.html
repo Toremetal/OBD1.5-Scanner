@@ -47,8 +47,8 @@
     <script src="ds/ECM221.js"></script>
     <script src="ds/ECM_CLASSES.js"></script>
     <script>
-       const ECM_MAN = new ECM_CLASSES();
-       const ecmOptions= ECM_MAN.ecmOptions();
+        const ECM_MAN = new ECM_CLASSES();
+        const ecmOptions = ECM_MAN.ecmOptions();
         var ECM = ECM_MAN.setECM("ECM278");/* 3.4L V6 */
 
         function setECM(file) {
@@ -57,30 +57,30 @@
             setEcmValues();
             alert(ECM.toString());
         }
-        
+
         function generateUI() {
-            let retStr="";
+            let retStr = "";
             let i = 0;
             var tStr = "";
-            for(let eId in ECM.ENGINE_DATA) {
+            for (let eId in ECM.ENGINE_DATA) {
                 let id = ECM.ENGINE_DATA[eId];
                 let title = id;
                 if (id != "airfuel" && id != "mph" && id != "rpm" && id != "battery" && id != "gear" && id != "milcodes" && id != "actcodes" && id != "NotUsed" && id != ECM.ENGINE_DATA.length) {
-                    if (id == "trans-temp") { tStr = "°f";}
-                    else if (id.includes("-mseconds")) { tStr = "ms"; title = id.replace("-mseconds","");}
-                    else if (id.includes("-cell")) { tStr = "cell"; title = id.replace("-cell","");}
-                    else if (id.includes("-pos")) { tStr = "position"; title = id.replace("-pos","");}
-                    else if (id.includes("-psi")) { tStr = "psi"; title = id.replace("-psi","");}
-                    else if (id.includes("-int")) { tStr = "int"; title = id.replace("-int","");}
-                    else if (id.includes("-blm")) { tStr = "blm"; title = id.replace("-blm","");}
-                    else if (id.includes("-rpm")) { tStr = "rpm"; title = id.replace("-rpm","");}
-                    else if (id.includes("-volts")) { tStr = "volts"; title = id.replace("-volts","");}
-                    else if (id.includes("-percent")) { tStr = "%"; title = id.replace("-percent","");}
-                    else if (id.includes("-deg")) { tStr = "°deg"; title = id.replace("-deg","");}
-                    else if (id.includes("-msb")) { tStr = "msb"; title = id.replace("-msb","");}
-                    else if (id.includes("-lsb")) { tStr = "lsb"; title = id.replace("-lsb","");}
-                    else if (id.includes("-celcius")) { tStr = "°C"; title = id.replace("-celcius","");}
-                    else if (id.includes("-tempf")) { tStr = "°f"; title = id.replace("-tempf","");}
+                    if (id == "trans-temp") { tStr = "°f"; }
+                    else if (id.includes("-mseconds")) { tStr = "ms"; title = id.replace("-mseconds", ""); }
+                    else if (id.includes("-cell")) { tStr = "cell"; title = id.replace("-cell", ""); }
+                    else if (id.includes("-pos")) { tStr = "position"; title = id.replace("-pos", ""); }
+                    else if (id.includes("-psi")) { tStr = "psi"; title = id.replace("-psi", ""); }
+                    else if (id.includes("-int")) { tStr = "int"; title = id.replace("-int", ""); }
+                    else if (id.includes("-blm")) { tStr = "blm"; title = id.replace("-blm", ""); }
+                    else if (id.includes("-rpm")) { tStr = "rpm"; title = id.replace("-rpm", ""); }
+                    else if (id.includes("-volts")) { tStr = "volts"; title = id.replace("-volts", ""); }
+                    else if (id.includes("-percent")) { tStr = "%"; title = id.replace("-percent", ""); }
+                    else if (id.includes("-deg")) { tStr = "°deg"; title = id.replace("-deg", ""); }
+                    else if (id.includes("-msb")) { tStr = "msb"; title = id.replace("-msb", ""); }
+                    else if (id.includes("-lsb")) { tStr = "lsb"; title = id.replace("-lsb", ""); }
+                    else if (id.includes("-celcius")) { tStr = "°C"; title = id.replace("-celcius", ""); }
+                    else if (id.includes("-tempf")) { tStr = "°f"; title = id.replace("-tempf", ""); }
                     else { tStr = ""; }
                     if (i == 0) {
                         retStr += `<tr>`;
@@ -90,38 +90,38 @@
                         retStr += `hidden id="autoTranTemp" `;
                     }
                     retStr += `class="chromeBorder" width="22%" onclick='sH("${id}Field")'>
-                                        <div align="center">
-                                            <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
-                                                   bordercolordark="#808080" bordercolorlight="#ffffff">
-                                                <tr>
-                                                    <td id="${id}Field" onclick='sH("${id}Field")' class="guage">
-                                                        <fieldset align="center" class="hide">
-                                                            <legend onclick='sH("${id}Field")'>${title}</legend>
-                                                            <form align="center">
-                                                                <input id="${id}" name="${id}" value="0" type="number"
-                                                                       style="margin-top:10px;margin-bottom:10px;"
-                                                                       readonly><br /><b style="margin-bottom:-50px;">${tStr}</b>
-                                                            </form>`;
+                                            <div align="center">
+                                                <table border="1" cellpadding="0" bgcolor="#efefef" bordercolor="#c0c0c0"
+                                                       bordercolordark="#808080" bordercolorlight="#ffffff">
+                                                    <tr>
+                                                        <td id="${id}Field" onclick='sH("${id}Field")' class="guage">
+                                                            <fieldset align="center" class="hide">
+                                                                <legend onclick='sH("${id}Field")'>${title}</legend>
+                                                                <form align="center">
+                                                                    <input id="${id}" name="${id}" value="0" type="number"
+                                                                           style="margin-top:10px;margin-bottom:10px;"
+                                                                           readonly><br /><b style="margin-bottom:-50px;">${tStr}</b>
+                                                                </form>`;
                     if (id == "blm-cell") {
                         retStr += `<button title="Reset BLM" onclick="sendEcmCmd(ECM.EcmCmdNums.ResetBLM);" id="resetBlmBtn" class="btn resBtn" disabled>Reset BLM Value</button>`;
                     }
-                                                retStr += `</fieldset>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </td>`;
+                    retStr += `</fieldset>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </td>`;
                     i++;
                     if (i == 4) {
                         retStr += `</tr>`;
-                        i=0;
+                        i = 0;
                     }
                 }
             }
             if (i < 4 && i > 0) {
                 retStr += `</tr>`;
             }
-            document.getElementById("dynamic-gauges").innerHTML=retStr;
+            document.getElementById("dynamic-gauges").innerHTML = retStr;
         }
 
     </script>
@@ -146,6 +146,7 @@
             box-sizing: border-box;
             box-shadow: 1px 2px 5px rgba(0, 0, 0, .31);
         }
+
         .status {
             background-color: #00000000;
             border: 1px ridge #111111;
@@ -173,7 +174,7 @@
                 <legend class="btn" onclick='sH("usbHelp")' title="Click for Connection Diagram">[?]Scan Controls</legend>
                 <img onclick='sH("usbHelp")' title="1995 Camaro" alt="1995 Camaro" src="img/camaro2.png"
                      style="cursor:pointer;margin-right:-108px;float:left;border:none;height:48px;width:100px;" />
-                
+
                 <input title="Disconnect" style="margin-left:-210px;cursor:pointer;" id="disconnect" value="DisConnect"
                        type="button" onclick="disconnectECM();" disabled />
                 <input id="connected" type="checkbox" disabled />
@@ -210,24 +211,24 @@
                 </sub>
                 <i id="serialStatus" class="status">&nbsp; &nbsp;&nbsp;</i> ]
                 <div>
-                <select style="cursor:pointer;display:inline-flex;" name="transmissionType" id="transmissionType" onchange='setTransType(!ECM.A_TRANSMISSION);'>
-                    <optgroup label="Shift-Type">
-                        <option value="false">Manual</option>
-                    </optgroup>
-                    <optgroup label="Shift-Type">
-                        <option value="true">Automatic</option>
-                    </optgroup>
-                </select>
+                    <select style="cursor:pointer;display:inline-flex;" name="transmissionType" id="transmissionType" onchange='setTransType(!ECM.A_TRANSMISSION);'>
+                        <optgroup label="Shift-Type">
+                            <option value="false">Manual</option>
+                        </optgroup>
+                        <optgroup label="Shift-Type">
+                            <option value="true">Automatic</option>
+                        </optgroup>
+                    </select>
                     <code id="autoF" class="slidecontainer" hidden>
                         <label for="gear">Automatic- </label>
                         <input type="range" min="0" max="6" value="6" class="slider2" name="prndl" id="gear">
                         [ <span id="prndlDis" style="color:red;font-size:large;">P</span><small style="color:orange;" id="prndlDis2"></small> ]
                     </code>
-                <em id="carVin" style="font-size: large; margin: 0 4px -2px 2px; padding: 0 0 10px;width:fit-content;display:inline-flex;float:left;"></em>
-                
-                    
+                    <em id="carVin" style="font-size: large; margin: 0 4px -2px 2px; padding: 0 0 10px;width:fit-content;display:inline-flex;float:left;"></em>
+
+
                 </div>
-                
+
             </fieldset>
             <div hidden id="usbHelp" class="chromeBorder">
                 <fieldset>
@@ -249,7 +250,9 @@
                 <fieldset>
                     <legend style="min-width:664px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding:4px 4px;cursor:default;"
                             title="Scan Settings">
-                        <i title="Un-Check if Not Receiving Engine Data.">Verify Engine Data</i>
+                        <i title="Alternate Engine Data Processing Method.">ScanMode</i>
+                        <input id="ScanMode" style="border-radius:10px;cursor:pointer;" title="Alt Eng Data Processing Method." type="checkbox" />
+                        |<i title="Un-Check if Not Receiving Engine Data.">Verify Engine Data</i>
                         <input id="validate" style="border-radius:10px;cursor:pointer;" title="Not-Compatible with all OS's." type="checkbox" />
                         |<i title="Check to Disable ECM(Eng) to ECM(ABS,Trans,etc.) Messaging.">Disable ECM Messages</i>
                         <input id="msg" style="border-radius:10px;cursor:pointer;" title="Check to Disable ECM(Eng) to ECM(ABS,Trans,etc.) Messaging while Scanning." type="checkbox" />
@@ -829,15 +832,15 @@
         </div>
         <div style="padding:8px 30px;">
             <!-- HomePageAd -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-8927593002808864"
-     data-ad-slot="2822185833"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8927593002808864"
+                 data-ad-slot="2822185833"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
         <!-- footer -->
         <hr size="3">
@@ -856,7 +859,7 @@
             function yr() {
                 const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL <sub> v: ' + APPVERSION + '</sub>';
             }
-            document.getElementById("CopyRight").innerHTML='<small onclick=window.open("https://toremetal.com") style="color:#752929;text-align: left;position: fixed;z-index:8; bottom: 6px; left: 5px;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yrTitle() + '" >' + yr() + "</small>";
+            document.getElementById("CopyRight").innerHTML = '<small onclick=window.open("https://toremetal.com") style="color:#752929;text-align: left;position: fixed;z-index:8; bottom: 6px; left: 5px;cursor: pointer;line-height: 0;display:block !important;" title="COPYRIGHT ' + yrTitle() + '" >' + yr() + "</small>";
             const egrOne = document.getElementById("egr1");
             const egrTwo = document.getElementById("egr2");
             const egrThree = document.getElementById("egr3");
@@ -892,9 +895,9 @@
             const EcmStream = [];
 
             const DEBUG = false;
-            
+
             //const ECM = new ECM278();
-            
+
             const CMD_CONTROL = {
                 lastCmd: ECM.EcmCmdNums.noCmdNum,
                 nextCmd: ECM.EcmCmdNums.vinDataCmdNum,
@@ -926,12 +929,12 @@
             document.getElementById("delayTime").value = CMD_CONTROL.delayTime;
             document.getElementById("delayBytes").value = CMD_CONTROL.delayBytes;
             document.getElementById("cacheSize").value = CMD_CONTROL.cacheSize;
-            
+
             function setEcmValues() {
                 CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
                 CMD_CONTROL.nextCmd = ECM.EcmCmdNums.vinDataCmdNum;
                 CMD_CONTROL.sendCmd = ECM.EcmCmdNums.stopComCmdNum;
-                CMD_CONTROL.bufferSize=ECM.COM_PORT.bufferSize;
+                CMD_CONTROL.bufferSize = ECM.COM_PORT.bufferSize;
                 document.getElementById("bufferSize").value = CMD_CONTROL.bufferSize;
                 document.getElementById("transmissionType").value = ECM.A_TRANSMISSION;
                 setTransType(ECM.A_TRANSMISSION);
@@ -941,7 +944,7 @@
                     CMD_CONTROL.nextCmd = ECM.EcmCmdNums.engineDataCmdNum;
                 }
             }
-            
+
             /* Transmission Shift Type Controller */
             function setTransType(transVal) {
                 ECM.A_TRANSMISSION = transVal;
@@ -972,33 +975,57 @@
                     console.error("(Raw)Writer:", error);
                 }
             }
-            
+
             async function readSerialData(value) {
                 let y = 0;
                 for (let x in value) {
                     try {
                         if ((CMD_CONTROL.lastCmd == ECM.EcmCmdNums.engineDataCmdNum) && (CMD_CONTROL.eng == 0) &&
-                        (y + ECM.engDataLength <= value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdEngineDataStream)) {
+                            (y + ECM.engDataLength <= value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdEngineDataStream)) {
                             CMD_CONTROL.eng = 1;/* Required here for Scans "if (msg)" Process! Prevents overlap before the process completes. */
                             if (DEBUG === 2) { console.log("[ENGINE-DATA]-RECEIVED"); }
                             let engDataResponse = value.slice(parseInt(y), parseInt(y + ECM.engDataLength));
                             let engCheckSum = value[parseInt(y + ECM.engDataLength)];
                             let engData = value.slice(parseInt(y + 3), parseInt(y + ECM.engDataLength));
-                            let checkSumsTest = checkSum(engDataResponse) == engCheckSum;
-                            if (checkSumsTest) { console.log("✓-CHECKSUM:ENG"); } else { console.log("✖-CHECKSUM:ENG"); }
-                            if (checkSumsTest || !document.getElementById("validate").checked) {
-                                if (CMD_CONTROL.firstrun) {
-                                    sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
-                                } else {
-                                    CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
-                                    cmdRunning(0);
+                            if (!document.getElementById("ScanMode").checked) {
+                                let checkSumsTest = ECM_MAN.testCheckSum(engDataResponse, engCheckSum);
+                                //let checkSumsTest = checkSum(engDataResponse) == engCheckSum;
+                                if (checkSumsTest) { console.log("✓-CHECKSUM:ENG"); } else {
+                                    checkSumsTest = checkSum(engDataResponse) == engCheckSum;
+                                    if (checkSumsTest) { console.log("✓-CHECKSUM:ENG"); } else { console.log("✖-CHECKSUM:ENG"); }
                                 }
-                                await readEngine(ECM.ENGINE_DATA, engData).then(() => {
+                                if (checkSumsTest || !document.getElementById("validate").checked) {
+                                    if (CMD_CONTROL.firstrun) {
+                                        sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
+                                    } else {
+                                        CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
+                                        cmdRunning(0);
+                                    }
+                                    await readEngine(ECM.ENGINE_DATA, engData).then(() => {
+                                        CMD_CONTROL.proceed = true;
+                                    });
+                                } else {
+                                    sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
                                     CMD_CONTROL.proceed = true;
-                                });
+                                }
                             } else {
-                                sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
-                                CMD_CONTROL.proceed = true;
+                                await checkSumTest(engDataResponse, engCheckSum).then((good) => {
+                                    if (good) {
+                                        readEngine(ECM.ENGINE_DATA, engData).then(() => {
+                                            if (CMD_CONTROL.firstrun) {
+                                                sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
+                                                CMD_CONTROL.proceed = true;
+                                            } else {
+                                                CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
+                                                cmdRunning(0);
+                                                CMD_CONTROL.proceed = true;
+                                            }
+                                        });
+                                    } else {
+                                        sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
+                                        CMD_CONTROL.proceed = true;
+                                    }
+                                });
                             }
                             break;
                         } else if ((CMD_CONTROL.lastCmd == ECM.EcmCmdNums.disconnectEcmCmdNum) && (CMD_CONTROL.dCom == 0) && (y + 3 < value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdDisConnectDataStream)) {
@@ -1447,6 +1474,27 @@
                 return ECM_MAN.getCheckSum(data);
             }
 
+            /* ENGINE DATA CHECKSUM TEST */
+            async function checkSumTest(data, checkSum) {
+                /*let sum = 0;
+                for (let c in data) {
+                    let nVal = 256 - parseInt(data[c]);
+                    sum = sum + nVal;
+                }
+                let dataCheckSum = sum % 256;
+                let goodCheckSum = dataCheckSum == checkSum;*/
+                let goodCheckSum = ECM_MAN.testCheckSum(data, checkSum);
+                if (goodCheckSum) {
+                    console.log("✓-CHECKSUM:ENG");
+                } else {
+                    console.log("✖-CHECKSUM:ENG");
+                }
+                if ((goodCheckSum == false) && document.getElementById("validate").checked) {
+                    return false;
+                }
+                return true; // dataCheckSum === checkSum;
+            }
+
             /* VIN SERIAL DATA HANDLER. */
             async function readVIN(vinData) {
                 document.getElementById("carVin").innerHTML = "vin: " + ECM.getVIN(vinData);
@@ -1459,48 +1507,48 @@
                 document.getElementById("actcodes").value = ECM.values.activeDTC;
                 return 0;
             }
-            
-/* ENGINE SERIAL DATA HANDLER. */
-async function readEngine(ecmFileConst, dataStream) {
-    let BYTEID = Object.keys(ecmFileConst);
-    let index = 0;
-    for (let z in ecmFileConst) {
-        //let index = parseInt(z);
-        try {
-            if (BYTEID[index] == "length") {
-                document.getElementById("EngineData").innerHTML = ECM.values.engStr;
-                document.getElementById("TransData").innerHTML = ECM.values.tranStr;
-                document.getElementById("clutchpressed").checked = ECM.values.clutchEngaged;
-                document.getElementById("brakepressed").checked = ECM.values.tccBrakeEngaged;
-                document.getElementById("fanOnOff").checked = ECM.values.fanOn;
-                //document.getElementById("acv").value = ECM.values.acVolts;
-                rotateRPM();
-                rotateMPH();
-                setTransGear();
-                if (ECM.values.EGR1) {egrStatus(0, "green");} else {egrStatus(0, "red");}
-                if (ECM.values.EGR2) {egrStatus(1, "green");} else {egrStatus(1, "red");}
-                if (ECM.values.EGR3) {egrStatus(2, "green");} else {egrStatus(2, "red");}
-                if (ECM.values.clutchEngaged){
-                    document.getElementById('clutchImg').style.transform = 'rotateZ(35deg)'
-                } else {
-                    document.getElementById('clutchImg').style.transform = 'rotateZ(0deg)'
+
+            /* ENGINE SERIAL DATA HANDLER. */
+            async function readEngine(ecmFileConst, dataStream) {
+                let BYTEID = Object.keys(ecmFileConst);
+                let index = 0;
+                for (let z in ecmFileConst) {
+                    //let index = parseInt(z);
+                    try {
+                        if (BYTEID[index] == "length") {
+                            document.getElementById("EngineData").innerHTML = ECM.values.engStr;
+                            document.getElementById("TransData").innerHTML = ECM.values.tranStr;
+                            document.getElementById("clutchpressed").checked = ECM.values.clutchEngaged;
+                            document.getElementById("brakepressed").checked = ECM.values.tccBrakeEngaged;
+                            document.getElementById("fanOnOff").checked = ECM.values.fanOn;
+                            //document.getElementById("acv").value = ECM.values.acVolts;
+                            rotateRPM();
+                            rotateMPH();
+                            setTransGear();
+                            if (ECM.values.EGR1) { egrStatus(0, "green"); } else { egrStatus(0, "red"); }
+                            if (ECM.values.EGR2) { egrStatus(1, "green"); } else { egrStatus(1, "red"); }
+                            if (ECM.values.EGR3) { egrStatus(2, "green"); } else { egrStatus(2, "red"); }
+                            if (ECM.values.clutchEngaged) {
+                                document.getElementById('clutchImg').style.transform = 'rotateZ(35deg)'
+                            } else {
+                                document.getElementById('clutchImg').style.transform = 'rotateZ(0deg)'
+                            }
+                            if (parseInt(document.getElementById("milcodes").value) > 0) {
+                                //if ((parseInt(document.getElementById("milcodes").value) > 0) || (parseInt(document.getElementById("actcodes").value) > 0)) {
+                                document.getElementById("checkEngineLight").src = "img/checkEngineLight.png";
+                            } else {
+                                document.getElementById("checkEngineLight").src = "img/checkEngine.png";
+                            }
+                        } else if (index < ecmFileConst.length) {
+                            document.getElementById(ecmFileConst[z]).value = ECM.processEngData[index](dataStream[index], ECM.values);
+                        }
+                    } catch (error) {
+                        if (index < ecmFileConst.length) { console.error("ERROR setValues-ecmFileConst[" + index + "]:" + ecmFileConst[z] + " value[" + index + "]:" + dataStream[index], error); }
+                    }
+                    index++;
                 }
-                if (parseInt(document.getElementById("milcodes").value) > 0) {
-                //if ((parseInt(document.getElementById("milcodes").value) > 0) || (parseInt(document.getElementById("actcodes").value) > 0)) {
-                    document.getElementById("checkEngineLight").src="img/checkEngineLight.png";
-                } else {
-                    document.getElementById("checkEngineLight").src="img/checkEngine.png";
-                }
-            } else if (index < ecmFileConst.length) {
-                document.getElementById(ecmFileConst[z]).value = ECM.processEngData[index](dataStream[index], ECM.values);
+                return 0;
             }
-        } catch (error) {
-            if (index < ecmFileConst.length) {console.error("ERROR setValues-ecmFileConst[" + index + "]:" + ecmFileConst[z] + " value[" + index + "]:" + dataStream[index], error);}
-        }
-        index++;
-    }
-    return 0;
-}
 
             /* // COOKIES
             function setCookie(cname, cvalue, exdays) {
