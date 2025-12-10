@@ -3,11 +3,11 @@
 <head>
     <!--
     ~   ************************************************************************
-    ~            ™T©ReMeTaL Properties: Copyright (c) 2024 ™T©ReMeTaL.
+    ~            ™T©ReMeTaL Properties: Copyright (c) 2026 ™T©ReMeTaL.
     ~   ************************************************************************
     ~    MIT License
     ~    ™T©ReMeTaL toremetal.com
-    ~    Copyright (C) 2024 ™T©ReMeTaL.
+    ~    Copyright (C) 2026 ™T©ReMeTaL.
     ~
     ~    Permission is hereby granted, free of charge, to any person obtaining a copy
     ~    of this software and associated documentation files (the "Software"), to deal
@@ -125,9 +125,37 @@
         }
 
     </script>
-    <script>const APPVERSION = '24.11.4.18';</script>
+    <script>const APPVERSION = '25.12.4.19';</script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8927593002808864" crossorigin="anonymous"></script>
-    
+    <style>
+        #usbHelp {
+            opacity: 0.7;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: fit-content;
+            width: fit-content;
+            margin: 8px auto 0;
+            z-index: 1;
+            background: transparent;
+            background-color: #000000;
+            border-radius: 18px;
+            border: ridge 0.4px #cbc9c9;
+            box-sizing: border-box;
+            box-shadow: 1px 2px 5px rgba(0, 0, 0, .31);
+        }
+        .status {
+            background-color: #00000000;
+            border: 1px ridge #111111;
+            border-radius: 50%;
+            width: 8px;
+            line-height: 0;
+            height: 4px;
+            font-size: 6px;
+        }
+    </style>
 </head>
 <body>
     <!--onload="checkCookie()"-->
@@ -180,17 +208,6 @@
                     <input id="sendingEcmCmd" type="checkbox" style="max-width:4px;" />
                     <label for="sendingEcmCmd">TxRx</label>
                 </sub>
-                <style>
-                    .status {
-                        background-color: #00000000;
-                        border: 1px ridge #111111;
-                        border-radius: 50%;
-                        width: 8px;
-                        line-height: 0;
-                        height: 4px;
-                        font-size: 6px;
-                    }
-                </style>
                 <i id="serialStatus" class="status">&nbsp; &nbsp;&nbsp;</i> ]
                 <div>
                 <select style="cursor:pointer;display:inline-flex;" name="transmissionType" id="transmissionType" onchange='setTransType(!ECM.A_TRANSMISSION);'>
@@ -212,18 +229,7 @@
                 </div>
                 
             </fieldset>
-            <div hidden id="usbHelp"
-                 style="opacity: 0.7;position:fixed;top:0;bottom:0;right:0;left:0;height:fit-content;width:fit-content;margin:8px auto 0;z-index:1;background:transparent;background-color:#000000;
-
-            border-radius: 18px;
-            border: ridge 0.4px #cbc9c9;
-            box-sizing: border-box;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, .31);
-            /*border: 1px solid rgb(177, 176, 176);
-            border: inset 10px #57F2FF;
-            border-style: groove ridge ridge groove;
-            border-style: outset inset inset outset;*/"
-                 align="center" class="chromeBorder">
+            <div hidden id="usbHelp" class="chromeBorder">
                 <fieldset>
                     <legend style="min-width:664px;color:orangered;background-color:#000000;width:fit-content;border-radius:15px 15px 1px 1px;cursor:default;"
                             title="Connection Diagram.">
@@ -251,27 +257,27 @@
                 </fieldset>
                 <fieldset>
                     <legend style="min-width:664px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding-top:10px;cursor:default;">
-                        <i title="Retry Interval." style="margin-bottom:-4px;">Retry at,</i>
-                        <input id="delayTime" style="border-radius:10px;width:100px;margin-bottom:-4px;" title="Retry delay."
+                        <i title="Retry Interval." style="margin-bottom:-4px;">Retry delay</i>
+                        <input id="delayTime" style="border-radius:10px;width:60px;margin-bottom:-4px;" title="Retry delay."
                                value="9" type="number" min="1" max="100" step="1"
-                               onchange='CMD_CONTROL.delayTime=parseInt(this.value);' /> Reads
+                               onchange='CMD_CONTROL.delayTime = parseInt(this.value); document.getElementById("ltd").innerText = parseInt(parseInt(this.value)*parseInt(document.getElementById("loopTimeValue").value)).toString()+" ms"; ' /> <i id="ltd">144 ms</i>
                         <i title="Retry Interval." style="margin-bottom:-4px;">or </i>
-                        <input id="delayBytes" style="border-radius:10px;width:100px;margin-bottom:-4px;" title="Retry delay."
-                               value="255" type="number" min="76" max="1024" step="1"
-                               onchange='CMD_CONTROL.delayBytes=parseInt(this.value);' /> Bytes
+                        <input id="delayBytes" style="border-radius:10px;width:80px;margin-bottom:-4px;" title="Retry delay."
+                               value="128" type="number" min="76" max="1024" step="1"
+                               onchange='CMD_CONTROL.delayBytes=parseInt(this.value);' /> <i>Bytes.</i>
 
-                        <i title="Cache Size." style="margin-bottom:-4px;">Flush at</i>
-                        <input id="cacheSize" style="border-radius:10px;width:100px;margin-bottom:-4px;"
-                               title="Cache Size." value="510" type="number" min="76"
-                               max="1024" step="16" onchange='CMD_CONTROL.cacheSize=parseInt(this.value);' /> bytes
+                        <i title="Cache Size." style="margin-bottom:-4px;">CacheSize</i>
+                        <input id="cacheSize" style="border-radius:10px;width:80px;margin-bottom:-4px;"
+                               title="Cache Size." value="512" type="number" min="76"
+                               max="1024" step="16" onchange='CMD_CONTROL.cacheSize=parseInt(this.value);' /> <i>Bytes.</i>
                     </legend>
                 </fieldset>
                 <fieldset>
                     <legend style="min-width:664px;color:orangered;background-color:#000000;width:fit-content;border-radius:1px;padding-top:10px;cursor:default;">
                         <i title="Send Cmd Interval." style="margin-bottom:-4px;">Send Cmd's every</i>
                         <input id="loopTimeValue" style="border-radius:10px;width:100px;margin-bottom:-4px;"
-                               title="Send Interval. IMPORTANT!! Set BEFORE Connecting!" value="64" type="number" min="64"
-                               max="10240" step="64" onchange='CMD_CONTROL.loopTime=parseInt(this.value);' /> ms
+                               title="Send Interval. IMPORTANT!! Set BEFORE Connecting!" value="16" type="number" min="8"
+                               max="10240" step="8" onchange='CMD_CONTROL.loopTime=parseInt(this.value); document.getElementById("ltd").innerText = parseInt(parseInt(this.value)*parseInt(document.getElementById("delayTime").value)).toString()+" ms";' /> ms
                         <i title="Com Port buffer." style="margin-bottom:-4px;">Buffer Size</i>
                         <input id="bufferSize" style="border-radius:10px;width:100px;margin-bottom:-4px;" title="COM-Port buffer. IMPORTANT!! Set BEFORE Connecting!"
                                value="77" type="number" min="75" max="1024" step="1"
@@ -335,7 +341,6 @@
                 <div id="Dash">
                     <fieldset style="border:none;">
                         <legend class="tab btn" style="width:fit-content;margin:auto;cursor:default;" id="dashTitle">
-                            <!-- onclick='sH("Dash")' <b>Dash</b>&nbsp;-->
                             <i class="chromeBorder" title="Engine Fan Status"
                                style='cursor:default;border:1px solid;border-radius:10%;padding:2px;'>
                                 <img onclick="document.getElementById('fanOnOff').click();" title="Engine Fan Status" alt="Fan" src="img/fan.png"
@@ -512,8 +517,8 @@
                                     <!-- END item [BATTERY] -->
 
                                 </tr>
-                                <table id="dynamic-gauges"></table>
                             </table>
+                            <table id="dynamic-gauges"></table>
                             <script>generateUI();</script>
                         </div><!-- outer table -->
                     </div>
@@ -836,14 +841,14 @@
         </div>
         <!-- footer -->
         <hr size="3">
-        <table width="95%" align="center">
-            <tr>
-                <td class="hide" id="CopyRight">
-                </td>
+        <footer width="95%" align="center">
+            <section>
+                <p class="hide" id="CopyRight">
+                </p>
                 <img title="1995 Camaro" alt="1995 Camaro" src="img/camaro1.png"
                      style="margin-left:-108px;float:right;border:none;height:48px;width:100px;position:fixed;bottom:4px;right:4px;" />
-            </tr>
-        </table>
+            </section>
+        </footer>
         <script>
             function yrTitle() {
                 const d = new Date(); return '&#169;' + d.getFullYear() + '&#8482;T&#169;ReMeTaL v: ' + APPVERSION;
@@ -883,17 +888,8 @@
             //var COOKIE_PERMISSION = false;
             var myIntervalReader;
 
-            /* byte CACHE ARRAY[]'s
-             * note: array handling methods
-             * .pop(); :remove last item.
-             * .slice(70, 70) :remove specific item.
-             * .shift(); remove first item. */
+            /* byte CACHE ARRAY[] */
             const EcmStream = [];
-            //const engineDataBuffer = [];
-            //var engineDataResponse;
-            //var milDataResponse;
-            //var vinDataResponse;
-            //var engCheckSum;
 
             const DEBUG = false;
             
@@ -904,7 +900,7 @@
                 nextCmd: ECM.EcmCmdNums.vinDataCmdNum,
                 sendCmd: ECM.EcmCmdNums.stopComCmdNum,
                 bufferSize: ECM.COM_PORT.bufferSize, // 76,
-                loopTime: 8, /* 64 */
+                loopTime: 16, /* 64 */
                 delayTime: 9, /* x Loop time = milliseconds waited (no response) before resending last cmd */
                 delayBytes: 128, /* bytes read (no response) before resending last cmd */
                 cacheSize: 512, /* max number of bytes stored for processing */
@@ -948,95 +944,62 @@
             
             /* Transmission Shift Type Controller */
             function setTransType(transVal) {
-                ECM.A_TRANSMISSION = transVal;//!ECM.A_TRANSMISSION;
+                ECM.A_TRANSMISSION = transVal;
                 document.getElementById("clutchdiv").hidden = ECM.A_TRANSMISSION;
                 document.getElementById("tcc").hidden = !ECM.A_TRANSMISSION;
                 document.getElementById("autoF").hidden = !ECM.A_TRANSMISSION;
                 document.getElementById("autoTranTemp").hidden = !ECM.A_TRANSMISSION;
-                //document.getElementById("fantd").hidden = !document.getElementById("fantd").hidden;
                 document.getElementById("tranTabBtn").hidden = !ECM.A_TRANSMISSION;
             }
 
             setEcmValues();
+
+            function rawDataDisplay(value) {
+                CMD_CONTROL.readCount++;
+                let curData = document.getElementById("sdata").innerHTML;
+                let conbit = "";
+                for (let x in value) {
+                    try {
+                        conbit += ECM_MAN.numericToAlpha(value[x]);
+                        conbit += ",";
+                    } catch (error) {
+                        console.error("Byte:" + value[x], error);
+                    }
+                }
+                try {
+                    document.getElementById("sdata").innerHTML = CMD_CONTROL.readCount.toString() + ":" + conbit + "</br>" + curData;
+                } catch (error) {
+                    console.error("(Raw)Writer:", error);
+                }
+            }
             
             async function readSerialData(value) {
                 let y = 0;
-                //console.log(value);
                 for (let x in value) {
                     try {
-                        if ((CMD_CONTROL.lastCmd == ECM.EcmCmdNums.engineDataCmdNum) && (CMD_CONTROL.eng == 0) && (y + ECM.engDataLength < value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdEngineDataStream)) {
+                        if ((CMD_CONTROL.lastCmd == ECM.EcmCmdNums.engineDataCmdNum) && (CMD_CONTROL.eng == 0) &&
+                        (y + ECM.engDataLength <= value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdEngineDataStream)) {
                             CMD_CONTROL.eng = 1;/* Required here for Scans "if (msg)" Process! Prevents overlap before the process completes. */
                             if (DEBUG === 2) { console.log("[ENGINE-DATA]-RECEIVED"); }
-                            //let results = value.slice(parseInt(y), parseInt(y + 71));
-                            //let engDataResponse = results.slice(0, 70);
-                            //let engCheckSum = results[70];
-                            //let engData = results.slice(3, 70);
-
                             let engDataResponse = value.slice(parseInt(y), parseInt(y + ECM.engDataLength));
                             let engCheckSum = value[parseInt(y + ECM.engDataLength)];
                             let engData = value.slice(parseInt(y + 3), parseInt(y + ECM.engDataLength));
-
-                            await checkSumTest(engDataResponse, engCheckSum).then((good) => {
-                                if (good) {
-                                    readEngine(ECM.ENGINE_DATA, engData).then(() => {
-                                        if (CMD_CONTROL.firstrun) {
-                                            sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
-                                            CMD_CONTROL.proceed = true;
-                                        } else {
-                                            CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
-                                            cmdRunning(0);
-                                            CMD_CONTROL.proceed = true;
-                                        }
-                                    });
-                                } else {
-                                    sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
-                                    CMD_CONTROL.proceed = true;
-                                }
-                            });
-
-                            /*let checkSumTest = checkSum(engineDataResponse) === engCheckSum;
-                            if (checkSumTest || !document.getElementById("validate").checked) {
-                                if (checkSumTest) {console.log("✓-CHECKSUM:ENG");} else {console.log("✖-CHECKSUM:ENG");}
-                                engineDataResponse.shift();
-                                engineDataResponse.shift();
-                                engineDataResponse.shift();
-                                await readEngine(ECM.ENGINE_DATA, engineDataResponse).then(() => {
+                            let checkSumsTest = checkSum(engDataResponse) == engCheckSum;
+                            if (checkSumsTest) { console.log("✓-CHECKSUM:ENG"); } else { console.log("✖-CHECKSUM:ENG"); }
+                            if (checkSumsTest || !document.getElementById("validate").checked) {
                                 if (CMD_CONTROL.firstrun) {
                                     sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
                                 } else {
                                     CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
                                     cmdRunning(0);
                                 }
+                                await readEngine(ECM.ENGINE_DATA, engData).then(() => {
                                     CMD_CONTROL.proceed = true;
                                 });
                             } else {
-                                console.log("✖-CHECKSUM:ENG");
                                 sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
                                 CMD_CONTROL.proceed = true;
-                            }*/
-
-                            /* engineDataResponse = value.slice(parseInt(y), parseInt(y + 70));
-                            engCheckSum = value[parseInt(y + 70)];
-                            await checkSumTest(engineDataResponse, engCheckSum).then((good) => {
-                                if (good) {
-                                    engineDataResponse.shift();
-                                    engineDataResponse.shift();
-                                    engineDataResponse.shift();
-                                    readEngine(ECM.ENGINE_DATA, engineDataResponse).then(() => {
-                                        if (CMD_CONTROL.firstrun) {
-                                            sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
-                                            CMD_CONTROL.proceed = true;
-                                        } else {
-                                            CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
-                                            cmdRunning(0);
-                                            CMD_CONTROL.proceed = true;
-                                        }
-                                    });
-                                } else {
-                                    sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
-                                    CMD_CONTROL.proceed = true;
-                                }
-                            });*/
+                            }
                             break;
                         } else if ((CMD_CONTROL.lastCmd == ECM.EcmCmdNums.disconnectEcmCmdNum) && (CMD_CONTROL.dCom == 0) && (y + 3 < value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdDisConnectDataStream)) {
                             CMD_CONTROL.dCom = 1;/* Prevents overlap before the process completes. */
@@ -1049,7 +1012,7 @@
                         } else if ((CMD_CONTROL.lastCmd == ECM.EcmCmdNums.stopComCmdNum) && (CMD_CONTROL.com == 0) && (y + 3 < value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdStopComDataStream)) {
                             if (CMD_CONTROL.sendCnt < 3) {
                                 CMD_CONTROL.sendCnt++;
-                                sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);
+                                //sendEcmCmd(ECM.EcmCmdNums.stopComCmdNum);
                                 console.log("[STOPCOM]", CMD_CONTROL.sendCnt);
                                 CMD_CONTROL.proceed = true;
                             } else {
@@ -1064,15 +1027,9 @@
                         } else if ((CMD_CONTROL.lastCmd == ECM.EcmCmdNums.vinDataCmdNum) && (CMD_CONTROL.vin == 0) && (parseInt(y + ECM.vinDataLength) < value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdVinDataStream)) {
                             CMD_CONTROL.vin = 1;
                             if (DEBUG === 2) { console.log("[VIN-DATA]-RECEIVED"); }
-                            //let results = value.slice(parseInt(y), parseInt(y + 49));
-                            let vinDataResponse = value.slice(parseInt(y), parseInt(y + ECM.vinDataLength));// results.slice(0, 48);
-                            let vinCheckSum = value[parseInt(y + ECM.vinDataLength)];// results[48];
-                            let vinData = value.slice(parseInt(y + 3), parseInt(y + 21));//results.slice(3, 21);
-                            
-                            //let vinData = value.slice(parseInt(y+3), parseInt(y + 21));
-                            //let vinCheckSum = value[parseInt(y+48)];
-                            //let vinDataResponse = value.slice(parseInt(y), parseInt(y+48));
-
+                            let vinDataResponse = value.slice(parseInt(y), parseInt(y + ECM.vinDataLength));
+                            let vinCheckSum = value[parseInt(y + ECM.vinDataLength)];
+                            //let vinData = value.slice(parseInt(y + 3), parseInt(y + 21));
                             let checkSumsTest = checkSum(vinDataResponse) == vinCheckSum;
                             if (checkSumsTest) {
                                 console.log("✓-CHECKSUM:VIN");
@@ -1094,15 +1051,9 @@
                         } else if ((CMD_CONTROL.lastCmd == ECM.EcmCmdNums.milDataCmdNum) && (CMD_CONTROL.mil == 0) && (y + ECM.milDataLength < value.length) && msgTest(value[x], value[y + 1], value[y + 2], ECM.EcmCmdMilDataStream)) {
                             CMD_CONTROL.mil = 1;
                             if (DEBUG === 2) { console.log("[MIL-DATA]-RECEIVED"); }
-                            //let results = value.slice(parseInt(y), parseInt(y + 25));
-                            let milDataResponse = value.slice(parseInt(y), parseInt(y + ECM.milDataLength));// results.slice(0, 24);
-                            let milCheckSum = value[parseInt(y + ECM.milDataLength)];// results[24];
-                            let milData = value.slice(parseInt(y + 3), parseInt(y + ECM.milDataLength));//results.slice(3, 24);
-
-                            //let milData = value.slice(parseInt(y+3), parseInt(y+24));
-                            //let milDataResponse = value.slice(parseInt(y), parseInt(y+24));
-                            //let milCheckSum = value[y + 24];//.toString()
-
+                            let milDataResponse = value.slice(parseInt(y), parseInt(y + ECM.milDataLength));
+                            let milCheckSum = value[parseInt(y + ECM.milDataLength)];
+                            let milData = value.slice(parseInt(y + 3), parseInt(y + ECM.milDataLength));
                             let checkSumsTest = checkSum(milDataResponse) == milCheckSum;
                             if (checkSumsTest) {
                                 console.log("✓-CHECKSUM:MIL");
@@ -1118,103 +1069,67 @@
                                 CMD_CONTROL.proceed = true;
                             }
                             break;
-                        } else { CMD_CONTROL.proceed = true; }
+                        }
                     } catch (error) {
                         console.error("readSerialData(" + y + "):", error);
                     }
                     y++;
                 }
-                /*if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.engineDataCmdNum && engineDataResponse.length > 0) {
-                    await checkSumTest(engineDataResponse, engCheckSum).then((good) => {
-                        if (good) {
-                            engineDataResponse.shift();
-                            engineDataResponse.shift();
-                            engineDataResponse.shift();
-                            readEngine(ECM.ENGINE_DATA, engineDataResponse).then(() => {
-                                engineDataResponse=[];
-                                if (CMD_CONTROL.firstrun) {
-                                    sendEcmCmd(ECM.EcmCmdNums.milDataCmdNum);
-                                    CMD_CONTROL.proceed = true;
-                                } else {
-                                    CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
-                                    cmdRunning(0);
-                                    CMD_CONTROL.proceed = true;
-                                }
-                            });
-                        } else {
-                            sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
-                            CMD_CONTROL.proceed = true;
-                        }
-                    });
-                } else*/
-                if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.reset) {
-                    sendEcmCmd(ECM.EcmCmdNums.reset2);
-                    CMD_CONTROL.proceed = true;
-                } else if (CMD_CONTROL.lastCmd > ECM.EcmCmdNums.disconnectEcmCmdNum && CMD_CONTROL.lastCmd < ECM.EcmCmdNums.noCmdNum) {
-                    sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
-                    CMD_CONTROL.proceed = true;
-                } else if (CMD_CONTROL.lastCmd >= ECM.EcmCmdNums.msg1 && CMD_CONTROL.lastCmd <= ECM.EcmCmdNums.msg3) {
-                    /* (idea) if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.msg1) {sendEcmCmd(ECM.EcmCmdNums.msg2);} else if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.msg2) {sendEcmCmd(ECM.EcmCmdNums.msg3);}*/
-                    CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
-                    CMD_CONTROL.proceed = true;
-                } else { CMD_CONTROL.proceed = true; }
-
-                /* retry after x number of bytes read */
-                if (EcmStream.length > CMD_CONTROL.delayBytes) {
-                    if (CMD_CONTROL.lastCmd < ECM.EcmCmdNums.msg1) {
-                        document.getElementById("sendingEcmCmd").checked = true;
-                        CMD_CONTROL.proceed = true;
-                    }
-                }
-                /* Max cache size clear and resend if cmd-active */
-                if (EcmStream.length > CMD_CONTROL.cacheSize) {
-                    EcmStream.length = 0;
-                    /*if (CMD_CONTROL.lastCmd < ECM.EcmCmdNums.msg1) {document.getElementById("sendingEcmCmd").checked = true;CMD_CONTROL.proceed = true;}*/
-                }
             }
 
             const serialStreamHandler = new WritableStream({
                 write(value) {
-                    CMD_CONTROL.proceed = false;
                     statChg("blue");
-                    let curData = document.getElementById("sdata").innerHTML;
-                    let conbit = "";
                     for (let x in value) {
                         try {
-                            //if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.engineDataCmdNum && engineDataBuffer.length > 0 && engineDataBuffer.length < 76) {engineDataBuffer.push(value[x]);}
-                            //if (value[x]==228 && CMD_CONTROL.lastCmd === ECM.EcmCmdNums.engineDataCmdNum && engineDataBuffer.length === 0) {engineDataBuffer.push(value[x]);}//, 153, 1,
-                            //if (EcmStream.length > 0) {EcmStream.push(value[x]);}
-                            //if (EcmStream.length === 0 && value[x]==228) {EcmStream.push(value[x]);}
                             EcmStream.push(value[x]);
-                            conbit += ECM_MAN.numericToAlpha(value[x]);
-                            conbit += ",";
                         } catch (error) {
                             console.error("Byte:" + value[x], error);
                         }
                     }
                     try {
-                        document.getElementById("sdata").innerHTML = CMD_CONTROL.readCount.toString() + ":" + conbit + "</br>" + curData;
-                    } catch (error) {
-                        console.error("(Raw)Writer:", error);
-                    }
-                    CMD_CONTROL.readCount++;
-                    try {
-                        if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.engineDataCmdNum && EcmStream.length >= 76) {// && engineDataBuffer.length === 76) {
-                            readSerialData(EcmStream);//engineDataBuffer);
-                        } else if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.disconnectEcmCmdNum && EcmStream.length >= 4) {
+                        if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.engineDataCmdNum && EcmStream.length >= 76) {
+                            CMD_CONTROL.proceed = false;
                             readSerialData(EcmStream);
-                        } else if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.stopComCmdNum && EcmStream.length >= 16) {
+                        } else if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.disconnectEcmCmdNum && EcmStream.length >= 4) {
+                            CMD_CONTROL.proceed = false;
+                            readSerialData(EcmStream);
+                        } else if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.stopComCmdNum && EcmStream.length >= 3) {
+                            CMD_CONTROL.proceed = false;
                             readSerialData(EcmStream);
                         } else if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.vinDataCmdNum && EcmStream.length >= 54) {
+                            CMD_CONTROL.proceed = false;
                             readSerialData(EcmStream);
                         } else if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.milDataCmdNum && EcmStream.length >= 30) {
-                            readSerialData(EcmStream);
-                        } else {
+                            CMD_CONTROL.proceed = false;
                             readSerialData(EcmStream);
                         }
-                        //readSerialData(EcmStream);
                     } catch (error) { console.error("(Serial):", error); }
-                    //statChg("#00000000;");
+                    if (EcmStream.length >= 3) {
+                        /* Max cache size. */
+                        if (EcmStream.length > CMD_CONTROL.cacheSize) {
+                            EcmStream.length = 0;
+                        }
+
+                        /* retry after x number of bytes read */
+                        if (EcmStream.length > CMD_CONTROL.delayBytes) {
+                            if (CMD_CONTROL.lastCmd < ECM.EcmCmdNums.msg1) {
+                                document.getElementById("sendingEcmCmd").checked = true;
+                                CMD_CONTROL.proceed = true;
+                            }
+                        }
+
+                        if (CMD_CONTROL.lastCmd === ECM.EcmCmdNums.reset) {
+                            sendEcmCmd(ECM.EcmCmdNums.reset2);
+                            CMD_CONTROL.proceed = true;
+                        } else if (CMD_CONTROL.lastCmd > ECM.EcmCmdNums.disconnectEcmCmdNum && CMD_CONTROL.lastCmd < ECM.EcmCmdNums.noCmdNum) {
+                            sendEcmCmd(ECM.EcmCmdNums.engineDataCmdNum);
+                            CMD_CONTROL.proceed = true;
+                        } else if (CMD_CONTROL.lastCmd >= ECM.EcmCmdNums.msg1 && CMD_CONTROL.lastCmd <= ECM.EcmCmdNums.msg3) {
+                            CMD_CONTROL.lastCmd = ECM.EcmCmdNums.noCmdNum;
+                            CMD_CONTROL.proceed = true;
+                        }
+                    }
                 }
             });
 
@@ -1222,28 +1137,20 @@
                 statChg("red");
                 const writer = myport.writable.getWriter();
                 try {
+                    rawDataDisplay(EcmStream);
                     CMD_CONTROL.loopCount = 0;
-                    if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.engineDataCmdNum) {/*engineDataBuffer.length=0;*/CMD_CONTROL.eng = 0; }
+                    EcmStream.length = 0;
+                    if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.engineDataCmdNum) { CMD_CONTROL.eng = 0; }
                     if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.milDataCmdNum) { CMD_CONTROL.mil = 0; }
                     if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.vinDataCmdNum) { CMD_CONTROL.vin = 0; }
                     if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.disconnectEcmCmdNum) { CMD_CONTROL.dCom = 0; }
                     if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.stopComCmdNum) { CMD_CONTROL.com = 0; }
                     CMD_CONTROL.lastCmd = CMD_CONTROL.sendCmd;
-                    //if (CMD_CONTROL.proceed && EcmStream.length > 152) {
-                    EcmStream.length = 0;
-                    //}
                     document.getElementById("wait").innerHTML = "SENDING CMD[" + ECM.CMDNAMES[CMD_CONTROL.sendCmd] + "]<br/>Please Wait";
                     console.log("SEND CMD[" + ECM.CMDNAMES[CMD_CONTROL.sendCmd] + "]");
                     await writer.write(ECM.EcmCmds[ECM.CMDNAMES[CMD_CONTROL.sendCmd]]).then(() => {
                         if (CMD_CONTROL.appTest) {
-                            if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.stopComCmdNum) {
-                                try {
-                                    writer.write(ECM.EcmCmds[ECM.CMDNAMES[ECM.EcmCmdNums.stopComCmdNum]]);
-                                    console.log("SEND CMD[" + ECM.CMDNAMES[ECM.EcmCmdNums.stopComCmdNum] + "]");
-                                } catch (e) {
-                                    console.error("stopcom", e);
-                                }
-                            } else if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.engineDataCmdNum) {
+                            if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.engineDataCmdNum) {
                                 try {
                                     writer.write(ECM.EcmCmds[ECM.CMDNAMES[ECM.EcmCmdNums.engTest]]);
                                     console.log("SEND CMD[" + ECM.CMDNAMES[ECM.EcmCmdNums.engTest] + "]");
@@ -1264,39 +1171,9 @@
                                 } catch (e) {
                                     console.error("milTest", e);
                                 }
-                            }/* else if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.msg1) {
-                                                try {
-                                                    writer.write(ECM.EcmCmds[ECM.CMDNAMES[ECM.EcmCmdNums.msg1]]);
-                                                    console.log("SEND CMD[" + ECM.CMDNAMES[ECM.EcmCmdNums.msg1] + "]");
-                                                } catch (e) {
-                                                    console.error("msg1", e);
-                                                }
-                                            } else if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.msg2) {
-                                                try {
-                                                    writer.write(ECM.EcmCmds[ECM.CMDNAMES[ECM.EcmCmdNums.msg2]]);
-                                                    console.log("SEND CMD[" + ECM.CMDNAMES[ECM.EcmCmdNums.msg2] + "]");
-                                                } catch (e) {
-                                                    console.error("msg2", e);
-                                                }
-                                            } else if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.msg3) {
-                                                try {
-                                                    writer.write(ECM.EcmCmds[ECM.CMDNAMES[ECM.EcmCmdNums.msg3]]);
-                                                    console.log("SEND CMD[" + ECM.CMDNAMES[ECM.EcmCmdNums.msg3] + "]");
-                                                } catch (e) {
-                                                    console.error("msg3", e);
-                                                }
-                                            }*/
+                            }
                         }
-                    });/*.then((v) => {
-                                        if (CMD_CONTROL.sendCmd === ECM.EcmCmdNums.stopComCmdNum) {
-                                            try {
-                                                writer.write(ECM.EcmCmds[ECM.CMDNAMES[CMD_CONTROL.sendCmd]]);
-                                                console.log("SEND CMD[" + ECM.CMDNAMES[CMD_CONTROL.sendCmd] + "]");
-                                            } catch (e) {
-                                                console.error("stopcom", e);
-                                            }
-                                        }
-                                    });*/
+                    });
                     await writer.releaseLock();
                     document.getElementById("sendingEcmCmd").checked = false;
                     //statChg("#00000000;");
@@ -1328,7 +1205,8 @@
                     myIntervalReader = setInterval(function () {
                         if (CMD_CONTROL.proceed) {
                             CMD_CONTROL.loopCount++;
-                            if (document.getElementById("sendingEcmCmd").checked) {
+                            if (DEBUG === 2) { console.log("LAST CMD[" + ECM.CMDNAMES[CMD_CONTROL.lastCmd] + "]"); }
+                            if (document.getElementById("sendingEcmCmd").checked == true) {
                                 writeData(myport);
                             } else if (CMD_CONTROL.lastCmd < ECM.EcmCmdNums.msg1 && CMD_CONTROL.loopCount > CMD_CONTROL.delayTime) {
                                 writeData(myport); /* time based retry. */
@@ -1374,7 +1252,7 @@
                                 }
                             }
                             if (CMD_CONTROL.lastCmd >= ECM.EcmCmdNums.noCmdNum) { statChg("yellow"); }
-                            if (document.getElementById("disconnect").disabled && CMD_CONTROL.firstrun == false) {
+                            if (!document.getElementById("connected").checked && CMD_CONTROL.firstrun == false) {
                                 clearInterval(myIntervalReader);
                             }
                         }
@@ -1450,10 +1328,10 @@
                         document.getElementById("Mode1").disabled = false;
                         document.getElementById("Mode4").disabled = false;
                         document.getElementById("Mode2").disabled = false;
+                        document.getElementById("disconnect").disabled = false;
                     }
                     document.getElementById("resetMilBtn").disabled = false;
                     document.getElementById("resetBlmBtn").disabled = false;
-                    document.getElementById("disconnect").disabled = false;
                     document.getElementById("scan").disabled = false;
                     document.getElementById("actControls").hidden = false;
                     document.getElementById("wait").hidden = true;
@@ -1562,81 +1440,25 @@
                 } else {
                     automaticGear.innerHTML = "P";
                 }
-            } /* [END] Transmission Gear Position Controller */
+            }
 
             /* MIL/DTC DATA CHECKSUM TEST */
             function checkSum(data) {
-                /*let sum = 0;
-                for (let c in data) {
-                    let nVal = (256 - parseInt(data[c]));
-                    sum = sum + nVal;
-                }
-                return (sum % 256);*/ // dataCheckSum
                 return ECM_MAN.getCheckSum(data);
             }
 
-            /* ENGINE DATA CHECKSUM TEST */
-            async function checkSumTest(data, checkSum) {
-                /*let sum = 0;
-                for (let c in data) {
-                    let nVal = 256 - parseInt(data[c]);
-                    sum = sum + nVal;
-                }
-                let dataCheckSum = sum % 256;
-                let goodCheckSum = dataCheckSum == checkSum;*/
-                let goodCheckSum = ECM_MAN.testCheckSum(data, checkSum);
-                if (goodCheckSum) {
-                    console.log("✓-CHECKSUM:ENG");
-                } else {
-                    console.log("✖-CHECKSUM:ENG");
-                }
-                if ((goodCheckSum == false) && document.getElementById("validate").checked) {
-                    return false;
-                }
-                return true; // dataCheckSum === checkSum;
-            }
-
             /* VIN SERIAL DATA HANDLER. */
-            async function readVIN(vin) {
-                document.getElementById("carVin").innerHTML = "vin: " + ECM.getVIN(vin);
-                //let vinStr = "";
-                /*for (let c in vin) {
-                    vinStr += String.fromCharCode(vin[c]);
-                }
-                document.getElementById("carVin").innerHTML = "vin:" + vinStr;*/
-                return "";//vinStr;
+            async function readVIN(vinData) {
+                document.getElementById("carVin").innerHTML = "vin: " + ECM.getVIN(vinData);
+                return "";
             }
 
             /* MIL/DTC SERIAL DATA HANDLER. */
             async function readMIL(dataStream) {
                 document.getElementById("dtcdata").innerHTML = ECM.getMIL(dataStream, ECM.values);
                 document.getElementById("actcodes").value = ECM.values.activeDTC;
-            
-                /*const value = dataStream;
-                let dtcStr = "";
-                for (let k = 0; k <= 20; k++) {
-                    if (k == 0) {
-                        document.getElementById("actcodes").value = value[k];
-                    } else if (value[k] != 0) {
-                        let dtcCode = ECM_MAN.numToBin(value[k]);
-                        let tc = 7;
-                        for (let t in dtcCode) {
-                            try {
-                                if (dtcCode[t] == "1") {
-                                    let MilCode = ECM.DTCCODES["code" + (k + 1).toString() + tc.toString()];
-                                    if (DEBUG) { console.log("byte[" + k + "]:" + dtcCode + " bit:" + tc.toString() + " [MilCode]" + MilCode); }
-                                    if (MilCode != "") { dtcStr += MilCode + "<br/>"; }
-                                }
-                            } catch (error) {
-                                console.error("ERROR (value[" + k + "]:" + value[k] + " dtcCode:" + dtcCode + ") " + " bit:" + tc, error);
-                            }
-                            tc--;
-                        }
-                    }
-                }
-                document.getElementById("dtcdata").innerHTML = dtcStr;*/
                 return 0;
-            } /* -- [End] function -- */
+            }
             
 /* ENGINE SERIAL DATA HANDLER. */
 async function readEngine(ecmFileConst, dataStream) {
@@ -1678,7 +1500,7 @@ async function readEngine(ecmFileConst, dataStream) {
         index++;
     }
     return 0;
-} /* -- [End] function -- */
+}
 
             /* // COOKIES
             function setCookie(cname, cvalue, exdays) {
